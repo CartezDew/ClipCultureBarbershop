@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GalleryItem } from '../types';
+import type { GalleryItem } from '../types/gallery';
 import { getGallery } from '../lib/mockApi';
 
 const Gallery = () => {

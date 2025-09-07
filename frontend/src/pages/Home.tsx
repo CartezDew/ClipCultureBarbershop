@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Service, Barber } from '../types';
+import type { Service } from '../types/service';
+import type { Barber } from '../types/barber';
 import { getServices, getBarbers } from '../lib/mockApi';
 import { CONTACT_INFO } from '../lib/constants';
 

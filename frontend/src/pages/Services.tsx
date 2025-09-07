@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Service } from '../types';
+import type { Service } from '../types/service';
 import { getServices } from '../lib/mockApi';
 
 const Services = () => {

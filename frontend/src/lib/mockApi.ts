@@ -1,4 +1,6 @@
-import { Service, Barber, GalleryItem } from '../types';
+import type { Service } from '../types/service';
+import type { Barber } from '../types/barber';
+import type { GalleryItem } from '../types/gallery';
 
 export async function getServices(): Promise<Service[]> {
   const res = await fetch('/src/mocks/services.json');

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Barber } from '../types';
+import type { Barber } from '../types/barber';
 import { getBarbers } from '../lib/mockApi';
 
 const Team = () => {
