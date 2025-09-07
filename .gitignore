@@ -1,0 +1,23 @@
+# Node
+node_modules
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+
+# Build outputs
+dist
+build
+.netlify
+.vercel
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+.eggs/
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+.DS_Store

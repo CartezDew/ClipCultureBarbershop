@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "Alex Rodriguez", "specialty": "Fades & Lineups", "experience": "5 years", "bio": "Specializes in modern fades and precision lineups" },
+  { "id": 2, "name": "Jordan Smith", "specialty": "Classic Cuts", "experience": "8 years", "bio": "Master of traditional barbering techniques" },
+  { "id": 3, "name": "Sam Johnson", "specialty": "Beards & Hot Shaves", "experience": "6 years", "bio": "Expert in beard styling and luxury shaves" },
+  { "id": 4, "name": "Mike Chen", "specialty": "Creative Styling", "experience": "4 years", "bio": "Brings artistic flair to every cut" }
+]

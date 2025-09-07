@@ -1,0 +1,8 @@
+[
+  { "id": 1, "title": "Classic Gentleman", "description": "Traditional cut with modern styling", "image": "/api/placeholder/300/300" },
+  { "id": 2, "title": "Sharp Fade", "description": "Clean fade with precise lines", "image": "/api/placeholder/300/300" },
+  { "id": 3, "title": "Beard Masterpiece", "description": "Expertly shaped and styled beard", "image": "/api/placeholder/300/300" },
+  { "id": 4, "title": "Hot Towel Experience", "description": "Luxurious shave service", "image": "/api/placeholder/300/300" },
+  { "id": 5, "title": "Creative Cut", "description": "Artistic and unique styling", "image": "/api/placeholder/300/300" },
+  { "id": 6, "title": "Professional Look", "description": "Clean and business-ready styling", "image": "/api/placeholder/300/300" }
+]
