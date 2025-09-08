@@ -1,4 +1,4 @@
-import { CONTACT_INFO } from '../lib/constants';
+import { CONTACT_INFO } from '../lib/constants.js';
 
 const Footer = () => {
   return (

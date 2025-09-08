@@ -1,4 +1,5 @@
-import { CONTACT_INFO } from '../lib/constants';
+import { CONTACT_INFO } from '../lib/constants.js';
+import '../styles/contact.css';
 
 const Contact = () => {
   return (
@@ -36,8 +37,7 @@ const Contact = () => {
                 <div className="mb-3">
                   <a 
                     href={`tel:${CONTACT_INFO.phone}`} 
-                    className="btn btn--primary"
-                    style={{ marginRight: '1rem' }}
+                    className="btn btn--primary contact__call-button"
                   >
                     Call Now
                   </a>
@@ -49,19 +49,7 @@ const Contact = () => {
                   </a>
                 </div>
                 
-                <div 
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    backgroundColor: '#f0f0f0',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#666',
-                    marginTop: '1rem'
-                  }}
-                >
+                <div className="contact__map-placeholder">
                   Map Placeholder
                 </div>
               </div>
@@ -70,7 +58,7 @@ const Contact = () => {
           
           <div className="text-center mt-4">
             <h2>Follow Us</h2>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}>
+            <div className="contact__social-links">
               <a 
                 href={CONTACT_INFO.social.instagram} 
                 target="_blank" 

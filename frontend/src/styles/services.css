@@ -1,0 +1,6 @@
+/* Services Page Styles */
+
+.services__price-duration {
+  justify-content: space-between;
+  align-items: center;
+}

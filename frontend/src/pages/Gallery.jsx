@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { GalleryItem } from '../types/gallery';
-import { getGallery } from '../lib/mockApi';
+import { getGallery } from '../lib/mockApi.js';
+import '../styles/gallery.css';
 
 const Gallery = () => {
-  const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
     getGallery().then(setGallery);
@@ -21,19 +21,7 @@ const Gallery = () => {
           <div className="grid grid--3">
             {gallery.map((item) => (
               <div key={item.id} className="card">
-                <div 
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    backgroundColor: '#f0f0f0',
-                    borderRadius: '8px',
-                    marginBottom: '1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#666'
-                  }}
-                >
+                <div className="gallery__image-placeholder">
                   Image Placeholder
                 </div>
                 <h3>{item.title}</h3>

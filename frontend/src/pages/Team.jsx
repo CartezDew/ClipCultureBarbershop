@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { Barber } from '../types/barber';
-import { getBarbers } from '../lib/mockApi';
+import { getBarbers } from '../lib/mockApi.js';
+import '../styles/team.css';
 
 const Team = () => {
-  const [barbers, setBarbers] = useState<Barber[]>([]);
+  const [barbers, setBarbers] = useState([]);
 
   useEffect(() => {
     getBarbers().then(setBarbers);

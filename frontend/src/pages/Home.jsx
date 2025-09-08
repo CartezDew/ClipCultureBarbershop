@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Service } from '../types/service';
-import type { Barber } from '../types/barber';
-import { getServices, getBarbers } from '../lib/mockApi';
-import { CONTACT_INFO } from '../lib/constants';
+import { getServices, getBarbers } from '../lib/mockApi.js';
+import { CONTACT_INFO } from '../lib/constants.js';
+import '../styles/home.css';
 
 const Home = () => {
-  const [services, setServices] = useState<Service[]>([]);
-  const [barbers, setBarbers] = useState<Barber[]>([]);
+  const [services, setServices] = useState([]);
+  const [barbers, setBarbers] = useState([]);
 
   useEffect(() => {
     getServices().then(setServices);

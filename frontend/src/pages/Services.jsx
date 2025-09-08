@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { Service } from '../types/service';
-import { getServices } from '../lib/mockApi';
+import { getServices } from '../lib/mockApi.js';
+import '../styles/services.css';
 
 const Services = () => {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     getServices().then(setServices);
@@ -23,7 +23,7 @@ const Services = () => {
               <div key={service.id} className="card">
                 <h3>{service.name}</h3>
                 <p className="mb-2">{service.description}</p>
-                <div className="flex" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex services__price-duration">
                   <span><strong>${service.price}</strong></span>
                   <span>{service.durationMins} minutes</span>
                 </div>
