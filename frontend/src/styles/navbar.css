@@ -35,10 +35,10 @@
   }
   
   /* Add padding to body to account for fixed navbar */
-  body {
+  /* body {
     padding-top: 3rem;
   }
-  
+   */
   /* Ensure first container has proper top margin */
   .get-started-page > *:first-child {
     margin-top: 2rem;
@@ -129,6 +129,23 @@
     font-weight: 700;
     color: var(--color-hunter-green);
     transition: font-size 0.3s ease;
+  }
+
+  .logo-image-nav {
+    height: 50px;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
+    image-rendering: auto;
+    image-rendering: smooth;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: opacity 0.2s ease;
+    /* Force high DPI rendering */
+    -webkit-image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: bicubic;
   }
   
   /* Menu Section */

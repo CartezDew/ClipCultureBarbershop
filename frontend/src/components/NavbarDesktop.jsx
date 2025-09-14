@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Home, Scissors, Users, Phone, HelpCircle, Camera } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import logoWebP from '../assets/images/CC-Logo.webp'
+import logoWebP2x from '../assets/images/CC-Logo-2x.webp'
+import logoPNG from '../assets/images/CC-Logo.png'
 import '../styles/navbar.css'
 
 const NavbarDesktop = () => {
@@ -96,7 +99,15 @@ const NavbarDesktop = () => {
             <div className="navbar-container">
                 <div className="logo-section">
                     <Link to="/" className="logo-link">
-                        <h1 className="logo-text-nav">ClipCulture</h1>
+                        <picture>
+                            <source srcSet={`${logoWebP2x} 2x, ${logoWebP} 1x`} type="image/webp" />
+                            <img 
+                                src={logoPNG} 
+                                srcSet={`${logoPNG} 1x`}
+                                alt="ClipCulture Logo" 
+                                className="logo-image-nav"
+                            />
+                        </picture>
                     </Link>
                 </div>
                 {/* Menu items: keep mounted to avoid flicker; animate between hidden/visible */}
