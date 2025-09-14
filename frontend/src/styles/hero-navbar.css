@@ -1,6 +1,6 @@
 /* Hero Navbar Styles */
 .hero-navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -12,10 +12,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
   height: 52px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-logo {
@@ -57,7 +59,7 @@
 .hero-nav-links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: .5rem;
   flex: 1;
   justify-content: center;
   opacity: 0.8;

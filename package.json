@@ -2,6 +2,7 @@
   "name": "clipculture",
   "private": true,
   "scripts": {
+    "dev": "npm run dev:frontend",
     "dev:frontend": "npm --prefix frontend run dev"
   }
 }

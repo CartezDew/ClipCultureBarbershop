@@ -6,6 +6,7 @@ import Services from './pages/Services.jsx';
 import Team from './pages/Team.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Contact from './pages/Contact.jsx';
+import ProductDetail from './pages/ProductDetail.jsx';
 
 function App() {
   return (
@@ -45,6 +46,15 @@ function App() {
               <Navbar />
               <main>
                 <Contact />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/products/:slug" element={
+            <>
+              <Navbar />
+              <main>
+                <ProductDetail />
               </main>
               <Footer />
             </>

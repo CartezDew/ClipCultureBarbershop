@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import '../styles/booking.css';
 
 const BookingForm = () => {
@@ -291,13 +292,26 @@ const BookingForm = () => {
                   required
                 />
               </div>
-              <button 
+              <motion.button 
                 className="btn-book-now" 
                 onClick={openPopupForm}
                 disabled={!formData.firstName || !formData.lastName || !formData.email || !formData.phone}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{
+                  background: "linear-gradient(135deg,rgb(5, 61, 90) 0%,rgb(77, 172, 161) 50%, #085078 100%)",
+                  
+                  backgroundSize: "200% 200%"
+                }}
               >
                 Book Now
-              </button>
+              </motion.button>
             </div>
           </div>
         );

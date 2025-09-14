@@ -7,9 +7,10 @@
   grid-template-columns: 40% 60%;
   grid-template-rows: 1fr;
   grid-template-areas: "left right";
-  /* min-height: 100vh; */
+  min-height: 100vh;
   overflow: hidden;
   align-items: end;
+  padding-top: 80px; /* Account for navbar */
 }
 
 .hero__background {

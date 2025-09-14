@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { getServices, getBarbers } from '../lib/mockApi.js';
 import { CONTACT_INFO } from '../lib/constants.js';
 import HeroNavbar from '../components/HeroNavbar.jsx';
+import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
+import TopProducts from '../components/TopProducts.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
@@ -33,17 +35,33 @@ import heroImagePNG from '../assets/images/ClipCultureHero.png';
 const Home = () => {
   const [services, setServices] = useState([]);
   const [barbers, setBarbers] = useState([]);
+  const [showHeroNavbar, setShowHeroNavbar] = useState(true);
 
   useEffect(() => {
     getServices().then(setServices);
     getBarbers().then(setBarbers);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.querySelector('.hero');
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        // Hide hero navbar when hero section is completely out of view
+        setShowHeroNavbar(rect.bottom > 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div>
-      <HeroNavbar />
       {/* Hero Section */}
       <section className="hero">
+        {/* Hero Navbar - Fixed at top of hero section */}
+        {showHeroNavbar && <HeroNavbar />}
         <div className="hero__background">
           <picture>
             <source srcSet={heroImageWebP} type="image/webp" />
@@ -114,6 +132,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Main Navbar - Shows when hero section is out of view */}
+      {!showHeroNavbar && <Navbar />}
+
+      {/* Top Products */}
+      <TopProducts />
 
       {/* Services Preview */}
       <section className="section section--light">
