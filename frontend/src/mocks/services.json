@@ -1,8 +1,9 @@
 [
-  { "id": 1, "name": "Classic Cut", "price": 30, "durationMins": 30, "description": "Traditional haircut with modern styling" },
-  { "id": 2, "name": "Beard Trim", "price": 20, "durationMins": 20, "description": "Precise beard shaping and trimming" },
-  { "id": 3, "name": "Hot Towel Shave", "price": 35, "durationMins": 30, "description": "Luxurious hot towel shave experience" },
-  { "id": 4, "name": "Fade Cut", "price": 35, "durationMins": 45, "description": "Modern fade with clean lines" },
-  { "id": 5, "name": "Haircut + Beard", "price": 45, "durationMins": 50, "description": "Complete grooming package" },
-  { "id": 6, "name": "Mustache Trim", "price": 15, "durationMins": 15, "description": "Precise mustache styling" }
+  { "id": 1, "name": "Basic Haircut", "price": 20, "durationMins": 30},
+  { "id": 2, "name": "Basic Lineup", "price": 20, "durationMins": 20},
+  { "id": 3, "name": "Bald Fade", "price": 35, "durationMins": 30},
+  { "id": 4, "name": "Taper Fade", "price": 35, "durationMins": 30},
+  { "id": 5, "name": "Drop Fade", "price": 35, "durationMins": 30},
+  { "id": 6, "name": "Beard Trim", "price": 20, "durationMins": 20}
+
 ]

@@ -1,5 +1,304 @@
 /* Home Page Styles */
 
+/* Services Section Background */
+.section--light {
+  background: linear-gradient(to bottom, #0d233d, #6a9298);
+  /* color: rgb(193, 12, 12); */
+}
+
+.section--light h2,
+.section--light h3,
+.section--light p {
+  color: white;
+}
+
+.section--light .card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+}
+
+.section--light .btn--secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.section--light .btn--secondary:hover {
+  background-color: white;
+  color: #0d233d;
+}
+
+/* Services Grid Layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item {
+  padding: 2.5rem;
+  background: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Enhanced Grid Borders with Fading Effects */
+/* Row 1: Service items 1, 2, 3 */
+.service-item:nth-child(1)::after,
+.service-item:nth-child(2)::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 0;
+  bottom: 20%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorderVertical 3s ease-in-out infinite, floatingBorder 4s ease-in-out infinite;
+}
+
+.service-item:nth-child(1)::before,
+.service-item:nth-child(2)::before,
+.service-item:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorder 3s ease-in-out infinite, floatingBorder 4s ease-in-out infinite;
+}
+
+/* Row 2: Service items 4, 5, 6 */
+.service-item:nth-child(4)::after,
+.service-item:nth-child(5)::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 0;
+  bottom: 20%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorderVertical 3s ease-in-out infinite, floatingBorder 4s ease-in-out infinite;
+}
+
+/* Hover Effects */
+.service-item:hover {
+  background: rgba(10, 151, 134, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(10, 151, 134, 0.15);
+}
+
+.service-item:hover::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(10, 151, 134, 0.4) 20%,
+    rgba(10, 151, 134, 0.4) 80%,
+    transparent 100%
+  ) !important;
+}
+
+.service-item:hover::before {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(10, 151, 134, 0.4) 20%,
+    rgba(10, 151, 134, 0.4) 80%,
+    transparent 100%
+  ) !important;
+}
+
+/* Animation Keyframes */
+@keyframes shimmerBorder {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1.02);
+  }
+}
+
+@keyframes shimmerBorderVertical {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleY(1.02);
+  }
+}
+
+@keyframes floatingBorder {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.section--light h2 {
+  font-size: clamp(2.5rem, 3.5vw, 2.8rem);
+  margin-bottom: 1rem;
+}
+
+.services-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  color: var(--primary-green);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  opacity: 0.6;
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.services-divider {
+  width: 90px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #0a9786 20%, #14b8a6 80%, transparent 100%);
+  margin: 0 auto 2rem;
+  border-radius: 2px;
+}
+
+.service-item h3 {
+  color: white;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 0rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.service-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.service-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.service-duration-pill {
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif ;
+  color: #666;
+  background: rgba(248, 249, 250, 0.4);
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.service-divider {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.service-price {
+  color: var(--primary-green);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Responsive Services Grid */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  .service-item:nth-child(3n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .service-item:nth-child(2n) {
+    border-right: none;
+  }
+  
+  .service-item:nth-child(n+5) {
+    border-bottom: none;
+  }
+  
+  .service-item {
+    padding: 1.5rem 1rem;
+  }
+  
+  .service-item h3 {
+    font-size: 1.1rem;
+  }
+  
+  .service-description {
+    font-size: 0.9rem;
+  }
+  
+  .service-duration-pill {
+    font-size: 0.8rem;
+  }
+  
+  .service-price {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+  }
+  
+  .service-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .service-item:last-child {
+    border-bottom: none;
+  }
+  
+  .service-item {
+    padding: 1.25rem;
+  }
+}
+
 /* Hero Section with Background Image */
 .hero {
   position: relative;
@@ -119,7 +418,7 @@
 .social-proof__number {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #0a9786;
+  color: var(--primary-green);
   margin-bottom: 0.4rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   line-height: 1;
