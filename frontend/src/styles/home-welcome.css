@@ -1,0 +1,290 @@
+/* Home Welcome Section */
+.home-welcome {
+  padding: 3rem 0;
+  background: linear-gradient(0deg,rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
+  overflow: hidden;
+}
+
+.home-welcome__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.home-welcome__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.home-welcome__left {
+  text-align: left;
+}
+
+.home-welcome__right {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.home-welcome__image {
+  width: 100%;
+  max-width: auto;
+  height: auto;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.home-welcome__image:hover {
+  transform: scale(1.02);
+}
+
+.home-welcome__logo {
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.home-welcome__logo-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 120px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.home-welcome__subtitle {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-bottom: 2rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-welcome__text {
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.home-welcome__text p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.home-welcome__text p:last-child {
+  margin-bottom: 0;
+}
+
+.home-welcome__closing {
+  font-weight: 600;
+  color: var(--primary-green) !important;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.3rem) !important;
+}
+
+.home-welcome__cta {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.home-welcome__social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.home-welcome__social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.home-welcome__social-button--instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+}
+
+.home-welcome__social-button--facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.home-welcome__social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.home-welcome__social-button--instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 4px 12px rgba(240, 148, 51, 0.4);
+}
+
+.home-welcome__social-button--facebook:hover {
+  background: #166fe5;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+}
+
+.home-welcome__social-button:active {
+  transform: translateY(0);
+}
+
+.home-welcome__button {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-green), #14b8a6);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+  border: 2px solid transparent;
+}
+
+.home-welcome__button:hover {
+  background: linear-gradient(135deg, #14b8a6, var(--primary-green));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.home-welcome__button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-welcome {
+    padding: 3rem 0;
+  }
+  
+  .home-welcome__container {
+    padding: 0 1rem;
+  }
+  
+  .home-welcome__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .home-welcome__left {
+    text-align: center;
+  }
+  
+  .home-welcome__logo {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .home-welcome__logo-image {
+    max-height: 100px;
+  }
+  
+  .home-welcome__subtitle {
+    margin-bottom: 1.5rem;
+  }
+  
+  .home-welcome__text {
+    margin-bottom: 2.5rem;
+  }
+  
+  .home-welcome__text p {
+    margin-bottom: 1.2rem;
+  }
+  
+  .home-welcome__image {
+    max-width: 300px;
+  }
+  
+  .home-welcome__cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .home-welcome__button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .home-welcome__social-button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-welcome {
+    padding: 2.5rem 0;
+  }
+  
+  .home-welcome__container {
+    padding: 0 0.75rem;
+  }
+  
+  .home-welcome__content {
+    gap: 1.5rem;
+  }
+  
+  .home-welcome__logo {
+    margin-bottom: 1.5rem;
+  }
+  
+  .home-welcome__logo-image {
+    max-height: 80px;
+  }
+  
+  .home-welcome__subtitle {
+    margin-bottom: 1rem;
+  }
+  
+  .home-welcome__text {
+    margin-bottom: 2rem;
+  }
+  
+  .home-welcome__image {
+    max-width: 250px;
+  }
+  
+  .home-welcome__cta {
+    gap: 0.75rem;
+  }
+  
+  .home-welcome__button {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .home-welcome__social-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .home-welcome__social-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+

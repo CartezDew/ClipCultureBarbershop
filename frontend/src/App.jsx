@@ -6,6 +6,7 @@ import Services from './pages/Services.jsx';
 import Team from './pages/Team.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Contact from './pages/Contact.jsx';
+import About from './pages/About.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 
 function App() {
@@ -46,6 +47,15 @@ function App() {
               <Navbar />
               <main>
                 <Contact />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/about" element={
+            <>
+              <Navbar />
+              <main>
+                <About />
               </main>
               <Footer />
             </>

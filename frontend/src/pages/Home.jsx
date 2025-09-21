@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Gallery from '../components/Gallery.jsx';
+import Home_Welcome from '../components/Home_Welcome.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
@@ -139,6 +140,7 @@ const Home = () => {
 
       {/* Top Products */}
       <TopProducts />
+      <Gallery />
 
       {/* Services Preview */}
       <section className="section section--light">
@@ -182,8 +184,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Gallery */}
-      <Gallery />
+      {/* Home Welcome */}
+      <Home_Welcome />
 
       {/* Team Preview */}
       <section className="section section--dark">
