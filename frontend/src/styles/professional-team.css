@@ -1,0 +1,370 @@
+/* Professional Team Section */
+.professional-team {
+  padding: 4rem 0;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.professional-team__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.professional-team__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.professional-team__title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.2;
+}
+
+.professional-team__subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.professional-team__subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary-green) 20%, #14b8a6 80%, transparent 100%);
+  border-radius: 1px;
+}
+
+.professional-team__toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.professional-team__divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.professional-team__toggle-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+}
+
+.professional-team__toggle-btn:hover {
+  color: var(--primary-green);
+}
+
+.professional-team__toggle-btn.active {
+  color: var(--primary-green);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.professional-team__toggle-btn.active:hover {
+  color: #14b8a6;
+}
+
+.professional-team__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.professional-team__card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.professional-team__card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-green);
+  box-shadow: 0 10px 30px rgba(10, 151, 134, 0.2);
+}
+
+.professional-team__image-placeholder {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.professional-team__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.professional-team__card:hover .professional-team__image {
+  transform: scale(1.05);
+}
+
+/* Join Our Team Section */
+.professional-team__join {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.professional-team__join-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.professional-team__join-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.professional-team__join-text {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--primary-green);
+  margin-bottom: 2rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.professional-team__apply-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-green), #14b8a6);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.professional-team__apply-btn:hover {
+  background: linear-gradient(135deg, #14b8a6, var(--primary-green));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.professional-team__apply-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+}
+
+.professional-team__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #333 0%, #555 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.professional-team__placeholder-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.professional-team__info {
+  text-align: center;
+}
+
+.professional-team__name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.professional-team__title {
+  font-size: 1rem;
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.professional-team__location {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Special styling for Owner */
+.professional-team__card:first-child {
+  border-color: var(--primary-green);
+  background: rgba(10, 151, 134, 0.1);
+}
+
+.professional-team__card:first-child .professional-team__name {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.professional-team__card:first-child .professional-team__title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .professional-team {
+    padding: 3rem 0;
+  }
+  
+  .professional-team__container {
+    padding: 0 1rem;
+  }
+  
+  .professional-team__header {
+    margin-bottom: 3rem;
+  }
+  
+  .professional-team__toggle {
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  
+  .professional-team__divider {
+    height: 16px;
+  }
+  
+  .professional-team__toggle-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .professional-team__join {
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+  
+  .professional-team__grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .professional-team__card {
+    padding: 1.25rem;
+  }
+  
+  .professional-team__image-placeholder {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  .professional-team__name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .professional-team {
+    padding: 2.5rem 0;
+  }
+  
+  .professional-team__container {
+    padding: 0 0.75rem;
+  }
+  
+  .professional-team__toggle {
+    gap: 0.3rem;
+    margin-top: 1.5rem;
+  }
+  
+  .professional-team__divider {
+    height: 14px;
+  }
+  
+  .professional-team__toggle-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .professional-team__join {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+  }
+  
+  .professional-team__apply-btn {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .professional-team__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .professional-team__card {
+    padding: 1rem;
+  }
+  
+  .professional-team__image-placeholder {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .professional-team__placeholder-text {
+    font-size: 0.7rem;
+  }
+  
+  .professional-team__name {
+    font-size: 1.1rem;
+  }
+  
+  .professional-team__title {
+    font-size: 0.9rem;
+  }
+  
+  .professional-team__location {
+    font-size: 0.8rem;
+  }
+}

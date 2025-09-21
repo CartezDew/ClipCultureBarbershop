@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { getServices, getBarbers } from '../lib/mockApi.js';
+import { getServices } from '../lib/mockApi.js';
 import { CONTACT_INFO } from '../lib/constants.js';
 import HeroNavbar from '../components/HeroNavbar.jsx';
 import Navbar from '../components/Navbar.jsx';
@@ -9,6 +9,7 @@ import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Gallery from '../components/Gallery.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
+import Professional_Team from '../components/Professional_Team.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
@@ -37,11 +38,9 @@ import heroImagePNG from '../assets/images/ClipCultureHero.png';
 
 const Home = () => {
   const [services, setServices] = useState([]);
-  const [barbers, setBarbers] = useState([]);
   const [showHeroNavbar, setShowHeroNavbar] = useState(true);
   useEffect(() => {
     getServices().then(setServices);
-    getBarbers().then(setBarbers);
   }, []);
 
   useEffect(() => {
@@ -187,27 +186,8 @@ const Home = () => {
       {/* Home Welcome */}
       <Home_Welcome />
 
-      {/* Team Preview */}
-      <section className="section section--dark">
-        <div className="container">
-          <h2 className="text-center mb-4">Meet Our Barbers</h2>
-          <div className="grid grid--3">
-            {barbers.slice(0, 3).map((barber) => (
-              <div key={barber.id} className="card">
-                <h3>{barber.name}</h3>
-                <p className="mb-2"><strong>{barber.specialty}</strong></p>
-                <p className="mb-2">{barber.experience}</p>
-                <p>{barber.bio}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-4">
-            <Link to="/team" className="btn btn--secondary">
-              Meet the Team
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Professional Team */}
+      <Professional_Team />
 
       {/* Contact Info */}
       <section className="section section--light">
