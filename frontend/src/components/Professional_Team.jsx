@@ -133,8 +133,8 @@ const Professional_Team = () => {
     <section className="professional-team">
       <div className="professional-team__container">
         <div className="professional-team__header">
-          <h2 className="professional-team__title">Meet Our Team</h2>
-          <p className="professional-team__subtitle">Meet the talented barbers who make Clip Culture special</p>
+          <h2 className="professional-team__header-title">Meet Our Team</h2>
+          <p className="professional-team__subtitle">Masters of the Craft. Shapers of the Culture.</p>
           
           {/* Location Toggle */}
           <div className="professional-team__toggle">
@@ -191,7 +191,6 @@ const Professional_Team = () => {
         <div className="professional-team__join">
           <div className="professional-team__join-content">
             <h3 className="professional-team__join-title">Interested in joining our team?</h3>
-            <p className="professional-team__join-text">Apply Here</p>
             <button className="professional-team__apply-btn">
               Apply Now
             </button>
