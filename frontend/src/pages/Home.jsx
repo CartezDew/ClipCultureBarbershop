@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
-import { CONTACT_INFO } from '../lib/constants.js';
 import HeroNavbar from '../components/HeroNavbar.jsx';
 import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
@@ -11,6 +10,7 @@ import Gallery from '../components/Gallery.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
 import Professional_Team from '../components/Professional_Team.jsx';
+import Contact from '../components/Contact.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
@@ -193,31 +193,9 @@ const Home = () => {
       {/* Professional Team */}
       <Professional_Team />
 
-      {/* Contact Info */}
-      <section className="section section--light">
-        <div className="container">
-          <div className="grid grid--2">
-            <div>
-              <h2>Visit Us</h2>
-              <p className="mb-2">{CONTACT_INFO.address}</p>
-              <p className="mb-2">{CONTACT_INFO.phone}</p>
-              <p className="mb-4">{CONTACT_INFO.hours}</p>
-              <Link to="/contact" className="btn btn--primary">
-                Get Directions
-              </Link>
-            </div>
-            <div>
-              <h2>Book Your Cut</h2>
-              <p className="mb-4">
-                Walk-ins welcome, but we recommend booking ahead to secure your preferred time slot.
-              </p>
-              <Link to="/contact" className="btn btn--primary">
-                Book Now
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Contact */}
+      <Contact />
+
     </div>
   );
 };
