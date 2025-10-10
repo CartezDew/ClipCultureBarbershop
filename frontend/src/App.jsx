@@ -5,7 +5,7 @@ import Home from './pages/Home.jsx';
 import Services from './pages/Services.jsx';
 import Team from './pages/Team.jsx';
 import Gallery from './pages/Gallery.jsx';
-import Contact from './pages/Contact.jsx';
+import ContactPage from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 
@@ -46,7 +46,7 @@ function App() {
             <>
               <Navbar />
               <main>
-                <Contact />
+                <ContactPage />
               </main>
               <Footer />
             </>

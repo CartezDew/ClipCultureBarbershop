@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Phone } from 'lucide-react';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
 import Shop2Image from '../assets/Contact/Shop_2.webp';
@@ -8,6 +9,10 @@ const Contact = () => {
   return (
     <section className="contact">
       <div className="contact__container">
+        <div className="contact__header">
+          <h2 className="contact__title">Visit Our Locations</h2>
+          <p className="contact__subtitle">Two Culture Hubs. One Standard of Excellence.</p>
+        </div>
 
         <div className="contact__images">
           <div className="contact__image-container">
@@ -57,7 +62,7 @@ const Contact = () => {
             </div>
             <div className="contact__hours">
               <div className="contact__hours-row">
-                <span className="contact__day">Monday - Saturday</span>
+                <span className="contact__day">Mon - Sat</span>
                 <span className="contact__time">9 AM - 7 PM</span>
               </div>
               <div className="contact__hours-row">
@@ -66,7 +71,10 @@ const Contact = () => {
               </div>
             </div>
             <div className="contact__phone-section">
-              <p className="contact__phone">(404)-458-2993</p>
+              <p className="contact__phone">
+                <Phone size={16} className="contact__phone-icon" />
+                (404)-458-2993
+              </p>
             </div>
           </div>
         </div>
