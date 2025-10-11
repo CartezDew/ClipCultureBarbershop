@@ -1,0 +1,249 @@
+
+
+/* Facts Component Styles */
+.w-full {
+  max-width: 1400px;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(0deg,rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
+}
+
+
+.facts-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.2rem, 1.7vw, 1.3rem);
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: 0.01em;
+  text-align: center;
+  position: relative;
+}
+
+.facts-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 190px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--green) 20%, var(--green-light) 80%, transparent 100%);
+  border-radius: 1px;
+}
+
+
+.facts-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Facts heading styles */
+#facts-heading {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #303030;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.2;
+  text-align: center;
+}
+
+
+/* Container & rows */
+.facts-accordion { 
+  list-style: none; 
+  padding: 0; 
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 4rem;
+  border-radius: 4px;
+}
+
+.fact { 
+  background: transparent; 
+  border-bottom: 1px solid rgba(25, 35, 26, 0.1);
+}
+
+.fact:last-child {
+  border-bottom: none;
+}
+
+/* Trigger */
+.fact-trigger { 
+  position: relative; 
+  background: transparent; 
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.fact-trigger:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.fact-trigger:hover {
+  background-color: rgba(51, 103, 59, 0.02);
+}
+
+.fact-trigger .chev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--black);
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+  order: 2;
+}
+
+.fact.open .fact-trigger .chev {
+  background: var(--green);
+}
+
+.fact-trigger .chev::before {
+  content: '+';
+  transition: all 0.3s ease;
+}
+
+.fact.open .fact-trigger .chev::before {
+  content: '-';
+  color: white;
+}
+
+/* Question text styling */
+.fact-trigger span:not(.chev) {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 1.7vw, 1.3rem);
+  font-weight: 600;
+  color: var(--color-eerie-black);
+  line-height: 1.4;
+  flex: 1;
+  text-align: left;
+  padding-right: 1rem;
+  order: 1;
+}
+
+/* Panel animation */
+.fact-panel {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  padding: 0 1.25rem 1.5rem 1.25rem;
+}
+
+.fact.open .fact-panel {
+  opacity: 1;
+}
+
+.fact-panel > div {
+  color: rgba(25, 35, 26, 0.8);
+  font-size: clamp(1rem, 1.7vw, 1.3rem);
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  padding-top: 0.125rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Scroll Animations */
+.facts-accordion {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.facts-accordion-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fact {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fact-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.fact:nth-child(1) { transition-delay: 0.1s; }
+.fact:nth-child(2) { transition-delay: 0.2s; }
+.fact:nth-child(3) { transition-delay: 0.3s; }
+.fact:nth-child(4) { transition-delay: 0.4s; }
+.fact:nth-child(5) { transition-delay: 0.5s; }
+.fact:nth-child(6) { transition-delay: 0.6s; }
+.fact:nth-child(7) { transition-delay: 0.7s; }
+.fact:nth-child(8) { transition-delay: 0.8s; }
+.fact:nth-child(9) { transition-delay: 0.9s; }
+.fact:nth-child(10) { transition-delay: 1.0s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .fact-trigger .chev,
+  .fact-panel,
+  .facts-accordion,
+  .fact { transition: none !important; }
+}
+
+
+
+/* Responsive Design for FAQ */
+/* @media (max-width: 768px) {
+  .faq-section {
+    padding: 3rem 1rem;
+  }
+  
+  .faq-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .faq-header p {
+    font-size: 1.1rem;
+    max-width: 600px;
+  }
+} */
+
+@media (max-width: 480px) {
+  .faq-section {
+    padding: 2rem 1rem;
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+  }
+
+  .fact-trigger span {
+    font-size: clamp(1.05rem, 2.7vw, 1.5rem);
+  }
+
+  .faq-header p {
+    font-size: clamp(1.05rem, 2.7vw, 1.5rem);
+    max-width: 100%;
+  }
+}

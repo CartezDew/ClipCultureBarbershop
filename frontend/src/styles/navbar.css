@@ -117,12 +117,6 @@
     opacity: 0.8;
   }
   
-  .logo-image-nav {
-    width: clamp(2rem, 2.7vw, 2.4rem);
-    height: clamp(2rem, 2.6vw, 2.4rem);
-    margin-right: 0.4rem;
-    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease;
-  }
   
   .logo-text-nav {
     font-size: clamp(1rem, 2.7vw, 1.2rem);
@@ -132,20 +126,28 @@
   }
 
   .logo-image-nav {
-    height: 50px;
+    height: 35px;
     width: auto;
-    max-width: 250px;
+    max-width: 200px;
     object-fit: contain;
-    image-rendering: auto;
-    image-rendering: smooth;
+    object-position: left center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    transition: opacity 0.2s ease;
+    margin-right: 0.4rem;
+    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease;
     /* Force high DPI rendering */
     -webkit-image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: bicubic;
+    /* Prevent pixelation and distortion */
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+    /* Ensure proper scaling */
+    min-width: 0;
+    flex-shrink: 0;
   }
   
   /* Menu Section */
@@ -488,10 +490,18 @@ body.mobile-menu-opened::before {
     gap: -0.5rem;
   }
   .logo-image-nav { 
-    width: clamp(1.8rem, 3.5vw, 2.35rem); 
-    height: clamp(1.8rem, 3.5vw, 2.35rem);
+    height: 30px;
+    width: auto;
+    max-width: 170px;
+    object-fit: contain;
+    object-position: left center;
     margin-right: 0.2rem;
     transition: opacity 0.2s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+    min-width: 0;
+    flex-shrink: 0;
   }
   .navbar-container {
     padding: 0 0.5rem;

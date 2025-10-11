@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Home, Scissors, Users, Camera, Phone, ShoppingCart } from 'lucide-react';
 import logoWebP from '../assets/images/CC-Logo.webp';
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp';
-import logoPNG from '../assets/images/CC-Logo.png';
+import logoPNG from '../assets/images/CC-Logo-blank.webp';
 import '../styles/hero-navbar.css';
 
 const HeroNavbar = () => {

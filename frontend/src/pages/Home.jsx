@@ -11,6 +11,7 @@ import Testimonials from '../components/Testimonials.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
 import Professional_Team from '../components/Professional_Team.jsx';
 import Contact from '../components/Contact.jsx';
+import Facts from '../components/facts.jsx';
 import Footer from '../components/Footer.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
@@ -193,6 +194,9 @@ const Home = () => {
 
       {/* Professional Team */}
       <Professional_Team />
+
+      {/* Facts */}
+      <Facts />
 
       {/* Contact */}
       <Contact />

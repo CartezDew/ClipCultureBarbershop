@@ -5,6 +5,9 @@
 /* CSS Variables */
 :root {
   --primary-green: #0a9786;
+  --green: #0a9786;
+  --green-light: #14b8a6;
+  --green-dark: #0d7a6b;
 }
 
 /* Reset and base styles */

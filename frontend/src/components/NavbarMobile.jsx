@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera } from 'lucide-react'
 import logoWebP from '../assets/images/CC-Logo.webp'
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp'
-import logoPNG from '../assets/images/CC-Logo.png'
+import logoPNG from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
 const NavbarMobile = () => {
