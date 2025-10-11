@@ -12,6 +12,7 @@ const Contact = () => {
         <div className="contact__header">
           <h2 className="contact__title">Visit Our Locations</h2>
           <p className="contact__subtitle">Two Culture Hubs. One Standard of Excellence.</p>
+          <p className="contact__walk-ins">Walk-ins welcomed</p>
         </div>
 
         <div className="contact__images">
