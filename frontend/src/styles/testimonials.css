@@ -296,12 +296,12 @@
   align-items: start;
 }
 
-.testimonials__left-section {
+ .testimonials__left-section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-}
+} 
 
 .testimonials__right-section {
   display: flex;
@@ -312,6 +312,7 @@
 .testimonials .h-12 {
   height: 5rem;
 }
+
 
 .testimonials .w-12 {
   width: 5rem;
@@ -345,9 +346,10 @@
   height: 100%;
 }
 
-.testimonials .w-full {
+.testimonials .w-full-testimonials {
   width: 100%;
 }
+
 
 .testimonials .object-cover {
   object-fit: cover;
@@ -369,7 +371,7 @@
 
 .testimonials .text-neutral-400 {
   color: #a3a3a3;
-}
+}  */
 
 /* --- Client Name and Location --- */
 .testimonials h4.text-white {

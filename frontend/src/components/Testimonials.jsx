@@ -1,8 +1,12 @@
 import { CheckCircle2, Quote } from "lucide-react";
+import Ticker from './Ticker.jsx';
 import '../styles/testimonials.css';
 import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
 import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
+
+// Debug image imports
+console.log('Image imports:', { AdultHaircut, KidsHaircut, MenHaircut });
 
 // --- Usage -------------------------------------------------------------
 // <TestimonialSection testimonials={data} />
@@ -14,36 +18,6 @@ import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
 //   photoUrl: "/images/clients/marcus.jpg" // optional
 // }]
 // ----------------------------------------------------------------------
-
-const DEFAULT_TESTIMONIALS = [
-  {
-    name: "Megan Rizzo",
-    location: "Sandy Springs",
-    quote:
-      "Most amazing service ever received. The barber made my son feel calm and took his time. He played with him and got him used to the equipment. We have a friend and barber for life! I will never go anywhere else!",
-    rating: 5,
-    verified: true,
-    photoUrl: KidsHaircut,
-  },
-  {
-    name: "Toddie Fox",
-    location: "Summerhill",
-    quote:
-      "I was hesitant to try a new barber, but Dave put me at ease the moment I walked in. Professional, welcoming, and precise—this was one of the best cuts I've ever had. Clip Culture truly defines the standard, and I've found my go-to barber.",
-    rating: 5,
-    verified: true,
-    photoUrl: AdultHaircut,
-  },
-  {
-    name: "Q Smith",
-    location: "Sandy Springs",
-    quote:
-      "I came in as a walk-in after trying (and failing) to cut my own hair the night before. With a wedding to attend just hours later, Dave completely transformed my look—fixing my lineup and having me ready to show up sharp. The craftsmanship and care were next-level. I'll definitely be back.",
-    rating: 5,
-    verified: true,
-    photoUrl: MenHaircut,
-  },
-];
 
 const renderStars = (rating) => {
   const stars = [];
@@ -74,6 +48,36 @@ const renderStars = (rating) => {
 
   return stars;
 };
+
+const DEFAULT_TESTIMONIALS = [
+  {
+    name: "Megan Rizzo",
+    location: "Sandy Springs",
+    quote:
+      "Most amazing service ever received. The barber made my son feel calm and took his time. He played with him and got him used to the equipment. We have a friend and barber for life! I will never go anywhere else!",
+    rating: 5,
+    verified: true,
+    photoUrl: KidsHaircut,
+  },
+  {
+    name: "Toddie Fox",
+    location: "Summerhill",
+    quote:
+      "I was hesitant to try a new barber, but Dave put me at ease the moment I walked in. Professional, welcoming, and precise—this was one of the best cuts I've ever had. Clip Culture truly defines the standard, and I've found my go-to barber.",
+    rating: 5,
+    verified: true,
+    photoUrl: AdultHaircut,
+  },
+  {
+    name: "Q Smith",
+    location: "Sandy Springs",
+    quote:
+      "I came in as a walk-in after trying (and failing) to cut my own hair the night before. With a wedding to attend just hours later, Dave completely transformed my look—fixing my lineup and having me ready to show up sharp. The craftsmanship and care were next-level. I'll definitely be back.",
+    rating: 5,
+    verified: true,
+    photoUrl: MenHaircut,
+  },
+];
 
 export default function Testimonials({
   title = "Client Testimonials",
@@ -123,11 +127,15 @@ export default function Testimonials({
               </a>
             </div>
       </div>
+
+      {/* Ticker Component */}
+      <Ticker />
     </section>
   );
 }
 
 function TestimonialCard({ name, location, quote, rating = 5, photoUrl, verified = true }) {
+  console.log('TestimonialCard photoUrl for', name, ':', photoUrl);
   return (
     <article className="group relative rounded-2xl overflow-hidden bg-neutral-900/80 border border-white/10 shadow-[0_10px_40px_-8px_rgba(0,0,0,0.6)]">
       {/* glow border */}
@@ -142,14 +150,18 @@ function TestimonialCard({ name, location, quote, rating = 5, photoUrl, verified
           {/* Left Side - Image and Verified */}
           <div className="testimonials__left-section">
             <div className="relative h-12 w-12 rounded-full bg-neutral-800 ring-1 ring-white/10 overflow-hidden">
-              {photoUrl ? (
-                <img src={photoUrl} alt={`${name} headshot`} className="h-full w-full object-cover" />
-              ) : (
-                <div className="h-full w-full grid place-items-center text-xs text-neutral-400">
-                  Photo
-                </div>
-              )}
-              <span className="absolute inset-0 rounded-full ring-2 ring-emerald-400/40 group-hover:ring-teal-300/60 transition" />
+              <img 
+                src={photoUrl} 
+                alt={`${name} headshot`} 
+                className="h-full w-full-testimonials object-cover rounded-full relative z-10" 
+                style={{ display: 'block' }}
+                onError={(e) => {
+                  console.log('Image failed to load for', name, ':', photoUrl);
+                  e.target.style.display = 'none';
+                }}
+                onLoad={() => console.log('Image loaded successfully for', name, ':', photoUrl)}
+              />
+              <span className="absolute inset-0 rounded-full ring-2 ring-emerald-400/40 group-hover:ring-teal-300/60 transition pointer-events-none" />
             </div>
             {verified && (
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-300 ring-1 ring-inset ring-emerald-400/30 mt-2">

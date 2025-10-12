@@ -237,4 +237,16 @@ const sampleFacts = [
       </>
     ),
   },
+  {
+    id: 7,
+    q: "What makes your grooming products different?",
+    a: (
+      <>
+        <p>
+        Our products are made with <strong>high-quality, barber-approved ingredients</strong> that nourish your hair and scalp without heavy buildup. 
+        Each formula is tested by our team to ensure lasting style, comfort, and results that reflect the ClipCulture standard.
+        </p>
+      </>
+    ),
+  },
 ];
