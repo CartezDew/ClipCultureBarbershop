@@ -48,7 +48,7 @@
 .product-card {
   background: white;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
@@ -70,7 +70,7 @@
   background:  #0a9786;
   background: rgba(0, 0, 0, 0.6);
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%);
-  border-radius: 8px;
+  border-radius: 4px;
   position: relative;
 }
 

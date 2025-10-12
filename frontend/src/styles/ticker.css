@@ -32,6 +32,17 @@
   position: relative;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  overflow: hidden;
+}
+
+.ticker-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  border-radius: 1px;
+  transform-origin: left;
 }
 
 .ticker-item:hover {

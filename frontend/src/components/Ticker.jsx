@@ -9,6 +9,7 @@ const TickerItems = [
 const Ticker = () => {
   const [animationsTriggered, setAnimationsTriggered] = useState({ ticker: false });
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [currentUnderlinedIndex, setCurrentUnderlinedIndex] = useState(0);
   const tickerRef = useRef(null);
 
   // Intersection Observer for animations
@@ -30,6 +31,17 @@ const Ticker = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Auto-cycling underline animation every 3 seconds
+  useEffect(() => {
+    if (!animationsTriggered.ticker) return;
+
+    const interval = setInterval(() => {
+      setCurrentUnderlinedIndex((prev) => (prev + 1) % TickerItems.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [animationsTriggered.ticker]);
 
   const handleTickerClick = (index) => {
     setHighlightedIndex(index);
@@ -55,19 +67,47 @@ const Ticker = () => {
             <motion.div
               className="ticker-item"
               onClick={() => handleTickerClick(i)}
-              style={{ cursor: 'pointer' }}
+              style={{ 
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
               animate={{
                 color: highlightedIndex === i ? 'var(--green)' : '#19231A',
-                scale: highlightedIndex === i ? 1.1 : 1
+                scale: highlightedIndex === i ? 1.1 : (currentUnderlinedIndex === i ? 1.2 : 1)
               }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              transition={{ 
+                duration: highlightedIndex === i ? 0.5 : 0.8, 
+                ease: 'easeInOut' 
+              }}
               whileHover={{ scale: 1.15, color: 'var(--green)' }}
               whileTap={{ scale: 0.95 }}
             >
               {label}
+              {/* Animated underline */}
+              <motion.div
+                className="ticker-underline"
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  height: '2px',
+                  background: 'var(--green)',
+                  borderRadius: '1px'
+                }}
+                initial={{ width: 0 }}
+                animate={{ 
+                  width: currentUnderlinedIndex === i ? '100%' : 0 
+                }}
+                transition={{ 
+                  duration: 0.6, 
+                  ease: 'easeInOut',
+                  delay: currentUnderlinedIndex === i ? 0.1 : 0
+                }}
+              />
             </motion.div>
             {i < (TickerItems.length - 1) && (
-              <span className="ticker-separator">•</span>
+              <span className="ticker-separator">|</span>
             )}
           </React.Fragment>
         ))}

@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Scissors, Users, Camera, Phone, ShoppingCart } from 'lucide-react';
+import { 
+  Home, Scissors, Users, Camera, Phone, ShoppingCart, ChevronDown, Info, 
+  User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, 
+  Megaphone, Store, FileText, HelpCircle, Mail, LogIn
+} from 'lucide-react';
 import logoWebP from '../assets/images/CC-Logo.webp';
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp';
 import logoPNG from '../assets/images/CC-Logo-blank.webp';
 import '../styles/hero-navbar.css';
 
 const HeroNavbar = () => {
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const navRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const getIconForMenuItem = (itemName) => {
     switch (itemName) {
       case 'Services':
         return <Scissors className="hero-menu-icon" size={18} />
       case 'Barbers':
         return <Users className="hero-menu-icon" size={18} />
-      case 'Gallery':
-        return <Camera className="hero-menu-icon" size={18} />
+      case 'About':
+        return <Info className="hero-menu-icon" size={18} />
       case 'Shop':
         return <ShoppingCart className="hero-menu-icon" size={18} />
       default:
@@ -22,8 +43,43 @@ const HeroNavbar = () => {
     }
   };
 
+  const toggleDropdown = (dropdownName) => {
+    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+  };
+
+  const closeDropdown = () => {
+    setActiveDropdown(null);
+  };
+
+  const dropdownMenus = {
+    services: [
+      { name: 'All Services', link: '/services', icon: <Scissors size={16} /> },
+      { name: 'Men', link: '/services?category=men', icon: <User size={16} /> },
+      { name: 'Women', link: '/services?category=women', icon: <Users2 size={16} /> },
+      { name: 'Kids', link: '/services?category=kids', icon: <Baby size={16} /> }
+    ],
+    barbers: [
+      { name: 'All Locations', link: '/team', icon: <MapPin size={16} /> },
+      { name: 'Sandy Springs', link: '/team?location=sandy-springs', icon: <Building size={16} /> },
+      { name: 'Summerhill', link: '/team?location=summerhill', icon: <Building size={16} /> }
+    ],
+    shop: [
+      { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
+      { name: 'Books', link: '/shop?category=books', icon: <BookOpen size={16} /> },
+      { name: 'Mentorship', link: '/shop?category=mentorship', icon: <GraduationCap size={16} /> },
+      { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
+      { name: 'Franchise', link: '/shop?category=franchise', icon: <Store size={16} /> }
+    ],
+    about: [
+      { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
+      { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
+      { name: 'Contact Us', link: '/contact', icon: <Mail size={16} /> },
+      { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
+    ]
+  };
+
   return (
-    <nav className="hero-navbar">
+    <nav className="hero-navbar" ref={navRef}>
       <div className="hero-navbar-container">
         <div className="hero-logo">
           <Link to="/" className="hero-logo-link">
@@ -40,22 +96,116 @@ const HeroNavbar = () => {
         </div>
         
         <div className="hero-nav-links">
-          <Link to="/services" className="hero-nav-link">
-            {getIconForMenuItem('Services')}
-            <span>Services</span>
-          </Link>
-          <Link to="/team" className="hero-nav-link">
-            {getIconForMenuItem('Barbers')}
-            <span>Barbers</span>
-          </Link>
-          <Link to="/gallery" className="hero-nav-link">
-            {getIconForMenuItem('Gallery')}
-            <span>Gallery</span>
-          </Link>
-          <Link to="/shop" className="hero-nav-link">
-            {getIconForMenuItem('Shop')}
-            <span>Shop</span>
-          </Link>
+          {/* Services Dropdown */}
+          <div className="hero-dropdown-container">
+            <button 
+              className="hero-nav-link hero-dropdown-trigger"
+              onClick={() => toggleDropdown('services')}
+            >
+              {getIconForMenuItem('Services')}
+              <span>Services</span>
+              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'services' ? 'active' : ''}`} size={14} />
+            </button>
+            {activeDropdown === 'services' && (
+              <div className="hero-dropdown-menu">
+                {dropdownMenus.services.map((item, index) => (
+                  <Link 
+                    key={index} 
+                    to={item.link} 
+                    className="hero-dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    <span className="hero-dropdown-icon">{item.icon}</span>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Barbers Dropdown */}
+          <div className="hero-dropdown-container">
+            <button 
+              className="hero-nav-link hero-dropdown-trigger"
+              onClick={() => toggleDropdown('barbers')}
+            >
+              {getIconForMenuItem('Barbers')}
+              <span>Barbers</span>
+              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'barbers' ? 'active' : ''}`} size={14} />
+            </button>
+            {activeDropdown === 'barbers' && (
+              <div className="hero-dropdown-menu">
+                {dropdownMenus.barbers.map((item, index) => (
+                  <Link 
+                    key={index} 
+                    to={item.link} 
+                    className="hero-dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    <span className="hero-dropdown-icon">{item.icon}</span>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* About Dropdown */}
+          <div className="hero-dropdown-container">
+            <button 
+              className="hero-nav-link hero-dropdown-trigger"
+              onClick={() => toggleDropdown('about')}
+            >
+              {getIconForMenuItem('About')}
+              <span>About</span>
+              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'about' ? 'active' : ''}`} size={14} />
+            </button>
+            {activeDropdown === 'about' && (
+              <div className="hero-dropdown-menu">
+                {dropdownMenus.about.map((item, index) => (
+                  <Link 
+                    key={index} 
+                    to={item.link} 
+                    className="hero-dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    <span className="hero-dropdown-icon">{item.icon}</span>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Shop Dropdown */}
+          <div className="hero-dropdown-container">
+            <button 
+              className="hero-nav-link hero-dropdown-trigger hero-shop-link"
+              onClick={() => toggleDropdown('shop')}
+            >
+              <div className="hero-shop-icon-container">
+                {getIconForMenuItem('Shop')}
+                <span className="hero-cart-count">0</span>
+              </div>
+              <span>Shop</span>
+              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'shop' ? 'active' : ''}`} size={14} />
+            </button>
+            {activeDropdown === 'shop' && (
+              <div className="hero-dropdown-menu">
+                {dropdownMenus.shop.map((item, index) => (
+                  <Link 
+                    key={index} 
+                    to={item.link} 
+                    className="hero-dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    <span className="hero-dropdown-icon">{item.icon}</span>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
         
         <div className="hero-nav-actions">
