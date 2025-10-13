@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ServicesGallery from '../components/ServicesGallery.jsx';
 import '../styles/services.css';
 
 const Services = () => {
@@ -54,7 +55,12 @@ const Services = () => {
             <p className="services__subtitle">Walk-ins are welcome!</p>
             <div className="services-divider"></div>
           </div>
+        </div>
 
+        {/* Services Gallery Component - Outside container for full width */}
+        <ServicesGallery />
+
+        <div className="container">
           {/* Regular Services */}
           <div className="services__section">
             <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>

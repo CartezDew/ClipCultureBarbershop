@@ -1,0 +1,338 @@
+/* Services Gallery Section */
+.services-gallery-section {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  left: 0;
+  right: 0;
+}
+
+.services-gallery-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Services Gallery Header */
+.services-gallery-header {
+  text-align: center;
+  /* margin-bottom: 3rem; */
+}
+
+.services-gallery-title {
+  font-size: clamp(2.5rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.services-gallery-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  color: var(--primary-green);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  opacity: 0.6;
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.services-gallery-divider {
+  width: 90px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #0a9786 20%, #14b8a6 80%, transparent 100%);
+  margin: 0 auto 0rem;
+}
+
+/* Services Gallery Carousel Container */
+.services-gallery-carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.services-gallery-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  ;
+}
+
+.services-gallery-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 0;
+  line-height: 0;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.services-gallery-slide {
+  flex: 0 0 20%;
+  width: 20%;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  overflow: hidden;
+}
+
+.services-gallery-image {
+  display: block;
+  object-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  transition: transform 0.3s ease;
+}
+
+.services-gallery-slide:hover .services-gallery-image {
+  transform: scale(1.05);
+}
+
+
+/* Services Gallery Navigation Buttons */
+.services-gallery-nav {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.services-gallery-nav--prev {
+  left: 10px;
+}
+
+.services-gallery-nav--next {
+  right: 10px;
+}
+
+.services-gallery-nav:hover {
+  background: rgba(10, 151, 134, 0.3);
+  border-color: var(--primary-green);
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(10, 151, 134, 0.3);
+}
+
+.services-gallery-nav:active {
+  transform: scale(0.95);
+}
+
+.services-gallery-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.services-gallery-nav:disabled:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: none;
+  box-shadow: none;
+}
+
+.services-gallery-nav svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+}
+
+/* Services Gallery Responsive Design */
+@media (max-width: 768px) {
+  .services-gallery-section {
+    padding: 2rem 0;
+  }
+
+  .services-gallery-container {
+    padding: 0;
+  }
+
+  .services-gallery-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .services-gallery-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .services-gallery-carousel {
+    gap: 0.5rem;
+  }
+
+  .services-gallery-slide {
+    flex: 0 0 33.333%;
+    width: 33.333%;
+    height: 250px;
+  }
+
+  .services-gallery-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .services-gallery-nav svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-gallery-section {
+    padding: 1.5rem 0;
+  }
+
+  .services-gallery-title {
+    font-size: 1.8rem;
+  }
+
+  .services-gallery-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .services-gallery-slide {
+    flex: 0 0 50%;
+    width: 50%;
+    height: 200px;
+  }
+
+  .services-gallery-nav {
+    width: 35px;
+    height: 35px;
+  }
+
+  .services-gallery-nav svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Services Gallery Animation for smooth transitions */
+@keyframes servicesGalleryFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.services-gallery-section {
+  animation: servicesGalleryFadeInUp 0.8s ease-out;
+}
+
+/* Services Gallery Hover effects for better interactivity */
+.services-gallery-wrapper:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Services Gallery Loading state */
+.services-gallery-image {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: servicesGalleryLoading 1.5s infinite;
+}
+
+@keyframes servicesGalleryLoading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.services-gallery-image[src] {
+  background: none;
+  animation: none;
+}
+
+/* Services Gallery Focus states for accessibility */
+.services-gallery-nav:focus {
+  outline: 2px solid var(--primary-green);
+  outline-offset: 2px;
+}
+
+.services-gallery-nav:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Services Gallery High contrast mode support */
+@media (prefers-contrast: high) {
+  .services-gallery-nav {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #ffffff;
+  }
+  
+  .services-gallery-nav:hover {
+    background: rgba(10, 151, 134, 0.8);
+  }
+}
+
+/* Services Gallery Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .services-gallery-track {
+    transition: none;
+  }
+  
+  .services-gallery-image {
+    transition: none;
+  }
+  
+  .services-gallery-nav {
+    transition: none;
+  }
+  
+  .services-gallery-wrapper:hover {
+    transform: none;
+  }
+  
+  .services-gallery-slide:hover .services-gallery-image {
+    transform: none;
+  }
+}
