@@ -7,18 +7,23 @@ const ServicesGallery = () => {
 
   // Services-specific gallery images - using a different subset or different images
   const servicesImages = [
-    { id: 1, src: '/src/assets/gallery/image-1.webp', alt: 'Haircut Service 1' },
+    { id: 1, src: '/src/assets/gallery/image-7.webp', alt: 'Haircut Service 1' },
     { id: 2, src: '/src/assets/gallery/image-2.webp', alt: 'Haircut Service 2' },
-    { id: 3, src: '/src/assets/gallery/image-3.webp', alt: 'Haircut Service 3' },
-    { id: 4, src: '/src/assets/gallery/image-4.webp', alt: 'Haircut Service 4' },
-    { id: 5, src: '/src/assets/gallery/image-5.webp', alt: 'Haircut Service 5' },
-    { id: 6, src: '/src/assets/gallery/image-6.webp', alt: 'Haircut Service 6' },
-    { id: 7, src: '/src/assets/gallery/image-7.webp', alt: 'Haircut Service 7' },
-    { id: 8, src: '/src/assets/gallery/image-8.webp', alt: 'Haircut Service 8' },
-    { id: 9, src: '/src/assets/gallery/image-9.webp', alt: 'Haircut Service 9' },
-    { id: 10, src: '/src/assets/gallery/image-10.webp', alt: 'Haircut Service 10' },
-    { id: 11, src: '/src/assets/gallery/image-11.webp', alt: 'Haircut Service 11' },
-    { id: 12, src: '/src/assets/gallery/image-12.webp', alt: 'Haircut Service 12' },
+    { id: 3, src: '/src/assets/gallery/image-20.webp', alt: 'Haircut Service 3' },
+    { id: 4, src: '/src/assets/gallery/image-10.webp', alt: 'Haircut Service 4' },
+    { id: 5, src: '/src/assets/gallery/image-13.webp', alt: 'Haircut Service 5' },
+    { id: 6, src: '/src/assets/gallery/image-22.webp', alt: 'Haircut Service 6' },
+    { id: 7, src: '/src/assets/gallery/image-37.webp', alt: 'Haircut Service 7' },
+    { id: 8, src: '/src/assets/gallery/image-15.webp', alt: 'Haircut Service 8' },
+    { id: 9, src: '/src/assets/gallery/image-16.webp', alt: 'Haircut Service 9' },
+    { id: 10, src: '/src/assets/gallery/image-18.webp', alt: 'Haircut Service 10' },
+    { id: 11, src: '/src/assets/gallery/image-23.webp', alt: 'Haircut Service 11' },
+    { id: 12, src: '/src/assets/gallery/image-25.webp', alt: 'Haircut Service 12' },
+    { id: 13, src: '/src/assets/gallery/image-26.webp', alt: 'Haircut Service 13' },
+    { id: 14, src: '/src/assets/gallery/image-29.webp', alt: 'Haircut Service 14' },
+    { id: 15, src: '/src/assets/gallery/image-31.webp', alt: 'Haircut Service 15' },
+    { id: 16, src: '/src/assets/gallery/image-47.webp', alt: 'Haircut Service 16' },
+
     // Add more specific images for services page
   ];
 
