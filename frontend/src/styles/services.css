@@ -1,24 +1,21 @@
 /* Services Page Styles */
-body {
-  background: linear-gradient(to bottom, #0d233d, #6a9298);
-}
-
 .section--light {
   background: linear-gradient(to bottom, #0d233d, #6a9298);
+  background: #1a1a1a !important;
   color: white;
 }
 
-.section--light h1,
+/* .section--light h1,
 .section--light h2,
 .section--light h3,
 .section--light p {
   color: white;
-}
+} */
 
 /* Services Header */
 .services__header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   font-weight: 800;
   transform: translateY(20px);
   transition: all 0.8s ease;
@@ -35,20 +32,21 @@ body {
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #ffffff;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .services__subtitle {
-  font-size: 1.7rem;
+  font-size: 1.2rem ;
   font-weight: 400;
   line-height: 1.5;
   color: #a1a1aa;
   max-width: 600px;
   margin: 0 auto;
+  padding-bottom: 1rem;
 }
 
 .services-divider {
-  width: 90px;
+  width: 130px;
   height: 3px;
   background: linear-gradient(90deg, transparent 0%, #0a9786 20%, #14b8a6 80%, transparent 100%);
   margin: 0 auto 2rem;
@@ -60,27 +58,6 @@ body {
   margin-bottom: 4rem;
 }
 
-.services__section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  position: relative;
-}
-
-.services__section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #0a9786, #14b8a6);
-  border-radius: 2px;
-}
 
 /* Services Grid */
 .services__grid {
@@ -148,18 +125,38 @@ body {
   }
 }
 
-/* Enhanced Grid Borders with Fading Effects */
-/* All grids - Vertical lines between columns */
-.services__card:nth-child(1)::after,
-.services__card:nth-child(2)::after,
-.services__card:nth-child(4)::after,
-.services__card:nth-child(5)::after {
+/* Grid layout (adjust breakpoints/columns as needed) */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0; /* no gaps so dividers meet cleanly */
+}
+
+@media (max-width: 900px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base: prep cards for absolute pseudo-elements */
+.services__card { 
+  position: relative; 
+}
+
+/* RIGHT divider (vertical) — one per card */
+.services__card::after {
   content: '';
   position: absolute;
   top: 20%;
   right: 0;
   bottom: 20%;
-  width: 1px;
+  width: 2.2px;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -167,21 +164,19 @@ body {
     rgba(255, 255, 255, 0.15) 80%,
     transparent 100%
   );
-  animation: shimmerBorderVertical 3s ease-in-out infinite, floatingBorder 4s ease-in-out infinite;
+  animation: shimmerBorderVertical 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
-/* All grids - Horizontal lines between rows */
-.services__card:nth-child(1)::before,
-.services__card:nth-child(2)::before,
-.services__card:nth-child(3)::before,
-.services__card:nth-child(4)::before,
-.services__card:nth-child(5)::before {
+/* BOTTOM divider (horizontal) — one per card */
+.services__card::before {
   content: '';
   position: absolute;
   left: 20%;
   right: 20%;
   bottom: 0;
-  height: 1px;
+  height: 2.2px;
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -189,7 +184,54 @@ body {
     rgba(255, 255, 255, 0.15) 80%,
     transparent 100%
   );
-  animation: shimmerBorder 3s ease-in-out infinite, floatingBorder 4s ease-in-out infinite;
+  animation: shimmerBorder 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* === EDGE CLEANUP (3 columns) === */
+.services__grid .services__card:nth-child(3n)::after { /* last col */
+  display: none;
+}
+.services__grid .services__card:nth-last-child(-n + 3)::before { /* last row */
+  display: none;
+}
+
+/* === EDGE CLEANUP for 2 columns (<=900px) === */
+@media (max-width: 900px) {
+  .services__grid .services__card:nth-child(2n)::after { /* last col in 2-col layout */
+    display: none;
+  }
+  .services__grid .services__card:nth-last-child(-n + 2)::before { /* last row in 2-col layout */
+    display: none;
+  }
+}
+
+/* === EDGE CLEANUP for 1 column (<=560px) === */
+@media (max-width: 560px) {
+  .services__grid .services__card::after { /* no right divider in 1-col */
+    display: none;
+  }
+  .services__grid .services__card:last-child::before { /* no bottom divider on last card */
+    display: none;
+  }
+}
+
+/* If you keep the helper <div class="border-effects"> in JSX, hide it: */
+.border-effects { 
+  display: none; 
+}
+
+/* Special handling for addons grid (2 columns) */
+.services__grid--addons {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.services__grid--addons .services__card:nth-child(2n)::after { 
+  display: none; 
+}
+.services__grid--addons .services__card:nth-last-child(-n + 2)::before { 
+  display: none; 
 }
 
 /* Hover Effects */
@@ -340,7 +382,7 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .services__title {
     font-size: 2.5rem;
   }
@@ -379,7 +421,7 @@ body {
   .services__card {
     padding: 1.25rem;
   }
-}
+} */
 
 @media (max-width: 500px) {
   .services__title {

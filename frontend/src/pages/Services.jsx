@@ -57,7 +57,6 @@ const Services = () => {
 
           {/* Regular Services */}
           <div className="services__section">
-            <h2 className="services__section-title">Haircuts & Styling</h2>
             <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
               {regularServices.map((service, index) => (
                 <div 
