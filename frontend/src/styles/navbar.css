@@ -34,11 +34,6 @@
     pointer-events: none;
   }
   
-  /* Add padding to body to account for fixed navbar */
-  /* body {
-    padding-top: 3rem;
-  }
-   */
   /* Ensure first container has proper top margin */
   .get-started-page > *:first-child {
     margin-top: 2rem;
@@ -126,9 +121,9 @@
   }
 
   .logo-image-nav {
-    height: 35px;
+    height: clamp(40px, 5vw, 50px);
     width: auto;
-    max-width: 200px;
+    max-width: clamp(150px, 25vw, 180px);
     object-fit: contain;
     object-position: left center;
     image-rendering: -webkit-optimize-contrast;
@@ -449,8 +444,13 @@ body.mobile-menu-opened::before {
  
   /* Desktop navbar sizing + spacing trims */
   .navbar-desktop .logo-image-nav {
-    width: clamp(1.5rem, 2.6vw, 1.8rem);
-    height: clamp(1.5rem, 2.6vw, 1.8rem);
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    object-position: center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
   }
   .navbar-desktop .menu-section {
     gap: clamp(0.5rem, 1.8vw, 1rem);
@@ -490,16 +490,15 @@ body.mobile-menu-opened::before {
     gap: -0.5rem;
   }
   .logo-image-nav { 
-    height: 30px;
-    width: auto;
-    max-width: 170px;
+    height: 40px;
+    width: 40px;
     object-fit: contain;
-    object-position: left center;
-    margin-right: 0.2rem;
-    transition: opacity 0.2s ease;
+    object-position: center;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     image-rendering: high-quality;
+    margin-right: 0.2rem;
+    transition: opacity 0.2s ease;
     min-width: 0;
     flex-shrink: 0;
   }

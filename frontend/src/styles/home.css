@@ -217,8 +217,8 @@
 .service-duration-pill {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif ;
-  color: #666;
-  background: rgba(248, 249, 250, 0.4);
+  color: #e1dbdb;
+  background: rgba(248, 249, 250, 0.3);
   padding: 0.2rem 0.55rem;
   border-radius: 5px;
   display: inline-block;

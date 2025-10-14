@@ -277,8 +277,8 @@
 
 .services__card-duration-pill {
   font-size: 0.9rem;
-  color: #666;
-  background: rgba(248, 249, 250, 0.6);
+  color: #e1dbdb;
+  background: rgba(248, 249, 250, 0.3);
   padding: 0.25rem 0.75rem;
   border-radius: 10px;
   display: inline-block;

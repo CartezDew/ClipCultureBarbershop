@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
-import logoWebP2x from '../assets/images/CC-Logo-Black-HQ.webp'
-import logoPNG from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
 const NavbarDesktop = () => {
@@ -43,9 +41,10 @@ const NavbarDesktop = () => {
             { name: 'Franchise', link: '/shop?category=franchise', icon: <Store size={16} /> }
         ],
         about: [
-            { name: 'Home', link: '/', icon: <Home size={16} /> },
+            ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
             { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
             { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
+            { name: 'Join Team', link: '/join-team', icon: <UserPlus size={16} /> },
             { name: 'Contact Us', link: '/contact', icon: <Mail size={16} /> },
             { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
         ]
@@ -154,15 +153,11 @@ const NavbarDesktop = () => {
             <div className="navbar-container">
                 <div className="logo-section">
                     <Link to="/" className="logo-link">
-                        <picture>
-                            <source srcSet={`${logoWebP2x} 2x, ${logoWebP} 1x`} type="image/webp" />
-                            <img 
-                                src={logoPNG} 
-                                srcSet={`${logoPNG} 1x`}
-                                alt="ClipCulture Logo" 
-                                className="logo-image-nav"
-                            />
-                        </picture>
+                        <img 
+                            src={logoWebP} 
+                            alt="ClipCulture Logo" 
+                            className="logo-image-nav"
+                        />
                     </Link>
                 </div>
                 {/* Menu items: keep mounted to avoid flicker; animate between hidden/visible */}
