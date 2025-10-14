@@ -72,7 +72,7 @@ const ServicesGallery = () => {
     window.addEventListener('resize', onResize);
 
     // RAF loop
-    const speedPxPerSec = 60; // tune speed here
+    const speedPxPerSec = 20; // tune speed here
     const tick = (ts) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = (ts - lastTsRef.current) / 1000;

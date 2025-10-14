@@ -5,12 +5,6 @@
   color: white;
 }
 
-/* .section--light h1,
-.section--light h2,
-.section--light h3,
-.section--light p {
-  color: white;
-} */
 
 /* Services Header */
 .services__header {
@@ -27,7 +21,7 @@
 }
 
 .services__title {
-  font-size: 3rem;
+  font-size: clamp(2.8rem, 4vw, 3.2rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -55,7 +49,7 @@
 
 /* Service Sections */
 .services__section {
-  margin-bottom: 4rem;
+  margin-bottom: 0.5rem;
 }
 
 
@@ -85,7 +79,7 @@
   transform: translateY(30px);
   transition: all 0.8s ease 0.3s;
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 
 .services__grid--addons.animate {
@@ -114,6 +108,16 @@
   animation: cardEaseInFromLeft 0.6s ease-out forwards;
 }
 
+/* Add-on Services */
+ .services__section-title {
+  font-size: clamp(2.5rem, 3.5vw, 2.8rem) !important;
+  text-align: center;
+  padding-top: 2rem;
+  opacity: 0.7;
+}
+
+
+
 @keyframes cardEaseInFromLeft {
   0% {
     opacity: 0;
@@ -125,29 +129,7 @@
   }
 }
 
-/* Grid layout (adjust breakpoints/columns as needed) */
-.services__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0; /* no gaps so dividers meet cleanly */
-}
 
-@media (max-width: 900px) {
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .services__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Base: prep cards for absolute pseudo-elements */
-.services__card { 
-  position: relative; 
-}
 
 /* RIGHT divider (vertical) — one per card */
 .services__card::after {
@@ -189,50 +171,7 @@
   pointer-events: none;
 }
 
-/* === EDGE CLEANUP (3 columns) === */
-.services__grid .services__card:nth-child(3n)::after { /* last col */
-  display: none;
-}
-.services__grid .services__card:nth-last-child(-n + 3)::before { /* last row */
-  display: none;
-}
 
-/* === EDGE CLEANUP for 2 columns (<=900px) === */
-@media (max-width: 900px) {
-  .services__grid .services__card:nth-child(2n)::after { /* last col in 2-col layout */
-    display: none;
-  }
-  .services__grid .services__card:nth-last-child(-n + 2)::before { /* last row in 2-col layout */
-    display: none;
-  }
-}
-
-/* === EDGE CLEANUP for 1 column (<=560px) === */
-@media (max-width: 560px) {
-  .services__grid .services__card::after { /* no right divider in 1-col */
-    display: none;
-  }
-  .services__grid .services__card:last-child::before { /* no bottom divider on last card */
-    display: none;
-  }
-}
-
-/* If you keep the helper <div class="border-effects"> in JSX, hide it: */
-.border-effects { 
-  display: none; 
-}
-
-/* Special handling for addons grid (2 columns) */
-.services__grid--addons {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.services__grid--addons .services__card:nth-child(2n)::after { 
-  display: none; 
-}
-.services__grid--addons .services__card:nth-last-child(-n + 2)::before { 
-  display: none; 
-}
 
 /* Hover Effects */
 .services__card:hover {
@@ -346,109 +285,41 @@
   font-weight: 500;
 }
 
-/* Add-on Services */
-.services__card--addon {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border: 2px solid #e9ecef;
-}
 
-.services__card--addon:hover {
-  border-color: #0a9786;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-}
-
-/* Specialty Services */
-.services__card--specialty {
-  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
-  border: 2px solid #fed7d7;
-}
 
 .services__card--specialty:hover {
   border-color: #0a9786;
-  background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
 }
 
-/* Empty Card */
-.services__card--empty {
-  background: transparent;
-  border: none;
-  pointer-events: none;
-  visibility: hidden;
-}
 
 .services__cta {
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  padding: 2rem 0;
 }
 
-/* Responsive Design */
-/* @media (max-width: 768px) {
-  .services__title {
-    font-size: 2.5rem;
-  }
-  
-  .services__subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .services__section-title {
-    font-size: 1.75rem;
-  }
-  
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-  
-  .services__grid--addons {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    max-width: 100%;
-  }
-  
-  .services__card:nth-child(3n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-  }
-  
-  .services__card:nth-child(2n) {
-    border-right: none;
-  }
-  
-  .services__card:nth-child(n+5) {
-    border-bottom: none;
-  }
-  
-  .services__card {
-    padding: 1.25rem;
-  }
-} */
-
-@media (max-width: 500px) {
-  .services__title {
-    font-size: 2rem;
-  }
-  
-  .services__section-title {
-    font-size: 1.5rem;
-  }
-  
-  .services__grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, auto);
-  }
-  
-  .services__grid--addons {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, auto);
-  }
-  
-  .services__card {
-    padding: 1rem;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  }
-  
-  .services__card:last-child {
-    border-bottom: none;
-  }
+.services__cta .btn-book-now {
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 200px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
+
+.services__cta .btn-book-now:hover {
+  box-shadow: 0 8px 25px rgba(8, 80, 120, 0.5);
+  transform: translateY(-2px);
+}
+

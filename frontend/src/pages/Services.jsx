@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import ServicesGallery from '../components/ServicesGallery.jsx';
 import '../styles/services.css';
 
@@ -85,9 +86,37 @@ const Services = () => {
             </div>
           </div>
 
+                    {/* Specialty Services */}
+                    <div className="services__section">
+            <h2 className="services__section-title">Specialty Services</h2>
+            <div className="services-divider"></div>
+            <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
+              {specialtyServices.map((service, index) => (
+                <div 
+                  key={index} 
+                  className={`services__card services__card--specialty ${isAnimated ? 'card-animate-in' : ''}`}
+                  style={{
+                    animationDelay: `${(index + 19) * 0.1}s`,
+                    opacity: isAnimated ? 1 : 0,
+                    transform: isAnimated ? 'translateX(0)' : 'translateX(-50px)'
+                  }}
+                >
+                  <h3 className="services__card-title">{service.name}</h3>
+                  <div className="services__card-category">{service.category}</div>
+                  <div className="services__card-details">
+                    <div className="services__card-price">${service.price}</div>
+                    <div className="services__card-divider">|</div>
+                    <div className="services__card-duration-pill">{service.duration}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>  
+
           {/* Add-on Services */}
           <div className="services__section">
             <h2 className="services__section-title">Add-on Services</h2>
+            <div className="services-divider"></div>
             <div className={`services__grid services__grid--addons ${isAnimated ? 'animate' : ''}`}>
               {addOnServices.map((service, index) => (
                 <div 
@@ -110,38 +139,25 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Specialty Services */}
-          <div className="services__section">
-            <h2 className="services__section-title">Specialty Services</h2>
-            <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
-              {specialtyServices.map((service, index) => (
-                <div 
-                  key={index} 
-                  className={`services__card services__card--specialty ${isAnimated ? 'card-animate-in' : ''}`}
-                  style={{
-                    animationDelay: `${(index + 19) * 0.1}s`,
-                    opacity: isAnimated ? 1 : 0,
-                    transform: isAnimated ? 'translateX(0)' : 'translateX(-50px)'
-                  }}
-                >
-                  <h3 className="services__card-title">{service.name}</h3>
-                  <div className="services__card-category">{service.category}</div>
-                  <div className="services__card-details">
-                    <div className="services__card-price">${service.price}</div>
-                    <div className="services__card-divider">|</div>
-                    <div className="services__card-duration-pill">{service.duration}</div>
-                  </div>
-                </div>
-              ))}
-              {/* Add empty cards to fill the 3x2 grid */}
-              <div className="services__card services__card--empty"></div>
-            </div>
-          </div>
-
           <div className="services__cta">
-            <Link to="/contact" className="btn btn--primary btn--large">
+            <motion.button 
+              className="btn-book-now" 
+              onClick={() => window.location.href = '/contact'}
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              style={{
+                background: "linear-gradient(135deg,rgb(5, 61, 90) 0%,rgb(77, 172, 161) 50%, #085078 100%)",
+                backgroundSize: "200% 200%"
+              }}
+            >
               Book Your Service
-            </Link>
+            </motion.button>
           </div>
         </div>
       </section>
