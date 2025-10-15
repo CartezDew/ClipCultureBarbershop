@@ -1,4 +1,10 @@
 import '../styles/about.css';
+import visionImage from '../assets/gallery/image-11.webp';
+import communityImage from '../assets/gallery/image-4.webp';
+import businessImage from '../assets/gallery/image-3.webp';
+import leapImage from '../assets/gallery/image-20.webp';
+import birthImage from '../assets/gallery/image-42.webp';
+import movementImage from '../assets/gallery/image-6.webp';
 
 const About = () => {
   return (
@@ -10,47 +16,82 @@ const About = () => {
         </div>
         
         <div className="about-content">
-          <div className="about-intro">
-            <p>
-              At Clip Culture Barbershop, we don't just cut hair—we define what premium barbering should look and feel like. Since opening our doors in Sandy Springs, Atlanta in 2017, Clip Culture has grown into more than a barbershop: it's a movement. A place where style, education, and community meet.
-            </p>
+          <div className="about-section about-vision-grid">
+            <div className="about-vision-content">
+              <img src={visionImage} alt="Clip Culture Vision" className="vision-image about-vision-image" />
+              <h2 className="about-section__title">The Vision</h2>
+              <p>
+                <strong>At Clip Culture</strong>, we believe barbering is more than a service<strong>— it's a lifestyle, a legacy, and a platform for impact.</strong>
+              </p>
+              <p>
+                Rooted in craftsmanship and powered by modern luxuries, our barbershop experience sets the <strong>gold standard</strong> for what grooming should feel like: personal, premium, and community-driven.
+              </p>
+              <p>
+                From publishing books to developing grooming products, from launching two thriving locations to <strong>mentoring the next generation of barbers</strong>, Clip Culture is more than a brand—it's a movement. We’re here to <strong>shape the culture</strong> of grooming locally, nationally, and globally.
+              </p>
+            </div>
           </div>
           
-          <div className="about-section">
-            <h2 className="about-section__title">The Vision</h2>
-            <p>
-              Clip Culture was built on a simple but powerful belief: barbering is more than a service, it's an experience. By combining craftsmanship with modern luxuries and a community-driven atmosphere, we set the standard for what a barbershop can be. Through books, mentorship, men's products, and now two thriving locations, Clip Culture is actively shaping the culture of grooming—locally and globally.
-            </p>
+          <div className="about-intro about-humble-grid">
+            <div className="about-humble-content">
+              <img src={communityImage} alt="David Brown - Clip Culture Founder" className="humble-image about-humble-image" />
+              <h2 className="about-intro__title">
+               From Humble Beginnings to a Cultural Brand
+              </h2>
+              <p>
+               <strong>David Brown</strong>, founder of Clip Culture Barbershop, turned a dream born in Charleston, South Carolina, into a cultural movement. Like many, David once worked a traditional 9-to-5 job where profit often outweighed passion and customer experience. Feeling unfulfilled, he returned to his roots and set out to create a space where <strong>barbering was more than a service—it was an experience</strong>. His vision was simple: deliver exceptional cuts, modern luxuries, and a genuine sense of community all under one roof.
+              </p>
+            </div>
           </div>
           
-          <div className="about-section">
-            <h2 className="about-section__title">Meet David Brown</h2>
-            <p>
-              Founder David Brown is living proof that passion and purpose can rewrite a career path. A Charleston, South Carolina native, David earned a Bachelor's degree in Business Administration (Marketing) from South Carolina State University and a Master's in Human Resource Development from Webster University. He began in corporate America, but soon realized his true calling was in barbering—where people, creativity, and culture intersect.
-            </p>
-            <p>
-              After moving to Atlanta in 2012, David enrolled in barber school in 2013 and quickly fell in love with the craft. By 2015, he earned his Master Barber License and made the bold decision to leave his corporate job. Just two years later, on December 12, 2017, he opened the first Clip Culture Barbershop.
-            </p>
+          <div className="about-section about-business-grid">
+            <div className="about-business-content">
+              <img src={businessImage} alt="Business Education" className="business-image about-business-image" />
+              <h2 className="about-section__title">Business Meets Barbering</h2>
+              <p>
+                Before launching Clip Culture, David Brown earned a <strong>Bachelor's degree in Business Administration with a concentration in Marketing</strong> from South Carolina State University, followed by a <strong>Master's degree in Human Resource Development</strong> from Webster University.
+              </p>
+              <p>
+                Although he once envisioned himself climbing the corporate ladder, destiny had other plans. What began as a professional pursuit soon became a personal calling—a <strong>shift from boardrooms to barbershops</strong>, where David found his purpose behind the chair rather than behind a desk.
+              </p>
+            </div>
           </div>
           
-          <div className="about-section">
-            <h2 className="about-section__title">Building the Brand</h2>
-            <p>
-              From the start, Clip Culture became a hub for more than grooming—it became a space where people could learn, connect, and grow. David's influence quickly spread beyond the chair: he has written books, launched clothing brands and men's products, and mentored the next generation of barbers and entrepreneurs.
-            </p>
-            <p>
-              In fall 2024, Clip Culture expanded to its second location in Summerhill, further cementing its reputation as a trendsetting brand.
-            </p>
+          <div className="about-section about-leap-grid">
+            <div className="about-leap-content">
+              <img src={leapImage} alt="The Leap of Faith" className="leap-image about-leap-image" />
+              <h2 className="about-section__title">The Leap of Faith</h2>
+              <p>
+                In 2012, David made a bold move to Atlanta, determined to chase his passion. By March of 2013, he enrolled at the Cutting Edge Institute, where his talent quickly stood out. After leaving his corporate job in 2014, he earned his <strong>Master Barber License</strong> in early 2015 and began his professional journey in barbering. Each step reflected his belief that greatness comes when you align your purpose with your passion.
+              </p>
+            </div>
           </div>
           
-          <div className="about-section">
-            <h2 className="about-section__title">Today & Beyond</h2>
-            <p>
-              Clip Culture continues to grow with one mission in mind: to define the standard in barbering and shape the culture for the future. Every client, every cut, every interaction is part of a movement that elevates both the individual and the community.
-            </p>
-            <p className="about-closing">
-              Welcome to Clip Culture—where passion meets purpose, and the standard meets the culture.
-            </p>
+          <div className="about-section about-birth-grid">
+            <div className="about-birth-content">
+              <img src={birthImage} alt="The Birth of Clip Culture" className="birth-image about-birth-image" />
+              <h2 className="about-section__title">The Birth of Clip Culture</h2>
+              <p>
+                After four years of sharpening his craft and gaining experience in the Sandy Springs area, David launched Clip Culture Barbershop on <strong>December 12, 2017</strong>. What started as a single shop has since become a recognized brand—one that blends top-tier grooming with cultural pride and community spirit.
+              </p>
+            </div>
+          </div>
+          
+          <div className="about-section about-movement-grid">
+            <div className="about-movement-content">
+              <img src={movementImage} alt="More Than a Barbershop" className="movement-image about-movement-image" />
+              <h2 className="about-section__title">More Than a Barbershop</h2>
+              <p>
+                <strong>Clip Culture</strong> is more than a barbershop—it's a movement built on <strong>mentorship, education, and empowerment</strong>. Founder David Brown has written books, launched grooming products, and trained barbers to turn passion into purpose.
+              </p>
+              <p>
+                <br/>
+                <strong>In Fall 2024</strong>, Clip Culture opened its second location in <strong>Summerhill</strong>, expanding its reach across Atlanta. With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
+              </p>
+              <p className="about-closing">
+                "Defining the Standard. Shaping the Culture."
+              </p>
+            </div>
           </div>
         </div>
       </div>

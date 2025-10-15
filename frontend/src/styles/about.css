@@ -42,9 +42,17 @@
 .about-intro {
   margin-bottom: 3rem;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  border-left: 4px solid var(--primary-green);
+  /* background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px; */
+  /* border-left: 4px solid var(--primary-green); */
+}
+
+.about-intro__title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .about-intro p {
@@ -58,7 +66,7 @@
   margin-bottom: 3rem;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -71,26 +79,199 @@
 }
 
 .about-section p {
-  font-size: clamp(1rem, 1.8vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.2rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .about-section p:last-child {
   margin-bottom: 0;
+  margin-top: 1.5rem;
 }
 
 .about-closing {
   font-weight: 600;
-  color: var(--primary-green) !important;
+  color:  #0d233d !important;
   font-style: italic;
   font-size: clamp(1.1rem, 2vw, 1.3rem) !important;
   text-align: center;
-  padding: 1.5rem;
-  background: rgba(10, 151, 134, 0.1);
-  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(10, 151, 134, 0.3);
+  border-radius: 2px;
   border: 1px solid rgba(10, 151, 134, 0.2);
+}
+
+
+/* Vision Text Wrap Styles */
+.about-vision-grid {
+  margin-bottom: 2rem;
+}
+
+.about-vision-image {
+  float: left;
+  margin: .5rem 1.5rem 1rem 0;
+  max-width: 350px;
+  shape-outside: margin-box;
+}
+
+.about-vision-content {
+  overflow: hidden;
+}
+
+/* Humble Beginnings Grid Styles */
+.about-humble-grid {
+  margin-bottom: 2rem;
+}
+
+.about-humble-image {
+  float: right;
+  margin: 0rem 0 1rem 1.5rem;
+  max-width: 350px;
+  shape-outside: margin-box;
+}
+
+.about-humble-content {
+  overflow: hidden;
+}
+
+.humble-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Business Grid Styles */
+.about-business-grid {
+  margin-bottom: 2rem;
+}
+
+.about-business-image {
+  float: left;
+  margin: 0 2rem 1rem 0;
+  max-width: 200px;
+  shape-outside: margin-box;
+}
+
+.about-business-content {
+  overflow: hidden;
+}
+
+.business-image {
+  width: 100%;
+  height: 250px;
+  border-radius: 2px;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+  object-fit: cover;
+  object-position: center;
+}
+
+.vision-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Leap of Faith Grid Styles */
+.about-leap-grid {
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  /* padding: 0; */
+}
+
+.about-leap-content h2 {
+  color: #0d233d;
+}
+
+.about-leap-image {
+  float: right;
+  margin: 0rem 0 1rem 1.5rem;
+  max-width: 200px;
+  shape-outside: margin-box;
+}
+
+.about-leap-content {
+  overflow: hidden;
+}
+
+.leap-image {
+  width: 100%;
+  height: 250px;
+  border-radius: 2px;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Birth of Clip Culture Grid Styles */
+.about-birth-grid {
+  margin-bottom: 3rem;
+  /* background: none;
+  border: none; */
+  /* padding: 0; */
+}
+
+.about-birth-image {
+  float: left;
+  margin: 0rem 1.5rem 1rem 0;
+  max-width: 350px;
+  shape-outside: margin-box;
+}
+
+.about-birth-content {
+  overflow: hidden;
+}
+
+.birth-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-birth-content h2 {
+  color: #0d233d;
+}
+
+/* More Than a Barbershop Grid Styles */
+.about-movement-grid {
+  margin-bottom: 3rem;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.about-movement-image {
+  float: left;
+  margin: 0rem 1.5rem 1rem 0;
+  max-width: 350px;
+  shape-outside: margin-box;
+}
+
+.about-movement-content {
+  overflow: hidden;
+}
+
+.movement-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-movement-content h2 {
+  color: #0d233d;
 }
 
 /* Responsive Design */
@@ -112,6 +293,59 @@
   .about-section {
     padding: 1.5rem;
     margin-bottom: 2rem;
+  }
+  
+  .about-vision-image {
+    float: none;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .about-humble-image {
+    float: none;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .about-business-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .about-business-image {
+    order: 2;
+  }
+  
+  .about-business-content {
+    order: 1;
+  }
+  
+  .business-image {
+    max-width: 400px;
+  }
+  
+  .about-leap-image {
+    float: none;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .about-birth-image {
+    float: none;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .about-movement-image {
+    float: none;
+    margin: 0 auto 1.5rem auto;
+    max-width: 100%;
+    display: block;
   }
   
   .about-closing {
