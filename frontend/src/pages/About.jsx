@@ -5,6 +5,7 @@ import businessImage from '../assets/gallery/image-3.webp';
 import leapImage from '../assets/gallery/image-20.webp';
 import birthImage from '../assets/gallery/image-42.webp';
 import movementImage from '../assets/gallery/image-6.webp';
+// icons removed per design; no icon imports needed
 
 const About = () => {
   return (
@@ -13,6 +14,33 @@ const About = () => {
         <div className="about-header">
           <h1 className="about-title">About Clip Culture</h1>
           <p className="about-subtitle">Defining the Standard. Shaping the Culture.</p>
+        </div>
+        
+        <div className="about-stats">
+          <div className="about-stats-container">
+            <div className="about-stat">
+              <div className="about-stat-content">
+                <div className="about-stat-value">135K+</div>
+                <div className="about-stat-label">clients served</div>
+              </div>
+            </div>
+            <div className="about-stat-divider" aria-hidden="true"></div>
+            
+            <div className="about-stat">
+              <div className="about-stat-content">
+                <div className="about-stat-value">94%</div>
+                <div className="about-stat-label">client satisfaction</div>
+              </div>
+            </div>
+            <div className="about-stat-divider" aria-hidden="true"></div>
+            
+            <div className="about-stat">
+              <div className="about-stat-content">
+                <div className="about-stat-value">7+</div>
+                <div className="about-stat-label">years strong</div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="about-content">
