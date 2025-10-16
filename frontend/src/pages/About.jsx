@@ -121,6 +121,31 @@ const About = () => {
               </p>
             </div>
           </div>
+          
+          <div className="about-video-section">
+            <div className="about-video-container">
+              <h2 className="about-video-title">HERE'S A <em>FLASH</em>BACK TO</h2>
+              <p className="about-video-subtitle">Our 5 Year Anniversary Celebration:</p>
+              
+              <div className="about-video-wrapper">
+                <iframe 
+                  width="560" 
+                  height="315" 
+                  src="https://www.youtube.com/embed/ChdMhO7E5EA?si=AnbrpcXuxktnpr1Q" 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                  className="about-video-iframe"
+                ></iframe>
+              </div>
+              
+              <p className="about-video-credit">
+                - David Brown, Clip Culture Barbershop owner; Five year anniversary, 2022
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
