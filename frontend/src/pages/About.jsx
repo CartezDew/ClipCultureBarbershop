@@ -49,7 +49,7 @@ const About = () => {
               <img src={visionImage} alt="Clip Culture Vision" className="vision-image about-vision-image" />
               <h2 className="about-section__title">The Vision</h2>
               <p>
-                <strong>At Clip Culture</strong>, we believe barbering is more than a service<strong>— it's a lifestyle, a legacy, and a platform for impact.</strong>
+                At <strong> Clip Culture</strong>, we believe barbering is more than a service — it's a lifestyle, a legacy, and a platform for impact.
               </p>
               <p>
                 Rooted in craftsmanship and powered by modern luxuries, our barbershop experience sets the <strong>gold standard</strong> for what grooming should feel like: personal, premium, and community-driven.
@@ -77,7 +77,7 @@ const About = () => {
               <img src={businessImage} alt="Business Education" className="business-image about-business-image" />
               <h2 className="about-section__title">Business Meets Barbering</h2>
               <p>
-                Before launching Clip Culture, David Brown earned a <strong>Bachelor's degree in Business Administration with a concentration in Marketing</strong> from South Carolina State University, followed by a <strong>Master's degree in Human Resource Development</strong> from Webster University.
+                Before launching Clip Culture, David Brown earned a <strong>Bachelor's degree</strong> in Business Administration with a concentration in Marketing from South Carolina State University, followed by a <strong>Master's degree</strong> in Human Resource Development from Webster University.
               </p>
               <p>
                 Although he once envisioned himself climbing the corporate ladder, destiny had other plans. What began as a professional pursuit soon became a personal calling—a <strong>shift from boardrooms to barbershops</strong>, where David found his purpose behind the chair rather than behind a desk.
@@ -110,7 +110,7 @@ const About = () => {
               <img src={movementImage} alt="More Than a Barbershop" className="movement-image about-movement-image" />
               <h2 className="about-section__title">More Than a Barbershop</h2>
               <p>
-                <strong>Clip Culture</strong> is more than a barbershop—it's a movement built on <strong>mentorship, education, and empowerment</strong>. Founder David Brown has written books, launched grooming products, and trained barbers to turn passion into purpose.
+                Clip Culture is more than a barbershop—it's a movement built on <strong>mentorship, education, and empowerment</strong>. Founder David Brown has written books, launched grooming products, and trained barbers to turn passion into purpose.
               </p>
               <p>
                 <br/>
