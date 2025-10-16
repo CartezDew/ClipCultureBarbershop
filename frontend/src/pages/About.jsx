@@ -116,10 +116,11 @@ const About = () => {
                 <br/>
                 <strong>In Fall 2024</strong>, Clip Culture opened its second location in <strong>Summerhill</strong>, expanding its reach across Atlanta. With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
               </p>
-              <p className="about-closing">
-                "Defining the Standard. Shaping the Culture."
-              </p>
             </div>
+          </div>
+
+          <div className="about-closing">
+            <p className="about-closing">"Defining the Standard. Shaping the Culture."</p>
           </div>
           
           <div className="about-video-section">
@@ -144,6 +145,26 @@ const About = () => {
               <p className="about-video-credit">
                 - David Brown, Clip Culture Barbershop owner; Five year anniversary, 2022
               </p>
+            </div>
+          </div>
+          
+          <div className="about-email-section">
+            <div className="about-email-container">
+              <h2 className="about-email-title">Join the Culture.</h2>
+              <p className="about-email-subtitle">
+                Be first to know about drops, events, and insider updates—delivered straight to your inbox.
+              </p>
+              
+              <div className="about-email-form">
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="about-email-input"
+                />
+                <button className="about-email-button">
+                  Sign Up
+                </button>
+              </div>
             </div>
           </div>
         </div>
