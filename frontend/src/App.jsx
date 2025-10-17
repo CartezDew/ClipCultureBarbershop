@@ -8,6 +8,7 @@ import Gallery from './pages/Gallery.jsx';
 import ContactPage from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import Shop from './pages/Shop.jsx';
+import Mentorship from './pages/Mentorship.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 
 function App() {
@@ -66,6 +67,15 @@ function App() {
               <Navbar />
               <main>
                 <Shop />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/mentorship" element={
+            <>
+              <Navbar />
+              <main>
+                <Mentorship />
               </main>
               <Footer />
             </>

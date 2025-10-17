@@ -5,6 +5,7 @@ import businessImage from '../assets/gallery/image-3.webp';
 import leapImage from '../assets/gallery/image-20.webp';
 import birthImage from '../assets/gallery/image-42.webp';
 import movementImage from '../assets/gallery/image-6.webp';
+import JoinUs from '../components/JoinUs.jsx';
 // icons removed per design; no icon imports needed
 
 const About = () => {
@@ -148,25 +149,8 @@ const About = () => {
             </div>
           </div>
           
-          <div className="about-email-section">
-            <div className="about-email-container">
-              <h2 className="about-email-title">Join the Culture.</h2>
-              <p className="about-email-subtitle">
-                Be first to know about drops, events, and insider updates—delivered straight to your inbox.
-              </p>
-              
-              <div className="about-email-form">
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="about-email-input"
-                />
-                <button className="about-email-button">
-                  Sign Up
-                </button>
-              </div>
-            </div>
-          </div>
+          <JoinUs />
+            
         </div>
       </div>
     </div>

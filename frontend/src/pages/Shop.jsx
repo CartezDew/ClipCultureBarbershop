@@ -1,7 +1,9 @@
 import React from 'react';
 import TopProducts from '../components/TopProducts.jsx';
 import '../styles/shop.css';
+import '../styles/about.css';
 import Books from '../components/Books.jsx';
+import JoinUs from '../components/JoinUs.jsx';
 
 const Shop = () => {
   return (
@@ -18,6 +20,8 @@ const Shop = () => {
         <div className="shop-books-wrapper">
           <Books />
         </div>
+        
+        <JoinUs />  
       </div>
     </div>
   );
