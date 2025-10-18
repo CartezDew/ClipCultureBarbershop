@@ -1,21 +1,84 @@
 /* Mentorship Page Styles */
 .mentorship-page {
-  background: linear-gradient(to bottom, #0d233d, #6a9298);
+  background: #1a1a1a;
   color: white;
   padding: 3rem 0;
-  min-height: 100vh;
 }
 
 .mentorship-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .mentorship-header {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
   margin-bottom: 4rem;
   padding-top: 2rem;
+}
+
+.mentorship-header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mentorship-header-content .mentorship-intro {
+  margin-top: 2rem;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  border: none;
+}
+
+.mentorship-header-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mentorship-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.mentorship-features {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.mentorship-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 1rem;
+}
+
+.mentorship-feature-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  justify-content: flex-start;
+}
+
+.mentorship-checkmark {
+  color: var(--primary-green);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
 }
 
 .mentorship-title {
@@ -25,15 +88,23 @@
   margin-bottom: 1rem;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.2;
+  text-align: left;
 }
 
 .mentorship-subtitle {
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   color: var(--primary-green);
   font-weight: 600;
-  font-style: italic;
+  /* font-style: italic; */
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  text-align: left;
+}
+
+.mentorship-subtitle em strong {
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .mentorship-content {
@@ -51,6 +122,22 @@
 }
 
 .mentorship-intro-text {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.mentorship-intro-text-2 {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.mentorship-intro-text-3 {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   line-height: 1.6;
   color: #ffffff;
@@ -224,8 +311,37 @@
   }
   
   .mentorship-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
     margin-bottom: 3rem;
     padding-top: 1rem;
+    text-align: center;
+  }
+  
+  .mentorship-header-content {
+    order: 1;
+  }
+  
+  .mentorship-header-image {
+    order: 2;
+  }
+  
+  .mentorship-features {
+    margin-top: 1.5rem;
+  }
+  
+  .mentorship-features-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .mentorship-feature-item {
+    font-size: 0.9rem;
+  }
+  
+  .mentorship-checkmark {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
   }
   
   .mentorship-intro,

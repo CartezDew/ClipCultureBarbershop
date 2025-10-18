@@ -1,30 +1,69 @@
 import React from 'react';
 import '../styles/mentorship.css';
+import MentorshipImage from '../assets/Mentorship/Mentorship-1.webp';
 
 const Mentorship = () => {
   return (
     <div className="mentorship-page">
       <div className="mentorship-container">
         <div className="mentorship-header">
-          <h1 className="mentorship-title">Mentorship</h1>
-          <p className="mentorship-subtitle">Elevate Your Barber Career with Expert Guidance</p>
+          <div className="mentorship-header-content">
+            <h1 className="mentorship-title">Elevate Your Barber Career</h1>
+            <h2 className="mentorship-subtitle">with <em><strong>EXPERT</strong></em> Guidance.</h2>
+            <div className="mentorship-intro">
+              <p className="mentorship-intro-text">
+                Step into your purpose with mentorship from <strong>David Brown</strong>, founder and owner of Clip Culture Barbershop. 
+                With over <strong>11 years of hands-on experience</strong> and more than <strong>7 years</strong> of business ownership, David has mastered the art of blending craftsmanship, entrepreneurship, and culture.
+              </p>
+              <br/>
+              <p className="mentorship-intro-text-2">
+                Having provided over <strong>134,000 services</strong>, he now shares the same proven principles that built one of Atlanta's most respected barber brands—helping others rise through <strong>skill, discipline, and purpose</strong>.  
+              </p>
+              <br/>
+              <p className="mentorship-intro-text-3">
+                Whether you're just starting out or looking to elevate your existing practice, David's mentorship will guide you toward building a thriving career that goes beyond just cutting hair—it's about building a legacy.
+              </p>
+            </div>
+          </div>
+          <div className="mentorship-header-image">
+            <img 
+              src={MentorshipImage} 
+              alt="Mentorship Program" 
+              className="mentorship-image"
+            />
+            <div className="mentorship-features">
+              <ul className="mentorship-features-list">
+                <li className="mentorship-feature-item">
+                  <span className="mentorship-checkmark">✓</span>
+                  1 on 1 shadow sessions
+                </li>
+                <li className="mentorship-feature-item">
+                  <span className="mentorship-checkmark">✓</span>
+                  Facetime shadow calls
+                </li>
+                <li className="mentorship-feature-item">
+                  <span className="mentorship-checkmark">✓</span>
+                  Live work shops
+                </li>
+                <li className="mentorship-feature-item">
+                  <span className="mentorship-checkmark">✓</span>
+                  Coach calls
+                </li>
+                <li className="mentorship-feature-item">
+                  <span className="mentorship-checkmark">✓</span>
+                  Access to upcoming projects
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         
         <div className="mentorship-content">
-          <div className="mentorship-intro">
-            <p className="mentorship-intro-text">
-              Unlock the secrets of success in the barbering industry with our owner's unparalleled expertise. 
-              With over 7 years of experience and the imminent opening of our second location this spring, 
-              he's ready to share invaluable insights garnered from over 134,000 services provided to our loyal clients.
-            </p>
-          </div>
           
           <div className="mentorship-program">
-            <h2 className="mentorship-program-title">Are you ready to start on an exciting journey in the world of barbering?</h2>
-            <p className="mentorship-program-text">
-              Enroll in our in-person, hands-on barbering/hair design program and you could unlock endless opportunities 
-              for success in this thriving industry!
-            </p>
+            <h2 className="mentorship-program-title">
+            <strong>Take the first step</strong> towards a fulfilling career by enrolling in one of our barber programs today:</h2>
+           
           </div>
           
           <div className="mentorship-curriculum">
