@@ -109,6 +109,9 @@
 .mentorship-content {
   max-width: 800px;
   margin: 0 auto;
+  border-bottom: 3px solid var(--primary-green);
+  border-radius: 15px;
+  padding-bottom: 3rem;
 }
 
 /* Programs Section */
@@ -143,12 +146,13 @@
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   /* background: var(--primary-green); */
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem;
   border-radius: 15px;
   /* display: inline-block; */
   text-align: center;
   border-top: 3px solid var(--primary-green);
 }
+
 
 .mentorship-program-subtitle {
   font-size: clamp(1.3rem, 2.5vw, 1.6rem);
@@ -244,10 +248,11 @@
 }
 
 .mentorship-joinus-wrapper {
-  margin-top: 4rem;
+  margin-top: 0rem;
+  margin-bottom: -4rem;
   padding-top: 1rem;
   padding-bottom: 0rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 /* Override JoinUs component colors when inside mentorship page */
@@ -257,6 +262,10 @@
 
 .mentorship-joinus-wrapper .join-email-subtitle {
   color: white !important;
+}
+
+.mentorship-joinus-wrapper .join-email-container {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive Design */
