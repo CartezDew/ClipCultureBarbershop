@@ -106,151 +106,91 @@
   font-weight: 800;
   text-transform: uppercase;
 }
-
 .mentorship-content {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.mentorship-intro {
-  margin-bottom: 3rem;
-  padding: 2rem;
+/* Programs Section */
+.mentorship-programs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 4rem;
+  align-items: stretch; /* Make cards equal height */
+}
+
+.mentorship-program-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mentorship-intro-text {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-intro-text-2 {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-intro-text-3 {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-program {
-  margin-bottom: 3rem;
+  padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+}
+
+.mentorship-program-header {
+  margin-bottom: 1.5rem;
 }
 
 .mentorship-program-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
   font-weight: 700;
   color: var(--primary-green);
-  margin-bottom: 1.5rem;
+  margin: 0;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  line-height: 1.3;
-}
-
-.mentorship-program-text {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-curriculum {
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mentorship-curriculum-text {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-instructor {
-  margin-bottom: 3rem;
+  /* background: var(--primary-green); */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  /* display: inline-block; */
   text-align: center;
+  border-top: 3px solid var(--primary-green);
 }
 
-.mentorship-instructor-text {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  margin: 0 0 2rem 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-instructor-signature {
-  padding: 1.5rem;
-  background: rgba(10, 151, 134, 0.1);
-  border-radius: 8px;
-  border: 1px solid rgba(10, 151, 134, 0.3);
-}
-
-.mentorship-signature-text {
-  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+.mentorship-program-subtitle {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
   font-weight: 700;
-  color: var(--primary-green);
   margin: 0;
+  color: white;
+  opacity: 0.7;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+.mentorship-program-title  strong {
   font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  /* preserve trailing space visually */
+  margin-right: 0.25ch;  /* ensure spacing before following word */
 }
 
-.mentorship-opportunities {
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.mentorship-program-image {
+  margin-bottom: 1.5rem;
 }
 
-.mentorship-opportunities-text {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+.program-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.mentorship-program-content {
+  text-align: left;
+  flex: 1; /* Grow to fill available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.mentorship-program-description {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.6;
   color: #ffffff;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-cta {
-  text-align: center;
-  padding: 3rem 2rem;
-  background: rgba(10, 151, 134, 0.1);
-  border-radius: 12px;
-  border: 2px solid rgba(10, 151, 134, 0.3);
-}
-
-.mentorship-cta-text {
-  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-  font-weight: 600;
-  color: var(--primary-green);
   margin: 0 0 2rem 0;
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mentorship-cta-buttons {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .btn {
@@ -270,34 +210,53 @@
   min-width: 150px;
 }
 
-.btn--primary {
-  background: linear-gradient(135deg, #0a9786 0%, #0d233d 100%);
+.btn--coaching {
+  background: var(--primary-green);
   color: white;
   border: 2px solid var(--primary-green);
+  width: 100%;
+  margin-top: auto; /* Push button to bottom */
 }
 
-.btn--primary:hover {
-  background: linear-gradient(135deg, #0d233d 0%, #0a9786 100%);
-  transform: translateY(-2px);
+.btn--coaching:hover {
+  background: #0a8a7a;
+  transform: translateY(2px);
   box-shadow: 0 8px 25px rgba(10, 151, 134, 0.3);
 }
 
-.btn--secondary {
-  background: transparent;
-  color: var(--primary-green);
-  border: 2px solid var(--primary-green);
-}
-
-.btn--secondary:hover {
+.btn--mentorship {
   background: var(--primary-green);
   color: white;
+  border: 2px solid var(--primary-green);
+  width: 100%;
+  margin-top: auto; /* Push button to bottom */
+}
+
+.btn--mentorship:hover {
+  background: #0a8a7a;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.2);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.3);
 }
 
 .btn--large {
   padding: 1.2rem 2.5rem;
   font-size: 1.1rem;
+}
+
+.mentorship-joinus-wrapper {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Override JoinUs component colors when inside mentorship page */
+.mentorship-joinus-wrapper .join-email-title {
+  color: var(--primary-green) !important;
+}
+
+.mentorship-joinus-wrapper .join-email-subtitle {
+  color: white !important;
 }
 
 /* Responsive Design */
@@ -344,24 +303,14 @@
     margin-right: 0.5rem;
   }
   
-  .mentorship-intro,
-  .mentorship-curriculum,
-  .mentorship-opportunities {
+  .mentorship-programs {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .mentorship-program-card {
     padding: 1.5rem;
-  }
-  
-  .mentorship-cta {
-    padding: 2rem 1.5rem;
-  }
-  
-  .mentorship-cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .btn {
-    width: 100%;
-    max-width: 300px;
   }
 }
 
@@ -374,13 +323,7 @@
     margin-bottom: 2.5rem;
   }
   
-  .mentorship-intro,
-  .mentorship-curriculum,
-  .mentorship-opportunities {
+  .mentorship-program-card {
     padding: 1rem;
-  }
-  
-  .mentorship-cta {
-    padding: 1.5rem 1rem;
   }
 }
