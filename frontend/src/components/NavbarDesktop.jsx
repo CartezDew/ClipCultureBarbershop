@@ -37,7 +37,7 @@ const NavbarDesktop = () => {
             { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
             { name: 'Books', link: '/shop?category=books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
-            { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
+            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
             { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
         ],
         about: [

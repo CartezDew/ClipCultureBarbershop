@@ -11,6 +11,8 @@ import Shop from './pages/Shop.jsx';
 import Mentorship from './pages/Mentorship.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import Franchise from './pages/Franchise.jsx';
+import Advertise from './pages/Advertise.jsx';
+
 
 function App() {
   return (
@@ -77,6 +79,15 @@ function App() {
               <Navbar />
               <main>
                 <Mentorship />
+              </main>
+              <Footer />
+            </>
+          } />
+           <Route path="/advertise" element={
+            <>
+              <Navbar />
+              <main>
+                <Advertise />
               </main>
               <Footer />
             </>
