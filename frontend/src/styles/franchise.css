@@ -1,0 +1,468 @@
+/* Mentorship Page Styles */
+.franchise-page {
+  background: #1a1a1a;
+  color: white;
+  padding: 3rem 0;
+}
+
+.franchise-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.franchise-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 4rem;
+  padding-top: 2rem;
+}
+
+.franchise-header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.franchise-header-content .franchise-intro {
+  margin-top: 2rem;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  border: none;
+}
+
+.franchise-header-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  grid-row: 1;
+}
+
+.franchise-features {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-top: -2rem;
+  width: 100%;
+  border-top: 3px solid rgba(10, 151, 134, 0.4);
+  border-bottom: 3px solid rgba(10, 151, 134, 0.4);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.franchise-image {
+  max-width: 100%;
+  height: auto;
+  max-height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+/* .franchise-features {
+  margin-top: -3rem;
+  width: 100%;
+} */
+
+.franchise-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.5rem; /* widen spacing between columns only */
+  row-gap: 0.4rem; /* tight spacing between rows */
+}
+
+.franchise-feature-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  justify-content: flex-start;
+}
+
+.franchise-checkmark {
+  color: var(--primary-green);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.franchise-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.franchise-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--primary-green);
+  font-weight: 600;
+  /* font-style: italic; */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  text-align: left;
+}
+
+.franchise-subtitle em strong {
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.franchise-content {
+  max-width: 900px;
+  margin: 0 auto;
+  /* border-bottom: 3px solid var(--primary-green);
+  border-radius: 15px; */
+  padding-bottom: 0rem;
+}
+
+/* Programs Section */
+.franchise-programs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 4rem;
+  align-items: stretch; /* Make cards equal height */
+}
+
+.franchise-program-card {
+  /* background: rgba(255, 255, 255, 0.05); */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+}
+
+.franchise-program-header {
+  margin-bottom: 1.5rem;
+}
+
+/* .franchise-program-title {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--primary-green);
+  margin: 0;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+  color: white;
+  padding: 1.5rem 1rem;
+  border-radius: 15px;
+
+  text-align: center;
+  border-top: 3px solid var(--primary-green);
+} */
+
+
+.franchise-program-subtitle {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  margin: 0;
+  color: white;
+  color: #1a1a1a;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  text-align: left;
+}
+.franchise-program-subtitle strong {
+  font-style: italic;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  margin-right: 0.25ch;
+  text-align: left;
+}
+
+/* .franchise-program-title  strong {
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-green);
+
+  margin-right: 0.25ch;
+} */
+
+.franchise-program-image {
+  margin-bottom: 1.5rem;
+}
+
+.franchise-program-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.franchise-program-content {
+  text-align: left;
+  flex: 1; /* Grow to fill available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.franchise-program-description {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0 0 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.franchise-program-content .franchise-program-description:last-of-type {
+  text-align: center;
+}
+
+.franchise-program-content .franchise-program-description:last-of-type strong {
+  font-weight: 900;
+  color: var(--primary-green);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+}
+
+/* Franchise Requirements Styling */
+.franchise-requirements-section {
+  margin-bottom: 2rem;
+}
+
+.franchise-requirements-title {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.franchise-requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.franchise-requirements-list li {
+  font-size: clamp(1rem, 1.7vw, 1.8rem);
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.franchise-requirements-list li::before {
+  content: "•";
+  color: var(--primary-green);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.franchise-requirements-list li strong {
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+/* Franchise Benefits Styling */
+.franchise-Benefits {
+  margin-top: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.franchise-Benefits .franchise-features-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 0.4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-top: 3px solid rgba(10, 151, 134, 0.4);
+  border-bottom: 3px solid rgba(10, 151, 134, 0.4);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  align-items: start;
+}
+
+.franchise-Benefits .franchise-feature-item {
+  display: flex;
+  align-items: center;
+  font-size: clamp(1.1rem, 1.5vw, 1.8rem);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  justify-content: flex-start; /* left-align content inside each column */
+  text-align: left;            /* left-align text inside each column */
+}
+
+/* Franchise FAQ Section */
+.franchise-faq-section {
+  margin-top: 3rem;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+.franchise-faq-section .w-full {
+  background: linear-gradient(0deg,rgba(26, 26, 26, 1) 45%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
+  border-radius: 2px;
+}
+
+.franchise-faq-section #facts-heading {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.franchise-faq-section .facts-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.franchise-faq-section .facts-subtitle::after {
+  background: linear-gradient(90deg, transparent 0%, var(--primary-green) 20%, rgba(10, 151, 134, 0.6) 80%, transparent 100%);
+}
+
+
+/* .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  min-width: 150px;
+} */
+
+
+.btn--franchise {
+  background: #1a1a1a;;
+  color: white;
+  border: 2px solid #bababa;
+  width: 100%;
+  margin-top: auto; /* Push button to bottom */
+}
+
+.btn--franchise:hover {
+  background: #1a365d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(13, 35, 61, 0.3);
+}
+
+.btn--large {
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+.franchise-joinus-wrapper {
+  margin: 0rem 4rem 0 4rem;
+  margin-bottom: -4rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+/* Override JoinUs component colors when inside mentorship page */
+.franchise-joinus-wrapper .join-email-title {
+  color: var(--primary-green) !important;
+}
+
+.franchise-joinus-wrapper .join-email-subtitle {
+  color: white !important;
+}
+
+.franchise-joinus-wrapper .join-email-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mentorship-page {
+    padding: 2rem 0;
+  }
+  
+  .mentorship-container {
+    padding: 0 1rem;
+  }
+  
+  .mentorship-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+  
+  .mentorship-header-content {
+    order: 1;
+  }
+  
+  .mentorship-header-image {
+    order: 2;
+  }
+  
+  .mentorship-features {
+    margin-top: 1.5rem;
+  }
+  
+  .mentorship-features-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .mentorship-feature-item {
+    font-size: 0.9rem;
+  }
+  
+  .mentorship-checkmark {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .mentorship-programs {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .mentorship-program-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentorship-container {
+    padding: 0 0.75rem;
+  }
+  
+  .mentorship-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .mentorship-program-card {
+    padding: 1rem;
+  }
+}

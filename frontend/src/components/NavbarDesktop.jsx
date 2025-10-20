@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
@@ -38,7 +38,7 @@ const NavbarDesktop = () => {
             { name: 'Books', link: '/shop?category=books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
             { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
-            { name: 'Franchise', link: '/shop?category=franchise', icon: <Store size={16} /> }
+            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
         ],
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),

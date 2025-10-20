@@ -10,6 +10,7 @@ import About from './pages/About.jsx';
 import Shop from './pages/Shop.jsx';
 import Mentorship from './pages/Mentorship.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
+import Franchise from './pages/Franchise.jsx';
 
 function App() {
   return (
@@ -85,6 +86,15 @@ function App() {
               <Navbar />
               <main>
                 <ProductDetail />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/franchise" element={
+            <>
+              <Navbar />
+              <main>
+                <Franchise />
               </main>
               <Footer />
             </>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   Home, Scissors, Users, Camera, Phone, ShoppingCart, ChevronDown, Info, 
   User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, 
-  Megaphone, Store, FileText, HelpCircle, Mail, LogIn, UserPlus
+  Megaphone, Store, FileText, HelpCircle, Mail, LogIn, UserPlus, Building2
 } from 'lucide-react';
 import logoWebP from '../assets/images/CC-Logo.webp';
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp';
@@ -68,7 +68,7 @@ const HeroNavbar = () => {
       { name: 'Books', link: '/shop?category=books', icon: <BookOpen size={16} /> },
       { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
       { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
-      { name: 'Franchise', link: '/shop?category=franchise', icon: <Store size={16} /> }
+      { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
     ],
     about: [
       { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
