@@ -3,6 +3,7 @@ import '../styles/advertise.css';
 import '../styles/facts.css';
 import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/gallery/image-14.webp';
+import Shop2Image from '../assets/gallery/image-4.webp';
 import Gallery from '../components/Gallery.jsx';
 // FAQ data moved inline to avoid import issues
 const advertiseFaqs = [
@@ -156,102 +157,102 @@ const Advertise = () => {
           </ul>
         </div>
         <div className="advertise-content">
-          <div className="advertise-program">
-            </div>{/* <h2 className="franchise-program-title">
-              <strong>Ready to invest</strong> in your future? Learn more about our franchise opportunities:
-            </h2>
-          </div> */}
-          
-          <div className="advertise-programs">
-            <div className="advertise-program-card">
-              <div className="advertise-program-header">
-                <h3 className="advertise-program-subtitle">Own Your Own Clip Culture</h3>
-                <h4 className="advertise-program-subtitle"><strong>Barbershop Franchise</strong></h4>
+          <div className="advertise-bento-grid">
+            <div className="advertise-bento-left">
+              <div className="advertise-bento-image-box">
+                <img 
+                  src={Shop2Image} 
+                  alt="Advertise Opportunity" 
+                  className="advertise-bento-image"
+                />
               </div>
-              <div className="advertise-program-content">
-                <p className="advertise-program-description">
-                The Clip Culture Barbershop Franchise Opportunity is reshaping the hair industry with a modern, proven approach to business ownership. 
-                Our streamlined model keeps entry costs manageable while providing a <strong>strategic blueprint for long-term success</strong>.
-                </p>
-                <p className="advertise-program-description">
-                We’re passionate about empowering ambitious entrepreneurs to take control of their future with the backing of a trusted brand and a network of experienced professionals. 
-                With <strong>over 20 years of combined industry expertise</strong>, the Clip Culture team is committed to your growth every step of the way.
-                </p>
-                <p className="advertise-program-description">
-                You’re in business <strong>for yourself, not by yourself</strong>.
-                </p>
-                <p className="advertise-program-description">
-                CALL TODAY TO GET MORE INFO!<br/>
-                <strong>1 (404) 458-2993</strong>
-                </p>
-                <button className="btn btn--advertise">
-                  Request Information
-                </button>
+              <div className="advertise-bento-join">
+                <div className="advertise-program-card">
+                  <div className="advertise-program-header">
+                    <h3 className="advertise-program-subtitle"><strong>Join the Culture</strong> 
+                    <br/>— Grow Your Brand.</h3>
+                  </div>
+                  <div className="advertise-program-content">
+                    <p className="advertise-program-description">
+                    Don't miss the chance to put your brand in front of Atlanta's most loyal and influential community.
+                    </p>
+                    <p className="advertise-program-description">
+                    Partner with <strong>Clip Culture Barbershop</strong> and connect with thousands of clients who value quality, style, and authenticity.
+                    </p>
+            
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <div className="advertise-program-card">
-              <div className="advertise-program-header">
-                <h3 className="advertise-program-subtitle">Why Advertise <strong>With Us</strong>:</h3>
-              </div>
-              <div className="advertise-program-content">
-                <div className="advertise-benefits-list">
-                  <div className="advertise-benefit-item">
-                    <span className="advertise-checkmark">✓</span>
-                    <div className="advertise-benefit-content">
-                      <h4 className="advertise-benefit-title">High-Traffic Exposure</h4>
-                      <p className="advertise-benefit-description">
-                        Over <strong>1,600 clients</strong> visit our shops each month, giving your brand consistent visibility in an energetic, community-driven space.
-                      </p>
+
+            <div className="advertise-bento-right">
+              <div className="advertise-program-card">
+                <div className="advertise-program-header">
+                  <h3 className="advertise-program-subtitle">Why Advertise<br/>
+                  <strong>With Us</strong>:</h3>
+                </div>
+                <div className="advertise-program-content">
+                  <div className="advertise-benefits-list">
+                    <div className="advertise-benefit-item">
+                      <span className="advertise-checkmark">✓</span>
+                      <div className="advertise-benefit-content">
+                        <h4 className="advertise-benefit-title">High-Traffic Exposure</h4>
+                        <p className="advertise-benefit-description">
+                          Over <strong>1,600 clients</strong> visit our shops each month, giving your brand consistent visibility in an energetic, community-driven space.
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="advertise-benefit-item">
-                    <span className="advertise-checkmark">✓</span>
-                    <div className="advertise-benefit-content">
-                      <h4 className="advertise-benefit-title">Established Reputation</h4>
-                      <p className="advertise-benefit-description">
-                        Partner with one of Atlanta's most recognized barbershop brands — synonymous with excellence and authenticity.
-                      </p>
+                    
+                    <div className="advertise-benefit-item">
+                      <span className="advertise-checkmark">✓</span>
+                      <div className="advertise-benefit-content">
+                        <h4 className="advertise-benefit-title">Established Reputation</h4>
+                        <p className="advertise-benefit-description">
+                          Partner with one of Atlanta's most recognized barbershop brands — synonymous with excellence and authenticity.
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="advertise-benefit-item">
-                    <span className="advertise-checkmark">✓</span>
-                    <div className="advertise-benefit-content">
-                      <h4 className="advertise-benefit-title">Prime In-Shop Placement</h4>
-                      <p className="advertise-benefit-description">
-                        Your message plays on strategically positioned displays, capturing attention during peak engagement.
-                      </p>
+                    
+                    <div className="advertise-benefit-item">
+                      <span className="advertise-checkmark">✓</span>
+                      <div className="advertise-benefit-content">
+                        <h4 className="advertise-benefit-title">Prime In-Shop Placement</h4>
+                        <p className="advertise-benefit-description">
+                          Your message plays on strategically positioned displays, capturing attention during peak engagement.
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="advertise-benefit-item">
-                    <span className="advertise-checkmark">✓</span>
-                    <div className="advertise-benefit-content">
-                      <h4 className="advertise-benefit-title">Targeted Reach</h4>
-                      <p className="advertise-benefit-description">
-                        Our clientele spans professionals, families, and trendsetters, offering you access to a wide range of demographics and interests.
-                      </p>
+                    
+                    <div className="advertise-benefit-item">
+                      <span className="advertise-checkmark">✓</span>
+                      <div className="advertise-benefit-content">
+                        <h4 className="advertise-benefit-title">Targeted Reach</h4>
+                        <p className="advertise-benefit-description">
+                          Our clientele spans professionals, families, and trendsetters, offering you access to a wide range of demographics and interests.
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="advertise-benefit-item">
-                    <span className="advertise-checkmark">✓</span>
-                    <div className="advertise-benefit-content">
-                      <h4 className="advertise-benefit-title">Cost-Effective Impact</h4>
-                      <p className="advertise-benefit-description">
-                        Competitive advertising packages designed to maximize your marketing investment and deliver measurable results.
-                      </p>
+                    
+                    <div className="advertise-benefit-item">
+                      <span className="advertise-checkmark">✓</span>
+                      <div className="advertise-benefit-content">
+                        <h4 className="advertise-benefit-title">Cost-Effective Impact</h4>
+                        <p className="advertise-benefit-description">
+                          Competitive advertising packages designed to maximize your marketing investment and deliver measurable results.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                
-                <button className="btn btn--advertise">
-                  Get Started Today
-                </button>
+              </div>
+              
+              <div className="advertise-bento-cta">
+                <p className="advertise-cta-text">
+                  Spots fill quickly — <strong>reserve your ad space today</strong> and see your business take center stage.
+                </p>
               </div>
             </div>
+
           </div>
           <div className="advertise-Benefits">
             <ul className="advertise-features-list">

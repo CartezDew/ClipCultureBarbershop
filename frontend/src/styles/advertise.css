@@ -39,7 +39,7 @@
 }
 
 .advertise-title strong {
-  color: #629b65;
+  color: var(--green-new);
   font-weight: 900;
   text-transform: uppercase;
   font-style: italic;
@@ -47,7 +47,7 @@
 }
 
 .advertise-intro-text strong {
-  color: #629b65;
+  color: var(--green-new);
   /* color: #378a70; */
   font-weight: 900;
 }
@@ -86,10 +86,6 @@
   shape-outside: margin-box;
 }
 
-/* .franchise-features {
-  margin-top: -3rem;
-  width: 100%;
-} */
 
 .advertise-features-list {
   list-style: none;
@@ -110,8 +106,8 @@
   justify-content: flex-start;
 }
 
-.franchise-checkmark {
-  color: var(--primary-green);
+.advertise-checkmark {
+  color: var(--green-new);
   font-weight: bold;
   font-size: 1.2rem;
   margin-right: 0.75rem;
@@ -130,7 +126,7 @@
 
 .advertise-subtitle {
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--primary-green);
+  color: var(--green-new);
   font-weight: 600;
   /* font-style: italic; */
   margin: 0;
@@ -144,19 +140,113 @@
   text-transform: uppercase;
 }
 .advertise-content {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
   /* border-bottom: 3px solid var(--primary-green);
   border-radius: 15px; */
   padding-bottom: 0rem;
 }
 
-/* Programs Section */
+/* Bento Grid Layout */
+.advertise-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns */
+  grid-auto-rows: 1fr; /* make rows equal height */
+  gap: 1rem;
+  margin: 2rem auto 0 auto;
+  padding: 0;
+  max-width: 1400px;
+  padding-top: 0rem;
+  align-items: stretch; /* ensure columns stretch to equal height */
+}
+
+.advertise-bento-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.advertise-bento-right {
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  gap: 1rem;
+}
+
+.advertise-bento-cta {
+  flex: 0 0 15.25%; /* takes 20% of the column */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--green-new);
+  border-radius: 4px;
+  grid-row: 1 / span 2;
+}
+
+.advertise-cta-text {
+  color: white;
+  font-size: clamp(1.1rem, 1.8vw, 1.2rem);
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.advertise-bento-right .advertise-program-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.advertise-bento-right .advertise-program-content {
+  flex: 1;
+}
+
+.advertise-bento-image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(42, 90, 47, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  flex: 0 0 50%; /* image takes 35% of left column */
+}
+
+.advertise-bento-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 3px solid var(--green-new);
+}
+
+.advertise-bento-join {
+  flex: 1; /* takes remaining 65% of left column */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.advertise-bento-join .advertise-program-card {
+  height: auto;
+  flex: 1; /* fill remaining height */
+  display: flex;
+  flex-direction: column;
+}
+
+.advertise-bento-join .advertise-program-content {
+  flex: 0 0 auto; /* don't grow, just fit content */
+}
+
+
+/* Programs Section - Keep for other uses */
 .advertise-programs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
   align-items: stretch; /* Make cards equal height */
 }
 
@@ -205,7 +295,7 @@
   font-style: italic;
   font-weight: 900;
   text-transform: uppercase;
-  color: var(--primary-green);
+  color: var(--green-new);
   margin-right: 0.25ch;
   text-align: left;
 }
@@ -223,16 +313,28 @@
   margin-bottom: 1.5rem;
 }
 
-.advertise-program-image {
+/* .advertise-program-image-container {
+  width: 100%;
+  height: auto;
+  border: 2px solid green;
+} */
+
+.advertise-program-image img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
+/* 
+.advertise-bento-grid {
+  border: 7px solid green;
+} */
+
 
 .advertise-program-content {
   text-align: left;
-  flex: 1; /* Grow to fill available space */
+  flex: 0 0 auto; /* Don't grow to fill space */
   display: flex;
   flex-direction: column;
 }
@@ -241,29 +343,29 @@
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.6;
   color: #1a1a1a;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1rem 0; /* tighter spacing */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-.advertise-program-content .advertise-program-description:last-of-type {
-  text-align: center;
+.advertise-program-description:last-of-type {
+  padding-bottom: 1rem;
 }
 
 .advertise-program-content .advertise-program-description:last-of-type strong {
   font-weight: 900;
-  color: var(--primary-green);
+  color: var(--green-new);
   font-size: clamp(1.2rem, 2.2vw, 1.6rem);
 }
 
 /* Advertise Benefits List Styling */
-.advertise-benefits-list {
+/* .advertise-benefits-list {
   margin-bottom: 2rem;
-}
+} */
 
 .advertise-benefit-item {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   gap: 1rem;
 }
 
@@ -293,7 +395,7 @@
 
 .advertise-benefit-description strong {
   font-weight: 700;
-  color: var(--primary-green);
+  color: var(--green-new);
 }
 
 /* Keep old requirements styling for other sections */
@@ -327,7 +429,7 @@
 
 .advertise-requirements-list li::before {
   content: "•";
-  color: var(--primary-green);
+  color: var(--green-new);
   font-weight: bold;
   position: absolute;
   left: 0;
@@ -336,7 +438,7 @@
 
 .advertise-requirements-list li strong {
   font-weight: 700;
-  color: var(--primary-green);
+  color: var(--green-new);
 }
 
 /* Franchise Benefits Styling */
@@ -355,8 +457,8 @@
   row-gap: 0.4rem;
   max-width: 1000px;
   margin: 0 auto;
-  border-top: 3px solid rgba(10, 151, 134, 0.4);
-  border-bottom: 3px solid rgba(10, 151, 134, 0.4);
+  border-top: 3px solid rgba(33, 199, 133, 0.4);
+  border-bottom: 3px solid rgba(33, 199, 133, 0.4);
   border-radius: 15px;
   padding: 1rem 2rem;
   align-items: start;
@@ -395,7 +497,7 @@
 }
 
 .advertise-faq-section .facts-subtitle::after {
-  background: linear-gradient(90deg, transparent 0%, var(--primary-green) 20%, rgba(10, 151, 134, 0.6) 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--green-new) 20%, rgba(10, 151, 134, 0.6) 80%, transparent 100%);
 }
 
 
@@ -499,6 +601,22 @@
   .advertise-checkmark {
     font-size: 1.1rem;
     margin-right: 0.5rem;
+  }
+  
+  .advertise-bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1rem;
+    margin-top: 3rem;
+    max-width: 100%;
+  }
+  
+  .advertise-bento-left {
+    gap: 1.5rem;
+  }
+  
+  .advertise-bento-image-box img {
+    height: 200px;
   }
   
   .advertise-programs {
