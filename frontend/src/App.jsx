@@ -12,6 +12,7 @@ import Mentorship from './pages/Mentorship.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
+import Apply from './pages/Apply.jsx';
 
 
 function App() {
@@ -106,6 +107,15 @@ function App() {
               <Navbar />
               <main>
                 <Franchise />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/apply" element={
+            <>
+              <Navbar />
+              <main>
+                <Apply />
               </main>
               <Footer />
             </>

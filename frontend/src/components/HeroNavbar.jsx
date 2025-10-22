@@ -61,7 +61,8 @@ const HeroNavbar = () => {
     barbers: [
       { name: 'All Locations', link: '/team', icon: <MapPin size={16} /> },
       { name: 'Sandy Springs', link: '/team?location=sandy-springs', icon: <Building size={16} /> },
-      { name: 'Summerhill', link: '/team?location=summerhill', icon: <Building size={16} /> }
+      { name: 'Summerhill', link: '/team?location=summerhill', icon: <Building size={16} /> },
+      { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
     ],
     shop: [
       { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
@@ -73,7 +74,7 @@ const HeroNavbar = () => {
     about: [
       { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
       { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
-      { name: 'Join Team', link: '/join-team', icon: <UserPlus size={16} /> },
+      { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
       { name: 'Contact Us', link: '/contact', icon: <Mail size={16} /> },
       { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
     ]

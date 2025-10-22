@@ -93,7 +93,7 @@
 
 .mentorship-subtitle {
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--primary-green);
+  color: #287d6b;
   font-weight: 600;
   /* font-style: italic; */
   margin: 0;
