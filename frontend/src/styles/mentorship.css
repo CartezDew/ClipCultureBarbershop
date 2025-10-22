@@ -8,7 +8,7 @@
 .mentorship-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
 .mentorship-header {
@@ -107,11 +107,11 @@
   text-transform: uppercase;
 }
 .mentorship-content {
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
-  border-bottom: 3px solid var(--primary-green);
+  /* border-bottom: 3px solid var(--primary-green); */
   border-radius: 15px;
-  padding-bottom: 3rem;
+  padding-bottom: 0rem;
 }
 
 /* Programs Section */

@@ -8,7 +8,7 @@
 .advertise-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
 .advertise-header {
@@ -347,11 +347,6 @@
   color: var(--green-new);
   font-size: clamp(1.2rem, 2.2vw, 1.6rem);
 }
-
-/* Advertise Benefits List Styling */
-/* .advertise-benefits-list {
-  margin-bottom: 2rem;
-} */
 
 .advertise-benefit-item {
   display: flex;

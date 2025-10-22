@@ -131,7 +131,32 @@
 
 
 
-/* RIGHT divider (vertical) — one per card */
+/* Add wrapper for multiple borders */
+.services__card {
+  position: relative;
+}
+
+/* BOTTOM border (horizontal) - draw on all cards */
+.services__card::before {
+  content: '';
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: 0;
+  height: 2.2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorder 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* RIGHT border (vertical) - draw on all cards */
 .services__card::after {
   content: '';
   position: absolute;
@@ -151,27 +176,24 @@
   pointer-events: none;
 }
 
-/* BOTTOM divider (horizontal) — one per card */
-.services__card::before {
-  content: '';
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  bottom: 0;
-  height: 2.2px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(255, 255, 255, 0.15) 20%,
-    rgba(255, 255, 255, 0.15) 80%,
-    transparent 100%
-  );
-  animation: shimmerBorder 3s ease-in-out infinite,
-             floatingBorder 4s ease-in-out infinite;
-  pointer-events: none;
+/* Turn off right border on last column (cards 3, 6, 9, 12, 15) */
+.services__card:nth-child(3n)::after {
+  display: none;
 }
 
+@keyframes shimmerTopBorder {
+  0%, 100% {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    border-top-color: rgba(255, 255, 255, 0.3);
+  }
+}
 
+/* Top border hover for last row */
+.services__card:nth-child(n+13):hover {
+  border-top-color: rgba(10, 151, 134, 0.4);
+}
 
 /* Hover Effects */
 .services__card:hover {
@@ -271,6 +293,8 @@
 
 .services__card-divider {
   color: rgba(0, 0, 0, 0.3);
+  color: rgb(138, 130, 130);
+  opacity: 0.2;
   font-size: 2rem;
   font-weight: 300;
 }
