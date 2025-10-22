@@ -4,6 +4,7 @@ import '../styles/facts.css';
 import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/gallery/image-14.webp';
 import Shop2Image from '../assets/gallery/image-4.webp';
+import HatsImage from '../assets/about_home/products-hats.webp';
 import Gallery from '../components/Gallery.jsx';
 // FAQ data moved inline to avoid import issues
 const advertiseFaqs = [
@@ -179,7 +180,13 @@ const Advertise = () => {
                     <p className="advertise-program-description">
                     Partner with <strong>Clip Culture Barbershop</strong> and connect with thousands of clients who value quality, style, and authenticity.
                     </p>
-            
+                     <div className="advertise-bento-image-hats">
+                  <img 
+                  src={HatsImage} 
+                  alt="Advertise Opportunity" 
+                  className="advertise-bento-image-hats"
+                /> 
+                </div>
                   </div>
                 </div>
               </div>

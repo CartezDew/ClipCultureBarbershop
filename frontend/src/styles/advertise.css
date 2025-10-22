@@ -142,8 +142,8 @@
 .advertise-content {
   max-width: 1400px;
   margin: 0 auto;
-  /* border-bottom: 3px solid var(--primary-green);
-  border-radius: 15px; */
+  /* border: 3px solid var(--primary-green); */
+  border-radius: 15px; 
   padding-bottom: 0rem;
 }
 
@@ -222,11 +222,25 @@
   border: 3px solid var(--green-new);
 }
 
+/* Hats image positioned at bottom center of Join the Culture card */
+.advertise-bento-image-hats {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+}
+
+
 .advertise-bento-join {
   flex: 1; /* takes remaining 65% of left column */
   display: flex;
   flex-direction: column;
   min-height: 0;
+  position: relative; /* establish positioning context for floating image */
 }
 
 .advertise-bento-join .advertise-program-card {
@@ -256,7 +270,7 @@
   backdrop-filter: blur(10px);
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  padding: 1.3rem;
   text-align: center;
   display: flex;
   flex-direction: column; /* Stack content vertically */
@@ -265,21 +279,6 @@
 .advertise-program-header {
   margin-bottom: 1.5rem;
 }
-
-/* .franchise-program-title {
-  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
-  font-weight: 700;
-  color: var(--primary-green);
-  margin: 0;
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-
-  color: white;
-  padding: 1.5rem 1rem;
-  border-radius: 15px;
-
-  text-align: center;
-  border-top: 3px solid var(--primary-green);
-} */
 
 
 .advertise-program-subtitle {
@@ -300,24 +299,10 @@
   text-align: left;
 }
 
-/* .franchise-program-title  strong {
-  font-style: italic;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--primary-green);
-
-  margin-right: 0.25ch;
-} */
-
 .advertise-program-image {
   margin-bottom: 1.5rem;
 }
 
-/* .advertise-program-image-container {
-  width: 100%;
-  height: auto;
-  border: 2px solid green;
-} */
 
 .advertise-program-image img {
   max-width: 100%;
@@ -326,10 +311,6 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   object-fit: cover;
 }
-/* 
-.advertise-bento-grid {
-  border: 7px solid green;
-} */
 
 
 .advertise-program-content {
@@ -422,7 +403,7 @@
   line-height: 1.6;
   color: #1a1a1a;
   margin-bottom: 0.5rem;
-  padding-left: 1.5rem;
+  /* padding-left: 1.5rem; */
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
@@ -443,9 +424,9 @@
 
 /* Franchise Benefits Styling */
 .advertise-Benefits {
-  margin-top: 1rem;
-  padding: 2rem;
-  backdrop-filter: blur(10px);
+  margin-top: 2rem;
+  /* padding: 2rem; */
+  /* backdrop-filter: blur(10px); */
   border-radius: 8px;
   text-align: center;
 }
@@ -455,13 +436,14 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 1.5rem;
   row-gap: 0.4rem;
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
   border-top: 3px solid rgba(33, 199, 133, 0.4);
   border-bottom: 3px solid rgba(33, 199, 133, 0.4);
   border-radius: 15px;
   padding: 1rem 2rem;
   align-items: start;
+  /* display: none; */
 }
 
 .advertise-Benefits .advertise-feature-item {
