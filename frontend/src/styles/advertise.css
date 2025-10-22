@@ -57,7 +57,7 @@
 .advertise-features {
   grid-column: 1 / -1;
   grid-row: 2;
-  margin-top: 0rem;
+  margin-bottom: 3rem;
   width: 100%;
   border-top: 3px solid rgba(33, 199, 133, 0.4);
   border-bottom: 3px solid rgba(33, 199, 133, 0.4);
@@ -153,11 +153,12 @@
   grid-template-columns: 1fr 1fr; /* two columns */
   grid-auto-rows: 1fr; /* make rows equal height */
   gap: 1rem;
-  margin: 2rem auto 0 auto;
+  margin: 4rem auto 0 auto;
   padding: 0;
   max-width: 1400px;
   padding-top: 0rem;
   align-items: stretch; /* ensure columns stretch to equal height */
+  /* border: 3px solid red; */
 }
 
 .advertise-bento-left {
@@ -171,38 +172,47 @@
 .advertise-bento-right {
   display: flex;
   flex-direction: column;
-  height: 85%;
+  height: 100%;
   gap: 1rem;
 }
 
 .advertise-bento-cta {
-  flex: 0 0 15.25%; /* takes 20% of the column */
+  flex: 0 0 auto; /* don't use percentage, let it size naturally */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   padding: 1rem;
   background: var(--green-new);
   border-radius: 4px;
-  grid-row: 1 / span 2;
+  min-height: 80px; /* set a minimum height instead */
 }
 
 .advertise-cta-text {
   color: white;
-  font-size: clamp(1.1rem, 1.8vw, 1.2rem);
-  font-weight: 600;
-  text-align: center;
+  font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  text-align: left;
   margin: 0;
   line-height: 1.4;
 }
 
+.advertise-cta-text strong {
+  font-weight: 900;
+  color: #1a1a1a;
+  text-decoration: underline;
+  font-style: italic;
+}
+
 .advertise-bento-right .advertise-program-card {
-  height: 100%;
+  flex: 1; /* take remaining space */
   display: flex;
   flex-direction: column;
+  min-height: 0; /* allow flex shrinking */
 }
 
 .advertise-bento-right .advertise-program-content {
   flex: 1;
+  overflow-y: auto; /* allow scrolling if content is too tall */
 }
 
 .advertise-bento-image-box {
@@ -456,53 +466,9 @@
   text-align: left;            /* left-align text inside each column */
 }
 
-/* Franchise FAQ Section */
-.advertise-faq-section {
-  margin-top: 3rem;
-  padding: 0 2rem;
-  margin-bottom: 2rem;
-}
-
-.advertise-faq-section .w-full {
-  background: linear-gradient(0deg,rgba(26, 26, 26, 1) 45%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
-  border-radius: 2px;
-}
-
-.advertise-faq-section #facts-heading {
-  color: #ffffff;
-  margin-bottom: 1rem;
-}
-
-.advertise-faq-section .facts-subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2rem;
-}
-
-.advertise-faq-section .facts-subtitle::after {
-  background: linear-gradient(90deg, transparent 0%, var(--green-new) 20%, rgba(10, 151, 134, 0.6) 80%, transparent 100%);
-}
-
-
-/* .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  min-width: 150px;
-} */
-
 
 .btn--advertise {
-  background: #1a1a1a;;
+  background: #1a1a1a;
   color: white;
   border: 2px solid #bababa;
   width: 100%;
@@ -530,7 +496,7 @@
 
 /* Override JoinUs component colors when inside mentorship page */
 .advertise-joinus-wrapper .join-email-title {
-  color: var(--primary-green) !important;
+  color: var(--green-new) !important;
 }
 
 .advertise-joinus-wrapper .join-email-subtitle {
@@ -610,6 +576,159 @@
   .advertise-program-card {
     padding: 1.5rem;
   }
+}
+
+/* Advertising Packages Section */
+.advertise-packages-section {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  /* margin-bottom: 2rem; */
+}
+
+.advertise-packages-title {
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: var(--green-new);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.advertise-packages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: stretch; /* make columns equal height */
+}
+
+.advertise-packages-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Ensure the single left card fills the full column height so bottoms align */
+.advertise-packages-left .advertise-package-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* stretch to fill available height */
+}
+
+.advertise-packages-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.advertise-packages-right .advertise-package-card {
+  flex: 1; /* make both cards take equal space */
+}
+
+.advertise-package-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(42, 90, 47, 0.08);
+  border: 1px solid rgba(10, 151, 134, 0.1);
+}
+
+.advertise-package-title {
+  font-size: clamp(1.4rem, 3vw, 1.6rem);
+  font-weight: 900;
+  color: var(--green-new);
+  margin-bottom: 1.5rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.advertise-package-badge {
+  display: inline-block;
+  position: relative;
+  font-size: 0.9em;
+  font-weight: 900;
+  margin-right: .5rem;
+  color: #1a1a1a;
+  padding-bottom: 0.15rem; /* room for underline */
+}
+
+/* hand-drawn marker underline - first stroke */
+.advertise-package-badge::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  right: -2px;
+  bottom: -7px;
+  height: 0.3em;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(26,26,26,0) 0%, rgba(26,26,26,0.3) 20%, rgba(26,26,26,0.7) 40%),
+    linear-gradient(90deg, 
+      rgba(26,26,26,0.1) 0%, 
+      rgba(26,26,26,0.6) 8%, 
+      rgba(26,26,26,0.75) 15%, 
+      rgba(26,26,26,0.8) 50%, 
+      rgba(26,26,26,0.75) 85%, 
+      rgba(26,26,26,0.5) 92%, 
+      rgba(26,26,26,0.1) 100%
+    );
+  border-radius: 50% / 60%;
+  transform: rotate(-1.5deg) scaleY(0.9);
+  pointer-events: none;
+}
+
+/* hand-drawn marker underline - second overlapping stroke for texture */
+.advertise-package-badge::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -4px;
+  bottom: -6px;
+  height: 0.28em;
+  background: 
+    linear-gradient(90deg, 
+      rgba(26,26,26,0) 0%, 
+      rgba(26,26,26,0.4) 10%, 
+      rgba(26,26,26,0.65) 20%, 
+      rgba(26,26,26,0.7) 50%, 
+      rgba(26,26,26,0.6) 80%, 
+      rgba(26,26,26,0.35) 90%, 
+      rgba(26,26,26,0) 100%
+    );
+  border-radius: 40% / 50%;
+  transform: rotate(1deg) scaleY(1.1);
+  pointer-events: none;
+}
+
+.advertise-package-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.advertise-package-benefits li {
+  padding: 0.5rem 0;
+  color: #1a1a1a;
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.advertise-package-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green-new);
+  font-weight: bold;
+  font-size: clamp(1.4rem, 2vw, 1.5rem);
+}
+
+.advertise-package-benefits strong {
+  color:  #1a1a1a;
+  font-weight: 800;
+  opacity: 0.8;
 }
 
 @media (max-width: 480px) {

@@ -1,7 +1,7 @@
 /* Gallery Section */
 .gallery-section {
   padding: 0rem 0;
-  background: linear-gradient(to bottom, #6a9298, #0d233d);
+  /* background: linear-gradient(to bottom, #6a9298, #0d233d); */
   position: relative;
   overflow: hidden;
 }

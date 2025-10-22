@@ -291,8 +291,52 @@ const Advertise = () => {
           </div>
         </div>
         
+        {/* Advertising Packages Section */}
+        <div className="advertise-packages-section">
+          <h2 className="advertise-packages-title">Advertising Packages</h2>
+          <div className="advertise-packages-grid">
+            <div className="advertise-packages-left">
+              <div className="advertise-package-card">
+                <h3 className="advertise-package-title">
+                  <span className="advertise-package-badge">Founding Member</span> Package — $2,000
+                </h3>
+                <ul className="advertise-package-benefits">
+                  <li>Logo displayed on monitors for <strong>one full year</strong> with <strong>priority placement</strong></li>
+                  <li><strong>4 dedicated email blasts</strong> to our clients throughout the year</li>
+                  <li>Quarterly social media shoutouts and <strong>3 sponsored posts</strong></li>
+                  <li>Exclusive logo placement on all <strong>promotional materials</strong> (flyers, posters, brochures)</li>
+                  <li>Invitation to an <strong>exclusive networking event</strong> for Founding Members</li>
+                  <li>Opportunity to <strong>share promotional materials or samples</strong> with barbershop clients</li>
+                  <li>Featured <strong>spotlight article or interview</strong> on our website or social media</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="advertise-packages-right">
+              <div className="advertise-package-card">
+                <h3 className="advertise-package-title">6-Month Package — $1,250</h3>
+                <ul className="advertise-package-benefits">
+                  <li>Logo displayed on monitors for <strong>6 months</strong></li>
+                  <li><strong>2 dedicated email blasts</strong> to our client base</li>
+                  <li><strong>2 social media shoutouts</strong> during the campaign</li>
+                  <li><strong>1 sponsored post</strong> on our barbershop's social media</li>
+                </ul>
+              </div>
+              
+              <div className="advertise-package-card">
+                <h3 className="advertise-package-title">3-Month Package — $750</h3>
+                <ul className="advertise-package-benefits">
+                  <li>Logo displayed on barbershop monitors for <strong>3 months</strong></li>
+                  <li><strong>1 dedicated email blast</strong> to our client list</li>
+                  <li><strong>1 social media shoutout</strong> across our platforms</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         {/* FAQ Section */}
-        <div className="advertise-faq-section">
+        {/* <div className="advertise-faq-section">
           <div className="w-full">
             <h2 id="facts-heading" className="facts-animated">Frequently Asked Questions</h2>
             <p className="facts-subtitle">
@@ -331,9 +375,9 @@ const Advertise = () => {
               ))}
             </ul>
           </div>
+        </div> */}
         </div>
-        </div>
-        <Gallery />
+        {/* <Gallery /> */}
       <div className="advertise-joinus-wrapper">
         <JoinUs />
       </div>
