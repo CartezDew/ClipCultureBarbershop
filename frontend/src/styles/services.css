@@ -131,33 +131,37 @@
 
 
 
-/* Add wrapper for multiple borders */
+/* Card with borders */
 .services__card {
   position: relative;
 }
 
-/* BOTTOM border using box-shadow for the shimmer effect */
-.services__card {
-  box-shadow: 
-    inset 0 -2.2px 0 0 rgba(255, 255, 255, 0.15);
-  animation: shimmerCardBottom 3s ease-in-out infinite;
-}
-
-@keyframes shimmerCardBottom {
-  0%, 100% {
-    box-shadow: inset 0 -2.2px 0 0 rgba(255, 255, 255, 0.15);
-  }
-  50% {
-    box-shadow: inset 0 -2.2px 0 0 rgba(255, 255, 255, 0.3);
-  }
-}
-
-/* LEFT divider (vertical) */
+/* BOTTOM border (horizontal) */
 .services__card::before {
   content: '';
   position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  height: 2.2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorder 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* RIGHT border (vertical) */
+.services__card::after {
+  content: '';
+  position: absolute;
   top: 20%;
-  left: 0;
+  right: 0;
   bottom: 20%;
   width: 2.2px;
   background: linear-gradient(
@@ -172,28 +176,13 @@
   pointer-events: none;
 }
 
-/* RIGHT divider (vertical) — one per card */
-.services__card::after {
-  content: '';
-  position: absolute;
-  top: 20%;
-  right: 0;
-  bottom: 20%;
-  width: 2.2px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(255, 255, 255, 0.15) 20%,
-    rgba(255, 255, 255, 0.15) 80%,
-    transparent 100%
-  );
-  animation: shimmerBorder 3s ease-in-out infinite,
-             floatingBorder 4s ease-in-out infinite;
-  pointer-events: none;
+/* Turn off right border on last column (every 3rd card: 3, 6, 9, 12, 15) */
+.services__card:nth-child(3n)::after {
+  display: none;
 }
 
-/* Turn off right border on last column (cards 3, 6, 9, 12, 15) */
-.services__card:nth-child(3n)::after {
+/* Turn off bottom border on last row (cards 13-16) */
+.services__card:nth-child(n+13)::before {
   display: none;
 }
 
@@ -207,9 +196,9 @@
 }
 
 /* Top border hover for last row */
-.services__card:nth-child(n+13):hover {
+/* .services__card:nth-child(n+13):hover {
   border-top-color: rgba(10, 151, 134, 0.4);
-}
+} */
 
 /* Hover Effects */
 .services__card:hover {
