@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/professional-team.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';    
@@ -191,9 +192,9 @@ const Professional_Team = () => {
         <div className="professional-team__join">
           <div className="professional-team__join-content">
             <h3 className="professional-team__join-title">Interested in joining our team?</h3>
-            <button className="professional-team__apply-btn">
+            <Link to="/apply" className="professional-team__apply-btn">
               Apply Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
