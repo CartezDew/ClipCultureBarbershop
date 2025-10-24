@@ -48,18 +48,25 @@ const Home = () => {
     getServices().then(setServices);
   }, []);
 
-  // Scroll to anchors when arriving on this page with a hash (e.g., /#contact)
+  // Scroll to anchors when arriving on this page with a hash (e.g., /#contact, /#faq)
   useEffect(() => {
     if (!location.hash) return;
     const targetId = location.hash.replace('#', '');
 
     const scrollWithOffset = () => {
       const el = document.getElementById(targetId);
-      if (!el) return;
+      if (!el) {
+        console.log('Element not found:', targetId);
+        return;
+      }
 
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - 80; // 100px offset for navbar
+      // Use different offsets for different sections
+      const offset = targetId === 'faq' ? 40 : 80;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition, 'using offset:', offset);
 
       window.scrollTo({
         top: offsetPosition,
@@ -67,10 +74,27 @@ const Home = () => {
       });
     };
 
-    // Delay scroll to ensure page has fully loaded and laid out
-    const timeoutId = setTimeout(scrollWithOffset, 100);
+    // Wait for images and content to load before scrolling
+    // Use 'load' event to ensure all images are loaded
+    const handleLoad = () => {
+      setTimeout(scrollWithOffset, 100);
+    };
+
+    if (document.readyState === 'complete') {
+      // Page already loaded
+      setTimeout(scrollWithOffset, 300);
+    } else {
+      // Wait for page to load
+      window.addEventListener('load', handleLoad);
+    }
     
-    return () => clearTimeout(timeoutId);
+    // Also try after a delay as a fallback
+    const timeoutId = setTimeout(scrollWithOffset, 1000);
+    
+    return () => {
+      window.removeEventListener('load', handleLoad);
+      clearTimeout(timeoutId);
+    };
   }, [location.hash]);
 
   useEffect(() => {

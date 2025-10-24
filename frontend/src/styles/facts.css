@@ -5,6 +5,8 @@
   /* max-width: 1400px; */
   padding: 3rem 2rem;
   background: linear-gradient(0deg,rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
+  /* Ensure anchor scroll stops with space for fixed navbars */
+  scroll-margin-top: 10px;
 }
 
 
