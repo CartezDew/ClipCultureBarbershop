@@ -20,7 +20,7 @@ const NavbarMobile = () => {
         { id: 2, name: 'Services', path: '/services' },
         { id: 3, name: 'Barbers', path: '/team' },
         { id: 4, name: 'Gallery', path: '/gallery' },
-        { id: 5, name: 'Contact', path: '/contact' }
+        { id: 5, name: 'Contact', path: '#contact' }
     ]
     const menuRef = useRef(null)
     const openAtRef = useRef(0)

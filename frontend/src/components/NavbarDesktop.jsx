@@ -46,7 +46,7 @@ const NavbarDesktop = () => {
             { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
             { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
             { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
-            { name: 'Contact Us', link: '/contact', icon: <Mail size={16} /> },
+            { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
             { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
         ]
     }
@@ -224,7 +224,7 @@ const NavbarDesktop = () => {
                   </motion.div>
                 )}
                 <div className="icon-section">
-                    <Link to="/contact" className="get-started-btn">
+                    <Link to="/#contact" className="get-started-btn">
                         Book Now
                     </Link>
                 </div>

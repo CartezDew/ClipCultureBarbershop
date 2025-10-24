@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
@@ -42,9 +43,35 @@ import heroImagePNG from '../assets/images/ClipCultureHero.png';
 const Home = () => {
   const [services, setServices] = useState([]);
   const [showHeroNavbar, setShowHeroNavbar] = useState(true);
+  const location = useLocation();
   useEffect(() => {
     getServices().then(setServices);
   }, []);
+
+  // Scroll to anchors when arriving on this page with a hash (e.g., /#contact)
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+
+    const scrollWithOffset = () => {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+
+      // Get the element's position
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - 80; // 100px offset for navbar
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    };
+
+    // Delay scroll to ensure page has fully loaded and laid out
+    const timeoutId = setTimeout(scrollWithOffset, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, [location.hash]);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -75,7 +75,7 @@ const HeroNavbar = () => {
       { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
       { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
       { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
-      { name: 'Contact Us', link: '/contact', icon: <Mail size={16} /> },
+      { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
       { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
     ]
   };
@@ -211,7 +211,7 @@ const HeroNavbar = () => {
         </div>
         
         <div className="hero-nav-actions">
-          <Link to="/contact" className="hero-contact-btn">Book Now</Link>
+          <Link to="/#contact" className="hero-contact-btn">Book Now</Link>
         </div>
       </div>
     </nav>

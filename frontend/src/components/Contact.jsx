@@ -7,7 +7,7 @@ import OwnerImage from '../assets/Contact/Owner.webp';
 
 const Contact = () => {
   return (
-    <section className="contact">
+    <section id="contact" className="contact">
       <div className="contact__container">
         <div className="contact__header">
           <h2 className="contact__title">Visit Our Locations</h2>

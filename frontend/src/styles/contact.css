@@ -1,5 +1,7 @@
 /* Contact Section */
 .contact {
+  /* Ensure anchor scroll stops with space for fixed navbars */
+  scroll-margin-top: 120px;
   padding: 2rem 0;
   background-color: #1a1a1a;
   color: white;

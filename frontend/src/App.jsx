@@ -48,15 +48,6 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="/contact" element={
-            <>
-              <Navbar />
-              <main>
-                <ContactPage />
-              </main>
-              <Footer />
-            </>
-          } />
           <Route path="/about" element={
             <>
               <Navbar />
