@@ -181,8 +181,10 @@
   display: none;
 }
 
-/* Turn off bottom border on last row (cards 13-16) */
-.services__card:nth-child(n+13)::before {
+/* Turn off bottom border on cards 13-15 (but not 16) */
+.services__card:nth-child(13)::before,
+.services__card:nth-child(14)::before,
+.services__card:nth-child(15)::before {
   display: none;
 }
 
