@@ -44,7 +44,7 @@ const NavbarDesktop = () => {
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
             { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
-            { name: 'FAQ', link: '/about#faq', icon: <HelpCircle size={16} /> },
+            { name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> },
             { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
             { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
             { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }

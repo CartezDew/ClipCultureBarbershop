@@ -37,6 +37,7 @@ export default function Facts({ items = sampleFacts }) {
 
   return (
     <section 
+      id="faq"
       ref={factsRef}
       aria-labelledby="facts-heading" 
       className={`w-full ${animationsTriggered ? 'facts-animated' : ''}`}
