@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/professional-team.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';    
@@ -18,6 +18,17 @@ import Image13 from '../assets/Barbers/Image_13.webp'
 
 const Professional_Team = () => {
   const [selectedLocation, setSelectedLocation] = useState('all'); // 'all', 'sandy-springs', 'summerhill'
+  const location = useLocation();
+
+  // Update selected location based on URL parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const locationParam = params.get('location');
+    
+    if (locationParam === 'sandy-springs' || locationParam === 'summerhill' || locationParam === 'all') {
+      setSelectedLocation(locationParam);
+    }
+  }, [location.search]);
   
   const sandySpringsBarbers = [
     {

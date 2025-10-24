@@ -59,9 +59,9 @@ const HeroNavbar = () => {
       { name: 'Kids', link: '/services?category=kids', icon: <Baby size={16} /> }
     ],
     barbers: [
-      { name: 'All Locations', link: '/#team', icon: <MapPin size={16} /> },
-      { name: 'Sandy Springs', link: '/#team', icon: <Building size={16} /> },
-      { name: 'Summerhill', link: '/#team', icon: <Building size={16} /> },
+      { name: 'All Locations', link: '/?location=all#team', icon: <MapPin size={16} /> },
+      { name: 'Sandy Springs', link: '/?location=sandy-springs#team', icon: <Building size={16} /> },
+      { name: 'Summerhill', link: '/?location=summerhill#team', icon: <Building size={16} /> },
       { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
     ],
     shop: [
