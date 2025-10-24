@@ -169,6 +169,8 @@
 .professional-team__apply-btn {
   display: inline-block;
   background: linear-gradient(135deg, var(--green-new), #59605f);
+  border: 2px solid var(--green-new);
+  background: var(--primary-black);
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -178,7 +180,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
-  border: 2px solid transparent;
+  /* border: 2px solid transparent; */
   cursor: pointer;
 }
 

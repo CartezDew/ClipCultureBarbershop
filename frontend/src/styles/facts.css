@@ -3,7 +3,7 @@
 /* Facts Component Styles */
 .w-full {
   /* max-width: 1400px; */
-  padding: 2.5rem 2rem;
+  padding: 3rem 2rem;
   background: linear-gradient(0deg,rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
 }
 
@@ -14,11 +14,12 @@
   max-width: 700px;
   margin: 0 auto 2rem auto;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   letter-spacing: 0.01em;
   text-align: center;
   position: relative;
+  opacity: 0.8;
 }
 
 .facts-subtitle::after {
@@ -29,7 +30,7 @@
   transform: translateX(-50%);
   width: 190px;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--green) 20%, var(--green) 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--green-new) 20%, var(--green-new) 80%, transparent 100%);
   border-radius: 1px;
 }
 

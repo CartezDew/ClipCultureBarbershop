@@ -1,6 +1,6 @@
 /* Contact Section */
 .contact {
-  padding: 1rem 0;
+  padding: 2rem 0;
   background-color: #1a1a1a;
   color: white;
 }
@@ -42,7 +42,7 @@
   transform: translateX(-50%);
   width: 170px;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--primary-green) 20%, #14b8a6 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--green-new) 20%, #14b8a6 80%, transparent 100%);
   border-radius: 1px;
 }
 
@@ -124,7 +124,7 @@
 
 /* Sandy Springs Column */
 .contact__column--sandy-springs {
-  background: linear-gradient(135deg, #599c5c, #378a70);
+  background: linear-gradient(135deg, var(--green-new), #378a70);
   /* background: linear-gradient(135deg, var(--primary-green), #14b8a6); */
 }
 
