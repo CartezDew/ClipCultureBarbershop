@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ServicesGallery from '../components/ServicesGallery.jsx';
 import '../styles/services.css';
 
 const Services = () => {
   const [isAnimated, setIsAnimated] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,6 +14,50 @@ const Services = () => {
     }, 500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Scroll to anchors when arriving on this page with a hash (e.g., /services#specialty-services)
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+
+    const scrollWithOffset = () => {
+      const el = document.getElementById(targetId);
+      if (!el) {
+        console.log('Element not found:', targetId);
+        return;
+      }
+
+      // Get the element's position
+      const elementPosition = el.getBoundingClientRect().top;
+      const offset = 55;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition);
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    };
+
+    // Wait for images and content to load before scrolling
+    const handleLoad = () => {
+      setTimeout(scrollWithOffset, 100);
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(scrollWithOffset, 300);
+    } else {
+      window.addEventListener('load', handleLoad);
+    }
+    
+    const timeoutId = setTimeout(scrollWithOffset, 1000);
+    
+    return () => {
+      window.removeEventListener('load', handleLoad);
+      clearTimeout(timeoutId);
+    };
+  }, [location.hash]);
 
   const regularServices = [
     { name: 'Basic Haircut', price: 20, duration: '30 min (approx.)' },
@@ -88,7 +133,7 @@ const Services = () => {
 
                     {/* Specialty Services */}
                     <div className="services__section">
-            <h2 className="services__section-title">Specialty Services</h2>
+            <h2 id="specialty-services" className="services__section-title">Specialty Services</h2>
             <div className="services-divider"></div>
             <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
               {specialtyServices.map((service, index) => (

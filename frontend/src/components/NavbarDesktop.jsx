@@ -24,9 +24,9 @@ const NavbarDesktop = () => {
     const dropdownMenus = {
         services: [
             { name: 'All Services', link: '/services', icon: <Scissors size={16} /> },
-            { name: 'Men', link: '/services?category=men', icon: <User size={16} /> },
-            { name: 'Women', link: '/services?category=women', icon: <Users2 size={16} /> },
-            { name: 'Kids', link: '/services?category=kids', icon: <Baby size={16} /> }
+            { name: 'Men', link: '/services', icon: <User size={16} /> },
+            { name: 'Women', link: '/services#specialty-services', icon: <Users2 size={16} /> },
+            { name: 'Kids', link: '/services#specialty-services', icon: <Baby size={16} /> }
         ],
         barbers: [
             { name: 'All Locations', link: '/?location=all#team', icon: <MapPin size={16} /> },
