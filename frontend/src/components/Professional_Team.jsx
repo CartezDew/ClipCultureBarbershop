@@ -134,7 +134,7 @@ const Professional_Team = () => {
     <section className="professional-team">
       <div className="professional-team__container">
         <div className="professional-team__header">
-          <h2 className="professional-team__header-title">Meet Our Team</h2>
+          <h2 id="team" className="professional-team__header-title">Meet Our Team</h2>
           <p className="professional-team__subtitle">Masters of the Craft. Shapers of the Culture.</p>
           
           {/* Location Toggle */}

@@ -63,7 +63,9 @@ const Home = () => {
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
       // Use different offsets for different sections
-      const offset = targetId === 'faq' ? 40 : 80;
+      let offset = 80;
+      if (targetId === 'faq') offset = 40;
+      if (targetId === 'team') offset = 65;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
       console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition, 'using offset:', offset);

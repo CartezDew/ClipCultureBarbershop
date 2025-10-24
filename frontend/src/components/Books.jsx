@@ -64,7 +64,7 @@ const Books = () => {
   };
 
   return (
-    <section className="books">
+    <section id="books" className="books">
       <div className="books__container">
         <div className="books__header">
           <h2 className="books__title">Master the Craft. Lead the <em>CULTURE</em>.</h2>

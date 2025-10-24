@@ -30,15 +30,6 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="/team" element={
-            <>
-              <Navbar />
-              <main>
-                <Team />
-              </main>
-              <Footer />
-            </>
-          } />
           <Route path="/gallery" element={
             <>
               <Navbar />

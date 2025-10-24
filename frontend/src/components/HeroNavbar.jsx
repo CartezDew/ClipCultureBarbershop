@@ -59,14 +59,14 @@ const HeroNavbar = () => {
       { name: 'Kids', link: '/services?category=kids', icon: <Baby size={16} /> }
     ],
     barbers: [
-      { name: 'All Locations', link: '/team', icon: <MapPin size={16} /> },
-      { name: 'Sandy Springs', link: '/team?location=sandy-springs', icon: <Building size={16} /> },
-      { name: 'Summerhill', link: '/team?location=summerhill', icon: <Building size={16} /> },
+      { name: 'All Locations', link: '/#team', icon: <MapPin size={16} /> },
+      { name: 'Sandy Springs', link: '/#team', icon: <Building size={16} /> },
+      { name: 'Summerhill', link: '/#team', icon: <Building size={16} /> },
       { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
     ],
     shop: [
       { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
-      { name: 'Books', link: '/shop?category=books', icon: <BookOpen size={16} /> },
+      { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
       { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
       { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
       { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
