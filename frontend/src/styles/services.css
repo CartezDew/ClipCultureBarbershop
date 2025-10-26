@@ -5,6 +5,10 @@
   color: white;
 }
 
+.services-container-main {
+  padding: 0 1rem;
+}
+
 
 /* Services Header */
 .services__header {
@@ -45,6 +49,17 @@
   background: linear-gradient(90deg, transparent 0%, #0a9786 20%, #14b8a6 80%, transparent 100%);
   margin: 0 auto 2rem;
   border-radius: 2px;
+}
+
+.services__section-title-main {
+  font-size: clamp(.8rem, 1.8vw, 1.5rem) !important;
+  font-weight: 600 !important;
+  color: var(--primary-green) !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  opacity: 0.7 !important;
 }
 
 /* Service Sections */
@@ -316,6 +331,13 @@
   font-weight: 500;
 }
 
+.services__card-duration-pill strong {
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
 
 
 .services__card--specialty:hover {
@@ -354,3 +376,139 @@
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  .services-container {
+    padding: 3rem;
+  }
+  .services__card {
+    padding: 2rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.9rem;
+    color: #e1dbdb;
+    background: rgba(248, 249, 250, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 700px) {
+  .services__title {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+  }
+}
+
+@media (max-width: 660px) {
+  .services-container {
+    padding: 1.5rem;
+  }
+  .services__card {
+    padding: 1.5rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .services__card {
+    padding: 1.5rem;
+  }
+  
+  .services__card-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .services__card-price {
+    margin-bottom: 0;
+  }
+
+  .services__card-divider {
+    display: none;
+  }
+  .services__card-duration-pill {
+    font-size: 0.8rem;
+    background: rgba(248, 249, 250, 0.2)
+  }
+  .services__card-title {
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 550px) {
+  .services__card {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .services__card-title {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+  }
+  .services__section-title {
+    font-size: 2rem !important;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .services__card {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .services-container-main {
+    padding: 0 .5rem;
+  }
+  .services__card-price {
+    font-size: 1rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 445px) {
+  .services__card-title {
+    font-size: .9rem;
+  }
+  .services__section-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 405px) {
+  .services__card-title {
+    font-size: .8rem;
+  }
+  .services__card-price {
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .services__card {
+    padding-left: .7rem;
+    padding-right: .7rem;
+  }
+  .services-container-main {
+    padding: 0 .3rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .services__card-title {
+    font-size: .75rem;
+  }
+  .services__section-title {
+    font-size: 1.6rem !important;
+  }
+}
+
+@media (max-width: 335px) {
+  .services__card-title {
+    font-size: .7rem;
+  }
+}

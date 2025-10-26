@@ -60,42 +60,42 @@ const Services = () => {
   }, [location.hash]);
 
   const regularServices = [
-    { name: 'Basic Haircut', price: 20, duration: '30 min (approx.)' },
-    { name: 'Basic Haircut + Beard', price: 28, duration: '35 min (approx.)' },
-    { name: 'Basic Haircut + Eyebrows', price: 35, duration: '35 min (approx.)' },
-    { name: 'Basic Haircut + Eyebrows + Beard', price: 38, duration: '45 min (approx.)' },
-    { name: 'Basic Lineup', price: 20, duration: '20 min (approx.)' },
-    { name: 'Basic Lineup + Beard', price: 25, duration: '30 min (approx.)' },
-    { name: 'Bald Fade', price: 35, duration: '25 min (approx.)' },
-    { name: 'Bald Fade + Beard', price: 35, duration: '30 min (approx.)' },
-    { name: 'Bald Fade + Beard + Enhancements', price: 40, duration: '40 min (approx.)' },
-    { name: 'Taper Fade + Beard', price: 35, duration: '35 min (approx.)' },
-    { name: 'Taper Fade + Twist Sponge', price: 38, duration: '30 min (approx.)' },
-    { name: 'Drop Fade', price: 35, duration: '25 min (approx.)' },
-    { name: 'Dark Caesar/Low Caesar', price: 35, duration: '25 min (approx.)' },
-    { name: 'Beard Trim', price: 20, duration: '20 min (approx.)' },
-    { name: 'Hot Towel Shave', price: 20, duration: '20 min (approx.)' },
-    { name: 'Blow-Out', price: 35, duration: '40 min (approx.)' }
+    { name: 'Basic Haircut', price: 20, duration: '30 min <strong>*</strong>' },
+    { name: 'Basic Haircut + Beard', price: 28, duration: '35 min <strong>*</strong>' },
+    { name: 'Basic Haircut + Eyebrows', price: 35, duration: '35 min <strong>*</strong>' },
+    { name: 'Basic Haircut + Eyebrows + Beard', price: 38, duration: '45 min <strong>*</strong>' },
+    { name: 'Basic Lineup', price: 20, duration: '20 min <strong>*</strong>' },
+    { name: 'Basic Lineup + Beard', price: 25, duration: '30 min <strong>*</strong>' },
+    { name: 'Bald Fade', price: 35, duration: '25 min <strong>*</strong>' },
+    { name: 'Bald Fade + Beard', price: 35, duration: '30 min <strong>*</strong>' },
+    { name: 'Bald Fade + Beard + Enhancements', price: 40, duration: '40 min <strong>*</strong>' },
+    { name: 'Taper Fade + Beard', price: 35, duration: '35 min <strong>*</strong>' },
+    { name: 'Taper Fade + Twist Sponge', price: 38, duration: '30 min <strong>*</strong>' },
+    { name: 'Drop Fade', price: 35, duration: '25 min <strong>*</strong>' },
+    { name: 'Dark Caesar/Low Caesar', price: 35, duration: '25 min <strong>*</strong>' },
+    { name: 'Beard Trim', price: 20, duration: '20 min <strong>*</strong>' },
+    { name: 'Hot Towel Shave', price: 20, duration: '20 min <strong>*</strong>' },
+    { name: 'Blow-Out', price: 35, duration: '40 min <strong>*</strong>' }
   ];
 
   const addOnServices = [
-    { name: 'Eyebrows', price: 12, duration: '15 min (approx.)' },
-    { name: 'Designs', price: 10, duration: '15 min (approx.)' },
-    { name: 'Shampoo Service', price: 8, duration: '10 min (approx.)' }
+    { name: 'Eyebrows', price: 12, duration: '15 min <strong>*</strong>' },
+    { name: 'Designs', price: 10, duration: '15 min <strong>*</strong>' },
+    { name: 'Shampoo Service', price: 8, duration: '10 min <strong>*</strong>' }
   ];
 
   const specialtyServices = [
-    { name: 'Child Haircut (10 and under)', price: 25, duration: '25 min (approx.)', category: 'Children' },
-    { name: 'Child Haircut + Designs', price: 30, duration: '30 min (approx.)', category: 'Children' },
-    { name: 'Women\'s Haircut + Designs', price: 35, duration: '30 min (approx.)', category: 'Women' },
-    { name: 'Women\'s Undercut (only)', price: 25, duration: '25 min (approx.)', category: 'Women' },
-    { name: 'Senior Citizen Haircut (62+)', price: 30, duration: '30 min (approx.)', category: 'Seniors' }
+    { name: 'Child Haircut (10 and under)', price: 25, duration: '25 min <strong>*</strong>', category: 'Children' },
+    { name: 'Child Haircut + Designs', price: 30, duration: '30 min <strong>*</strong>', category: 'Children' },
+    { name: 'Women\'s Haircut + Designs', price: 35, duration: '30 min <strong>*</strong>', category: 'Women' },
+    { name: 'Women\'s Undercut (only)', price: 25, duration: '25 min <strong>*</strong>', category: 'Women' },
+    { name: 'Senior Citizen Haircut (62+)', price: 30, duration: '30 min <strong>*</strong>', category: 'Seniors' }
   ];
 
   return (
     <div>
       <section className="section section--light">
-        <div className="container">
+        <div className="services-container">
           <div className={`services__header ${isAnimated ? 'animate' : ''}`}>
             <h1 className="services__title">Our Services</h1>
             <p className="services__subtitle">Walk-ins are welcome!</p>
@@ -106,8 +106,9 @@ const Services = () => {
         {/* Services Gallery Component - Outside container for full width */}
         <ServicesGallery />
 
-        <div className="container">
+        <div className="services-container-main">
           {/* Regular Services */}
+          <h2 className="services__section-title-main">* Service times are approximate and may vary by complexity *.</h2>
           <div className="services__section">
             <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
               {regularServices.map((service, index) => (
@@ -124,7 +125,7 @@ const Services = () => {
                   <div className="services__card-details">
                     <div className="services__card-price">${service.price}</div>
                     <div className="services__card-divider">|</div>
-                    <div className="services__card-duration-pill">{service.duration}</div>
+                    <div className="services__card-duration-pill" dangerouslySetInnerHTML={{ __html: service.duration }}></div>
                   </div>
                 </div>
               ))}
@@ -151,7 +152,7 @@ const Services = () => {
                   <div className="services__card-details">
                     <div className="services__card-price">${service.price}</div>
                     <div className="services__card-divider">|</div>
-                    <div className="services__card-duration-pill">{service.duration}</div>
+                    <div className="services__card-duration-pill" dangerouslySetInnerHTML={{ __html: service.duration }}></div>
                   </div>
                 </div>
               ))}
@@ -177,7 +178,7 @@ const Services = () => {
                   <div className="services__card-details">
                     <div className="services__card-price">${service.price}</div>
                     <div className="services__card-divider">|</div>
-                    <div className="services__card-duration-pill">{service.duration}</div>
+                    <div className="services__card-duration-pill" dangerouslySetInnerHTML={{ __html: service.duration }}></div>
                   </div>
                 </div>
               ))}
