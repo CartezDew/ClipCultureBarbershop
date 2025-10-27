@@ -111,11 +111,11 @@ const TopProducts = () => {
                   <span className="product-card__rating-text">({product.rating})</span>
                 </div>
                 <div className="product-card__actions">
-                  <button className="btn btn--add-cart">
+                  <button className="productbtn--add-cart">
                     <ShoppingCart size={16} />
                     Add to Cart
                   </button>
-                  <Link to={`/products/${product.slug}`} className="btn btn--learn-more">
+                  <Link to={`/products/${product.slug}`} className="productbtn--learn-more">
                     Learn More
                     <ArrowRight size={16} />
                   </Link>
