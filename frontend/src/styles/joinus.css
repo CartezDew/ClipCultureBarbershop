@@ -84,3 +84,33 @@
 .join-email-button:hover {
   background: #1a365d;
 }
+
+@media (max-width: 550px) {
+  .join-email-section {
+    padding: 0 1rem;
+  }
+  .join-email-title {
+    font-size: clamp(1.4rem, 2vw, 1.5rem);
+  }
+  .join-email-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1rem);
+  }
+  .join-email-input {
+    max-width: 200px;
+    padding: 0.5rem 0.5rem;
+  }
+  .join-email-button {
+    padding: 0.5rem 1rem;
+  }
+  .join-email-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .join-email-input {
+    max-width: 150px;
+    padding: 0.5rem 0.5rem;
+  }
+}

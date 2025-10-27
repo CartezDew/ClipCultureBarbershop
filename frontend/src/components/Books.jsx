@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/books.css';
 import AmazonImage from '../assets/books/Amazon.png';
 
 const Books = () => {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const measureAndSetTitleHeight = () => {
+      const gridEl = gridRef.current;
+      if (!gridEl) return;
+      const titleNodes = gridEl.querySelectorAll('.book-card__name');
+      if (!titleNodes.length) return;
+      let max = 0;
+      titleNodes.forEach((node) => {
+        // Reset to natural height before measuring in case of previous min-height
+        const prevMin = node.style.minHeight;
+        node.style.minHeight = 'auto';
+        const h = node.offsetHeight;
+        if (h > max) max = h;
+        node.style.minHeight = prevMin;
+      });
+      gridEl.style.setProperty('--book-title-height', `${max}px`);
+    };
+
+    // Measure after paint
+    const rAF = requestAnimationFrame(measureAndSetTitleHeight);
+    window.addEventListener('resize', measureAndSetTitleHeight);
+
+    return () => {
+      cancelAnimationFrame(rAF);
+      window.removeEventListener('resize', measureAndSetTitleHeight);
+    };
+  }, []);
   const products = [
     {
       id: 1,
@@ -71,7 +100,7 @@ const Books = () => {
           <p className="books__subtitle">Transform how you think, lead, and grow with every page.</p>
         </div>
         
-        <div className="books__grid">
+        <div className="books__grid" ref={gridRef}>
           {products.map((product) => (
             <div key={product.id} className="book-card">
               <div className="book-card__image-container">
