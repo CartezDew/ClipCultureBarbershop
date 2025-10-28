@@ -351,15 +351,15 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .mentorship-page {
+  .franchise-page {
     padding: 2rem 0;
   }
   
-  .mentorship-container {
+  .franchise-container {
     padding: 0 1rem;
   }
   
-  .mentorship-header {
+  .franchise-header {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 3rem;
@@ -367,53 +367,53 @@
     text-align: center;
   }
   
-  .mentorship-header-content {
+  .franchise-header-content {
     order: 1;
   }
   
-  .mentorship-header-image {
+  .franchise-header-image {
     order: 2;
   }
   
-  .mentorship-features {
+  .franchise-features {
     margin-top: 1.5rem;
   }
   
-  .mentorship-features-list {
+  .franchise-features-list {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
   
-  .mentorship-feature-item {
+  .franchise-feature-item {
     font-size: 0.9rem;
   }
   
-  .mentorship-checkmark {
+  .franchise-checkmark {
     font-size: 1.1rem;
     margin-right: 0.5rem;
   }
   
-  .mentorship-programs {
+  .franchise-programs {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-top: 3rem;
   }
   
-  .mentorship-program-card {
+  .franchise-program-card {
     padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .mentorship-container {
+  .franchise-container {
     padding: 0 0.75rem;
   }
   
-  .mentorship-header {
+  .franchise-header {
     margin-bottom: 2.5rem;
   }
   
-  .mentorship-program-card {
+  .franchise-program-card {
     padding: 1rem;
   }
 }
