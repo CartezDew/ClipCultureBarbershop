@@ -436,7 +436,7 @@ body.mobile-menu-opened::before {
   }
 }
 
-/* Hide hamburger above 680px */
+/* Hide hamburger above 605px */
 @media (min-width: 606px) {
   .hamburger-line { display: none !important; }
 }
@@ -452,44 +452,20 @@ body.mobile-menu-opened::before {
   }
   .logo-section {
     gap: -0.5rem;
+    justify-content: center;
+    flex: 1;
   }
-  .logo-image-nav { 
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
-    object-position: center;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: high-quality;
-    margin-right: 0.2rem;
-    transition: opacity 0.2s ease;
-    min-width: 0;
-    flex-shrink: 0;
+  .logo-image-nav {
+    height: clamp(20px, 6vw, 40px);
+    width: auto;
   }
   .navbar-container {
-    padding: 0 0.5rem;
-  }
-  .logo-text-nav { 
-  font-size: clamp(0.8rem, 3.5vw, 1.1rem);
-  transition: opacity 0.2s ease;
-  }
-  
-  /* Mobile navbar logo hover effects */
-  .navbar-mobile .logo-link:hover .logo-image-nav,
-  .navbar-mobile .logo-link:hover .logo-text-nav {
-    opacity: 0.7;
-  }
-  
+    justify-content: center;
+  } 
   .book-now-btn {
     display: none;
    }
 }
-  
-/* Visibility gates */
-/* @media (max-width: 680px) {
-  .navbar-visible-desktop { display: none; }
-  .navbar-visible-mobile { display: block; }
-} */
 
 @media (max-width: 520px) {
   .book-now-btn { padding: 0.35rem 0.3rem; font-size: 0.7rem; }

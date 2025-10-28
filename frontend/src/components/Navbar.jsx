@@ -5,14 +5,14 @@ import { ChevronUp } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 
 const Navbar = () => {
-    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 680 : false)
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 605 : false)
     const [showBackToTop, setShowBackToTop] = useState(false)
     const autoScrollingRef = useRef(false)
     const location = useLocation()
 
     useEffect(() => {
         if (typeof window === 'undefined') return
-        const mql = window.matchMedia('(max-width: 580px)')
+        const mql = window.matchMedia('(max-width: 605px)')
         const handleChange = (e) => setIsMobile(e.matches)
         setIsMobile(mql.matches)
         if (mql.addEventListener) mql.addEventListener('change', handleChange)

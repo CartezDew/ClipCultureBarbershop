@@ -51,7 +51,7 @@ const NavbarDesktop = () => {
         ]
     }
 
-    // Hide menu items while scrolling on >=680px, re-appear after idle
+    // Hide menu items while scrolling on >=605px, re-appear after idle
     const [scrollingHide, setScrollingHide] = useState(false)
     const scrollTimerRef = useRef(null)
     const lastScrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0)
@@ -59,7 +59,7 @@ const NavbarDesktop = () => {
     const rafIdRef = useRef(0)
 
     useEffect(() => {
-        const mq = window.matchMedia('(min-width: 680px)')
+        const mq = window.matchMedia('(min-width: 605px)')
         const onScroll = () => {
             if (!mq.matches) return
             const now = Date.now()

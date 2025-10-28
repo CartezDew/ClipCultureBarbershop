@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera } from 'lucide-react'
-import logoWebP from '../assets/images/CC-Logo.webp'
-import logoWebP2x from '../assets/images/CC-Logo-2x.webp'
-import logoPNG from '../assets/images/CC-Logo-Black-HQ.webp'
+import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart } from 'lucide-react'
+
+import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
 const NavbarMobile = () => {
@@ -28,7 +27,7 @@ const NavbarMobile = () => {
     // Check screen size and update mobile state
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth <= 680)
+            setIsMobile(window.innerWidth <= 605)
         }
         
         // Check on mount
@@ -149,19 +148,6 @@ const NavbarMobile = () => {
     return (
         <nav className="navbar navbar-mobile">
             <div className="navbar-container">
-                <div className="logo-section">
-                    <Link to="/" className="logo-link" aria-label="Go to home">
-                        <picture>
-                            <source srcSet={`${logoWebP2x} 2x, ${logoWebP} 1x`} type="image/webp" />
-                            <img 
-                                src={logoPNG} 
-                                srcSet={`${logoPNG} 1x`}
-                                alt="ClipCulture Logo" 
-                                className="logo-image-nav"
-                            />
-                        </picture>
-                    </Link>
-                </div>
                 <button className={`mobile-nav-toggle ${isOpen ? 'open' : ''}`} onClick={() => { 
                     setIsOpen(v => {
                         // Always allow close when open
@@ -173,13 +159,28 @@ const NavbarMobile = () => {
                     <span className="mobile-nav-line"></span>
                     <span className="mobile-nav-line"></span>
                 </button>
+                
+                <div className="logo-section">
+                    <Link to="/" className="logo-link" aria-label="Go to home">
+                        <picture>
+                            <source srcSet={`${logoMobile} 2x, ${logoMobile} 1x`} type="image/webp" />
+                            <img 
+                                src={logoMobile} 
+                                srcSet={`${logoMobile} 1x`}
+                                alt="ClipCulture Logo" 
+                                className="logo-image-nav"
+                            />
+                        </picture>
+                    </Link>
+                </div>
+                
                 <div className="icon-section">
                     <Link 
-                        to="/contact" 
-                        className="book-now-btn" 
-                        onClick={() => setIsOpen(false)}
+                        to="/shop" 
+                        className="shopping-cart-btn"
+                        aria-label="Shopping Cart"
                     >
-                        Book Now
+                        <ShoppingCart size={24} />
                     </Link>
                 </div>
             </div>
