@@ -176,7 +176,7 @@ const NavbarMobile = () => {
                 <div className="icon-section">
                     <Link 
                         to="/contact" 
-                        className="get-started-btn" 
+                        className="book-now-btn" 
                         onClick={() => setIsOpen(false)}
                     >
                         Book Now

@@ -62,7 +62,7 @@
     font-size: 0.7rem;
   }
   
-  .navbar.scrolled .get-started-btn {
+  .navbar.scrolled .book-now-btn {
     padding: 0.3rem 0.5rem;
     font-size: 0.65rem;
   }
@@ -109,40 +109,18 @@
   }
   
   .logo-link:hover {
-    opacity: 0.8;
+    opacity: 0.6;
+    transform: scale(1.05);
   }
   
-  
-  .logo-text-nav {
-    font-size: clamp(1rem, 2.7vw, 1.2rem);
-    font-weight: 700;
-    color: var(--color-hunter-green);
-    transition: font-size 0.3s ease;
-  }
 
   .logo-image-nav {
-    height: clamp(40px, 5vw, 50px);
+    height: clamp(40px, 5vw, 60px);
     width: auto;
     max-width: clamp(150px, 25vw, 180px);
     object-fit: contain;
-    object-position: left center;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    margin-right: 0.4rem;
     transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease;
-    /* Force high DPI rendering */
-    -webkit-image-rendering: -webkit-optimize-contrast;
-    -ms-interpolation-mode: bicubic;
-    /* Prevent pixelation and distortion */
-    image-rendering: high-quality;
-    image-rendering: -webkit-optimize-contrast;
-    /* Ensure proper scaling */
-    min-width: 0;
-    flex-shrink: 0;
+    margin-top: 0.5rem;
   }
   
   /* Menu Section */
@@ -180,7 +158,7 @@
   }
   
   .menu-text {
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     transition: font-size 0.3s ease;
   }
   
@@ -193,7 +171,7 @@
   }
   
   
-  .get-started-btn {
+  .book-now-btn {
     background-color: var(--color-hunter-green); /* hunter-green */
     color: var(--color-timberwolf);
     padding: 0.4rem 0.6rem;
@@ -206,12 +184,12 @@
     overflow: hidden;
   }
   
-  .get-started-btn:hover {
+  .book-now-btn:hover {
     background-color: rgba(154, 109, 56, 0.9);
   }
 
   /* Get Started button animation - moving sharpness effect */
-  .get-started-btn::before {
+  .book-now-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -443,15 +421,6 @@ body.mobile-menu-opened::before {
 @media (max-width: 900px) {
  
   /* Desktop navbar sizing + spacing trims */
-  .navbar-desktop .logo-image-nav {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    object-position: center;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: high-quality;
-  }
   .navbar-desktop .menu-section {
     gap: clamp(0.5rem, 1.8vw, 1rem);
   }
@@ -462,23 +431,18 @@ body.mobile-menu-opened::before {
   .navbar-desktop .menu-text {
     font-size: clamp(0.7rem, 1.6vw, 0.85rem);
   }
-  .navbar-desktop .get-started-btn {
-    padding: clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.45rem, 1.6vw, 0.6rem);
-    font-size: clamp(0.68rem, 1.5vw, 0.78rem);
-  }
-
   .logo-text-nav {
     font-size: clamp(1rem, 2.2vw, 1.2rem);
   }
 }
 
 /* Hide hamburger above 680px */
-@media (min-width: 681px) {
+@media (min-width: 606px) {
   .hamburger-line { display: none !important; }
 }
 
 /* Show toggle on small screens */
-@media (max-width: 680px) {
+@media (max-width: 605px) {
   .mobile-nav-toggle { 
     display: flex; 
   }
@@ -516,9 +480,8 @@ body.mobile-menu-opened::before {
     opacity: 0.7;
   }
   
-  .get-started-btn {
-    padding: 0.35rem 0.3rem; 
-    font-size: clamp(0.7rem, 3.3vw, .9rem);
+  .book-now-btn {
+    display: none;
    }
 }
   
@@ -529,7 +492,7 @@ body.mobile-menu-opened::before {
 } */
 
 @media (max-width: 520px) {
-  .get-started-btn { padding: 0.35rem 0.3rem; font-size: 0.7rem; }
+  .book-now-btn { padding: 0.35rem 0.3rem; font-size: 0.7rem; }
 }
 
 /* Desktop variant marker */
@@ -589,7 +552,7 @@ body.mobile-menu-opened .App.navbar-hidden .navbar {
 }
 
 /* Show back to top button at 680px and below */
-@media (max-width: 680px) {
+@media (max-width: 600px) {
   .back-to-top-btn {
     display: flex;
     align-items: center;

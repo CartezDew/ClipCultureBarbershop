@@ -79,11 +79,11 @@ const Hero = () => {
       setCurrentTickerItems(getTickerItemsForWidth(currentWidth));
       
       // Update mobile state for logo behavior
-      setIsMobile(currentWidth <= 680);
+      setIsMobile(currentWidth <= 580);
     };
     
     // Set initial mobile state
-    setIsMobile(window.innerWidth <= 680);
+    setIsMobile(window.innerWidth <= 580);
     
     handleResize();
     window.addEventListener('resize', handleResize);
