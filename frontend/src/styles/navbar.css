@@ -548,13 +548,13 @@ body.mobile-menu-opened .App.navbar-hidden .navbar {
   bottom: 2rem;
   width: 2.7rem;
   height: 2.7rem;
-  background-color: rgba(154, 109, 56, 0.8);
+  background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
   color: var(--color-timberwolf);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(154, 109, 56, 0.9);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
   transition: all 0.3s ease;
   animation: pulse-glow 2s ease-in-out infinite;
 }

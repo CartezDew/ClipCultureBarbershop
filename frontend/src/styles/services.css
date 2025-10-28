@@ -144,8 +144,6 @@
   }
 }
 
-
-
 /* Card with borders */
 .services__card {
   position: relative;
@@ -338,12 +336,9 @@
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-
-
 .services__card--specialty:hover {
   border-color: #0a9786;
 }
-
 
 .services__cta {
   text-align: center;

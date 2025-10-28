@@ -39,7 +39,7 @@
 }
 
 .apply-title {
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 800;
   color: white;
   margin: 0;
@@ -56,7 +56,7 @@
   color: white;
   border: 2px solid var(--green-new);
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -84,25 +84,19 @@
 .apply-bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0rem;
+  gap: 2rem;
   margin-top: 0rem;
+  padding: 2rem;
 }
 
 .apply-bento-card {
   background: rgba(255, 255, 255, 0.05);
-  border-left: 25px solid var(--primary-black);
-  border-top: 25px solid var(--primary-black);
-  border-bottom: 25px solid var(--primary-black);
   border-radius: 4px;
   padding: 2rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-}
-
-.apply-bento-card:last-child {
-  border-right: 25px solid var(--primary-black);
 }
 
 .apply-bento-card::before {
@@ -112,7 +106,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+  background: linear-gradient(90deg, transparent, var(--green-new), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -132,6 +126,8 @@
   color: var(--primary-white);
   margin: 0 0 1.5rem 0;
   line-height: 1.3;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
 .apply-card-text {
@@ -187,6 +183,7 @@
   color: white;
   margin: 0 0 1rem 0;
   line-height: 1.2;
+  font-family: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
 }
 
 .apply-video-subtitle {
@@ -250,65 +247,210 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-
-/* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 940px) {
   .apply-bento-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .apply-video-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .apply-video-content {
-    text-align: center;
+  .apply-bento-grid > *:last-child {
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 768px) {
-  .apply-header {
-    padding: 3rem 1rem 2rem;
+  
+  .apply-video-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
   }
   
-  .apply-bento-section,
-  .apply-video-section {
-    padding: 3rem 1rem;
+  .apply-video-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
+
+@media (max-width: 700px) {
+  .apply-header {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 680px) {
+  .apply-title {
+    font-size: clamp(1.3rem, 4vw, 2rem);
+  }
+  .apply-card-title {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+  }
+  .apply-card-text {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+  .apply-video-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  .apply-video-content {
+    padding: 0rem 0rem 2rem 0rem;
+  }
+  
+  .apply-video-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .apply-video-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -2rem;
+  }
+  
+  .apply-video-content {
+    order: 1;
+    text-align: center;
+  }
+  
+  .apply-founder-callouts {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .apply-callout-item {
+    position: relative;
+  }
+  
+  .apply-callout-item:not(:last-child)::after {
+    content: "|";
+    margin-left: 0.5rem;
+    color: var(--green-new);
+    font-weight: bold;
+  }
+  
+  .apply-video-wrapper {
+    order: 3;
+  }
+
+  .apply-video-wrapper {
+    position: relative;
+    width: 90%;
+    height: 80%;
+  }
+  .apply-founder-callouts {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: -0.5rem;
+  }
+
+}
+
+@media (max-width: 620px) {
+  .apply-bento-grid {
+    gap: 1rem;
+    padding: 1rem;
   }
   
   .apply-bento-card {
     padding: 2rem;
   }
-  
-  .apply-video-title {
-    font-size: 2rem;
-  }
-  
-  .apply-video-subtitle {
-    font-size: 1.25rem;
-  }
 }
 
-@media (max-width: 480px) {
-  .apply-title {
-    font-size: 2rem;
+@media (max-width: 590px) {
+  .apply-bento-grid {
+    gap: 0.5rem;
+    padding: 0.5rem;
   }
   
   .apply-bento-card {
     padding: 1.5rem;
   }
-  
-  .apply-card-title {
-    font-size: 1.25rem;
+  .apply-now-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
   }
+
+  /* Join Us Component */
+.apply-joinus-wrapper {
+  margin: 0rem 2rem 0 2rem;
+  margin-bottom: -6rem;
+  padding-bottom: 5rem;
+}
+}
+
+@media (max-width: 500px) {
   
+  .apply-bento-card {
+    padding: 1.5rem;
+  }
+  .apply-bento-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: .75rem;
+    padding: 1rem;
+  }
+  .apply-video-content {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+  .apply-callout-text {
+    font-size: clamp(0.7rem, 1vw, 1rem);
+  }
+  .apply-video-section {
+    padding: 3rem 0rem;
+  }
+  .apply-callout-item:not(:last-child)::after {
+    display: none;
+  }
+  .apply-founder-callouts {
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 440px) {
+  .apply-callout-item {
+    padding: 0.2rem .25rem;
+  }
+    /* Join Us Component */
+.apply-joinus-wrapper {
+  margin: 0rem 2rem 0 2rem;
+  margin-bottom: -6rem;
+  }
+}
+
+
+@media (max-width: 415px) {
+  .apply-callout-item {
+    padding: 0.2rem .25rem;
+  }
+  .apply-founder-callouts {
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 375px) {
   .apply-video-title {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
   }
-  
   .apply-video-subtitle {
     font-size: 1.1rem;
   }
-}
+  .apply-video-wrapper {
+    position: relative;
+    width: 93%;
+    height: 100%;
+  }
+      /* Join Us Component */
+  .apply-joinus-wrapper {
+    margin: 0rem .5rem 0 .5rem;
+    margin-bottom: -6rem;
+    }
+  }
+
+

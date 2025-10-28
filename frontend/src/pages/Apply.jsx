@@ -71,13 +71,13 @@ const Apply = () => {
                 <span className="apply-callout-text">Published Author</span>
               </div>
               <div className="apply-callout-item">
+                <span className="apply-callout-text">Mentor</span>
+              </div>
+              <div className="apply-callout-item">
                 <span className="apply-callout-text">BUSINESS PROFESSIONAL (M.S.)</span>
               </div>
               <div className="apply-callout-item">
                 <span className="apply-callout-text">Community Leader</span>
-              </div>
-              <div className="apply-callout-item">
-                <span className="apply-callout-text">Mentor</span>
               </div>
             </div>
           </div>
