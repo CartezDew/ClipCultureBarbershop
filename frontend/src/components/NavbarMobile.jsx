@@ -180,7 +180,10 @@ const NavbarMobile = () => {
                         className="shopping-cart-btn"
                         aria-label="Shopping Cart"
                     >
-                        <ShoppingCart size={24} />
+                        <div className="shop-icon-container">
+                            <ShoppingCart size={24} />
+                            <span className="cart-count">0</span>
+                        </div>
                     </Link>
                 </div>
             </div>
