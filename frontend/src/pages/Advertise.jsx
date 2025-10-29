@@ -147,11 +147,11 @@ const Advertise = () => {
               <span className="advertise-checkmark">✓</span>
               Targeted Reach
             </li>
-            <li className="franchise-feature-item">
+            <li className="advertise-feature-item">
               <span className="advertise-checkmark">✓</span>
               Cost-Effective Impact
             </li>
-            <li className="franchise-feature-item">
+            <li className="advertise-feature-item">
               <span className="advertise-checkmark">✓</span>
               Turn Wait Time Into Ad Time
             </li>

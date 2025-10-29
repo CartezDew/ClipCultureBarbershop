@@ -22,9 +22,6 @@
 }
 
 .advertise-header-content {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start; */
   overflow: hidden;
 }
 
@@ -48,7 +45,6 @@
 
 .advertise-intro-text strong {
   color: var(--green-new);
-  /* color: #378a70; */
   font-weight: 900;
 }
 
@@ -94,12 +90,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 1.5rem; /* widen spacing between columns only */
-  row-gap: 0.4rem; /* tight spacing between rows */
+  row-gap: 0.5rem; /* tight spacing between rows */
 }
 
 .advertise-feature-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-size: 1rem;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -502,17 +498,43 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 930px) {
+  .advertise-features-list {
+    column-gap: 1rem; /* widen spacing between columns only */
+    row-gap: 1rem; /* tight spacing between rows */
+    gap: .5rem;
+  }
+  .advertise-features {
+    padding: 1rem 1.5rem;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    text-wrap: wrap;
+  }
+}
+
+@media (max-width: 825px) {
+  .advertise-feature-item {
+    font-size: 0.92rem;
+  }
+  
+  .advertise-checkmark {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+} 
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .advertise-page {
+  /* .advertise-page {
     padding: 2rem 0;
   }
   
   .advertise-container {
     padding: 0 1rem;
-  }
+  } */
   
-  .advertise-header {
+  /* .advertise-header {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 3rem;
@@ -526,36 +548,32 @@
   
   .advertise-header-image {
     order: 2;
-  }
+  } */
   
-  .advertise-features {
+  /* .advertise-features {
     margin-top: 1.5rem;
-  }
+  } */
+
   
-  .advertise-features-list {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  
-  .advertise-feature-item {
+  /* .advertise-feature-item {
     font-size: 0.9rem;
   }
-  
-  .advertise-checkmark {
+   */
+  /* .advertise-checkmark {
     font-size: 1.1rem;
     margin-right: 0.5rem;
-  }
+  } */
   
   .advertise-bento-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 0rem;
     max-width: 100%;
   }
   
   .advertise-bento-left {
-    gap: 1.5rem;
+    gap: 1rem;
   }
   
   .advertise-bento-image-box img {
@@ -564,7 +582,7 @@
   
   .advertise-programs {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
     margin-top: 3rem;
   }
   
@@ -727,16 +745,103 @@
   opacity: 0.8;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 720px) {
+  .advertise-image--float {
+    min-width: 200px;
+    max-height: auto;
+  }
+  .advertise-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+  .advertise-title strong {
+    font-size: clamp(1rem, 2.8vw, 1.8rem);
+  }
+
   .advertise-container {
-    padding: 0 0.75rem;
+    padding: 0 2.2rem;
   }
-  
-  .advertise-header {
-    margin-bottom: 2.5rem;
+  .advertise-page {
+    padding: 2.5rem 0;
   }
-  
-  .advertise-program-card {
-    padding: 1rem;
+}
+
+@media (max-width: 615px) {
+  .advertise-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .advertise-title {
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+  }
+  .advertise-title strong {
+    font-size: clamp(1rem, 2.8vw, 1.6rem);
+  }
+  .advertise-image--float {
+    margin: 0.2rem 0rem .7rem 0.8rem;
+    min-width: 185px;
+  }
+  .advertise-container {
+    padding: 0 1.5rem;
+  }
+  .advertise-page {
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .advertise-title {
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+  }
+  .advertise-title strong {
+    font-size: clamp(0.9rem, 2.8vw, 1.4rem);
+  }
+}
+
+/* Reorder header elements on very small screens */
+@media (max-width: 470px) {
+  .advertise-header-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .advertise-title {
+    order: 1;
+    text-align: center;
+    font-size: clamp(1.9rem, 4vw, 2.2rem);
+  }
+  .advertise-title strong {
+    font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  }
+  .advertise-image--float {
+    order: 2;
+    float: none; /* disable float so it stacks */
+    margin: 0.5rem 0; 
+    align-self: center;
+    width: auto;
+    max-width: 280px;
+    margin-bottom: 0rem;
+
+  }
+  .advertise-header-content .advertise-intro {
+    order: 3;
+  }
+  .advertise-intro-text {
+    font-size: clamp(1rem, 2.8vw, 1.2rem);
+  }
+  .advertise-intro-text-2 {
+    font-size: clamp(1rem, 2.8vw, 1.2rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .advertise-title {
+    font-size: clamp(1.7rem, 4vw, 2rem);
+  }
+  .advertise-title strong {
+    font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  }
+  .advertise-image--float {
+    max-width: 230px;
   }
 }
