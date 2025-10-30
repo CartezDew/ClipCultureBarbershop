@@ -250,6 +250,11 @@ const Advertise = () => {
                       </div>
                     </div>
                   </div>
+                  <img
+                    src={HatsImage}
+                    alt="Advertise Opportunity"
+                    className="advertise-bento-image-hats-2"
+                  />
                 </div>
               </div>
               
