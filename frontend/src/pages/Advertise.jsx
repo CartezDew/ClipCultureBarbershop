@@ -266,7 +266,7 @@ const Advertise = () => {
             </div>
 
           </div>
-          <div className="advertise-Benefits">
+          <div className="advertise-features">
             <ul className="advertise-features-list">
               <li className="advertise-feature-item">
                 <span className="advertise-checkmark">✓</span>
