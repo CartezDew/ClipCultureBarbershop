@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
+import Gallery from '../components/Gallery.jsx';
 
 const TopProducts = () => {
   const products = [
@@ -86,46 +87,51 @@ const TopProducts = () => {
   };
 
   return (
-    <section className="top-products">
-      <div className="top-products__container">
-        <div className="top-products__header">
-          <h2 className="top-products__title">Premium Grooming Products</h2>
-          <p className="top-products__subtitle">Investing in yourself goes beyond the chair…</p>
-        </div>
-        
-        <div className="top-products__grid">
-          {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <div className="product-card__image-container">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="product-card__image"
-                />
-              </div>
-              <div className="product-card__content">
-                <h3 className="product-card__name">{product.name}</h3>
-                <div className="product-card__price">${product.price}</div>
-                <div className="product-card__rating">
-                  {renderStars(product.rating)}
-                  <span className="product-card__rating-text">({product.rating})</span>
+    <>
+      <section className="top-products">
+        <div className="top-products__container">
+          <div className="top-products__header">
+            <h2 className="top-products__title">Premium Grooming Products</h2>
+            <p className="top-products__subtitle">Investing in yourself goes beyond the chair…</p>
+          </div>
+          
+          <div className="top-products__grid">
+            {products.map((product) => (
+              <div key={product.id} className="product-card">
+                <div className="product-card__image-container">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="product-card__image"
+                  />
                 </div>
-                <div className="product-card__actions">
-                  <button className="productbtn--add-cart">
-                    <ShoppingCart size={16} />
-                    Add to Cart
-                  </button>
-                  <Link to={`/products/${product.slug}`} className="productbtn--learn-more">
-                    Learn More
-                    <ArrowRight size={16} />
-                  </Link>
+                <div className="product-card__content">
+                  <h3 className="product-card__name">{product.name}</h3>
+                  <div className="product-card__price">${product.price}</div>
+                  <div className="product-card__rating">
+                    {renderStars(product.rating)}
+                    <span className="product-card__rating-text">({product.rating})</span>
+                  </div>
+                  <div className="product-card__actions">
+                    <button className="productbtn--add-cart">
+                      <ShoppingCart size={16} />
+                      Add to Cart
+                    </button>
+                    <Link to={`/products/${product.slug}`} className="productbtn--learn-more">
+                      Learn More
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
+      <div className="top-products-gallery-wrapper">
+        <Gallery />
       </div>
-    </section>
+    </>
   );
 };
 

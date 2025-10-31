@@ -4,8 +4,6 @@ import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Services from './pages/Services.jsx';
 import Team from './pages/Team.jsx';
-import Gallery from './pages/Gallery.jsx';
-import ContactPage from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import Shop from './pages/Shop.jsx';
 import Mentorship from './pages/Mentorship.jsx';
@@ -26,15 +24,6 @@ function App() {
               <Navbar />
               <main>
                 <Services />
-              </main>
-              <Footer />
-            </>
-          } />
-          <Route path="/gallery" element={
-            <>
-              <Navbar />
-              <main>
-                <Gallery />
               </main>
               <Footer />
             </>

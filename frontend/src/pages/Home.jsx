@@ -7,7 +7,6 @@ import HeroNavbar from '../components/HeroNavbar.jsx';
 import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
-import Gallery from '../components/Gallery.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
 import Professional_Team from '../components/Professional_Team.jsx';
@@ -195,7 +194,6 @@ const Home = () => {
 
       {/* Top Products */}
       <TopProducts />
-      <Gallery />
 
       {/* Testimonials */}
       <Testimonials />
