@@ -110,6 +110,18 @@ const Franchise = () => {
       <div className="franchise-container">
         <div className="franchise-header">
           <div className="franchise-header-content">
+            <div className="franchise-header-image">
+              <img 
+                src={Shop1Image} 
+                alt="Franchise Opportunity" 
+                className="franchise-image"
+              />
+              <img 
+                src={Shop2Image} 
+                alt="Franchise Opportunity" 
+                className="franchise-image"
+              />
+            </div>
             <h1 className="franchise-title">Why Clip Culture Barbershop?</h1>
             <h2 className="franchise-subtitle">Franchise <em><strong>OPPORTUNITY</strong></em> Awaits</h2>
             <div className="franchise-intro">
@@ -128,18 +140,6 @@ const Franchise = () => {
               Join a legacy that continues to <strong>define the standard and shape the culture</strong> .
               </p>
             </div>
-          </div>
-          <div className="franchise-header-image">
-            <img 
-              src={Shop1Image} 
-              alt="Franchise Opportunity" 
-              className="franchise-image"
-            />
-            <img 
-              src={Shop2Image} 
-              alt="Franchise Opportunity" 
-              className="franchise-image"
-            />
           </div>
           <div className="franchise-features">
             <ul className="franchise-features-list">
@@ -174,8 +174,7 @@ const Franchise = () => {
           <div className="franchise-program">
             </div>{/* <h2 className="franchise-program-title">
               <strong>Ready to invest</strong> in your future? Learn more about our franchise opportunities:
-            </h2>
-          </div> */}
+            </h2> */}
           
           <div className="franchise-programs">
             <div className="franchise-program-card">
@@ -243,7 +242,7 @@ const Franchise = () => {
               </div>
             </div>
           </div>
-          <div className="franchise-Benefits">
+          <div className="franchise-features">
             <ul className="franchise-features-list">
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>

@@ -656,8 +656,8 @@
   }
   .advertise-features {
     padding: 1rem 1.5rem;
-    align-items: left;
-    justify-content: left;
+    align-items: center;
+    justify-content: center;
     text-align: left;
     text-wrap: wrap;
   }
