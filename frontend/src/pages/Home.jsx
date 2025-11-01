@@ -38,6 +38,7 @@ const BicepIcon = ({ size = 24 }) => (
 import '../styles/home.css';
 import heroImageWebP from '../assets/images/ClipCultureHero.webp';
 import heroImagePNG from '../assets/images/ClipCultureHero.png';
+import heroImageSplit from '../assets/images/clipculturehero2.webp';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -135,8 +136,11 @@ const Home = () => {
           <BookingForm />
         </div>
         
-        {/* Right side - Tagline and Social Proof */}
-        <div className="hero__right">
+        {/* Right side - Tagline, Social Proof */}
+        <div
+          className="hero__right"
+          style={{ '--hero-right-bg': `url(${heroImageSplit})` }}
+        >
           {/* Tagline */}
           <div className="hero__tagline">
             <h2>"Defining the Standard. <br/> 

@@ -12,7 +12,8 @@ const TopProducts = () => {
       price: 15,
       rating: 5,
       image: "/src/assets/products/Product-1.png",
-      slug: "curl-twist"
+      slug: "curl-twist",
+      size: "8 oz"
     },
     {
       id: 2,
@@ -20,7 +21,8 @@ const TopProducts = () => {
       price: 20,
       rating: 5,
       image: "/src/assets/products/Product-2.png",
-      slug: "beard-balm"
+      slug: "beard-balm",
+      size: "8 oz"
     },
     {
       id: 3,
@@ -28,7 +30,8 @@ const TopProducts = () => {
       price: 20,
       rating: 5,
       image: "/src/assets/products/Product-3.png",
-      slug: "beard-oil"
+      slug: "beard-oil",
+      size: "4 oz"
     },
     {
       id: 4,
@@ -36,7 +39,8 @@ const TopProducts = () => {
       price: 18,
       rating: 5,
       image: "/src/assets/products/Product-4.png",
-      slug: "beard-wash"
+      slug: "beard-wash",
+      size: "8 oz"
     },
     {
       id: 5,
@@ -44,7 +48,8 @@ const TopProducts = () => {
       price: 15,
       rating: 4.6,
       image: "/src/assets/products/Product-5 .png",
-      slug: "body-lotion"
+      slug: "body-lotion",
+      size: "16 oz"
     },
     {
       id: 6,
@@ -52,7 +57,8 @@ const TopProducts = () => {
       price: 15,
       rating: 4,
       image: "/src/assets/products/Product-6.png",
-      slug: "body-wash"
+      slug: "body-wash",
+      size: "16 oz"
     }
   ];
 
@@ -107,6 +113,7 @@ const TopProducts = () => {
                 </div>
                 <div className="product-card__content">
                   <h3 className="product-card__name">{product.name}</h3>
+                  {product.size && <div className="product-card__size">{product.size}</div>}
                   <div className="product-card__price">${product.price}</div>
                   <div className="product-card__rating">
                     {renderStars(product.rating)}
