@@ -135,23 +135,6 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <section className="hero">
-        {/* Mobile splash overlay (<=600px) */}
-        {isMobile600 && (
-          <motion.div
-            className="hero-logo-splash"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
-            onAnimationComplete={() => setShowTaglineAnim(true)}
-          >
-            <img
-              src={clipCultureLogo}
-              alt="Clip Culture Logo"
-              className="hero-logo-splash-image"
-            />
-          </motion.div>
-        )}
-
         {/* Hero Navbar - Fixed at top of hero section */}
         {showHeroNavbar && <HeroNavbar />}
         <div className="hero__background">
@@ -188,6 +171,23 @@ const Home = () => {
         >
           {/* Tagline */}
           <div className="hero__tagline">
+            {/* Mobile splash overlay (<=600px) */}
+            {isMobile600 && (
+              <motion.div
+                className="hero-logo-splash"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                transition={{ duration: 1.8, ease: 'easeOut', delay: 0.3 }}
+                onAnimationComplete={() => setShowTaglineAnim(true)}
+              >
+                <img
+                  src={clipCultureLogo}
+                  alt="Clip Culture Logo"
+                  className="hero-logo-splash-image"
+                />
+              </motion.div>
+            )}
+            
             {isMobile600 ? (
               <motion.h2
                 initial={{ opacity: 0, scale: 0.9 }}
