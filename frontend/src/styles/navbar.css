@@ -443,6 +443,18 @@ body.mobile-menu-opened::before {
 
 /* Show toggle on small screens */
 @media (max-width: 605px) {
+  .navbar-visible-desktop {
+    display: none !important;
+  }
+  
+  .navbar-visible-mobile {
+    display: block !important;
+  }
+  
+  .navbar-mobile {
+    display: block !important;
+  }
+  
   .mobile-nav-toggle { 
     display: flex;
     order: 1;

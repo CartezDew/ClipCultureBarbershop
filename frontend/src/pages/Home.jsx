@@ -39,6 +39,8 @@ import '../styles/home.css';
 import heroImageWebP from '../assets/images/ClipCultureHero.webp';
 import heroImagePNG from '../assets/images/ClipCultureHero.png';
 import heroImageSplit from '../assets/images/clipculturehero2.webp';
+import shopImage1 from '../assets/Contact/Shop_1.webp';
+import shopImage2 from '../assets/Contact/Shop_2.webp';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -134,6 +136,16 @@ const Home = () => {
         {/* Left side - Booking form */}
         <div className="hero__left">
           <BookingForm />
+          <Link to="/booking" className="hero__btn hero__btn--book">
+            Book Now
+          </Link>
+        </div>
+        
+        {/* Shop Now Section for 600px grid */}
+        <div className="hero__shop-section">
+          <Link to="/shop" className="hero__btn hero__btn--shop">
+            Shop Now
+          </Link>
         </div>
         
         {/* Right side - Tagline, Social Proof */}
@@ -150,6 +162,7 @@ const Home = () => {
             the craft, and inspiring the future.
             </p> */}
           </div>
+          
           
           {/* Social Proof Section */}
           <div className="hero__social-proof">

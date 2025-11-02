@@ -8,10 +8,12 @@ import {
 import logoWebP from '../assets/images/CC-Logo.webp';
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp';
 import logoPNG from '../assets/images/CC-Logo-blank.webp';
+import NavbarMobile from './NavbarMobile.jsx';
 import '../styles/hero-navbar.css';
 
 const HeroNavbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 605 : false);
   const navRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -25,6 +27,20 @@ const HeroNavbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia('(max-width: 605px)');
+    const handleChange = (e) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    if (mql.addEventListener) mql.addEventListener('change', handleChange);
+    else mql.addListener(handleChange);
+
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener('change', handleChange);
+      else mql.removeListener(handleChange);
     };
   }, []);
 
@@ -79,6 +95,14 @@ const HeroNavbar = () => {
       { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
     ]
   };
+
+  if (isMobile) {
+    return (
+      <div className="hero-navbar hero-navbar--mobile" ref={navRef}>
+        <NavbarMobile />
+      </div>
+    );
+  }
 
   return (
     <nav className="hero-navbar" ref={navRef}>

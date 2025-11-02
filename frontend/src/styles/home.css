@@ -312,6 +312,7 @@
   padding-top: 80px; /* Account for navbar */
 }
 
+
 .hero__background {
   position: absolute;
   top: 0;
@@ -424,6 +425,11 @@
   line-height: 1.2;
 }
 
+.hero__shop-section,
+.hero__left .hero__btn--book {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .hero__social-proof {
     gap: 1rem;
@@ -449,6 +455,7 @@
     background-color: var(--primary-black);
     padding: 4rem 1.5rem;
     margin-bottom: -2rem;
+
   }
 
   .hero__right {
@@ -628,8 +635,6 @@
     font-size: 1rem;
     text-align: left;
   }
-  
-
 
   .hero__social-proof .social-proof__item {
     justify-content: center;
@@ -638,8 +643,106 @@
   .social-proof__content {
     text-align: center;
   }
- 
 
+}
+
+@media (max-width: 600px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
+    /* border-top: 3.5rem solid var(--primary-black); */
+    margin-top: none;
+    background: var(--primary-black);
+    background: linear-gradient(0deg, rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
+  }
+  
+  
+  .hero__right {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 300px;
+    background: none;
+    border-right: none;
+    border-left: none;
+    /* border: 1px solid red; */
+  }
+
+  .hero__right::before, .hero__right::after {
+    background: none;
+    content: none;
+  }
+  
+  .hero__left {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 0.75rem; */
+
+    box-sizing: border-box;
+    padding: 1rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .hero__left .booking-form-container {
+    display: none;
+  }
+  
+  .hero__left .hero__btn--book {
+    display: inline-block;
+  }
+  
+  .hero__shop-section {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero__btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .hero__btn--book {
+    background: var(--green-new, #0a9786);
+    color: white;
+  }
+  
+  .hero__btn--book:hover {
+    background: #0c8575;
+    transform: translateY(-2px);
+  }
+  
+  .hero__btn--shop {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .hero__btn--shop:hover {
+    background: white;
+    color: var(--primary-black);
+    transform: translateY(-2px);
+  }
 }
 
 @media (max-width: 480px) {
