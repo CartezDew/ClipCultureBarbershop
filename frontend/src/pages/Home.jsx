@@ -41,10 +41,13 @@ import heroImagePNG from '../assets/images/ClipCultureHero.png';
 import heroImageSplit from '../assets/images/clipculturehero2.webp';
 import shopImage1 from '../assets/Contact/Shop_1.webp';
 import shopImage2 from '../assets/Contact/Shop_2.webp';
+import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
 
 const Home = () => {
   const [services, setServices] = useState([]);
   const [showHeroNavbar, setShowHeroNavbar] = useState(true);
+  const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 600 : false);
+  const [showTaglineAnim, setShowTaglineAnim] = useState(false);
   const location = useLocation();
   useEffect(() => {
     getServices().then(setServices);
@@ -115,10 +118,40 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia('(max-width: 600px)');
+    const handleChange = (e) => setIsMobile600(e.matches);
+    setIsMobile600(mql.matches);
+    if (mql.addEventListener) mql.addEventListener('change', handleChange);
+    else mql.addListener(handleChange);
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener('change', handleChange);
+      else mql.removeListener(handleChange);
+    };
+  }, []);
+
   return (
     <div>
       {/* Hero Section */}
       <section className="hero">
+        {/* Mobile splash overlay (<=600px) */}
+        {isMobile600 && (
+          <motion.div
+            className="hero-logo-splash"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
+            onAnimationComplete={() => setShowTaglineAnim(true)}
+          >
+            <img
+              src={clipCultureLogo}
+              alt="Clip Culture Logo"
+              className="hero-logo-splash-image"
+            />
+          </motion.div>
+        )}
+
         {/* Hero Navbar - Fixed at top of hero section */}
         {showHeroNavbar && <HeroNavbar />}
         <div className="hero__background">
@@ -155,14 +188,46 @@ const Home = () => {
         >
           {/* Tagline */}
           <div className="hero__tagline">
-            <h2>"Defining the Standard. <br/> 
-            Shaping the Culture."</h2>
-            {/* <p>"Defining the Standard. Shaping the Culture."
-            More than a barbershop, Clip Culture is a movement—leading the industry, elevating 
-            the craft, and inspiring the future.
-            </p> */}
+            {isMobile600 ? (
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={showTaglineAnim ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
+              >
+                "Defining the Standard. <br/> 
+                Shaping the Culture."
+              </motion.h2>
+            ) : (
+              <h2>"Defining the Standard. <br/> 
+              Shaping the Culture."</h2>
+            )}
           </div>
           
+          {/* Store Locations - visible only at 600px */}
+          <div className="store_locations">
+            <div className="store-location-item">
+              <img 
+                src={shopImage1} 
+                alt="Sandy Springs Barbershop" 
+                className="store-location-image"
+              />
+              <h3 className="store-location-name">
+                <MapPin size={18} className="store-location-icon" />
+                Sandy Springs
+              </h3>
+            </div>
+            <div className="store-location-item">
+              <img 
+                src={shopImage2} 
+                alt="Summerhill Barbershop" 
+                className="store-location-image"
+              />
+              <h3 className="store-location-name">
+                <MapPin size={18} className="store-location-icon" />
+                Summerhill
+              </h3>
+            </div>
+          </div>
           
           {/* Social Proof Section */}
           <div className="hero__social-proof">
