@@ -351,6 +351,18 @@
   }
 }
 
+@media (max-width: 360px) {
+  .top-products__title {
+    font-size: 1.5rem;
+  }
+  .top-products__subtitle {
+    font-size: 1rem;
+  }
+  .product-card__size {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 345px) {
   .productbtn--add-cart, .productbtn--learn-more {
     gap: 0.2rem;
