@@ -6,7 +6,7 @@ import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart }
 import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const isOpenRef = useRef(false)
@@ -164,12 +164,24 @@ const NavbarMobile = () => {
                     <Link to="/" className="logo-link" aria-label="Go to home">
                         <picture>
                             <source srcSet={`${logoMobile} 2x, ${logoMobile} 1x`} type="image/webp" />
-                            <img 
-                                src={logoMobile} 
-                                srcSet={`${logoMobile} 1x`}
-                                alt="ClipCulture Logo" 
-                                className="logo-image-nav"
-                            />
+                            {isMobile600 && location.pathname === '/' ? (
+                                <motion.img
+                                    src={logoMobile}
+                                    srcSet={`${logoMobile} 1x`}
+                                    alt="ClipCulture Logo"
+                                    className="logo-image-nav"
+                                    initial={{ opacity: 0 }}
+                                    animate={showTaglineAnim ? { opacity: 1 } : { opacity: 0 }}
+                                    transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
+                                />
+                            ) : (
+                                <img 
+                                    src={logoMobile} 
+                                    srcSet={`${logoMobile} 1x`}
+                                    alt="ClipCulture Logo" 
+                                    className="logo-image-nav"
+                                />
+                            )}
                         </picture>
                     </Link>
                 </div>

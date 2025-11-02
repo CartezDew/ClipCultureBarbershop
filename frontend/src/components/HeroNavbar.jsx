@@ -11,7 +11,7 @@ import logoPNG from '../assets/images/CC-Logo-blank.webp';
 import NavbarMobile from './NavbarMobile.jsx';
 import '../styles/hero-navbar.css';
 
-const HeroNavbar = () => {
+const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 605 : false);
   const navRef = useRef(null);
@@ -99,7 +99,7 @@ const HeroNavbar = () => {
   if (isMobile) {
     return (
       <div className="hero-navbar hero-navbar--mobile" ref={navRef}>
-        <NavbarMobile />
+        <NavbarMobile showTaglineAnim={showTaglineAnim} isMobile600={isMobile600} />
       </div>
     );
   }
