@@ -774,6 +774,7 @@
     left: 0;
     right: 0;
     color: white;
+    color:  rgba(241, 239, 239, 0.8);
     font-size: .9rem;
     font-weight: 600;
     text-align: center;
@@ -809,7 +810,7 @@
     /* background: red; */
     width: 100%;
     margin: 0;
-    background: linear-gradient(135deg, #282727 0%, #323332 25%, #7f817f 50%, #1e1e1e 75%, #212121 100%);
+    background: linear-gradient(135deg, #282727 0%, #323332 25%, #656665 50%, #1e1e1e 75%, #212121 100%);
     border-left: 1rem solid rgba(16, 15, 15, 0.6);
     border-right: 1rem solid rgba(16, 15, 15, 0.6);
     border-bottom: 1rem solid rgba(16, 15, 15, 0.6);
@@ -884,8 +885,8 @@
     grid-row: 3;
     padding: 0.3rem 1rem;
     margin: 0.3rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     border-right: 1rem solid rgba(16, 15, 15, 0.6);
     border-left: 1rem solid rgba(16, 15, 15, 0.6);
   }
@@ -935,10 +936,11 @@
     background: var(--primary-black);
     box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
     cursor: pointer;
+    animation: borderGlow 3s ease-in-out infinite;
   }
   
   .hero__btn--book:hover {
-    background: #0c8575;
+    background: var(--green-new);
     transform: translateY(-2px);
   }
   
