@@ -195,7 +195,7 @@
 .service-item h3 {
   color: white;
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0rem;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }

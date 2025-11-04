@@ -346,6 +346,7 @@ const Home = () => {
           <h2 className="text-center mb-4">Our Services</h2>
           <p className="services-subtitle">Walk-ins are welcome!</p>
           <div className="services-divider"></div>
+          <h2 className="services__section-title-main">* Service times are approximate and may vary by complexity *.</h2>
           <motion.div 
             className="services-grid"
             initial={{ opacity: 0, y: 30 }}
