@@ -58,6 +58,10 @@
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
+.home-welcome__logo-image-mobile {
+  display: none;
+}
+
 .home-welcome__subtitle {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 600;
@@ -74,7 +78,7 @@
 }
 
 .home-welcome__text p {
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   margin-bottom: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -173,19 +177,77 @@
   box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
 }
 
+/* Mobile Image Grid - Hidden by default */
+.home-welcome__mobile-images {
+  display: none;
+}
+
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .home-welcome__content {
+    grid-template-columns: 70% 30%;
+    gap: 2rem;
+    padding: 0 2rem 0 0rem;
+    align-items: stretch;
+  }
+  
+  .home-welcome__right {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Hide the main image */
+  .home-welcome__image {
+    display: none;
+  }
+  
+  /* Show mobile image grid */
+  .home-welcome__mobile-images {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .home-welcome__mobile-image {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    border-radius: 2px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border: 4px solid var(--primary-green);
+  }
+
+  .home-welcome__mobile-image:nth-child(2) {
+    border: 4px solid var(--primary-black);
+  }
+  
+  .home-welcome__mobile-image:hover {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 720px) {
+  .home-welcome__container {
+    padding: 0 1.5rem 0 2rem;
+  }
+}
+
+@media (max-width: 675px) {
   .home-welcome {
-    padding: 3rem 0;
+    padding: 4rem 0rem;
   }
   
   .home-welcome__container {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   
   .home-welcome__content {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 0 1rem;
     text-align: center;
   }
   
@@ -198,12 +260,23 @@
     margin-bottom: 2rem;
   }
   
+  /* Hide default logo, show mobile logo */
   .home-welcome__logo-image {
-    max-height: 100px;
+    display: none;
+  }
+  
+  .home-welcome__logo-image-mobile {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: clamp(70px, 15vw, 100px);
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
   }
   
   .home-welcome__subtitle {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   
   .home-welcome__text {
@@ -212,10 +285,21 @@
   
   .home-welcome__text p {
     margin-bottom: 1.2rem;
+    font-weight: 500;
   }
   
-  .home-welcome__image {
-    max-width: 300px;
+  /* Change mobile images to row layout */
+  .home-welcome__mobile-images {
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  
+  .home-welcome__mobile-image {
+    flex: 1 1 calc(33.333% - 0.5rem);
+    max-width: 170px;
+    height: 190px;
   }
   
   .home-welcome__cta {
@@ -227,11 +311,32 @@
   .home-welcome__button {
     padding: 0.875rem 2rem;
     font-size: 1rem;
+    margin-bottom: 1rem;
   }
   
   .home-welcome__social-button {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-width: 570px) {
+  .home-welcome__text p {
+    font-size: 1rem;
+  }
+  .home-welcome__subtitle {
+    font-size: 1.3rem;
+  }
+  .home-welcome__button {
+    font-size: 0.9rem;
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+@media (max-width: 535px) {
+  .home-welcome__mobile-image {
+    max-width: 150px;
+    height: 170px;
   }
 }
 
@@ -248,25 +353,16 @@
     gap: 1.5rem;
   }
   
-  .home-welcome__logo {
-    margin-bottom: 1.5rem;
-  }
-  
-  .home-welcome__logo-image {
-    max-height: 80px;
-  }
-  
-  .home-welcome__subtitle {
-    margin-bottom: 1rem;
-  }
   
   .home-welcome__text {
     margin-bottom: 2rem;
   }
-  
-  .home-welcome__image {
-    max-width: 250px;
+  .home-welcome__mobile-images {
+    max-width: 130px;
+    height: 170px;
+    gap: 0rem;
   }
+  
   
   .home-welcome__cta {
     gap: 0.75rem;
@@ -288,3 +384,16 @@
   }
 }
 
+@media (max-width: 415px) {
+  .home-welcome__mobile-image:first-child {
+    display: none;
+  }
+  .home-welcome__mobile-images {
+    max-width: 140px;
+    height: 170px;
+    gap: 1rem;
+  }
+  .home-welcome__mobile-image:nth-child(2) {
+    border: 4px solid var(--primary-green);
+  }
+}

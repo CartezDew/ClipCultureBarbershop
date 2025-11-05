@@ -1,3 +1,8 @@
+/* Hide top-products-gallery-wrapper on shop page only */
+.shop-page .top-products-gallery-wrapper {
+  display: none;
+}
+
 /* Top Products Section */
 .books {
   background: linear-gradient(135deg, #282727 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #0d0d0d 100%);
@@ -17,7 +22,7 @@
 
 .books__header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .books__title {
@@ -51,11 +56,12 @@
 }
 
 .book-card {
-  background: white;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
+  /* background: white;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%); */
   border-radius: 4px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding-top: 0rem;
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -63,7 +69,7 @@
 
 .book-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
 }
 
 .book-card__image-container {
@@ -72,7 +78,7 @@
   align-items: center;
   height: 300px;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%); */
   border-radius: 4px;
   position: relative;
 }
@@ -212,9 +218,6 @@
 }
 
 @media (max-width: 768px) {
-  .books {
-    padding: 3rem 0;
-  }
   
   .books__container {
     padding: 0 1.5rem;
@@ -232,18 +235,6 @@
     gap: 1.5rem;
   }
   
-  .book-card {
-    padding: 1.25rem;
-  }
-  
-  /* .book-card__image-container {
-    height: 160px;
-  }
-  
-  .book-card__image {
-    max-width: 100px;
-    max-height: 150px;
-  } */
 }
 
 @media (max-width: 700px) {
@@ -258,10 +249,6 @@
     justify-self: center;
     width: 100%;
     max-width: 320px;
-  }
-
-  .book-card__image-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%);
   }
 
   .book-card__image-container {
@@ -280,24 +267,6 @@
   background: none;
   }
 }
-
-/* @media (max-width: 500px) {
-  .book-card__image-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%);
-  } */
-  /* Reset last-child overrides from 700px breakpoint */
-  /* .books__grid .book-card:last-child {
-    grid-column: auto;
-    justify-self: auto;
-    width: auto;
-    max-width: none;
-  }
-    .books__grid {
-      grid-template-columns: repeat(1, 1fr);
-      gap: 1rem;
-    }
-  
-} */
 
 @media (max-width: 600px) {
     /* Center the last card across two columns */
@@ -350,7 +319,9 @@
 
 
   .book-card__image-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 60%, #e8ebe8 75%, #e0e4e0 100%);
+    border-top: 1px solid rgba(10, 151, 134, 0.2);
+    border-radius: 0px;
+    padding-top: .5rem;
   } 
   /* Reset last-child overrides from 700px breakpoint */
   .books__grid .book-card:last-child {

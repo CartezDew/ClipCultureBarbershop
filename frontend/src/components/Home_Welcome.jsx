@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import '../styles/home-welcome.css';
 import DaveHomeImage from '../assets/About_Home/Dave_Home.png';
 import ClipCultureLogo from '../assets/images/ClipCultureLogo2.webp';
+import ClipCultureLogoMobile from '../assets/images/Clip Culture Logo.webp';
+import Image1 from '../assets/About_Home_2/Barber_chair.webp';
+import Image2 from '../assets/About_Home_2/Popup-shop.webp';
+import Image3 from '../assets/About_Home_2/Products_beenies.webp';
+import Image4 from '../assets/About_Home_2/Accomplishment.webp';
 
 const Home_Welcome = () => {
   return (
@@ -14,6 +19,11 @@ const Home_Welcome = () => {
                 src={ClipCultureLogo} 
                 alt="Clip Culture Barbershop" 
                 className="home-welcome__logo-image"
+              />
+              <img 
+                src={ClipCultureLogoMobile} 
+                alt="Clip Culture Barbershop" 
+                className="home-welcome__logo-image-mobile"
               />
             </div>
             
@@ -69,6 +79,14 @@ const Home_Welcome = () => {
               alt="David Brown, Founder of Clip Culture Barbershop" 
               className="home-welcome__image"
             />
+            
+            {/* Mobile Image Grid - Visible only at 900px */}
+            <div className="home-welcome__mobile-images">
+              <img src={Image3} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
+              <img src={Image4} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
+              {/* <img src={Image2} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" /> */}
+              <img src={Image1} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
+            </div>
           </div>
         </div>
       </div>

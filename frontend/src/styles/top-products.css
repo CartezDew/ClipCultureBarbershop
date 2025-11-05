@@ -11,7 +11,7 @@
 .top-products__container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 .top-products-gallery-wrapper {
@@ -213,10 +213,13 @@
     gap: 0.5rem;
     padding: 0.5rem .5rem;
   }
+  .productbtn--add-cart, .productbtn--learn-more {
+    gap: .3rem;
+  }
 }
 @media (max-width: 768px) {
-  .top-products {
-    padding: 3rem 0;
+  .product-card {
+    padding: 1.5rem;
   }
   
   .top-products__title {
@@ -237,6 +240,12 @@
   }
   .top-products__grid {
     margin-top: -2rem;
+  }
+  .productbtn--add-cart, .productbtn--learn-more {
+    font-size: 0.8rem;
+  }
+  .productbtn--add-cart, .productbtn--learn-more {
+    padding: 0.75rem .5rem;
   }
 }
 
