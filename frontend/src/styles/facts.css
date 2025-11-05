@@ -2,8 +2,8 @@
 
 /* Facts Component Styles */
 .w-full {
-  /* max-width: 1400px; */
-  padding: 3rem 2rem;
+  max-width: 1400px;
+  padding: 4rem 2rem;
   background: linear-gradient(0deg,rgba(26, 26, 26, 1) 55%, rgba(30, 32, 33, 1) 62%, rgba(106, 146, 152, 1) 100%);
   /* Ensure anchor scroll stops with space for fixed navbars */
   scroll-margin-top: 10px;
@@ -213,11 +213,20 @@
   .fact { transition: none !important; }
 }
 
+@media (max-width: 600px) {
+  #facts-heading {
+    font-size: 1.8rem;
+  }
+  .facts-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
 
 @media (max-width: 480px) {
-  .faq-section {
-    padding: 2rem 1rem;
-  }
+  /* .faq-section {
+    padding: 2rem 0rem;
+  } */
 
   .faq-header {
     margin-bottom: 2rem;
@@ -230,5 +239,11 @@
   .faq-header p {
     font-size: clamp(1.05rem, 2.7vw, 1.5rem);
     max-width: 100%;
+  }
+  .w-full {
+    padding: 3.5rem 1rem;
+  }
+  .facts-accordion {
+    margin: 0 1.5rem;
   }
 }
