@@ -12,7 +12,7 @@ const Contact = () => {
         <div className="contact__header">
           <h2 className="contact__title">Visit Our Locations</h2>
           <p className="contact__subtitle">Two Culture Hubs. One Standard of Excellence.</p>
-          <p className="contact__walk-ins">Walk-ins welcomed</p>
+          <p className="contact__walk-ins">Walk-ins are welcomed</p>
         </div>
 
         <div className="contact__images">
@@ -78,6 +78,12 @@ const Contact = () => {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Phone Section - Visible only at 600px */}
+        <div className="contact__mobile-phone">
+          <Phone size={20} className="contact__mobile-phone-icon" />
+          <p className="contact__mobile-phone-number">(404)-458-2993</p>
         </div>
       </div>
     </section>
