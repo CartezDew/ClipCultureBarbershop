@@ -60,7 +60,7 @@ const Services = () => {
   }, [location.hash]);
 
   const regularServices = [
-    { name: 'Basic Haircut', price: 20, duration: '30 min <strong>*</strong>' },
+    { name: 'Basic Haircut', price: 20, duration: '30 mins <strong>*</strong>' },
     { name: 'Basic Haircut + Beard', price: 28, duration: '35 min <strong>*</strong>' },
     { name: 'Basic Haircut + Eyebrows', price: 35, duration: '35 min <strong>*</strong>' },
     { name: 'Basic Haircut + Eyebrows + Beard', price: 38, duration: '45 min <strong>*</strong>' },

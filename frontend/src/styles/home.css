@@ -18,9 +18,12 @@
 }
 
 .section--light .btn--secondary {
+  display: inline-block;
   background-color: transparent;
   color: white;
   border: 2px solid white;
+  text-decoration: none;
+  margin-bottom: 1rem;
 }
 
 .section--light .btn--secondary:hover {
@@ -195,7 +198,7 @@
 .service-item h3 {
   color: white;
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 0rem;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
@@ -226,10 +229,17 @@
   opacity: 0.8;
 }
 
+.service-duration-pill strong {
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
 .service-divider {
   color: rgba(255, 255, 255, 0.3);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 300;
+  opacity: 0.5;
 }
 
 .service-price {
@@ -239,31 +249,67 @@
   font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-/* Responsive Services Grid */
 @media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+  .section--light h2 {
+    font-size: 2rem;
+    padding-top: 1rem;  
   }
-  
-  .service-item:nth-child(3n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  .services__card {
+    padding: 2rem;
   }
-  
-  .service-item:nth-child(2n) {
-    border-right: none;
+  .service-duration-pill {
+    font-size: 0.9rem;
+    color: #e1dbdb;
+    background: rgba(248, 249, 250, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 500;
   }
-  
-  .service-item:nth-child(n+5) {
-    border-bottom: none;
+}
+
+@media (max-width: 680px) {
+  .section--light h2 {
+    font-size: 1.8rem;
+    padding-top: 1rem;
   }
-  
   .service-item {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
   }
-  
   .service-item h3 {
     font-size: 1.1rem;
+  }
+  .service-description {
+    font-size: 0.9rem;
+  }
+  .service-duration-pill {
+    font-size: 0.8rem;
+  }
+  .service-price {
+    font-size: 1rem;
+  }
+  .service-divider {
+    font-size: 1.5rem;
+  }
+  .section--light .btn--secondary {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+  }
+ 
+}
+
+/* Responsive Services Grid */
+@media (max-width: 560px) {
+
+  .service-item h3 {
+    font-size: 1.1rem;
+  }
+  .service-item {
+    padding: 1rem;
   }
   
   .service-description {
@@ -277,27 +323,105 @@
   .service-price {
     font-size: 1rem;
   }
+  .service-details {
+    gap: 0.3rem;
+  }
+  
+  .service-duration-pill {
+    padding: 0.2rem 0.4rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, auto);
-  }
-  
+
   .service-item {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem;
   }
-  
-  .service-item:last-child {
-    border-bottom: none;
+  .service-item h3 {
+    font-size: 1rem;
   }
-  
-  .service-item {
-    padding: 1.25rem;
+  .service-description {
+    font-size: 0.8rem;
+  }
+  .service-details {
+    gap: 0.2rem;
+  }
+  .service-duration-pill {
+    font-size: 0.8rem;
+  }
+  .service-price {
+    font-size: 0.95rem;
+  }
+  .service-divider {
+    font-size: 1.8rem;
+    opacity: 0.5;
+  }
+  .container {
+    padding: 0 0.5rem;
   }
 }
+
+@media (max-width: 445px) {
+  .container {
+    padding: 0 0.3rem;
+  }
+  .servivce-price {
+    font-size: 0.9rem;
+  }
+  .service-duration-pill {
+    font-size: 0.7rem;
+  }
+  .service-divider {
+    font-size: 1.6rem;
+    opacity: 0.5;
+  }
+  .service-details {
+    gap: 0.1rem;
+  }
+  .service-duration-pill {
+    padding: 0.1rem 0.3rem;
+  }
+  .service-price {
+    font-size: 0.85rem;
+  }
+  .service-divider {
+    font-size: 1.4rem;
+    opacity: 0.5;
+  }
+  .service-details {
+    gap: 0.1rem;
+  }
+  .service-duration-pill {
+    padding: 0.1rem 0.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .servivce-price {
+    font-size: 0.8rem;
+  }
+  .service-divider {
+    font-size: 1.3rem;
+    opacity: 0.5;
+  }
+  .service-item {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+}
+@media (max-width: 360px) {
+  .service-duration-pill {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.15rem;
+  }
+  .service-price {
+    font-size: 0.8rem;
+  }
+  .service-item {
+    padding-left: 0.5rem;
+    padding-right: 0.4rem;
+  }
+} 
 
 /* Hero Section with Background Image */
 .hero {

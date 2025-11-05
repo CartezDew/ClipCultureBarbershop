@@ -370,7 +370,7 @@ const Home = () => {
                 <div className="service-details">
                   <div className="service-price">${service.price}</div>
                   <div className="service-divider">|</div>
-                  <div className="service-duration-pill">{service.durationMins} mins (approx.)</div>
+                  <div className="service-duration-pill">{service.durationMins} min <strong>*</strong></div>
                 </div>
               </motion.div>
             ))}
