@@ -5,8 +5,8 @@ const Gallery = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const wrapperRef = useRef(null);
 
-  // Gallery images - dynamically generate array for all 60 images
-  const totalImages = 60;
+  // Gallery images - dynamically generate array for all 63 images
+  const totalImages = 66;
   const images = Array.from({ length: totalImages }, (_, index) => ({
     id: index + 1,
     src: `/src/assets/gallery/image-${index + 1}.webp`,

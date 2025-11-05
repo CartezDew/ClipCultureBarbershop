@@ -115,7 +115,7 @@ const About = () => {
               </p>
               <p>
                 <br/>
-                <strong>In Fall 2024</strong>, Clip Culture opened its second location in <strong>Summerhill</strong>, expanding its reach across Atlanta. With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
+                In Fall 2024, Clip Culture opened its second location in <strong>Summerhill</strong>, expanding its reach across Atlanta. With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
               </p>
             </div>
           </div>
