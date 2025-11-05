@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart } from 'lucide-react'
+
+import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const isOpenRef = useRef(false)
@@ -17,7 +19,7 @@ const NavbarMobile = () => {
         { id: 2, name: 'Services', path: '/services' },
         { id: 3, name: 'Barbers', path: '/team' },
         { id: 4, name: 'Gallery', path: '/gallery' },
-        { id: 5, name: 'Contact', path: '/contact' }
+        { id: 5, name: 'Contact', path: '#contact' }
     ]
     const menuRef = useRef(null)
     const openAtRef = useRef(0)
@@ -25,7 +27,7 @@ const NavbarMobile = () => {
     // Check screen size and update mobile state
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth <= 680)
+            setIsMobile(window.innerWidth <= 605)
         }
         
         // Check on mount
@@ -146,11 +148,6 @@ const NavbarMobile = () => {
     return (
         <nav className="navbar navbar-mobile">
             <div className="navbar-container">
-                <div className="logo-section">
-                    <Link to="/" className="logo-link" aria-label="Go to home">
-                        <h1 className="logo-text-nav">ClipCulture</h1>
-                    </Link>
-                </div>
                 <button className={`mobile-nav-toggle ${isOpen ? 'open' : ''}`} onClick={() => { 
                     setIsOpen(v => {
                         // Always allow close when open
@@ -162,13 +159,43 @@ const NavbarMobile = () => {
                     <span className="mobile-nav-line"></span>
                     <span className="mobile-nav-line"></span>
                 </button>
+                
+                <div className="logo-section">
+                    <Link to="/" className="logo-link" aria-label="Go to home">
+                        <picture>
+                            <source srcSet={`${logoMobile} 2x, ${logoMobile} 1x`} type="image/webp" />
+                            {isMobile600 && location.pathname === '/' ? (
+                                <motion.img
+                                    src={logoMobile}
+                                    srcSet={`${logoMobile} 1x`}
+                                    alt="ClipCulture Logo"
+                                    className="logo-image-nav"
+                                    initial={{ opacity: 0 }}
+                                    animate={showTaglineAnim ? { opacity: 1 } : { opacity: 0 }}
+                                    transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
+                                />
+                            ) : (
+                                <img 
+                                    src={logoMobile} 
+                                    srcSet={`${logoMobile} 1x`}
+                                    alt="ClipCulture Logo" 
+                                    className="logo-image-nav"
+                                />
+                            )}
+                        </picture>
+                    </Link>
+                </div>
+                
                 <div className="icon-section">
                     <Link 
-                        to="/contact" 
-                        className="get-started-btn" 
-                        onClick={() => setIsOpen(false)}
+                        to="/shop" 
+                        className="shopping-cart-btn"
+                        aria-label="Shopping Cart"
                     >
-                        Book Now
+                        <div className="shop-icon-container">
+                            <ShoppingCart size={24} />
+                            <span className="cart-count">0</span>
+                        </div>
                     </Link>
                 </div>
             </div>

@@ -1,24 +1,57 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
 const NavbarDesktop = () => {
     const [navbarVisible, setNavbarVisible] = useState(true)
+    const [activeDropdown, setActiveDropdown] = useState(null)
     const navigate = useNavigate()
     const location = useLocation()
+    const navRef = useRef(null)
     
-    // Menu items matching the Header.jsx routing
+    // Menu items with dropdown support
     const menuItems = [
-        { id: 1, name: 'Home', path: '/' },
-        { id: 2, name: 'Services', path: '/services' },
-        { id: 3, name: 'Barbers', path: '/team' },
-        { id: 4, name: 'Gallery', path: '/gallery' },
-        { id: 5, name: 'Contact', path: '/contact' }
+        { id: 1, name: 'Services', path: '/services', hasDropdown: true, dropdownKey: 'services' },
+        { id: 2, name: 'Barbers', path: '/team', hasDropdown: true, dropdownKey: 'barbers' },
+        { id: 3, name: 'Shop', path: '/shop', hasDropdown: true, dropdownKey: 'shop' },
+        { id: 4, name: 'About', path: '/about', hasDropdown: true, dropdownKey: 'about' },
     ]
 
-    // Hide menu items while scrolling on >=680px, re-appear after idle
+    // Dropdown menus matching HeroNavbar
+    const dropdownMenus = {
+        services: [
+            { name: 'All Services', link: '/services', icon: <Scissors size={16} /> },
+            { name: 'Men', link: '/services', icon: <User size={16} /> },
+            { name: 'Women', link: '/services#specialty-services', icon: <Users2 size={16} /> },
+            { name: 'Kids', link: '/services#specialty-services', icon: <Baby size={16} /> }
+        ],
+        barbers: [
+            { name: 'All Locations', link: '/?location=all#team', icon: <MapPin size={16} /> },
+            { name: 'Sandy Springs', link: '/?location=sandy-springs#team', icon: <Building size={16} /> },
+            { name: 'Summerhill', link: '/?location=summerhill#team', icon: <Building size={16} /> },
+            { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
+        ],
+        shop: [
+            { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
+            { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
+            { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
+            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
+            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
+        ],
+        about: [
+            ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
+            { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
+            { name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> },
+            { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
+            { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
+            { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
+        ]
+    }
+
+    // Hide menu items while scrolling on >=605px, re-appear after idle
     const [scrollingHide, setScrollingHide] = useState(false)
     const scrollTimerRef = useRef(null)
     const lastScrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0)
@@ -26,7 +59,7 @@ const NavbarDesktop = () => {
     const rafIdRef = useRef(0)
 
     useEffect(() => {
-        const mq = window.matchMedia('(min-width: 680px)')
+        const mq = window.matchMedia('(min-width: 605px)')
         const onScroll = () => {
             if (!mq.matches) return
             const now = Date.now()
@@ -63,6 +96,29 @@ const NavbarDesktop = () => {
         setScrollingHide(false)
     }, [location.pathname])
 
+    // Dropdown functions
+    const toggleDropdown = (dropdownName) => {
+        setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+    };
+
+    const closeDropdown = () => {
+        setActiveDropdown(null);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                setActiveDropdown(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     const getIconForMenuItem = (itemName) => {
         switch (itemName) {
             case 'Home':
@@ -71,8 +127,10 @@ const NavbarDesktop = () => {
                 return <Scissors className="menu-icon" size={18} />
             case 'Barbers':
                 return <Users className="menu-icon" size={18} />
-            case 'Gallery':
-                return <Camera className="menu-icon" size={18} />
+            case 'Shop':
+                return <ShoppingCart className="menu-icon" size={18} />
+            case 'About':
+                return <Info className="menu-icon" size={18} />
             case 'Contact':
                 return <Phone className="menu-icon" size={18} />
             default:
@@ -92,11 +150,15 @@ const NavbarDesktop = () => {
     const shouldShowMenu = !scrollingHide
 
     return (
-        <nav className="navbar navbar-desktop">
+        <nav className="navbar navbar-desktop" ref={navRef}>
             <div className="navbar-container">
                 <div className="logo-section">
                     <Link to="/" className="logo-link">
-                        <h1 className="logo-text-nav">ClipCulture</h1>
+                        <img 
+                            src={logoWebP} 
+                            alt="ClipCulture Logo" 
+                            className="logo-image-nav"
+                        />
                     </Link>
                 </div>
                 {/* Menu items: keep mounted to avoid flicker; animate between hidden/visible */}
@@ -112,19 +174,57 @@ const NavbarDesktop = () => {
                   >
                     {menuItems.map((item) => {
                         const icon = getIconForMenuItem(item.name)
-                        const linkClass = 'menu-link'
                         
-                        return (
-                            <Link key={item.id} to={item.path} className={linkClass}>
-                                {icon && icon}
-                                <span className="menu-text">{item.name}</span>
-                            </Link>
-                        )
+                        if (item.hasDropdown) {
+                            return (
+                                <div key={item.id} className="dropdown-container">
+                                    <button
+                                        className={`menu-link dropdown-trigger ${item.name === 'Shop' ? 'shop-link' : ''}`}
+                                        onClick={() => toggleDropdown(item.dropdownKey)}
+                                    >
+                                        <div className="nav-content">
+                                            {item.name === 'Shop' ? (
+                                                <div className="shop-icon-container">
+                                                    {icon && icon}
+                                                    <span className="cart-count">0</span>
+                                                </div>
+                                            ) : (
+                                                icon && icon
+                                            )}
+                                            <span className="menu-text">{item.name}</span>
+                                        </div>
+                                        <ChevronDown className={`dropdown-arrow ${activeDropdown === item.dropdownKey ? 'active' : ''}`} size={14} />
+                                    </button>
+                                    {activeDropdown === item.dropdownKey && (
+                                        <div className="dropdown-menu">
+                                            {dropdownMenus[item.dropdownKey].map((dropdownItem, index) => (
+                                                <Link
+                                                    key={index}
+                                                    to={dropdownItem.link}
+                                                    className="dropdown-item"
+                                                    onClick={closeDropdown}
+                                                >
+                                                    <span className="dropdown-icon">{dropdownItem.icon}</span>
+                                                    {dropdownItem.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <Link key={item.id} to={item.path} className="menu-link">
+                                    {icon && icon}
+                                    <span className="menu-text">{item.name}</span>
+                                </Link>
+                            )
+                        }
                     })}
                   </motion.div>
                 )}
                 <div className="icon-section">
-                    <Link to="/contact" className="get-started-btn">
+                    <Link to="/#contact" className="book-now-btn">
                         Book Now
                     </Link>
                 </div>

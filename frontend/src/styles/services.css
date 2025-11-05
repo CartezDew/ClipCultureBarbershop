@@ -1,6 +1,509 @@
 /* Services Page Styles */
+.section--light {
+  background: linear-gradient(to bottom, #0d233d, #6a9298);
+  background: #1a1a1a !important;
+  color: white;
+}
 
-.services__price-duration {
-  justify-content: space-between;
+.services-container-main {
+  padding: 0 1rem;
+}
+
+
+/* Services Header */
+.services__header {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.services__header.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services__title {
+  font-size: clamp(2.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.services__subtitle {
+  font-size: 1.2rem ;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #a1a1aa;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+.services-divider {
+  width: 130px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #0a9786 20%, #14b8a6 80%, transparent 100%);
+  margin: 0 auto 2rem;
+  border-radius: 2px;
+}
+
+.services__section-title-main {
+  font-size: clamp(.8rem, 1.8vw, 1.5rem) !important;
+  font-weight: 600 !important;
+  color: var(--primary-green) !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  opacity: 0.7 !important;
+}
+
+/* Service Sections */
+.services__section {
+  margin-bottom: 0.5rem;
+}
+
+
+/* Services Grid */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.3s;
+  position: relative;
+}
+
+.services__grid.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services__grid--addons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.3s;
+  position: relative;
+  margin-bottom: 0rem;
+}
+
+.services__grid--addons.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service Cards */
+.services__card {
+  padding: 2.5rem;
+  background: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-50px);
+  overflow: hidden;
+}
+
+/* Sequential card animation */
+.services__card.card-animate-in {
+  animation: cardEaseInFromLeft 0.6s ease-out forwards;
+}
+
+/* Add-on Services */
+ .services__section-title {
+  font-size: clamp(2.5rem, 3.5vw, 2.8rem) !important;
+  text-align: center;
+  padding-top: 2rem;
+  opacity: 0.7;
+}
+
+
+
+@keyframes cardEaseInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Card with borders */
+.services__card {
+  position: relative;
+}
+
+/* BOTTOM border (horizontal) */
+.services__card::before {
+  content: '';
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  height: 2.2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorder 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* RIGHT border (vertical) */
+.services__card::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 0;
+  bottom: 20%;
+  width: 2.2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmerBorderVertical 3s ease-in-out infinite,
+             floatingBorder 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Turn off right border on last column (every 3rd card: 3, 6, 9, 12, 15) */
+.services__card:nth-child(3n)::after {
+  display: none;
+}
+
+/* Turn off bottom border on cards 13-15 (but not 16) */
+.services__card:nth-child(13)::before,
+.services__card:nth-child(14)::before,
+.services__card:nth-child(15)::before {
+  display: none;
+}
+
+@keyframes shimmerTopBorder {
+  0%, 100% {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    border-top-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Top border hover for last row */
+/* .services__card:nth-child(n+13):hover {
+  border-top-color: rgba(10, 151, 134, 0.4);
+} */
+
+/* Hover Effects */
+.services__card:hover {
+  background: rgba(10, 151, 134, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(10, 151, 134, 0.15);
+}
+
+.services__card:hover::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(10, 151, 134, 0.4) 20%,
+    rgba(10, 151, 134, 0.4) 80%,
+    transparent 100%
+  ) !important;
+}
+
+.services__card:hover::before {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(10, 151, 134, 0.4) 20%,
+    rgba(10, 151, 134, 0.4) 80%,
+    transparent 100%
+  ) !important;
+}
+
+/* Animation Keyframes */
+@keyframes shimmerBorder {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1.02);
+  }
+}
+
+@keyframes shimmerBorderVertical {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleY(1.02);
+  }
+}
+
+@keyframes floatingBorder {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Card Content */
+.services__card-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.4;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.services__card-category {
+  font-size: 0.8rem;
+  color: #0a9786;
+  background: rgba(10, 151, 134, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.services__card-details {
+  display: flex;
   align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.services__card-price {
+  color: var(--primary-green);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.services__card-divider {
+  color: rgba(0, 0, 0, 0.3);
+  color: rgb(138, 130, 130);
+  opacity: 0.3;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.services__card-duration-pill {
+  font-size: 0.9rem;
+  color: #e1dbdb;
+  background: rgba(248, 249, 250, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 10px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.services__card-duration-pill strong {
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.services__card--specialty:hover {
+  border-color: #0a9786;
+}
+
+.services__cta {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem 0;
+}
+
+.services__cta .btn-book-now {
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 200px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.services__cta .btn-book-now:hover {
+  box-shadow: 0 8px 25px rgba(8, 80, 120, 0.5);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .services-container {
+    padding: 3rem;
+  }
+  .services__card {
+    padding: 2rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.9rem;
+    color: #e1dbdb;
+    background: rgba(248, 249, 250, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 700px) {
+  .services__title {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+  }
+}
+
+@media (max-width: 660px) {
+  .services-container {
+    padding: 1.5rem;
+  }
+  .services__card {
+    padding: 1.5rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .services__card {
+    padding: 1.5rem;
+  }
+  
+  .services__card-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .services__card-price {
+    margin-bottom: 0;
+  }
+
+  .services__card-divider {
+    display: none;
+  }
+  .services__card-duration-pill {
+    font-size: 0.8rem;
+    background: rgba(248, 249, 250, 0.2)
+  }
+  .services__card-title {
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 550px) {
+  .services__card {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .services__card-title {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+  }
+  .services__section-title {
+    font-size: 2rem !important;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .services__card {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .services-container-main {
+    padding: 0 .5rem;
+  }
+  .services__card-price {
+    font-size: 1rem;
+  }
+  .services__card-duration-pill {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 445px) {
+  .services__card-title {
+    font-size: .9rem;
+  }
+  .services__section-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 405px) {
+  .services__card-title {
+    font-size: .8rem;
+  }
+  .services__card-price {
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .services__card {
+    padding-left: .7rem;
+    padding-right: .7rem;
+  }
+  .services-container-main {
+    padding: 0 .3rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .services__card-title {
+    font-size: .75rem;
+  }
+  .services__section-title {
+    font-size: 1.6rem !important;
+  }
+}
+
+@media (max-width: 335px) {
+  .services__card-title {
+    font-size: .7rem;
+  }
 }

@@ -1,0 +1,547 @@
+/* Mentorship Page Styles */
+.mentorship-page {
+  background: #1a1a1a;
+  color: white;
+  padding: 3rem 0;
+}
+
+.mentorship-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.mentorship-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+  padding-top: 2rem;
+}
+
+.mentorship-header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mentorship-header-content .mentorship-intro {
+  margin-top: 2rem;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  border: none;
+}
+
+.mentorship-header-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mentorship-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.mentorship-features {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.mentorship-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 1rem;
+}
+
+.mentorship-feature-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  justify-content: flex-start;
+}
+
+.mentorship-checkmark {
+  color: var(--primary-green);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.mentorship-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.mentorship-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: #287d6b;
+  font-weight: 600;
+  /* font-style: italic; */
+  margin: 0rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  text-align: left;
+}
+
+.mentorship-subtitle em strong {
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.mentorship-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  /* border-bottom: 3px solid var(--primary-green); */
+  border-radius: 15px;
+  padding-bottom: 0rem;
+}
+
+/* Programs Section */
+.mentorship-programs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: stretch; /* Make cards equal height */
+}
+
+.mentorship-program-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+}
+
+.mentorship-program-header {
+  margin-bottom: 1.5rem;
+}
+
+.mentorship-program-title {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--primary-green);
+  margin: 0;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  /* background: var(--primary-green); */
+  color: white;
+  padding: 1.5rem 1rem;
+  border-radius: 15px;
+  /* display: inline-block; */
+  text-align: center;
+  border-top: 3px solid var(--primary-green);
+}
+
+
+.mentorship-program-subtitle {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  margin: 0;
+  color: white;
+  opacity: 0.7;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+.mentorship-program-title  strong {
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  /* preserve trailing space visually */
+  margin-right: 0.25ch;  /* ensure spacing before following word */
+}
+
+.mentorship-program-image {
+  margin-bottom: 1.5rem;
+}
+
+.program-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.mentorship-program-content {
+  text-align: left;
+  flex: 1; /* Grow to fill available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.mentorship-program-description {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0 0 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  min-width: 150px;
+}
+
+.btn--coaching {
+  background: var(--primary-green);
+  color: white;
+  border: 2px solid var(--primary-green);
+  width: 100%;
+  margin-top: auto; /* Push button to bottom */
+}
+
+.btn--coaching:hover {
+  background: #0a8a7a;
+  transform: translateY(2px);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.3);
+}
+
+.btn--mentorship {
+  background: var(--primary-green);
+  color: white;
+  border: 2px solid var(--primary-green);
+  width: 100%;
+  margin-top: auto; /* Push button to bottom */
+}
+
+.btn--mentorship:hover {
+  background: #0a8a7a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.3);
+}
+
+.btn--large {
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+.mentorship-joinus-wrapper {
+  margin-top: 0rem;
+  margin-bottom: -4rem;
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+/* Override JoinUs component colors when inside mentorship page */
+.mentorship-joinus-wrapper .join-email-title {
+  color: var(--primary-green) !important;
+}
+
+.mentorship-joinus-wrapper .join-email-subtitle {
+  color: white !important;
+}
+
+.mentorship-joinus-wrapper .join-email-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Control program title line break around 730px */
+@media (max-width: 770px) {
+  .mentorship-program-title br {
+    display: none;
+  }
+}
+
+@media (min-width: 771px) {
+  .mentorship-program-title br {
+    display: inline;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 730px) {
+  .mentorship-page {
+    padding: 2rem 0;
+  }
+  
+  .mentorship-container {
+    padding: 2.5rem 2rem;
+  }
+  
+  .mentorship-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+
+  .mentorship-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .mentorship-intro-text {
+    margin-bottom: 0rem;
+    text-align: left;
+  }
+  
+  .mentorship-intro-text-2 {
+    margin-bottom: 0rem;
+    text-align: left;
+  }
+  
+  .mentorship-intro-text-3 {
+    margin-bottom: 0rem;
+    text-align: left;
+  }
+
+  .mentorship-image {
+    max-width: 400px;
+    max-height: 400px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mentorship-header-content {
+    order: 1;
+  }
+  
+  .mentorship-header-image {
+    order: 2;
+    display: grid;
+    grid-template-columns: 6fr 3fr; /* image left (70%), features right (30%) */
+    gap: 1rem;
+    align-items: start;
+  }
+  .mentorship-header-image > img.mentorship-image {
+    grid-column: 1;
+    width: 90%;
+    height: auto;
+    justify-self: center;
+  }
+  .mentorship-header-image > .mentorship-features {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  
+  .mentorship-features {
+    margin-top: 0;
+  }
+  
+  .mentorship-features-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .mentorship-feature-item {
+    font-size: clamp(0.9rem, 2.3vw, 1.4rem);
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+  }
+  
+  .mentorship-checkmark {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+  }
+  
+  /* .mentorship-programs {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .mentorship-program-card {
+    padding: 1.5rem;
+  } */
+}
+
+@media (max-width: 720px) {
+  .mentorship-program-card {
+    padding: 1.5rem;
+  }
+  .mentorship-program-subtitle {
+    font-size: clamp(1.3rem, 2.3vw, 1.5rem);
+    color: var(--primary-green);
+    opacity: 0.9;
+    text-decoration: underline;
+    text-decoration-color: rgba(10, 151, 134, 0.3);
+  }
+}
+
+@media (max-width: 650px) {
+   .mentorship-programs {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  .program-image {
+    max-width: 100%;
+    max-height: 350px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  .mentorship-program-card {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .mentorship-program-description {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    opacity: 0.8;
+  }
+  .mentorship-program-description strong {
+    font-weight: 900;
+    opacity: 1;
+    color: white;
+  }
+  .mentorship-title {
+    font-size: 2rem;
+  }
+  .mentorship-subtitle {
+    font-size: 1.5rem;
+  }
+  .mentorship-features-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .mentorship-feature-item {
+    font-size: 1rem;
+  }
+ 
+}
+
+
+@media (max-width: 600px) {
+  .mentorship-programs {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .program-image {
+    max-height: 300px;
+  }
+  .mentorship-program-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .mentorship-container {
+    padding: 1rem 2rem 0rem 2rem;
+  }
+  
+  .mentorship-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .mentorship-program-card {
+    padding: 1rem;
+  }
+
+  .mentorship-header-image {
+    order: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .mentorship-header-image > img.mentorship-image {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    max-width: 250px;
+    max-height: auto;
+    height: auto;
+    justify-self: center;
+  }
+  .mentorship-header-image > .mentorship-features {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+  
+  .mentorship-features {
+    margin-top: 0;
+  }
+  
+  .mentorship-features-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .mentorship-feature-item {
+    font-size: clamp(0.9rem, 2.3vw, 1.4rem);
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+  }
+  
+  .mentorship-checkmark {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+  }
+  .mentorship-joinus-wrapper {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+}
+
+@media (max-width: 415px) {
+  .mentorship-program-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .mentorship-joinus-wrapper {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .mentorship-joinus-wrapper {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+}

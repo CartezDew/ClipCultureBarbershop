@@ -1,0 +1,154 @@
+.services-ticker {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  box-sizing: border-box;
+  padding: 2rem 0 0 0;
+  margin: 0 auto;
+  max-width: 800px;
+  position: relative;
+  z-index: 1;
+}
+
+.ticker-track {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.ticker-item {
+  font-weight: 700;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: #19231A;
+  opacity: 0.8;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ticker-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  border-radius: 1px;
+  transform-origin: left;
+}
+
+.ticker-item:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  color: var(--green);
+  background: rgba(10, 151, 134, 0.1);
+}
+
+/* .ticker-item:active {
+  transform: translateY(0px);
+} */
+
+.ticker-separator {
+  color: var(--green);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0.5rem;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services-ticker {
+    padding: 0.75rem .3rem;
+    margin: 1.5rem auto;
+    margin-bottom: -2rem;
+  }
+  
+  .ticker-item {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .ticker-separator {
+    font-size: 1rem;
+    margin: 0 0.3rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .ticker-track {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Force line break after Mentorship (separator after 3rd item) */
+  .ticker-separator:nth-of-type(3) {
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .ticker-item {
+    font-size: 1.2rem;
+  }
+  .ticker-separator {
+    font-size: 1.5rem;
+  }
+  .ticker-track {
+    border-top: 2px solid rgba(26, 26, 26, 0.2);
+    padding-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-ticker {
+    padding: 0.5rem 0.2rem;
+  }
+
+  .ticker-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0rem;
+  }
+  
+  .ticker-item {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+  }
+  .ticker-separator {
+    font-size: 1rem;
+  }
+  
+  
+  /* Maintain line break after Mentorship */
+  .ticker-separator:nth-of-type(3) {
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .ticker-item {
+    font-size: .9rem;
+    padding: 0.3rem 0.1rem;
+    text-wrap: wrap;
+  }
+  .ticker-track {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+  }
+}
