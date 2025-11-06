@@ -259,6 +259,9 @@
     color:   var(--primary-black);
     opacity: 0.6;
   }
+  .top-products__header {
+    margin-bottom: 2rem;
+  }
 }
 
 @media (max-width: 600px) {
