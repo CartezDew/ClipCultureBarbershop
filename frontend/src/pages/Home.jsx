@@ -179,9 +179,15 @@ const Home = () => {
         {/* Left side - Booking form */}
         <div className="hero__left">
           <BookingForm />
-          <Link to="/booking" className="hero__btn hero__btn--book">
+          <button 
+            className="hero__btn hero__btn--book"
+            onClick={(e) => {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('openBookingForm'));
+            }}
+          >
             Book Now
-          </Link>
+          </button>
         </div>
         
         {/* Shop Now Section for 600px grid */}

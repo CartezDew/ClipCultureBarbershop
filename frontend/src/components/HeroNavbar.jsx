@@ -235,7 +235,15 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
         </div>
         
         <div className="hero-nav-actions">
-          <Link to="/#contact" className="hero-contact-btn">Book Now</Link>
+          <button 
+            className="hero-book-btn" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('openBookingForm'));
+            }}
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </nav>

@@ -282,7 +282,7 @@
   display: none;
 }
 
-.contact__btn {
+.book__btn {
   display: inline-block;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -298,34 +298,34 @@
   text-align: center;
 }
 
-.contact__btn--sandy-springs {
+.book__btn--sandy-springs {
   background: #000000;
   color: #ffffff;
   position: relative;
   overflow: hidden;
 }
 
-.contact__btn--sandy-springs:hover {
+.book__btn--sandy-springs:hover {
   background: #333333;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.contact__btn--summerhill {
+.book__btn--summerhill {
   background: #000000;
   color: #ffffff;
   position: relative;
   overflow: hidden;
 }
 
-.contact__btn--summerhill:hover {
+.book__btn--summerhill:hover {
   background: #333333;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Moving sharpness animation for Book Now buttons */
-.contact__btn--sandy-springs::before {
+.book__btn--sandy-springs::before {
   content: '';
   position: absolute;
   top: 0;
@@ -342,7 +342,7 @@
   animation-delay: 0s;
 }
 
-.contact__btn--summerhill::before {
+.book__btn--summerhill::before {
   content: '';
   position: absolute;
   top: 0;
@@ -368,18 +368,18 @@
   }
 }
 
-.contact__btn--hours {
+.book__btn--hours {
   background: #6b7280;
   color: #ffffff;
 }
 
-.contact__btn--hours:hover {
+.book__btn--hours:hover {
   background: #4b5563;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(107, 114, 128, 0.3);
 }
 
-.contact__btn:active {
+.book__btn:active {
   transform: translateY(0);
 }
 
@@ -454,7 +454,7 @@
     padding: 1.5rem 1rem 1rem 1rem;
     height: 220px;
   }
-  .contact__btn {
+  .book__btn {
     padding: 1rem 2rem;
     font-size: 0.9rem;
     width: auto;
@@ -533,7 +533,7 @@
     border-left: 7px solid var(--primary-black);
     /* border-radius : 2px 2px 0 2px; */
   }
-  .contact__btn {
+  .book__btn {
     display: none;
   }
   .contact__phone-section {

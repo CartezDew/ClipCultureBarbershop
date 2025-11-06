@@ -39,6 +39,10 @@ const BookingForm = () => {
   const [monthDropdownOpen, setMonthDropdownOpen] = useState(false);
   const [viewingMonth, setViewingMonth] = useState(new Date().getMonth());
   const [viewingYear, setViewingYear] = useState(new Date().getFullYear());
+  const [locationFilter, setLocationFilter] = useState(null); // 'sandy-springs', 'summerhill', or null
+  const [policyAgreed, setPolicyAgreed] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Services from the Services page
   const regularServices = [
@@ -328,7 +332,7 @@ const BookingForm = () => {
   };
 
   const prevPopupStep = () => {
-    if (popupStep > 2) {
+    if (popupStep > 1) {
       setPopupStep(popupStep - 1);
       setIsDropdownOpen(false);
     }
@@ -350,6 +354,22 @@ const BookingForm = () => {
       document.body.style.paddingRight = '';
     };
   }, [showPopupForm]);
+
+  // Prevent body scrolling when success message is shown
+  useEffect(() => {
+    if (showSuccessMessage) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = '0px';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [showSuccessMessage]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -387,21 +407,53 @@ const BookingForm = () => {
     };
   }, [monthDropdownOpen]);
 
-  const openPopupForm = () => {
-    setPopupStep(2); // Start from step 2 (Service selection)
+  const openPopupForm = (location = null) => {
+    // If contact info is already filled, skip to step 2 (Barber selection)
+    const contactInfoFilled = formData.firstName && formData.lastName && formData.email && formData.phone;
+    setPopupStep(contactInfoFilled ? 2 : 1);
+    setLocationFilter(location);
     setShowPopupForm(true);
+    setPolicyAgreed(false); // Reset policy agreement
   };
+
+  // Listen for hero button click to open popup
+  useEffect(() => {
+    const handleOpenBooking = (event) => {
+      const location = event.detail?.location || null;
+      openPopupForm(location);
+    };
+
+    window.addEventListener('openBookingForm', handleOpenBooking);
+
+    return () => {
+      window.removeEventListener('openBookingForm', handleOpenBooking);
+    };
+  }, []);
 
   const closePopupForm = () => {
     setShowPopupForm(false);
-    setPopupStep(2); // Reset to step 2 for next time
+    setPopupStep(1); // Reset to step 1 for next time
+    setLocationFilter(null); // Reset location filter
+    setPolicyAgreed(false); // Reset policy agreement
+    setShowPolicy(false); // Hide policy content
   };
 
   const handleSubmit = () => {
     // Here you would typically send the data to your backend
     console.log('Booking submitted:', formData);
-    alert('Appointment booked successfully!');
-    navigate('/');
+    setShowPopupForm(false); // Close the booking modal first
+    setShowSuccessMessage(true); // Then show the success message
+    
+    // Scroll to top to show success message
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const formatSuccessDate = (dateString) => {
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   };
 
   const isStepValid = (step = currentStep) => {
@@ -415,7 +467,7 @@ const BookingForm = () => {
       case 4:
         return formData.date && formData.time;
       case 5:
-        return true; // Confirmation step
+        return policyAgreed; // Policy agreement required
       default:
         return false;
     }
@@ -423,8 +475,67 @@ const BookingForm = () => {
 
   const renderPopupStep = () => {
     switch (popupStep) {
+      case 1:
+        return (
+          <div className="booking-step">
+            <h3>Your Information</h3>
+            <div className="form-row">
+              <div className="form-group half">
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group half">
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group half">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group half">
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        );
+
       case 2:
         const selectedBarber = allBarbers.find(b => b.id === formData.barber);
+        // Filter barbers based on location if specified
+        const filteredBarbers = locationFilter 
+          ? allBarbers.filter(b => {
+              if (locationFilter === 'sandy-springs') return b.location === 'Sandy Springs';
+              if (locationFilter === 'summerhill') return b.location === 'Summerhill';
+              return true;
+            })
+          : allBarbers;
         
         return (
           <div className="booking-step">
@@ -451,7 +562,7 @@ const BookingForm = () => {
 
             {/* Barbers Grid */}
             <div className="barbers-grid">
-              {allBarbers.map(barber => (
+              {filteredBarbers.map(barber => (
                 <div
                   key={barber.id}
                   className={`barber-card ${formData.barber === barber.id ? 'selected' : ''}`}
@@ -905,15 +1016,15 @@ const BookingForm = () => {
               </div>
               <div className="detail-row">
                 <span className="label">Services:</span>
-                <span className="value">
-                  {selectedServices.map(service => `${service.name} ($${service.price})`).join(', ')}
+                <span className="value services-value">
+                  {selectedServices.map(service => service.name).join(', ')}
                 </span>
               </div>
               {selectedAddOns.length > 0 && (
                 <div className="detail-row">
                   <span className="label">Add-Ons:</span>
-                  <span className="value">
-                    {selectedAddOns.map(addon => `${addon.name} (+$${addon.price})`).join(', ')}
+                  <span className="value services-value">
+                    {selectedAddOns.map(addon => addon.name).join(', ')}
                   </span>
                 </div>
               )}
@@ -923,12 +1034,66 @@ const BookingForm = () => {
               </div>
               <div className="detail-row">
                 <span className="label">Location:</span>
-                <span className="value">{selectedLocation?.name || confirmedBarber?.location}</span>
+                <span className="value">
+                  {selectedLocation?.name || confirmedBarber?.location}
+                  <br />
+                  {selectedLocation?.address || (confirmedBarber?.location === 'Sandy Springs' ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328' : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312')}
+                </span>
               </div>
               <div className="detail-row">
                 <span className="label">Date & Time:</span>
                 <span className="value">{formData.date} at {formData.time}</span>
               </div>
+            </div>
+
+            {/* Policy Agreement Section */}
+            <div className="policy-agreement-section">
+              <div className="policy-checkbox-wrapper">
+                <label className="policy-checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={policyAgreed}
+                    onChange={(e) => setPolicyAgreed(e.target.checked)}
+                    className="policy-checkbox"
+                    required
+                  />
+                  <span className="policy-text">
+                    I agree to arrive 10–15 minutes early to allow time for my initial consultation prior to my service. 
+                    I am aware of the cancellation policy: Missed appointments incur a $15 no-show fee, which will be applied to my next booking.
+                  </span>
+                </label>
+              </div>
+              <button 
+                className="policy-read-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPolicy(!showPolicy);
+                }}
+              >
+                {showPolicy ? 'Hide' : 'Read'} Cancellation Policy
+              </button>
+
+              {showPolicy && (
+                <div className="policy-content">
+                  <h4>Cancellation Policy</h4>
+                  <p>
+                    <strong>No-Show Fee:</strong> Missed appointments without prior notice will incur a $15 fee, 
+                    which will be applied to your next booking.
+                  </p>
+                  <p>
+                    <strong>Cancellation Notice:</strong> Please provide at least 24 hours notice if you need to 
+                    cancel or reschedule your appointment.
+                  </p>
+                  <p>
+                    <strong>Late Arrivals:</strong> Arriving more than 15 minutes late may result in your appointment 
+                    being rescheduled to accommodate other clients.
+                  </p>
+                  <p>
+                    We understand that emergencies happen. Please contact us as soon as possible if you need to make 
+                    changes to your appointment.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -1150,6 +1315,11 @@ const BookingForm = () => {
     }
   };
 
+  const handleCloseSuccessMessage = () => {
+    setShowSuccessMessage(false);
+    navigate('/');
+  };
+
   return (
     <>
       <div className="booking-form-container">
@@ -1197,7 +1367,7 @@ const BookingForm = () => {
         <div className="popup-overlay" onClick={closePopupForm}>
           <div className="popup-form" onClick={(e) => e.stopPropagation()}>
             <div className="popup-header">
-              {popupStep > 2 && (
+              {popupStep > 1 && (
                 <button 
                   className="popup-back-btn" 
                   onClick={prevPopupStep}
@@ -1223,26 +1393,32 @@ const BookingForm = () => {
                   {/* Step Progress Indicator */}
                   <div className="step-progress-container">
                     <div className="step-progress">
-                      <div className={`step-item ${popupStep >= 2 ? 'active' : ''} ${popupStep > 2 ? 'completed' : ''}`}>
+                      <div className={`step-item ${popupStep >= 1 ? 'active' : ''} ${popupStep > 1 ? 'completed' : ''}`}>
                         <div className="step-circle">1</div>
+                        <div className="step-label">Contact</div>
+                      </div>
+                      <div className={`step-line ${popupStep > 1 ? 'completed' : ''}`}></div>
+                      
+                      <div className={`step-item ${popupStep >= 2 ? 'active' : ''} ${popupStep > 2 ? 'completed' : ''}`}>
+                        <div className="step-circle">2</div>
                         <div className="step-label">Barber</div>
                       </div>
                       <div className={`step-line ${popupStep > 2 ? 'completed' : ''}`}></div>
                       
                       <div className={`step-item ${popupStep >= 3 ? 'active' : ''} ${popupStep > 3 ? 'completed' : ''}`}>
-                        <div className="step-circle">2</div>
+                        <div className="step-circle">3</div>
                         <div className="step-label">Service</div>
                       </div>
                       <div className={`step-line ${popupStep > 3 ? 'completed' : ''}`}></div>
                       
                       <div className={`step-item ${popupStep >= 4 ? 'active' : ''} ${popupStep > 4 ? 'completed' : ''}`}>
-                        <div className="step-circle">3</div>
+                        <div className="step-circle">4</div>
                         <div className="step-label">Date & Time</div>
                       </div>
                       <div className={`step-line ${popupStep > 4 ? 'completed' : ''}`}></div>
                       
                       <div className={`step-item ${popupStep >= 5 ? 'active' : ''}`}>
-                        <div className="step-circle">4</div>
+                        <div className="step-circle">5</div>
                         <div className="step-label">Confirm</div>
                       </div>
                     </div>
@@ -1251,7 +1427,7 @@ const BookingForm = () => {
                   {renderPopupStep()}
 
                   <div className="popup-actions">
-                    {popupStep > 2 && (
+                    {popupStep > 1 && (
                       <button className="btn-back" onClick={prevPopupStep}>
                         ← Back
                       </button>
@@ -1280,6 +1456,66 @@ const BookingForm = () => {
             </div>
           </div>
         </div>,
+        document.body
+      )}
+
+      {/* Success Message Modal - Rendered using Portal at document root, above all other elements */}
+      {showSuccessMessage && ReactDOM.createPortal(
+        (() => {
+          const confirmedBarber = allBarbers.find(b => b.id === formData.barber);
+          const locationName = formData.location === 'sandy-springs' ? 'Sandy Springs' : 'Summerhill';
+          const locationAddress = formData.location === 'sandy-springs' 
+            ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328'
+            : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312';
+          
+          return (
+            <div className="success-message-overlay" onClick={handleCloseSuccessMessage}>
+              <div className="success-close-hint">Click anywhere to close</div>
+              <div className="success-message-container" onClick={(e) => e.stopPropagation()}>
+                <div className="success-icon">
+                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" stroke="var(--primary-green)" fill="none" strokeWidth="2"/>
+                    <path d="M9 12l2 2 4-4" stroke="var(--primary-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <h2 className="success-title">Appointment confirmed!</h2>
+                <div className="success-details">
+                  <p className="success-message">
+                    We'll be ready for you, {formData.firstName}— sharp lines, fresh vibes!
+                  </p>
+                  <div className="success-appointment-info">
+                    <h3>Your Appointment Details:</h3>
+                    <div className="success-info-grid">
+                      <div className="success-info-item">
+                        <span className="success-label">Date:</span>
+                        <span className="success-value">{formatSuccessDate(formData.date)}</span>
+                      </div>
+                      <div className="success-info-item">
+                        <span className="success-label">Time:</span>
+                        <span className="success-value">{formData.time}</span>
+                      </div>
+                      <div className="success-info-item">
+                        <span className="success-label">Location:</span>
+                        <span className="success-value">
+                          {locationName} - {locationAddress}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="success-reminder">
+                    Remember to arrive 10-15 minutes early for your appointment.
+                  </p>
+                  <button 
+                    className="success-btn-home"
+                    onClick={handleCloseSuccessMessage}
+                  >
+                    Return to Home
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })(),
         document.body
       )}
     </>

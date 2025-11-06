@@ -37,9 +37,17 @@ const Contact = () => {
               <p className="contact__address">6309 Roswell Road NE #2D</p>
               <p className="contact__city">Sandy Springs, GA 30328</p>
             </div>
-            <Link to="/contact" className="contact__btn contact__btn--sandy-springs">
+            <button 
+              className="book__btn book__btn--sandy-springs"
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('openBookingForm', { 
+                  detail: { location: 'sandy-springs' } 
+                }));
+              }}
+            >
               Book Now
-            </Link>
+            </button>
           </div>
 
           {/* Summerhill Location */}
@@ -51,9 +59,17 @@ const Contact = () => {
               <p className="contact__address">572 Hank Aaron Dr Suite 1120</p>
               <p className="contact__city">Atlanta, GA 30312</p>
             </div>
-            <Link to="/contact" className="contact__btn contact__btn--summerhill">
+            <button 
+              className="book__btn book__btn--summerhill"
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('openBookingForm', { 
+                  detail: { location: 'summerhill' } 
+                }));
+              }}
+            >
               Book Now
-            </Link>
+            </button>
           </div>
 
           {/* Shop Hours */}
