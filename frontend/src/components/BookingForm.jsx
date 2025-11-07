@@ -284,6 +284,14 @@ const BookingForm = () => {
         barber: barberId,
         location: locationId
       }));
+      
+      // Scroll to next button if not in view
+      setTimeout(() => {
+        const nextButton = document.querySelector('.btn-next');
+        if (nextButton) {
+          nextButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
     } else {
       setFormData(prev => ({
         ...prev,
@@ -498,6 +506,28 @@ const BookingForm = () => {
         return policyAgreed; // Policy agreement required
       default:
         return false;
+    }
+  };
+
+  const getValidationErrorMessage = (step) => {
+    switch (step) {
+      case 1:
+        if (!formData.firstName || !formData.lastName) return 'Please enter your full name';
+        if (!formData.email) return 'Please enter your email address';
+        if (!formData.phone) return 'Please enter your phone number';
+        return '';
+      case 2:
+        return 'Please select a barber';
+      case 3:
+        return 'Please select at least one service';
+      case 4:
+        if (!formData.date) return 'Please select a date';
+        if (!formData.time) return 'Please select a time';
+        return '';
+      case 5:
+        return 'Please agree to the cancellation policy';
+      default:
+        return 'Please complete all required fields';
     }
   };
 
@@ -1480,6 +1510,13 @@ const BookingForm = () => {
                     )}
                   </div>
 
+                  {/* Validation Error Message - Show when step is invalid */}
+                  {!isStepValid(popupStep) && (
+                    <div className="validation-error-message">
+                      {getValidationErrorMessage(popupStep)}
+                    </div>
+                  )}
+
                   {/* Featured Products Section - Only show on step 5 (Confirmation) */}
                   {popupStep === 5 && (
                     <div className="booking-products-section">
@@ -1527,8 +1564,17 @@ const BookingForm = () => {
           
           return (
             <div className="success-message-overlay" onClick={handleCloseSuccessMessage}>
-              <div className="success-close-hint">Click anywhere to close</div>
               <div className="success-message-container" onClick={(e) => e.stopPropagation()}>
+                <button 
+                  className="success-close-btn"
+                  onClick={handleCloseSuccessMessage}
+                  aria-label="Close"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
                 <div className="success-icon">
                   <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" stroke="var(--primary-green)" fill="none" strokeWidth="2"/>
@@ -1543,13 +1589,15 @@ const BookingForm = () => {
                   <div className="success-appointment-info">
                     <h3>Your Appointment Details:</h3>
                     <div className="success-info-grid">
-                      <div className="success-info-item">
-                        <span className="success-label">Date:</span>
-                        <span className="success-value">{formatSuccessDate(formData.date)}</span>
-                      </div>
-                      <div className="success-info-item">
-                        <span className="success-label">Time:</span>
-                        <span className="success-value">{formData.time}</span>
+                      <div className="success-info-item success-date-time-row">
+                        <div className="success-date-time-group">
+                          <span className="success-label">Date:</span>
+                          <span className="success-value">{formatSuccessDate(formData.date)}</span>
+                        </div>
+                        <div className="success-date-time-group">
+                          <span className="success-label">Time:</span>
+                          <span className="success-value">{formData.time}</span>
+                        </div>
                       </div>
                       <div className="success-info-item">
                         <span className="success-label">Location:</span>
