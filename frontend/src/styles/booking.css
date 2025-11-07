@@ -149,11 +149,11 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-.services-grid {
+/* .services-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-}
+} */
 
 .service-card {
   background: rgba(255, 255, 255, 0.1);
@@ -1537,6 +1537,12 @@
   .booking-social-links {
     padding: 0.5rem;
    
+  }
+}
+
+@media (max-width: 800px) {
+  .booking-form-container {
+    margin-left: 0rem;
   }
 }
 

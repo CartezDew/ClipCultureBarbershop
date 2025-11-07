@@ -176,7 +176,7 @@
     color: var(--color-timberwolf);
     padding: 0.4rem 0.6rem;
     border: none;
-    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    font-size: clamp(.9rem, 1.8vw, 1.3rem);
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s ease, padding 0.3s ease, font-size 0.3s ease;
@@ -185,7 +185,9 @@
   }
   
   .book-now-btn:hover {
-    background-color: rgba(154, 109, 56, 0.9);
+    background-color: white;
+    border-radius: 6px;
+    scale: 1.05;
   }
 
   /* Get Started button animation - moving sharpness effect */
@@ -325,29 +327,39 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
 }
 
-/* Add backdrop blur to body when mobile menu is open - reduced blur */
-body.mobile-menu-opened::before {
-  content: '';
+/* Mobile nav overlay backdrop - only on mobile screens */
+.mobile-nav-overlay {
   position: fixed;
-  top: 0;
+  top: 3rem; /* Start below the navbar header */
   left: 0;
-  /* width: 100vw;
-  height: 100vh; */
-  background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  z-index: 1000; /* Much lower than mobile menu to ensure menu is visible */
-  pointer-events: none; /* Allow clicks to pass through */
+  width: 100vw;
+  height: calc(100vh - 3rem); /* Full height minus navbar */
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9998; /* Just below the mobile menu */
+  cursor: pointer;
+}
+
+/* Hide mobile menu and overlay on desktop screens */
+@media (min-width: 606px) {
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+  
+  .mobile-nav-menu {
+    display: none !important;
+  }
 }
 
 /* Ensure backdrop filter support across devices */
-@supports not (backdrop-filter: blur(3px)) {
+@supports not (backdrop-filter: blur(10px)) {
   .mobile-nav-menu {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 248, 0.98) 25%, rgba(240, 242, 240, 0.98) 50%, rgba(232, 235, 232, 0.98) 75%, rgba(224, 228, 224, 0.98) 100%);
   }
   
-  body.mobile-menu-opened::before {
-    background: rgba(0, 0, 0, 0.08);
+  .mobile-nav-overlay {
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -374,6 +386,56 @@ body.mobile-menu-opened::before {
 
 .mobile-nav-item:last-child {
   border-bottom: none;
+}
+
+/* Mobile nav sections */
+.mobile-nav-section {
+  margin-bottom: 1rem;
+}
+
+.mobile-nav-section:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-nav-section-header {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-green);
+  background: rgba(10, 151, 134, 0.08);
+  border: none;
+  border-left: 3px solid var(--primary-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.mobile-nav-section-header:hover {
+  background: rgba(10, 151, 134, 0.15);
+}
+
+.mobile-nav-section-header:active {
+  background: rgba(10, 151, 134, 0.2);
+}
+
+.section-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  color: var(--primary-green);
+}
+
+.section-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.mobile-nav-section-items {
+  overflow: hidden;
 }
 
 /* Mobile nav icons */
@@ -422,10 +484,10 @@ body.mobile-menu-opened::before {
  
   /* Desktop navbar sizing + spacing trims */
   .navbar-desktop .menu-section {
-    gap: clamp(0.5rem, 1.8vw, 1rem);
+    gap: clamp(0rem, 1.8vw, 1rem);
   }
   .navbar-desktop .menu-icon {
-    width: clamp(0.75rem, 1.8vw, 0.95rem);
+    width: clamp(0rem, 1.8vw, 0.95rem);
     height: clamp(0.75rem, 1.8vw, 0.95rem);
   }
   .navbar-desktop .menu-text {
@@ -546,15 +608,17 @@ body.mobile-menu-opened::before {
 /* Mobile variant marker */
 .navbar-mobile .menu-section { display: none !important; }
 
-/* Ensure mobile navbar is visible while menu is open */
-body.mobile-menu-opened .navbar-visible-mobile { display: block !important; }
-body.mobile-menu-opened .navbar-visible-desktop { display: none !important; }
-
-/* Prevent App wrapper from hiding navbar while mobile menu is open */
-body.mobile-menu-opened .App.navbar-hidden .navbar { 
-  transform: translateY(0); 
-  opacity: 1; 
-  pointer-events: auto; 
+/* Ensure mobile navbar is visible while menu is open - only on mobile screens */
+@media (max-width: 605px) {
+  body.mobile-menu-opened .navbar-visible-mobile { display: block !important; }
+  body.mobile-menu-opened .navbar-visible-desktop { display: none !important; }
+  
+  /* Prevent App wrapper from hiding navbar while mobile menu is open */
+  body.mobile-menu-opened .App.navbar-hidden .navbar { 
+    transform: translateY(0); 
+    opacity: 1; 
+    pointer-events: auto; 
+  }
 }
 
 /* Back to top button - only visible on mobile and when not in hero */
@@ -743,6 +807,12 @@ body.mobile-menu-opened .App.navbar-hidden .navbar {
 .dropdown-item:hover .dropdown-icon {
   opacity: 1;
   color: #0a9786;
+}
+
+@media (max-width: 900px) {
+  .dropdown-trigger {
+    gap: 0rem;
+  }
 }
 
 /* Responsive dropdown styles */

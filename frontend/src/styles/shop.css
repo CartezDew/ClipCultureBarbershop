@@ -2,7 +2,7 @@
 .shop-page {
   background: linear-gradient(to bottom, #0d233d, #6a9298);
   color: white;
-  padding: 3rem 0;
+  padding: 5rem 0;
 }
 
 .shop-container {
@@ -13,7 +13,7 @@
 
 .shop-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   padding-top: 2rem;
 }
 
@@ -52,7 +52,10 @@
     font-size: clamp(1.1rem, 2vw, 1.5rem);
   }
   .shop-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .shop-page {
+    padding: 3rem 0;
   }
 }
 
@@ -64,11 +67,20 @@
 
 @media (max-width: 530px) {
   .shop-container {
-    padding: 0 0.75rem;
+    padding: 0 0rem;
   }
   
   .shop-header {
     margin-bottom: 2.5rem;
+  }
+  .shop-products-wrapper {
+    border-radius: 10px;
+  }
+  .shop-books-wrapper {
+    border-radius: 10px;
+  }
+  .shop-page .join-email-section {
+    border-top: 0px;
   }
 }
 

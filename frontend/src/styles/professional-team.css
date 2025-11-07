@@ -2,7 +2,6 @@
 .professional-team {
   padding: 3rem 0;
   background-color: #1a1a1a;
-  color: white;
 }
 
 .professional-team__container {
@@ -14,7 +13,7 @@
 .professional-team__header {
   text-align: center;
   margin-bottom: 4rem;
-  border-top: 2px solid rgba(33, 199, 133, 0.1);
+  /* border-top: 2px solid rgba(33, 199, 133, 0.1); */
   padding-top: 2rem;
 }
 
@@ -186,10 +185,11 @@
 }
 
 .professional-team__apply-btn:hover {
-  background: linear-gradient(135deg, #14b8a6, var(--primary-green));
+  background: var(--green-new);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(10, 151, 134, 0.4);
   border-color: rgba(255, 255, 255, 0.2);
+  scale: 1.03;
 }
 
 .professional-team__apply-btn:active {

@@ -171,6 +171,7 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(10, 151, 134, 0.4);
   border-color: rgba(255, 255, 255, 0.2);
+  scale: 1.03;
 }
 
 .home-welcome__button:active {

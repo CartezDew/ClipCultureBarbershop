@@ -10,7 +10,7 @@
     #aaaaaa, #bababa, #cacaca, #dadada, #eaeaea, #fafafa
   );
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  padding: 4rem 0;
+  padding: 6rem 0;
   position: relative;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .testimonials .text-3xl {
-  font-size: 1.875rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   line-height: 2.25rem;
   font-weight: 800;
   color: #ffffff;
@@ -60,13 +60,12 @@
   color: #ffffff;
 }
 
-.testimonials .mt-3 {
-  margin-top: 0.75rem;
-}
+
 
 .testimonials .text-base {
-  font-size: 1rem;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
   line-height: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .testimonials .text-lg {
@@ -146,15 +145,6 @@
   --tw-gradient-to: rgb(52 211 153 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
-
-/* .testimonials .via-teal-400 {
-  --tw-gradient-to: rgb(45 212 191 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), #2dd4bf, var(--tw-gradient-to);
-} */
-
-/* .testimonials .to-cyan-400 {
-  --tw-gradient-to: #22d3ee;
-} */
 
 /* --- Card Content --- */
 .testimonials .p-6 {
@@ -558,6 +548,7 @@
   background: linear-gradient(135deg, #0b8a7a, #1fc7d6);
   color: #ffffff;
   text-decoration: none;
+  scale: 1.03;
 }
 
 .testimonials__reviews-button:active {
@@ -582,6 +573,15 @@
     
     .testimonials__grid > :last-child {
       grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .testimonials .text-3xl {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+    }
+    .testimonials .text-base {
+      font-size: 1.2rem;
     }
   }
   
@@ -618,6 +618,17 @@
     }
   }
 
+  @media (max-width: 480px) {
+    .testimonials .text-3xl {
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    }
+    .testimonials .text-base {
+      font-size: 1rem;
+    }
+    .testimonials {
+      padding: 4rem 0;
+  }
+  }
 
 
 /* --- Retina Display Support --- */
