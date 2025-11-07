@@ -806,8 +806,8 @@ const BookingForm = () => {
                   </svg>
                 </div>
               </div>
-              <div className="barber-info">
-                <h4>Earliest Available</h4>
+              <div className="barber-info-earliest">
+                <h1>Earliest Available</h1>
                 <p>See the 5 earliest time slots and get matched automatically</p>
               </div>
             </div>
@@ -1657,6 +1657,18 @@ const BookingForm = () => {
       {showPopupForm && ReactDOM.createPortal(
         <div className="popup-overlay" onClick={closePopupForm}>
           <div className="popup-form" onClick={(e) => e.stopPropagation()}>
+            {popupStep > 1 && (
+              <button 
+                className="popup-back-btn" 
+                onClick={prevPopupStep}
+                aria-label="Go back"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </button>
+            )}
+            
             <button 
               className="popup-close" 
               onClick={closePopupForm}
@@ -1666,17 +1678,6 @@ const BookingForm = () => {
             </button>
             
             <div className="popup-header">
-              {popupStep > 1 && (
-                <button 
-                  className="popup-back-btn" 
-                  onClick={prevPopupStep}
-                  aria-label="Go back"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M15 18l-6-6 6-6"/>
-                  </svg>
-                </button>
-              )}
               <h2>Complete Your Booking</h2>
             </div>
             

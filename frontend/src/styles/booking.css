@@ -888,24 +888,42 @@
 
 .popup-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1.5rem 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
-
 }
 
 .popup-header h2 {
   color: var(--primary-green);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   margin: 0;
-  flex: 1;
   text-align: center;
   font-weight: 600;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  width: 100%;
 }
 
+
+.popup-back-btn {
+  background: none;
+  border: none;
+  color: var(--primary-black);
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 10;
+}
 
 .popup-back-btn:hover {
   background: rgba(255, 255, 255, 0.15);
@@ -913,9 +931,10 @@
 }
 
 .popup-back-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .popup-close {
@@ -936,6 +955,7 @@
   top: 0.5rem;
   right: 1rem;
   z-index: 10;
+  opacity: 0.5;
 }
 
 .popup-close:hover {
@@ -1402,7 +1422,7 @@
 /* Barber Selection Styles */
 .barbers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -1423,14 +1443,13 @@
 }
 
 .barber-card:hover {
-  border-color: 1px solid var(--green-new);
-  border-color: 3px red;
+  border: 3px solid var(--green-new);
   transform: translateY(-2px);
 }
 
 .barber-card.selected {
-  border-color: var(--green-new);
   border-width: 4px;
+  border-color: var(--green-new);
   background: rgba(24, 24, 24, 0.8);
 }
 
@@ -1444,6 +1463,11 @@
   background: rgba(24, 24, 24, 0.4);
 }
 
+.barber-card.earliest-available:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+  background: rgba(24, 24, 24, 0.6);
+}
 
 .barber-image-wrapper {
   width: 80px;
@@ -1517,17 +1541,36 @@
 .earliest-icon {
   color: rgba(255, 255, 255, 0.7);
   color: var(--primary-black);
+  color: var(--green-new);
 }
 
-.barber-card.selected .earliest-icon,
 .barber-card.earliest-available:hover .earliest-icon {
   color: var(--green-new);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
 .barber-info {
   flex: 1;
 }
 
+.barber-info-earliest h1 {
+  text-align: left;
+  color: white;
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--primary-black);
+}
+
+.barber-info-earliest p {
+  text-align: left;
+  color: white;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-weight: 400;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+
+}
 .barber-card.earliest-available .barber-info {
   text-align: left;
 }
@@ -1754,7 +1797,32 @@
   .btn-book-now {
     font-size: .9rem;
   }
+
+  .popup-close {
+    font-size: 1.5rem;
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+  .barber-card.earliest-available .barber-image-wrapper {
+    width: 50px;
+    height: 50px;
+    background: none;
+  }
+  .barber-info-earliest h1 {
+    font-size: 1.1rem;
+  }
+  .barber-info-earliest p {
+    font-size: 0.9rem;
+  }
+
+
+  .barber-card.earliest-available {
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+  }
 }
+
 
 @media (max-width: 670px) {
   .booking-header h2 {
@@ -1800,20 +1868,34 @@
   }
 }
 
-@media (max-width: 550px) {
-  .popup-close {
-    width: 20px;
-    height: 20px;
-    opacity: 0.5;
-  }
-  .popup-header h2 {
-    font-size: 1.3rem;
-    padding-top: 0.5rem;
-  }
-  .popup-content {
-    padding: 1rem;
+@media (max-width: 630px) {
+  .popup-form {
+    max-width: 90%;
   }
 }
+
+ @media (max-width: 550px) {
+   .popup-back-btn {
+     width: 25px;
+     height: 25px;
+     left: 0.75rem;
+   }
+   
+   .popup-back-btn svg {
+     width: 16px;
+     height: 16px;
+   }
+   
+   
+   .popup-header h2 {
+     font-size: 1.3rem;
+     padding-top: 0.5rem;
+   }
+   
+   .popup-content {
+     padding: 1rem;
+   }
+ }
 
 @media (max-width: 479px) {
 
@@ -2902,5 +2984,14 @@
   .booking-product-info {
     text-align: left;
     padding: 0.75rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .barbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
   }
 }
