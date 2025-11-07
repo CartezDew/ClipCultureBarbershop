@@ -311,11 +311,12 @@
 .mobile-nav-menu {
   display: block; /* Framer Motion handles mount/unmount */
   position: fixed;
-  top: 3rem;
+  top: 2.8rem;
   left: 0;
   
  
   width: 40vw; /* one-third of the viewport width */
+  min-width: 180px;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -666,7 +667,10 @@
     align-items: center;
     justify-content: center;
   }
-  
+
+  .mobile-nav-item {
+    font-size: 0.8rem;
+  }
   /* Hide when navbar is hidden (hero section) */
   .App.navbar-hidden .back-to-top-btn {
     opacity: 0;
@@ -686,7 +690,13 @@
     height: 25px;
     width: 30px;
   }
-}
+  .mobile-nav-item {
+    font-size: 0.8rem;
+  }
+  .mobile-nav-menu {
+    top: 2.3rem;
+    left: 0;
+}}
 /* Desktop Dropdown Styles */
 .dropdown-container {
   position: relative;
