@@ -54,6 +54,13 @@ const BookingForm = () => {
   const [portfolioBarber, setPortfolioBarber] = useState(null);
   const [showBio, setShowBio] = useState(false);
   const [bioBarber, setBioBarber] = useState(null);
+  const [hasScrolledOnStep3, setHasScrolledOnStep3] = useState(false);
+  const [hasScrolledOnStep4, setHasScrolledOnStep4] = useState(false);
+  const [isEditingDate, setIsEditingDate] = useState(false);
+  const [manualDateInput, setManualDateInput] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTimer, setAlertTimer] = useState(null);
 
   // Services from the Services page
   const regularServices = [
@@ -361,8 +368,18 @@ const BookingForm = () => {
     return checkDate < today;
   };
 
+  const isBeyond60Days = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 60);
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0);
+    return checkDate > maxDate;
+  };
+
   const handleDateSelect = (date) => {
-    if (isPastDate(date)) return;
+    if (isPastDate(date) || isBeyond60Days(date)) return;
     setFormData(prev => ({
       ...prev,
       date: formatDate(date),
@@ -374,7 +391,20 @@ const BookingForm = () => {
   };
 
   const handleMonthChange = (direction) => {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 60);
+    const maxYear = maxDate.getFullYear();
+    const maxMonth = maxDate.getMonth();
+
     if (direction === 'prev') {
+      // Don't allow going before current month
+      if (viewingYear === currentYear && viewingMonth === currentMonth) {
+        return;
+      }
+      
       if (viewingMonth === 0) {
         setViewingMonth(11);
         setViewingYear(viewingYear - 1);
@@ -382,6 +412,14 @@ const BookingForm = () => {
         setViewingMonth(viewingMonth - 1);
       }
     } else {
+      // Don't allow going beyond 60 days
+      if (viewingYear === maxYear && viewingMonth === maxMonth) {
+        return;
+      }
+      if (viewingYear > maxYear) {
+        return;
+      }
+      
       if (viewingMonth === 11) {
         setViewingMonth(0);
         setViewingYear(viewingYear + 1);
@@ -402,6 +440,64 @@ const BookingForm = () => {
       years.push(currentYear + i);
     }
     return years;
+  };
+
+  // Get available months for booking (current month through 60 days out)
+  const getAvailableMonthsForBooking = () => {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 60); // 60 days from now
+    
+    const maxYear = maxDate.getFullYear();
+    const maxMonth = maxDate.getMonth();
+    
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    
+    const availableMonths = [];
+    
+    // Add current year and its available months
+    const currentYearMonths = [];
+    for (let month = currentMonth; month < 12; month++) {
+      if (currentYear === maxYear && month > maxMonth) break;
+      currentYearMonths.push({
+        month,
+        monthName: monthNames[month],
+        year: currentYear
+      });
+    }
+    
+    if (currentYearMonths.length > 0) {
+      availableMonths.push({
+        year: currentYear,
+        months: currentYearMonths
+      });
+    }
+    
+    // Add next year months if maxDate extends into next year
+    if (maxYear > currentYear) {
+      const nextYearMonths = [];
+      for (let month = 0; month <= maxMonth; month++) {
+        nextYearMonths.push({
+          month,
+          monthName: monthNames[month],
+          year: maxYear
+        });
+      }
+      
+      if (nextYearMonths.length > 0) {
+        availableMonths.push({
+          year: maxYear,
+          months: nextYearMonths
+        });
+      }
+    }
+    
+    return availableMonths;
   };
 
   // Portfolio functions
@@ -495,12 +591,27 @@ const BookingForm = () => {
   };
 
   const handleServiceToggle = (serviceId) => {
-    setFormData(prev => ({
-      ...prev,
-      services: prev.services.includes(serviceId)
+    setFormData(prev => {
+      const newServices = prev.services.includes(serviceId)
         ? prev.services.filter(id => id !== serviceId)
-        : [...prev.services, serviceId]
-    }));
+        : [...prev.services, serviceId];
+      
+      // Scroll to next button on first service selection (only when adding, not removing)
+      if (!prev.services.includes(serviceId) && newServices.length > 0 && popupStep === 3 && !hasScrolledOnStep3) {
+        setTimeout(() => {
+          const nextButton = document.querySelector('.btn-next');
+          if (nextButton) {
+            nextButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          setHasScrolledOnStep3(true);
+        }, 100);
+      }
+      
+      return {
+        ...prev,
+        services: newServices
+      };
+    });
   };
 
   const toggleDropdown = () => {
@@ -525,20 +636,30 @@ const BookingForm = () => {
 
   const handleTimeSelect = (time, autoAssignedBarber = null) => {
     setFormData(prev => {
-      // If earliest available, auto-assign the barber and location for this time slot
-      if (autoAssignedBarber && prev.barber === 'earliest') {
-        const locationId = autoAssignedBarber.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill';
-        return {
-          ...prev,
-          time: time,
-          barber: autoAssignedBarber.id,
-          location: locationId
-        };
+      const updatedData = autoAssignedBarber && prev.barber === 'earliest'
+        ? {
+            ...prev,
+            time: time,
+            barber: autoAssignedBarber.id,
+            location: autoAssignedBarber.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill'
+          }
+        : {
+            ...prev,
+            time: time
+          };
+      
+      // Scroll to next button on first time AND date selection
+      if (prev.date && time && popupStep === 4 && !hasScrolledOnStep4) {
+        setTimeout(() => {
+          const nextButton = document.querySelector('.btn-next');
+          if (nextButton) {
+            nextButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          setHasScrolledOnStep4(true);
+        }, 100);
       }
-      return {
-        ...prev,
-        time: time
-      };
+      
+      return updatedData;
     });
   };
 
@@ -558,6 +679,8 @@ const BookingForm = () => {
     if (popupStep < 5) {
       setPopupStep(popupStep + 1);
       setIsDropdownOpen(false);
+      setIsEditingDate(false); // Reset date editing when changing steps
+      setManualDateInput('');
     }
   };
 
@@ -565,6 +688,8 @@ const BookingForm = () => {
     if (popupStep > 1) {
       setPopupStep(popupStep - 1);
       setIsDropdownOpen(false);
+      setIsEditingDate(false); // Reset date editing when changing steps
+      setManualDateInput('');
     }
   };
 
@@ -637,6 +762,36 @@ const BookingForm = () => {
     };
   }, [monthDropdownOpen]);
 
+  // Auto-scroll date-scroller when month/year changes
+  useEffect(() => {
+    if (popupStep === 4) {
+      // Find the first valid date in the viewing month
+      const firstDayOfMonth = new Date(viewingYear, viewingMonth, 1);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // If the first day of the month is in the past, use today instead
+      const targetDate = firstDayOfMonth < today ? today : firstDayOfMonth;
+      
+      // Only scroll if the target date is within the current month being viewed
+      if (targetDate.getMonth() === viewingMonth && targetDate.getFullYear() === viewingYear) {
+        setTimeout(() => {
+          const dateScroller = document.querySelector('.date-scroller');
+          const targetDateStr = formatDate(targetDate);
+          const dateButtons = document.querySelectorAll('.date-scroll-item:not(.more-dates)');
+          
+          dateButtons.forEach((button, index) => {
+            const buttonDate = button.getAttribute('data-date') || '';
+            if (buttonDate === targetDateStr && dateScroller) {
+              const scrollPosition = button.offsetLeft - dateScroller.offsetWidth / 2 + button.offsetWidth / 2;
+              dateScroller.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+            }
+          });
+        }, 100);
+      }
+    }
+  }, [viewingMonth, viewingYear, popupStep]);
+
   const openPopupForm = (location = null) => {
     // If contact info is already filled, skip to step 2 (Barber selection)
     const contactInfoFilled = formData.firstName && formData.lastName && formData.email && formData.phone;
@@ -666,7 +821,34 @@ const BookingForm = () => {
     setLocationFilter(null); // Reset location filter
     setPolicyAgreed(false); // Reset policy agreement
     setShowPolicy(false); // Hide policy content
+    setHasScrolledOnStep3(false); // Reset scroll flags
+    setHasScrolledOnStep4(false);
+    setIsEditingDate(false); // Reset date editing state
+    setManualDateInput('');
+    closeCustomAlert(); // Close any open alerts
   };
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (alertTimer) {
+        clearTimeout(alertTimer);
+      }
+    };
+  }, [alertTimer]);
+
+  // Prevent body scroll when alert is shown
+  useEffect(() => {
+    if (showAlert) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showAlert]);
 
   const handleSubmit = () => {
     // Here you would typically send the data to your backend
@@ -684,6 +866,111 @@ const BookingForm = () => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 
                    'July', 'August', 'September', 'October', 'November', 'December'];
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  };
+
+  const showCustomAlert = (message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+    
+    // Clear existing timer if any
+    if (alertTimer) {
+      clearTimeout(alertTimer);
+    }
+    
+    // Set new timer to auto-close after 5 seconds
+    const timer = setTimeout(() => {
+      setShowAlert(false);
+      setAlertMessage('');
+    }, 5000);
+    
+    setAlertTimer(timer);
+  };
+
+  const closeCustomAlert = () => {
+    if (alertTimer) {
+      clearTimeout(alertTimer);
+    }
+    setShowAlert(false);
+    setAlertMessage('');
+  };
+
+  const handleManualDateEdit = () => {
+    setIsEditingDate(true);
+    // Pre-populate with current month and day if date is selected
+    if (formData.date) {
+      const date = new Date(formData.date);
+      setManualDateInput(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`);
+    } else {
+      // Use the first available day in the viewing month
+      const firstDayOfMonth = new Date(viewingYear, viewingMonth, 1);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // If first day is in the past, use today
+      const targetDate = firstDayOfMonth < today ? today : firstDayOfMonth;
+      
+      setManualDateInput(`${targetDate.getMonth() + 1}/${targetDate.getDate()}/${targetDate.getFullYear()}`);
+    }
+  };
+
+  const handleManualDateSave = () => {
+    if (!manualDateInput) {
+      setIsEditingDate(false);
+      return;
+    }
+
+    // Parse the input (expecting format: MM/DD/YYYY or M/D/YYYY)
+    const parts = manualDateInput.split('/');
+    if (parts.length !== 3) {
+      showCustomAlert('Please enter date in format: MM/DD/YYYY');
+      return;
+    }
+
+    const month = parseInt(parts[0], 10) - 1; // 0-indexed
+    const day = parseInt(parts[1], 10);
+    const year = parseInt(parts[2], 10);
+
+    if (isNaN(month) || isNaN(day) || isNaN(year)) {
+      showCustomAlert('Invalid date format. Please use MM/DD/YYYY');
+      return;
+    }
+
+    if (month < 0 || month > 11) {
+      showCustomAlert('Month must be between 1 and 12');
+      return;
+    }
+
+    if (day < 1 || day > 31) {
+      showCustomAlert('Day must be between 1 and 31');
+      return;
+    }
+
+    const newDate = new Date(year, month, day);
+    
+    // Validate date
+    if (newDate.getMonth() !== month || newDate.getDate() !== day) {
+      showCustomAlert('Invalid date. Please check the day is valid for the selected month.');
+      return;
+    }
+
+    if (isPastDate(newDate)) {
+      showCustomAlert('Cannot select a past date');
+      return;
+    }
+
+    if (isBeyond60Days(newDate)) {
+      showCustomAlert('Cannot book more than 60 days in advance');
+      return;
+    }
+
+    // Valid date - update form
+    handleDateSelect(newDate);
+    setIsEditingDate(false);
+  };
+
+  const handleManualDateCancel = () => {
+    setIsEditingDate(false);
+    setManualDateInput('');
   };
 
   const isStepValid = (step = currentStep) => {
@@ -1128,32 +1415,28 @@ const BookingForm = () => {
                   {/* Month/Year Dropdown */}
                   {monthDropdownOpen && (
                     <div className="month-year-dropdown">
-                      <div className="month-selector">
-                        {months.map((month, index) => (
-                          <button
-                            key={index}
-                            className={`month-option ${viewingMonth === index ? 'selected' : ''}`}
-                            onClick={() => {
-                              setViewingMonth(index);
-                              setMonthDropdownOpen(false);
-                            }}
-                          >
-                            {month}
-                          </button>
-                        ))}
-                      </div>
-                      <div className="year-selector">
-                        {getYears().map(year => (
-                          <button
-                            key={year}
-                            className={`year-option ${viewingYear === year ? 'selected' : ''}`}
-                            onClick={() => {
-                              setViewingYear(year);
-                              setMonthDropdownOpen(false);
-                            }}
-                          >
-                            {year}
-                          </button>
+                      <div className="month-year-list">
+                        {getAvailableMonthsForBooking().map((yearGroup) => (
+                          <div key={yearGroup.year} className="year-group">
+                            <div className="year-header">
+                              {yearGroup.year}
+                            </div>
+                            <div className="months-list">
+                              {yearGroup.months.map((monthData) => (
+                                <button
+                                  key={`${monthData.year}-${monthData.month}`}
+                                  className={`month-option ${viewingMonth === monthData.month && viewingYear === monthData.year ? 'selected' : ''}`}
+                                  onClick={() => {
+                                    setViewingMonth(monthData.month);
+                                    setViewingYear(monthData.year);
+                                    setMonthDropdownOpen(false);
+                                  }}
+                                >
+                                  {monthData.monthName}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -1166,12 +1449,15 @@ const BookingForm = () => {
                 {upcomingDays.map((day, index) => {
                   const dayDate = formatDate(day);
                   const isPast = isPastDate(day);
+                  const isBeyondLimit = isBeyond60Days(day);
+                  const isDisabled = isPast || isBeyondLimit;
                   return (
                     <button
                       key={index}
-                      className={`date-scroll-item ${isSelected(day) ? 'selected' : ''} ${isPast ? 'past' : ''} ${isToday(day) ? 'today' : ''}`}
-                      onClick={() => !isPast && handleDateSelect(day)}
-                      disabled={isPast}
+                      className={`date-scroll-item ${isSelected(day) ? 'selected' : ''} ${isDisabled ? 'past' : ''} ${isToday(day) ? 'today' : ''}`}
+                      onClick={() => !isDisabled && handleDateSelect(day)}
+                      disabled={isDisabled}
+                      data-date={dayDate}
                     >
                       <div className="date-number">{day.getDate()}</div>
                       <div className="date-day">{getDayName(day)}</div>
@@ -1202,12 +1488,14 @@ const BookingForm = () => {
                       const dayDate = formatDate(day);
                       const isCurrentMonth = day.getMonth() === viewingMonth;
                       const isPast = isPastDate(day);
+                      const isBeyondLimit = isBeyond60Days(day);
+                      const isDisabled = isPast || !isCurrentMonth || isBeyondLimit;
                       return (
                         <button
                           key={index}
-                          className={`calendar-day ${!isCurrentMonth ? 'other-month' : ''} ${isSelected(day) ? 'selected' : ''} ${isPast ? 'past' : ''} ${isToday(day) ? 'today' : ''}`}
-                          onClick={() => !isPast && isCurrentMonth && handleDateSelect(day)}
-                          disabled={isPast || !isCurrentMonth}
+                          className={`calendar-day ${!isCurrentMonth ? 'other-month' : ''} ${isSelected(day) ? 'selected' : ''} ${isPast || isBeyondLimit ? 'past' : ''} ${isToday(day) ? 'today' : ''}`}
+                          onClick={() => !isDisabled && handleDateSelect(day)}
+                          disabled={isDisabled}
                         >
                           {day.getDate()}
                         </button>
@@ -1235,8 +1523,44 @@ const BookingForm = () => {
 
               {/* Selected Date Display */}
               {formData.date && (
-                <div className="selected-date-display">
-                  {getFullDayName(selectedDate)}
+                <div className="selected-date-container">
+                  {!isEditingDate ? (
+                    <div 
+                      className="selected-date-display"
+                      onClick={handleManualDateEdit}
+                      title="Click to edit date manually"
+                    >
+                      {getFullDayName(selectedDate)}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="edit-icon">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="manual-date-input-container">
+                      <input
+                        type="text"
+                        className="manual-date-input"
+                        value={manualDateInput}
+                        onChange={(e) => setManualDateInput(e.target.value)}
+                        placeholder="MM/DD/YYYY"
+                        autoFocus
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            handleManualDateSave();
+                          } else if (e.key === 'Escape') {
+                            handleManualDateCancel();
+                          }
+                        }}
+                      />
+                      <button className="manual-date-save" onClick={handleManualDateSave}>
+                        ✓
+                      </button>
+                      <button className="manual-date-cancel" onClick={handleManualDateCancel}>
+                        ✕
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -1956,6 +2280,35 @@ const BookingForm = () => {
                 onClick={handleBookFromBio}
               >
                 Book with {bioBarber.name}
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* Custom Alert Modal */}
+      {showAlert && ReactDOM.createPortal(
+        <div className="custom-alert-overlay" onClick={closeCustomAlert}>
+          <div className="custom-alert-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="custom-alert-close"
+              onClick={closeCustomAlert}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <div className="custom-alert-content">
+              <div className="custom-alert-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <p className="custom-alert-message">{alertMessage}</p>
+              <button className="custom-alert-btn" onClick={closeCustomAlert}>
+                Close
               </button>
             </div>
           </div>
