@@ -11,6 +11,7 @@ const ProductDetail = () => {
       id: 1,
       name: "Curl Twist",
       price: 15,
+      size: "8 oz",
       rating: 5,
       image: "/src/assets/products/Product-1.png",
       description: "Premium curl defining cream that enhances natural texture and provides long-lasting hold without stiffness.",
@@ -26,6 +27,7 @@ const ProductDetail = () => {
       id: 2,
       name: "Beard Balm",
       price: 20,
+      size: "8 oz",
       rating: 5,
       image: "/src/assets/products/Product-2.png",
       description: "Nourishing beard balm that conditions, styles, and tames unruly facial hair while promoting healthy growth.",
@@ -41,6 +43,7 @@ const ProductDetail = () => {
       id: 3,
       name: "Beard Oil",
       price: 20,
+      size: "4 oz",
       rating: 5,
       image: "/src/assets/products/Product-3.png",
       description: "Lightweight beard oil that moisturizes the skin underneath while adding shine and softness to your beard.",
@@ -56,6 +59,7 @@ const ProductDetail = () => {
       id: 4,
       name: "Beard Wash",
       price: 18,
+      size: "8 oz",
       rating: 5,
       image: "/src/assets/products/Product-4.png",
       description: "Gentle cleansing wash specifically formulated for facial hair and the sensitive skin underneath.",
@@ -71,6 +75,7 @@ const ProductDetail = () => {
       id: 5,
       name: "Body Lotion",
       price: 15,
+      size: "16 oz",
       rating: 4.6,
       image: "/src/assets/products/Product-5 .png",
       description: "Intensive body lotion that deeply moisturizes and nourishes skin, leaving it soft and smooth all day.",
@@ -86,6 +91,7 @@ const ProductDetail = () => {
       id: 6,
       name: "Body Wash",
       price: 15,
+      size: "16 oz",
       rating: 4,
       image: "/src/assets/products/Product-6.png",
       description: "Refreshing body wash that cleanses while moisturizing, leaving skin feeling clean and refreshed.",
@@ -146,7 +152,11 @@ const ProductDetail = () => {
 
           <div className="product-detail__info">
             <h1 className="product-detail__name">{product.name}</h1>
-            <div className="product-detail__price">${product.price}</div>
+            <div className="product-detail__price-container">
+              <span className="product-detail__price">${product.price}</span>
+              <span className="product-detail__divider">|</span>
+              <span className="product-detail__size">{product.size}</span>
+            </div>
             <div className="product-detail__rating">
               {renderStars(product.rating)}
               <span className="product-detail__rating-text">({product.rating})</span>

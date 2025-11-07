@@ -1480,32 +1480,34 @@ const BookingForm = () => {
                     )}
                   </div>
 
-                  {/* Featured Products Section */}
-                  <div className="booking-products-section">
-                    <h4 className="booking-products-title">Shop Our Grooming Products</h4>
-                    <div className="booking-products-grid">
-                      {featuredProducts.map((product) => (
-                        <Link 
-                          key={product.id} 
-                          to={`/products/${product.slug}`} 
-                          className="booking-product-card"
-                          onClick={() => setShowPopupForm(false)}
-                        >
-                          <div className="booking-product-image">
-                            <img src={product.image} alt={product.name} />
-                          </div>
-                          <div className="booking-product-info">
-                            <h5 className="booking-product-name">{product.name}</h5>
-                            <p className="booking-product-size">{product.size}</p>
-                            <p className="booking-product-price">${product.price}</p>
-                          </div>
-                        </Link>
-                      ))}
+                  {/* Featured Products Section - Only show on step 5 (Confirmation) */}
+                  {popupStep === 5 && (
+                    <div className="booking-products-section">
+                      <h4 className="booking-products-title">Shop Our Grooming Products</h4>
+                      <div className="booking-products-grid">
+                        {featuredProducts.map((product) => (
+                          <Link 
+                            key={product.id} 
+                            to={`/products/${product.slug}`} 
+                            className="booking-product-card"
+                            onClick={() => setShowPopupForm(false)}
+                          >
+                            <div className="booking-product-image">
+                              <img src={product.image} alt={product.name} />
+                            </div>
+                            <div className="booking-product-info">
+                              <h5 className="booking-product-name">{product.name}</h5>
+                              <p className="booking-product-size">{product.size}</p>
+                              <p className="booking-product-price">${product.price}</p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <Link to="/shop" className="view-all-products-btn" onClick={() => setShowPopupForm(false)}>
+                        View All Products →
+                      </Link>
                     </div>
-                    <Link to="/shop" className="view-all-products-btn" onClick={() => setShowPopupForm(false)}>
-                      View All Products →
-                    </Link>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
