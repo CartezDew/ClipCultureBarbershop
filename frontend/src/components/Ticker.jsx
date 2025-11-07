@@ -104,13 +104,13 @@ const Ticker = () => {
               }}
               animate={{
                 color: highlightedIndex === i ? 'var(--green)' : '#19231A',
-                scale: highlightedIndex === i ? 1.05 : (currentUnderlinedIndex === i ? 1.15 : 1)
+                scale: highlightedIndex === i ? 1.03 : (currentUnderlinedIndex === i ? 1.08 : 1)
               }}
               transition={{ 
                 duration: highlightedIndex === i ? 0.5 : 0.8, 
                 ease: 'easeInOut' 
               }}
-              whileHover={{ scale: 1.1, color: 'var(--green)' }}
+              whileHover={{ scale: 1.05, color: 'var(--green)' }}
               whileTap={{ scale: 0.95 }}
             >
               {label}

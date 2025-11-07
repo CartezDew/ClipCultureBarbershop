@@ -1,6 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import FloatingActionButtons from './components/FloatingActionButtons.jsx';
 import Home from './pages/Home.jsx';
 import Services from './pages/Services.jsx';
 import Team from './pages/Team.jsx';
@@ -12,12 +14,36 @@ import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
 import Apply from './pages/Apply.jsx';
 
+function AppContent() {
+  const location = useLocation();
+  const [showFloatingButtons, setShowFloatingButtons] = useState(false);
+  const isHomePage = location.pathname === '/';
 
-function App() {
+  useEffect(() => {
+    const handleScroll = () => {
+      // On home page, check if hero buttons are out of view
+      if (isHomePage) {
+        const heroBookButton = document.querySelector('.hero__btn--book');
+        if (heroBookButton) {
+          const buttonRect = heroBookButton.getBoundingClientRect();
+          setShowFloatingButtons(buttonRect.bottom < 0);
+        }
+      } else {
+        // On other pages, always show (CSS will handle 605px breakpoint)
+        setShowFloatingButtons(true);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
   return (
-    <Router>
-      <div className="App">
-        <Routes>
+    <div className="App">
+      <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={
             <>
@@ -92,7 +118,17 @@ function App() {
             </>
           } />
         </Routes>
+        
+        {/* Floating Action Buttons - Show on all pages except login */}
+        <FloatingActionButtons showOnHome={showFloatingButtons} />
       </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

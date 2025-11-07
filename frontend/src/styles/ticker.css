@@ -8,6 +8,7 @@
   max-width: 800px;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .ticker-track {
@@ -17,6 +18,8 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 0 1rem;
 }
 
 .ticker-item {

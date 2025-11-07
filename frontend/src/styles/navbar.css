@@ -627,7 +627,7 @@
   display: none;
   position: fixed;
   right: .3rem;
-  bottom: 2rem;
+  bottom: 6rem;
   width: 2.7rem;
   height: 2.7rem;
   background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
@@ -635,15 +635,19 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 999;
+  z-index: 10000;
   box-shadow: 0 4px 12px color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
   transition: all 0.3s ease;
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2s ease-in-out infinite, subtleBounce 2.5s ease-in-out infinite;
 }
 
 .back-to-top-btn:hover {
-  transform: scale(1.1);
+  animation: pulse-glow 2s ease-in-out infinite, subtleBounce 2.5s ease-in-out infinite;
   box-shadow: 0 6px 20px rgba(154, 109, 56, 0.4);
+}
+
+.back-to-top-btn:active {
+  transform: scale(0.95);
 }
 
 .back-to-top-btn svg {
@@ -657,6 +661,15 @@
   }
   50% {
     box-shadow: 0 4px 20px rgba(154, 109, 56, 0.6);
+  }
+}
+
+@keyframes subtleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
   }
 }
 
