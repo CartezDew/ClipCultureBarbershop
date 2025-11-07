@@ -1633,8 +1633,8 @@
 /* Card Icons - Top Right Corner */
 .barber-card-icons {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.1rem;
+  right: 0.1rem;
   display: flex;
   gap: 0rem;
   z-index: 2;
@@ -1649,8 +1649,8 @@
 } */
 
 .card-icon-btn {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
   background: none;
   border: none;
   display: flex;
@@ -2582,6 +2582,9 @@
     font-size: 0.9rem;
     border-radius: 50px;
   }
+  .barber-card {
+    padding: 0.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2595,6 +2598,19 @@
 
   .success-info-item {
     padding: 0.5rem;
+  }
+  .confirmation-details {
+    padding: 1rem;
+  }
+  .detail-row .value {
+    font-size: 0.9rem;
+  }
+  .total-price {
+    font-size: 1rem !important;
+    font-weight: 900 !important;
+  }
+  .view-all-products-btn {
+    font-size: 0.9rem;
   }
 }
 
@@ -2639,6 +2655,15 @@
 
   .popup-form {
     max-width: 90vw;
+  }
+  .confirmation-details {
+    padding: .5rem;
+  }
+  .detail-row .label {
+    font-size: 0.9rem;
+  }
+  .detail-row .value {
+    font-size: 0.8rem;
   }
 }
 
@@ -3275,7 +3300,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .booking-products-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -3286,7 +3311,7 @@
   }
 
   .booking-product-image {
-    width: 100px;
+    width: 150px;
     flex-shrink: 0;
   }
 

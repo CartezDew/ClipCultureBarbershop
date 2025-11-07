@@ -20,6 +20,7 @@
   --green-new: #629b65;
   --primary-black: #1a1a1a;
   --primary-white: #ffffff;
+  --primary-gray: rgba(183, 181, 181, 0.6);
 }
 
 /* Reset and base styles */

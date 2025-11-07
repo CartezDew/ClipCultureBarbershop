@@ -973,6 +973,22 @@ const BookingForm = () => {
     setManualDateInput('');
   };
 
+  const handlePolicyCheckboxChange = (checked) => {
+    setPolicyAgreed(checked);
+    
+    // If checked, scroll to show confirmation buttons at top so products are visible below
+    if (checked) {
+      setTimeout(() => {
+        const popupActions = document.querySelector('.popup-actions');
+        
+        if (popupActions) {
+          // Scroll to show the confirmation buttons at the top
+          popupActions.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
   const isStepValid = (step = currentStep) => {
     switch (step) {
       case 1:
@@ -1119,10 +1135,10 @@ const BookingForm = () => {
                         aria-label={`View ${barber.name}'s bio`}
                         title="Bio"
                       >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--primary-green)" stroke="none">
-                          <circle cx="12" cy="12" r="10" fill="none" stroke="var(--primary-green)" strokeWidth="2"></circle>
-                          <circle cx="12" cy="8" r="1.5" fill="var(--primary-green)"></circle>
-                          <rect x="11" y="11" width="2" height="7" rx="1" fill="var(--primary-green)"></rect>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--primary-gray)" stroke="none">
+                          <circle cx="12" cy="12" r="10" fill="none" stroke="var(--primary-gray)" strokeWidth="2"></circle>
+                          <circle cx="12" cy="8" r="1.5" fill="var(--primary-gray)"></circle>
+                          <rect x="11" y="11" width="2" height="7" rx="1" fill="var(--primary-gray)"></rect>
                         </svg>
                       </button>
                       <button 
@@ -1131,7 +1147,7 @@ const BookingForm = () => {
                         aria-label={`View ${barber.name}'s portfolio`}
                         title="Gallery"
                       >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green)" strokeWidth="2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-gray)" strokeWidth="2">
                           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                           <circle cx="8.5" cy="8.5" r="1.5"></circle>
                           <polyline points="21 15 16 10 5 21"></polyline>
@@ -1668,7 +1684,7 @@ const BookingForm = () => {
                   <input
                     type="checkbox"
                     checked={policyAgreed}
-                    onChange={(e) => setPolicyAgreed(e.target.checked)}
+                    onChange={(e) => handlePolicyCheckboxChange(e.target.checked)}
                     className="policy-checkbox"
                     required
                   />
