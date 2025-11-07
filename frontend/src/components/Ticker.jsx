@@ -1,12 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ticker.css';
 
 const TickerItems = [
   'Products', 'Books', 'Mentorship', 'Advertise', 'Franchise', 
 ];
 
+// Map ticker items to their routes
+const tickerRoutes = {
+  'Products': '/shop',
+  'Books': '/shop#books',
+  'Mentorship': '/mentorship',
+  'Advertise': '/advertise',
+  'Franchise': '/franchise'
+};
+
 const Ticker = () => {
+  const navigate = useNavigate();
   const [animationsTriggered, setAnimationsTriggered] = useState({ ticker: false });
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [currentUnderlinedIndex, setCurrentUnderlinedIndex] = useState(0);
@@ -44,9 +55,28 @@ const Ticker = () => {
   }, [animationsTriggered.ticker]);
 
   const handleTickerClick = (index) => {
+    const tickerItem = TickerItems[index];
+    const route = tickerRoutes[tickerItem];
+    
     setHighlightedIndex(index);
-    // Reset highlight after animation
-    setTimeout(() => setHighlightedIndex(-1), 1000);
+    
+    // Navigate to the route after a brief animation
+    setTimeout(() => {
+      if (route) {
+        navigate(route);
+        
+        // Scroll to top for routes without hash anchors
+        // (Books has #books so it handles its own scrolling)
+        if (!route.includes('#')) {
+          setTimeout(() => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }, 100);
+        }
+      }
+    }, 300);
   };
 
   return (

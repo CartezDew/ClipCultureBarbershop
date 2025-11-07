@@ -189,6 +189,7 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   text-decoration: none;
+  border-radius: 30px;
 }
 
 .amazon-button__image {
