@@ -2197,3 +2197,139 @@
     font-size: 0.9rem;
   }
 }
+
+/* Booking Modal Products Section */
+.booking-products-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.booking-products-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.booking-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.booking-product-card {
+  /* background: white; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-green);
+}
+
+.booking-product-image {
+  width: 150px;
+  height: 100px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  /* background: #f8f9f8; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.booking-product-image img {
+  width: 120px;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.booking-product-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.booking-product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 0.25rem;
+}
+
+.booking-product-size {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.booking-product-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.view-all-products-btn {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-all-products-btn:hover {
+  background: var(--primary-green);
+  color: white;
+  scale: 1.03;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .booking-products-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .booking-product-card {
+    flex-direction: row;
+  }
+
+  .booking-product-image {
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  .booking-product-info {
+    text-align: left;
+    padding: 0.75rem;
+  }
+}

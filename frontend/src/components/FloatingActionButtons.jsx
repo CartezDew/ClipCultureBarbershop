@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FloatingActionButtons = ({ showOnHome }) => {
   const location = useLocation();
@@ -59,6 +59,21 @@ const FloatingActionButtons = ({ showOnHome }) => {
     }
   };
 
+  const handleShopNowClick = (e) => {
+    e.preventDefault();
+    
+    // Navigate to shop page
+    navigate('/shop');
+    
+    // Scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
   return (
     <div className={`floating-action-buttons ${hideAtFooter ? 'hidden' : ''}`}>
       <button
@@ -67,9 +82,12 @@ const FloatingActionButtons = ({ showOnHome }) => {
       >
         Book Now
       </button>
-      <Link to="/shop" className="floating-btn floating-btn--shop">
+      <button
+        className="floating-btn floating-btn--shop"
+        onClick={handleShopNowClick}
+      >
         Shop Now
-      </Link>
+      </button>
     </div>
   );
 };

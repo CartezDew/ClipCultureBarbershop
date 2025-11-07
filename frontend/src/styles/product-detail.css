@@ -2,7 +2,7 @@
 .product-detail {
   /* min-height: 100vh; */
   background: #f8f9fa;
-  padding: 2rem 0;
+  padding: 6rem 0;
 }
 
 .product-detail__container {
@@ -15,7 +15,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #085078;
+  color: var(--primary-green);
   text-decoration: none;
   font-weight: 500;
   margin-bottom: 2rem;
@@ -29,7 +29,7 @@
 .product-detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2rem;
   align-items: start;
 }
 
@@ -37,7 +37,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
+  /* background: white; */
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -50,7 +50,7 @@
 }
 
 .product-detail__info {
-  background: white;
+  /* background: white; */
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -211,7 +211,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .product-detail__content {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -235,5 +235,50 @@
   
   .product-detail__info {
     padding: 1.5rem;
+  }
+  .product-detail__image img {
+    max-height: 200px;
+  }
+  .product-detail__image {
+    background: none;
+    box-shadow: none;
+  }
+  .product-detail__info {
+    background: none;
+    padding: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+    box-shadow: none;
+    margin: 0rem 1rem;
+  }
+  .product-detail {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .product-detail__back {
+    font-size: 0.8rem;
+  }
+  .product-detail__image img {
+    max-height: 150px;
+  }
+  .product-detail__name {
+    font-size: 1.5rem;
+  }
+  .product-detail__price {
+    font-size: 1.2rem;
+  }
+  .product-detail__rating-text {
+    font-size: 0.9rem;
+  }
+  .product-detail__description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .product-detail__info {
+    margin: 0rem 0rem;
   }
 }

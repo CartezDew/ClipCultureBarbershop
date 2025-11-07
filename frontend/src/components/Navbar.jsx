@@ -9,6 +9,10 @@ const Navbar = () => {
     const [showBackToTop, setShowBackToTop] = useState(false)
     const autoScrollingRef = useRef(false)
     const location = useLocation()
+    
+    // Pages where floating action buttons are NOT shown (so back-to-top should be lower)
+    const floatingButtonsExcludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply']
+    const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname)
 
     useEffect(() => {
         if (typeof window === 'undefined') return
@@ -125,7 +129,7 @@ const Navbar = () => {
             )}
             {isMobile && (
                 <button 
-                    className="back-to-top-btn" 
+                    className={`back-to-top-btn ${isFloatingButtonsExcluded ? 'low-position' : ''}`}
                     onClick={scrollToTop}
                     aria-label="Back to top"
                     style={{ 

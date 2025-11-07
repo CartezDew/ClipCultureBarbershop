@@ -627,7 +627,7 @@
   display: none;
   position: fixed;
   right: .3rem;
-  bottom: 6rem;
+  bottom: 5rem;
   width: 2.7rem;
   height: 2.7rem;
   background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
@@ -639,6 +639,11 @@
   box-shadow: 0 4px 12px color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
   transition: all 0.3s ease;
   animation: pulse-glow 2s ease-in-out infinite, subtleBounce 2.5s ease-in-out infinite;
+}
+
+/* Lower position for pages without floating action buttons */
+.back-to-top-btn.low-position {
+  bottom: 2rem;
 }
 
 .back-to-top-btn:hover {

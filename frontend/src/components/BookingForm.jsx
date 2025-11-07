@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import '../styles/booking.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
@@ -76,6 +76,34 @@ const BookingForm = () => {
     { id: 'eyebrows', name: 'Eyebrows', price: 12, duration: '15 min' },
     { id: 'designs', name: 'Designs', price: 10, duration: '15 min' },
     { id: 'shampoo-service', name: 'Shampoo Service', price: 8, duration: '10 min' }
+  ];
+
+  // Featured grooming products
+  const featuredProducts = [
+    {
+      id: 1,
+      name: "Curl Twist",
+      price: 15,
+      image: "/src/assets/products/Product-1.png",
+      slug: "curl-twist",
+      size: "8 oz"
+    },
+    {
+      id: 2,
+      name: "Beard Balm",
+      price: 20,
+      image: "/src/assets/products/Product-2.png",
+      slug: "beard-balm",
+      size: "8 oz"
+    },
+    {
+      id: 3,
+      name: "Beard Oil",
+      price: 20,
+      image: "/src/assets/products/Product-3.png",
+      slug: "beard-oil",
+      size: "4 oz"
+    }
   ];
 
   // Combine all services for display
@@ -1450,6 +1478,33 @@ const BookingForm = () => {
                         Confirm Appointment
                       </button>
                     )}
+                  </div>
+
+                  {/* Featured Products Section */}
+                  <div className="booking-products-section">
+                    <h4 className="booking-products-title">Shop Our Grooming Products</h4>
+                    <div className="booking-products-grid">
+                      {featuredProducts.map((product) => (
+                        <Link 
+                          key={product.id} 
+                          to={`/products/${product.slug}`} 
+                          className="booking-product-card"
+                          onClick={() => setShowPopupForm(false)}
+                        >
+                          <div className="booking-product-image">
+                            <img src={product.image} alt={product.name} />
+                          </div>
+                          <div className="booking-product-info">
+                            <h5 className="booking-product-name">{product.name}</h5>
+                            <p className="booking-product-size">{product.size}</p>
+                            <p className="booking-product-price">${product.price}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                    <Link to="/shop" className="view-all-products-btn" onClick={() => setShowPopupForm(false)}>
+                      View All Products →
+                    </Link>
                   </div>
                 </div>
               </div>
