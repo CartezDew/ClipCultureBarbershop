@@ -993,7 +993,7 @@ const BookingForm = () => {
 
                       {/* Add-On Services Group */}
                       <div className="dropdown-group">
-                        <div className="dropdown-group-label">Add-On Services (Optional - Select Multiple)</div>
+                        <div className="dropdown-group-label">Add-On Services (Optional)</div>
                         {addOnServices.map(addon => (
                           <div
                             key={addon.id}
