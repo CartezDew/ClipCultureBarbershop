@@ -16,6 +16,13 @@ import Image10 from '../assets/Barbers/Image_10.webp';
 import Image11 from '../assets/Barbers/Image_11.webp';
 import Image12 from '../assets/Barbers/Image_12.webp';
 import Image13 from '../assets/Barbers/Image_13.webp';
+// Gallery images for portfolio
+import GalleryImage1 from '../assets/gallery/image-1.webp';
+import GalleryImage2 from '../assets/gallery/image-2.webp';
+import GalleryImage3 from '../assets/gallery/image-3.webp';
+import GalleryImage4 from '../assets/gallery/image-4.webp';
+import GalleryImage5 from '../assets/gallery/image-5.webp';
+import GalleryImage6 from '../assets/gallery/image-6.webp';
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -43,6 +50,10 @@ const BookingForm = () => {
   const [policyAgreed, setPolicyAgreed] = useState(false);
   const [showPolicy, setShowPolicy] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [portfolioBarber, setPortfolioBarber] = useState(null);
+  const [showBio, setShowBio] = useState(false);
+  const [bioBarber, setBioBarber] = useState(null);
 
   // Services from the Services page
   const regularServices = [
@@ -109,24 +120,151 @@ const BookingForm = () => {
   // Combine all services for display
   const allMainServices = [...regularServices, ...specialtyServices];
 
+  // Portfolio images (using first 6 gallery images for all barbers for now)
+  const portfolioImages = [
+    GalleryImage1, GalleryImage2, GalleryImage3, 
+    GalleryImage4, GalleryImage5, GalleryImage6
+  ];
+
+  // Helper function to get random availability (simulated)
+  const getRandomAvailability = () => {
+    const today = new Date();
+    const daysOffset = Math.floor(Math.random() * 3); // 0-2 days from today
+    const availDate = new Date(today);
+    availDate.setDate(today.getDate() + daysOffset);
+    
+    const times = ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM', '4:00 PM'];
+    const randomTime = times[Math.floor(Math.random() * times.length)];
+    
+    return {
+      date: availDate,
+      time: randomTime,
+      daysFromNow: daysOffset
+    };
+  };
+
   // Barbers data from Professional Team
   const sandySpringsBarbers = [
-    { id: 'david-brown', name: "David Brown", title: "Owner/Master Barber", location: "Sandy Springs", image: Image1 },
-    { id: 'daniel-l', name: "Daniel L.", title: "Barber", location: "Sandy Springs", image: Image2 },
-    { id: 'leelee-s', name: "LeeLee S.", title: "Barber", location: "Sandy Springs", image: Image3 },
-    { id: 'justin-h', name: "Justin H.", title: "Barber", location: "Sandy Springs", image: Image4 },
-    { id: 'tyrel-y', name: "Tyrel Y", title: "Barber", location: "Sandy Springs", image: Image5 },
-    { id: 'doug-l', name: "Doug L.", title: "Barber", location: "Sandy Springs", image: Image6 }
+    { 
+      id: 'david-brown', 
+      name: "David Brown", 
+      title: "Owner/Master Barber", 
+      location: "Sandy Springs", 
+      image: Image1, 
+      availability: getRandomAvailability(),
+      bio: "Founder and master barber with over 15 years of experience. Specializes in precision cuts and classic styles with a modern twist. David's passion for the craft and dedication to excellence has made Clip Culture a premier destination."
+    },
+    { 
+      id: 'daniel-l', 
+      name: "Daniel L.", 
+      title: "Barber", 
+      location: "Sandy Springs", 
+      image: Image2, 
+      availability: getRandomAvailability(),
+      bio: "Creative stylist with 8 years of experience specializing in fades and modern cuts. Known for his attention to detail and ability to bring clients' visions to life. Daniel stays current with the latest trends and techniques."
+    },
+    { 
+      id: 'leelee-s', 
+      name: "LeeLee S.", 
+      title: "Barber", 
+      location: "Sandy Springs", 
+      image: Image3, 
+      availability: getRandomAvailability(),
+      bio: "Expert in textured cuts and creative designs with 6 years of experience. LeeLee's artistic approach and friendly demeanor make every appointment enjoyable. Specializes in trendy styles and beard sculpting."
+    },
+    { 
+      id: 'justin-h', 
+      name: "Justin H.", 
+      title: "Barber", 
+      location: "Sandy Springs", 
+      image: Image4, 
+      availability: getRandomAvailability(),
+      bio: "Master of classic and contemporary styles with 10 years behind the chair. Justin's precision and consistency keep clients coming back. Known for exceptional beard trims and traditional hot towel shaves."
+    },
+    { 
+      id: 'tyrel-y', 
+      name: "Tyrel Y", 
+      title: "Barber", 
+      location: "Sandy Springs", 
+      image: Image5, 
+      availability: getRandomAvailability(),
+      bio: "Skilled barber with 7 years of experience specializing in skin fades and line work. Tyrel's meticulous approach ensures every cut is sharp and clean. Great with clients of all ages and hair types."
+    },
+    { 
+      id: 'doug-l', 
+      name: "Doug L.", 
+      title: "Barber", 
+      location: "Sandy Springs", 
+      image: Image6, 
+      availability: getRandomAvailability(),
+      bio: "Veteran barber with 12 years of experience in both traditional and modern techniques. Doug's laid-back personality and expert skills create a comfortable atmosphere. Specializes in tapers and executive cuts."
+    }
   ];
 
   const summerhillBarbers = [
-    { id: 'aaron-w', name: "Aaron W.", title: "Barber", location: "Summerhill", image: Image7 },
-    { id: 'tj-s', name: "TJ S.", title: "Barber", location: "Summerhill", image: Image8 },
-    { id: 'cass-b', name: "Cass B.", title: "Barber", location: "Summerhill", image: Image9 },
-    { id: 'desean-p', name: "DeSean P.", title: "Barber", location: "Summerhill", image: Image10 },
-    { id: 'tray-w', name: "Tray W.", title: "Barber", location: "Summerhill", image: Image11 },
-    { id: 'hugo-d', name: "Hugo D.", title: "Barber", location: "Summerhill", image: Image12 },
-    { id: 'mula-s', name: "Mula S.", title: "Barber", location: "Summerhill", image: Image13 }
+    { 
+      id: 'aaron-w', 
+      name: "Aaron W.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image7, 
+      availability: getRandomAvailability(),
+      bio: "Dynamic barber with 9 years of experience known for creative fades and bold designs. Aaron brings energy and artistry to every cut. Excellent at consulting with clients to achieve their perfect look."
+    },
+    { 
+      id: 'tj-s', 
+      name: "TJ S.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image8, 
+      availability: getRandomAvailability(),
+      bio: "Precision stylist with 5 years of experience specializing in clean cuts and sharp lines. TJ's friendly approach and consistent results have built a loyal following. Expert in modern gentleman's cuts."
+    },
+    { 
+      id: 'cass-b', 
+      name: "Cass B.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image9, 
+      availability: getRandomAvailability(),
+      bio: "Talented barber with 6 years of experience excelling in textured styles and natural hair care. Cass's versatility and creativity shine in every appointment. Known for personalized consultations and style advice."
+    },
+    { 
+      id: 'desean-p', 
+      name: "DeSean P.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image10, 
+      availability: getRandomAvailability(),
+      bio: "Skilled craftsman with 8 years of experience specializing in bald fades and edge-ups. DeSean's technical precision and perfectionist approach deliver consistently excellent results. Great with intricate designs."
+    },
+    { 
+      id: 'tray-w', 
+      name: "Tray W.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image11, 
+      availability: getRandomAvailability(),
+      bio: "Professional barber with 7 years of experience mastering both classic and contemporary styles. Tray's attention to detail and personable nature create an exceptional experience. Specializes in tapers and line work."
+    },
+    { 
+      id: 'hugo-d', 
+      name: "Hugo D.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image12, 
+      availability: getRandomAvailability(),
+      bio: "Experienced barber with 10 years in the industry focusing on precision cuts and beard grooming. Hugo's steady hand and eye for detail ensure impeccable results. Known for his professionalism and expertise."
+    },
+    { 
+      id: 'mula-s', 
+      name: "Mula S.", 
+      title: "Barber", 
+      location: "Summerhill", 
+      image: Image13, 
+      availability: getRandomAvailability(),
+      bio: "Creative stylist with 6 years of experience bringing fresh perspectives to classic cuts. Mula's innovative techniques and engaging personality make every visit memorable. Excellent at modern fades and styling."
+    }
   ];
 
   const allBarbers = [...sandySpringsBarbers, ...summerhillBarbers];
@@ -264,6 +402,62 @@ const BookingForm = () => {
       years.push(currentYear + i);
     }
     return years;
+  };
+
+  // Portfolio functions
+  const handleOpenPortfolio = (e, barber) => {
+    e.stopPropagation(); // Prevent barber selection
+    setPortfolioBarber(barber);
+    setShowPortfolio(true);
+  };
+
+  const handleClosePortfolio = () => {
+    setShowPortfolio(false);
+    setPortfolioBarber(null);
+  };
+
+  const handleBookFromPortfolio = () => {
+    if (portfolioBarber) {
+      handleBarberSelect(portfolioBarber.id);
+      handleClosePortfolio();
+    }
+  };
+
+  // Bio functions
+  const handleOpenBio = (e, barber) => {
+    e.stopPropagation(); // Prevent barber selection
+    setBioBarber(barber);
+    setShowBio(true);
+  };
+
+  const handleCloseBio = () => {
+    setShowBio(false);
+    setBioBarber(null);
+  };
+
+  const handleBookFromBio = () => {
+    if (bioBarber) {
+      handleBarberSelect(bioBarber.id);
+      handleCloseBio();
+    }
+  };
+
+  // Format availability display
+  const formatAvailability = (availability) => {
+    if (!availability) return { day: 'Soon', time: '--' };
+    
+    const { daysFromNow, time } = availability;
+    
+    if (daysFromNow === 0) {
+      return { day: 'Today', time };
+    } else if (daysFromNow === 1) {
+      return { day: 'Tomorrow', time };
+    } else {
+      const date = availability.date;
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      return { day: `${month}/${day}`, time };
+    }
   };
 
   const handleInputChange = (e) => {
@@ -620,26 +814,65 @@ const BookingForm = () => {
 
             {/* Barbers Grid */}
             <div className="barbers-grid">
-              {filteredBarbers.map(barber => (
-                <div
-                  key={barber.id}
-                  className={`barber-card ${formData.barber === barber.id ? 'selected' : ''}`}
-                  onClick={() => handleBarberSelect(barber.id)}
-                >
-                  <div className="barber-image-wrapper">
-                    <img 
-                      src={barber.image} 
-                      alt={barber.name}
-                      className="barber-image"
-                    />
+              {filteredBarbers.map((barber, index) => {
+                const availability = formatAvailability(barber.availability);
+                const isOwner = barber.id === 'david-brown';
+                
+                return (
+                  <div
+                    key={barber.id}
+                    className={`barber-card ${formData.barber === barber.id ? 'selected' : ''}`}
+                    onClick={() => handleBarberSelect(barber.id)}
+                  >
+                    {/* Card Icons - Top Right */}
+                    <div className="barber-card-icons">
+                      <button 
+                        className="card-icon-btn info-icon-btn"
+                        onClick={(e) => handleOpenBio(e, barber)}
+                        aria-label={`View ${barber.name}'s bio`}
+                        title="Bio"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--primary-green)" stroke="none">
+                          <circle cx="12" cy="12" r="10" fill="none" stroke="var(--primary-green)" strokeWidth="2"></circle>
+                          <circle cx="12" cy="8" r="1.5" fill="var(--primary-green)"></circle>
+                          <rect x="11" y="11" width="2" height="7" rx="1" fill="var(--primary-green)"></rect>
+                        </svg>
+                      </button>
+                      <button 
+                        className="card-icon-btn portfolio-card-icon-btn"
+                        onClick={(e) => handleOpenPortfolio(e, barber)}
+                        aria-label={`View ${barber.name}'s portfolio`}
+                        title="Gallery"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green)" strokeWidth="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    
+                    <div className="barber-image-wrapper">
+                      <img 
+                        src={barber.image} 
+                        alt={barber.name}
+                        className="barber-image"
+                      />
+                    </div>
+                    <div className="barber-info">
+                      <h4>{barber.name}</h4>
+                      {/* Only show title for David Brown (Owner) */}
+                      {isOwner && <p className="barber-title">{barber.title}</p>}
+                      <p className="barber-location">{barber.location}</p>
+                      {/* Availability Display */}
+                      <div className="barber-availability">
+                        <span className="availability-label">Available</span>
+                      </div>
+                      <div className="availability-day">{availability.day}</div>
+                    </div>
                   </div>
-                  <div className="barber-info">
-                    <h4>{barber.name}</h4>
-                    <p className="barber-title">{barber.title}</p>
-                    <p className="barber-location">{barber.location}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         );
@@ -1424,6 +1657,14 @@ const BookingForm = () => {
       {showPopupForm && ReactDOM.createPortal(
         <div className="popup-overlay" onClick={closePopupForm}>
           <div className="popup-form" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="popup-close" 
+              onClick={closePopupForm}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            
             <div className="popup-header">
               {popupStep > 1 && (
                 <button 
@@ -1437,12 +1678,6 @@ const BookingForm = () => {
                 </button>
               )}
               <h2>Complete Your Booking</h2>
-              <button 
-                className="popup-close" 
-                onClick={closePopupForm}
-              >
-                ×
-              </button>
             </div>
             
             <div className="popup-content">
@@ -1450,6 +1685,28 @@ const BookingForm = () => {
                 <div className="popup-form-content">
                   {/* Step Progress Indicator */}
                   <div className="step-progress-container">
+                    {/* Compact Step Header (visible on mobile) */}
+                    <div className="step-header-compact">
+                      <div className="step-title-text">
+                        Step {popupStep} of 5 — {
+                          popupStep === 1 ? 'Contact' :
+                          popupStep === 2 ? 'Barber' :
+                          popupStep === 3 ? 'Service' :
+                          popupStep === 4 ? 'Date & Time' :
+                          'Confirm'
+                        }
+                      </div>
+                      <div className="step-progress-bar">
+                        {[1, 2, 3, 4, 5].map((step) => (
+                          <div 
+                            key={step}
+                            className={`step-segment ${popupStep >= step ? 'active' : ''}`}
+                          ></div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Original Step Progress (visible on desktop) */}
                     <div className="step-progress">
                       <div className={`step-item ${popupStep >= 1 ? 'active' : ''} ${popupStep > 1 ? 'completed' : ''}`}>
                         <div className="step-circle">1</div>
@@ -1621,6 +1878,87 @@ const BookingForm = () => {
             </div>
           );
         })(),
+        document.body
+      )}
+
+      {/* Portfolio Modal */}
+      {showPortfolio && portfolioBarber && ReactDOM.createPortal(
+        <div className="portfolio-overlay" onClick={handleClosePortfolio}>
+          <div className="portfolio-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="portfolio-close-btn"
+              onClick={handleClosePortfolio}
+              aria-label="Close"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            
+            <h3 className="portfolio-title">{portfolioBarber.name}'s Work</h3>
+            
+            <div className="portfolio-grid">
+              {portfolioImages.map((image, index) => (
+                <div key={index} className="portfolio-image-wrapper">
+                  <img src={image} alt={`${portfolioBarber.name}'s work ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+
+            <button 
+              className="portfolio-book-btn"
+              onClick={handleBookFromPortfolio}
+            >
+              Book {portfolioBarber.name}'s Services
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* Bio Modal */}
+      {showBio && bioBarber && ReactDOM.createPortal(
+        <div className="bio-overlay" onClick={handleCloseBio}>
+          <div className="bio-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="bio-close-btn"
+              onClick={handleCloseBio}
+              aria-label="Close"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            
+            <div className="bio-content">
+              <div className="bio-header">
+                <div className="bio-image-wrapper">
+                  <img src={bioBarber.image} alt={bioBarber.name} />
+                </div>
+                <div className="bio-header-info">
+                  <h3 className="bio-name">{bioBarber.name}</h3>
+                  {bioBarber.id === 'david-brown' && (
+                    <p className="bio-title">{bioBarber.title}</p>
+                  )}
+                  <p className="bio-location">{bioBarber.location}</p>
+                </div>
+              </div>
+
+              <div className="bio-text">
+                <p>{bioBarber.bio}</p>
+              </div>
+
+              <button 
+                className="bio-book-btn"
+                onClick={handleBookFromBio}
+              >
+                Book with {bioBarber.name}
+              </button>
+            </div>
+          </div>
+        </div>,
         document.body
       )}
     </>

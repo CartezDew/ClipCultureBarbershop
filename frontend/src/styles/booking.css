@@ -736,14 +736,14 @@
   position: relative;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
   border-radius: 2px;
-  padding: 2rem;
-  padding-bottom: 10rem;
+  padding: 0rem;
+  /* padding-bottom: 10rem; */
   padding-top: 0rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(5px);
   max-width: 70vw;
   width: 100%;
-  max-height: 75vh;
+  /* max-height: 75vh; */
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -826,7 +826,7 @@
   flex: 1;
   height: 3px;
   background-color: #d1d5db;
-  margin: 0 0.5rem;
+  /* margin: 0 0.5rem; */
   margin-bottom: 1.75rem;
   transition: all 0.3s ease;
   position: relative;
@@ -834,6 +834,44 @@
 }
 
 .step-line.completed {
+  background-color: var(--primary-green);
+}
+
+/* Compact Step Header (for mobile) */
+.step-header-compact {
+  display: none; /* Hidden by default, shown in media query */
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.step-title-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.step-progress-bar {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.step-segment {
+  flex: 1;
+  height: 100%;
+  background-color: #d1d5db;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.step-segment.active {
   background-color: var(--primary-green);
 }
 
@@ -895,7 +933,9 @@
   border-radius: 50%;
   transition: all 0.2s ease;
   position: absolute;
-  right: 2rem;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 10;
 }
 
 .popup-close:hover {
@@ -1368,6 +1408,7 @@
 }
 
 .barber-card {
+  position: relative;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 2px;
@@ -1413,6 +1454,50 @@
   flex-shrink: 0;
 }
 
+/* Card Icons - Top Right Corner */
+.barber-card-icons {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0rem;
+  z-index: 2;
+  flex-direction: column;
+  transition: opacity 0.3s ease;
+  /* opacity: 0; */
+}
+
+/* .barber-card:hover .barber-card-icons,
+.barber-card.selected .barber-card-icons {
+  opacity: 1;
+} */
+
+.card-icon-btn {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card-icon-btn:hover {
+  /* background: white; */
+  border: 1px solid  rgb(229, 223, 223);
+  border-radius: 50%;
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.card-icon-btn:active {
+  transform: scale(0.95);
+}
+
+
 .barber-card.earliest-available .barber-image-wrapper {
   margin-bottom: 0;
   margin-right: 1rem;
@@ -1426,6 +1511,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .earliest-icon {
@@ -1470,6 +1556,31 @@
   font-style: italic;
   font-size: 0.75rem;
   font-weight: 500;
+  margin-bottom: 0.5rem;
+
+}
+
+.barber-availability {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.availability-label {
+  color:  rgba(226, 221, 221, 0.8);
+  font-weight: 600;
+  opacity: 0.6;
+  display: block;
+  font-style: italic;
+}
+
+.availability-day {
+  font-size: 0.8rem;
+  color:   rgba(226, 221, 221, 0.8);
+  opacity: 0.9;
+  margin-top: 0.25rem;
+  font-weight: 600;
+  display: block;
 }
 
 /* Social Media Links */
@@ -1543,6 +1654,53 @@
 @media (max-width: 800px) {
   .booking-form-container {
     margin-left: 0rem;
+  }
+}
+
+/* Compact Step Indicator at 650px and below */
+@media (max-width: 650px) {
+  /* Hide the original step progress circles */
+  .step-progress {
+    display: none !important;
+  }
+  
+  /* Show the compact step header */
+  .step-header-compact {
+    display: flex !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .policy-agreement-section {
+    padding: 1rem;
+  }
+
+  .policy-text {
+    font-size: 0.875rem;
+  }
+
+  .policy-checkbox {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+  }
+
+  .policy-read-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .policy-content {
+    padding: 1rem;
+  }
+
+  .policy-content h4 {
+    font-size: 1rem;
+  }
+
+  .policy-content p {
+    font-size: 0.875rem;
   }
 }
 
@@ -1642,36 +1800,22 @@
   }
 }
 
-@media (max-width: 479px) {
-  .popup-form {
-    margin: 0.5rem;
-    border-radius: 15px;
+@media (max-width: 550px) {
+  .popup-close {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
   }
-  
-  .popup-header {
-    padding: 1rem;
+  .popup-header h2 {
+    font-size: 1.3rem;
+    padding-top: 0.5rem;
   }
-  
   .popup-content {
     padding: 1rem;
   }
+}
 
-  .popup-back-btn {
-    font-size: 0.8rem;
-    padding: 0.35rem 0.6rem;
-    left: 0.75rem;
-  }
-
-  .popup-close {
-    right: 0.75rem;
-    width: 25px;
-    height: 25px;
-    font-size: 1.5rem;
-  }
-
-  .popup-header h2 {
-    font-size: 1rem;
-  }
+@media (max-width: 479px) {
 
   .earliest-time-slot {
     padding: 0.75rem 0.5rem;
@@ -1755,20 +1899,6 @@
 
   .barber-location {
     font-size: 0.7rem;
-  }
-
-  .popup-back-btn {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.75rem;
-    left: 1rem;
-  }
-
-  .popup-close {
-    right: 1rem;
-  }
-
-  .popup-header h2 {
-    font-size: 1.2rem;
   }
 
   .step-circle {
@@ -1896,39 +2026,6 @@
 .policy-content strong {
   color: var(--primary-green);
   font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .policy-agreement-section {
-    padding: 1rem;
-  }
-
-  .policy-text {
-    font-size: 0.875rem;
-  }
-
-  .policy-checkbox {
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-  }
-
-  .policy-read-btn {
-    font-size: 0.85rem;
-    padding: 0.5rem 0.875rem;
-  }
-
-  .policy-content {
-    padding: 1rem;
-  }
-
-  .policy-content h4 {
-    font-size: 1rem;
-  }
-
-  .policy-content p {
-    font-size: 0.875rem;
-  }
 }
 
 /* Success Message Styling */
@@ -2287,11 +2384,379 @@
     flex: 0 0 35%;
     max-width: 35%;
   }
+
+  .popup-form {
+    max-width: 90vw;
+  }
 }
 
 @media (max-width: 350px) {
   .success-btn-home {
     display: none;
+  }
+}
+
+/* Portfolio Modal */
+.portfolio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100003;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.portfolio-modal {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease-out;
+}
+
+.portfolio-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.portfolio-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.portfolio-close-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.portfolio-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.portfolio-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  padding-right: 2rem;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.portfolio-image-wrapper {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f0f0f0;
+}
+
+.portfolio-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-book-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.portfolio-book-btn:hover {
+  background: var(--green-new);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 151, 134, 0.3);
+}
+
+.portfolio-book-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .portfolio-modal {
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .portfolio-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-grid {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .portfolio-book-btn {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-modal {
+    padding: 1rem;
+  }
+
+  .portfolio-title {
+    font-size: 1.2rem;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .portfolio-book-btn {
+    font-size: 0.95rem;
+  }
+}
+
+/* Bio Modal */
+.bio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100003;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.bio-modal {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease-out;
+}
+
+.bio-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.bio-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.bio-close-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.bio-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bio-content {
+  padding-right: 1rem;
+}
+
+.bio-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bio-image-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bio-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bio-header-info {
+  flex: 1;
+}
+
+.bio-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 0.25rem;
+}
+
+.bio-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-bottom: 0.25rem;
+}
+
+.bio-location {
+  font-size: 0.85rem;
+  color: var(--primary-green);
+  font-style: italic;
+}
+
+.bio-text {
+  margin-bottom: 1.5rem;
+}
+
+.bio-text p {
+  line-height: 1.6;
+  color: var(--primary-black);
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.bio-book-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.bio-book-btn:hover {
+  background: var(--green-new);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 151, 134, 0.3);
+}
+
+.bio-book-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .bio-modal {
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .bio-header {
+    gap: 1rem;
+  }
+
+  .bio-image-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .bio-name {
+    font-size: 1.3rem;
+  }
+
+  .bio-text p {
+    font-size: 0.9rem;
+  }
+
+  .bio-book-btn {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bio-modal {
+    padding: 1rem;
+  }
+
+  .bio-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bio-image-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .bio-name {
+    font-size: 1.2rem;
+  }
+
+  .bio-book-btn {
+    font-size: 0.95rem;
   }
 }
 
