@@ -2985,6 +2985,26 @@
     text-align: left;
     padding: 0.75rem;
   }
+  .btn-back {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+  .btn-next, .btn-confirm {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+  .month-name {
+    font-size: 1rem;
+  }
+  .year-display {
+    font-size: 1rem;
+  }
+  .date-number {
+    font-size: 1rem;
+  }
+  .date-day {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 380px) {
