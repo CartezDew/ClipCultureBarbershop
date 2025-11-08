@@ -16,27 +16,23 @@ const ServicesGallery = () => {
   const slideWidthPxRef = useRef(0); // width of a single slide (responsive)
   const playingRef = useRef(true);
 
-  // Services-specific gallery images - using a different subset or different images
-  const servicesImages = [
-    { id: 1, src: '/src/assets/gallery/image-7.webp', alt: 'Haircut Service 1' },
-    { id: 2, src: '/src/assets/gallery/image-2.webp', alt: 'Haircut Service 2' },
-    { id: 3, src: '/src/assets/gallery/image-20.webp', alt: 'Haircut Service 3' },
-    { id: 4, src: '/src/assets/gallery/image-10.webp', alt: 'Haircut Service 4' },
-    { id: 5, src: '/src/assets/gallery/image-13.webp', alt: 'Haircut Service 5' },
-    { id: 6, src: '/src/assets/gallery/image-22.webp', alt: 'Haircut Service 6' },
-    { id: 7, src: '/src/assets/gallery/image-37.webp', alt: 'Haircut Service 7' },
-    { id: 8, src: '/src/assets/gallery/image-15.webp', alt: 'Haircut Service 8' },
-    { id: 9, src: '/src/assets/gallery/image-16.webp', alt: 'Haircut Service 9' },
-    { id: 10, src: '/src/assets/gallery/image-18.webp', alt: 'Haircut Service 10' },
-    { id: 11, src: '/src/assets/gallery/image-23.webp', alt: 'Haircut Service 11' },
-    { id: 12, src: '/src/assets/gallery/image-25.webp', alt: 'Haircut Service 12' },
-    { id: 13, src: '/src/assets/gallery/image-26.webp', alt: 'Haircut Service 13' },
-    { id: 14, src: '/src/assets/gallery/image-29.webp', alt: 'Haircut Service 14' },
-    { id: 15, src: '/src/assets/gallery/image-31.webp', alt: 'Haircut Service 15' },
-    { id: 16, src: '/src/assets/gallery/image-47.webp', alt: 'Haircut Service 16' },
+  // Services-specific gallery images - dynamically import with Vite
+  const galleryModules = import.meta.glob('../assets/gallery/*.webp', { eager: true });
+  const desiredOrder = [7, 2, 20, 10, 13, 22, 37, 15, 16, 18, 23, 25, 26, 29, 31, 47];
 
-    // Add more specific images for services page
-  ];
+  const allImages = Object.entries(galleryModules).map(([path, mod]) => {
+    const match = path.match(/image-(\d+)\.webp$/);
+    const num = match ? parseInt(match[1], 10) : 0;
+    return {
+      id: num,
+      src: mod.default,
+      alt: `Haircut Service ${num}`
+    };
+  });
+
+  const servicesImages = desiredOrder
+    .map((n) => allImages.find((img) => img.id === n))
+    .filter(Boolean);
 
   // Create extended array for seamless infinite loop - duplicate the array
   const extendedImages = [...servicesImages, ...servicesImages];
