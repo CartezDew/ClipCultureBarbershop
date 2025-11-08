@@ -388,3 +388,47 @@
     font-size: .7rem !important;
   }
 }
+
+/* Quantity Selector for Product Cards */
+.product-card__quantity {
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.product-card__quantity-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 0.5rem;
+}
+
+.product-card__quantity-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .product-card__quantity-label {
+    font-size: 0.8rem;
+  }
+  
+  .product-card__quantity-selector {
+    border-width: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card__quantity {
+    margin-bottom: 0.75rem;
+  }
+  
+  .product-card__quantity-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+}

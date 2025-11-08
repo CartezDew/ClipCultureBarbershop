@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import '../styles/product-detail.css';
 
 const ProductDetail = () => {
   const { slug } = useParams();
+  const [quantity, setQuantity] = useState(1);
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
 
   const products = {
     'curl-twist': {
@@ -175,6 +186,36 @@ const ProductDetail = () => {
             <div className="product-detail__ingredients">
               <h3>Ingredients:</h3>
               <p>{product.ingredients}</p>
+            </div>
+
+            <div className="product-detail__quantity">
+              <label className="product-detail__quantity-label">Quantity</label>
+              <div className="product-detail__quantity-selector">
+                <button 
+                  className="quantity-btn quantity-btn--minus"
+                  onClick={decreaseQuantity}
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+                <input 
+                  type="number" 
+                  className="quantity-input" 
+                  value={quantity}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value) || 1;
+                    setQuantity(value > 0 ? value : 1);
+                  }}
+                  min="1"
+                />
+                <button 
+                  className="quantity-btn quantity-btn--plus"
+                  onClick={increaseQuantity}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
             </div>
 
             <div className="product-detail__actions">

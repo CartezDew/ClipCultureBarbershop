@@ -336,3 +336,46 @@
     max-height: 150px;
   }
 }
+
+/* Quantity Selector for Book Cards */
+.book-card__quantity {
+  margin-bottom: 1rem;
+}
+
+.book-card__quantity-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-bottom: 0.5rem;
+}
+
+.book-card__quantity-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .book-card__quantity-label {
+    font-size: 0.8rem;
+  }
+  
+  .book-card__quantity-selector {
+    border-width: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-card__quantity {
+    margin-bottom: 0.75rem;
+  }
+  
+  .book-card__quantity-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+}

@@ -1,9 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/books.css';
-import AmazonImage from '../assets/books/Amazon.png';
+import AmazonImage from '../assets/Books/Amazon.png';
 
 const Books = () => {
   const gridRef = useRef(null);
+  const [quantities, setQuantities] = useState({});
+
+  const getQuantity = (productId) => quantities[productId] || 1;
+
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity >= 1) {
+      setQuantities({ ...quantities, [productId]: newQuantity });
+    }
+  };
+
+  const decreaseQuantity = (productId) => {
+    const current = getQuantity(productId);
+    if (current > 1) {
+      updateQuantity(productId, current - 1);
+    }
+  };
+
+  const increaseQuantity = (productId) => {
+    const current = getQuantity(productId);
+    updateQuantity(productId, current + 1);
+  };
 
   useEffect(() => {
     const measureAndSetTitleHeight = () => {
@@ -38,7 +59,7 @@ const Books = () => {
       name: "Clip Culture Manual",
       price: 9.99,
       rating: 4.8,
-      image: "/src/assets/books/Clip Culture Manual.webp",
+      image: "/src/assets/Books/Clip Culture Manual.webp",
       slug: "Clip Culture Manual",
       amazonLink: "https://a.co/d/6JUYT4X"
     },
@@ -47,7 +68,7 @@ const Books = () => {
       name: "Clip Culture Mnaual 2",
       price: 9.19,
       rating: 5,
-      image: "/src/assets/books/Clip Culture Manual 2.webp",
+      image: "/src/assets/Books/Clip Culture Manual 2.webp",
       slug: "Clip Culture Mnaual 2",
       amazonLink: "https://a.co/d/5lDgae3"
     },
@@ -56,7 +77,7 @@ const Books = () => {
       name: "Clip Culture Mnaual 2- Extended Edition",
       price: 9.19,
       rating: 4.9,
-      image: "/src/assets/books/Clip Culture Manual 2- Extended Edition.webp",
+      image: "/src/assets/Books/Clip Culture Manual 2- Extended Edition.webp",
       slug: "Clip Culture Mnaual 2- Extended Edition",
       amazonLink: "https://a.co/d/7J9qXKz"
     },
@@ -119,6 +140,35 @@ const Books = () => {
                 <div className="book-card__rating">
                   {renderStars(product.rating)}
                   <span className="book-card__rating-text">({product.rating})</span>
+                </div>
+                <div className="book-card__quantity">
+                  <label className="book-card__quantity-label">Quantity</label>
+                  <div className="book-card__quantity-selector">
+                    <button 
+                      className="quantity-btn quantity-btn--minus"
+                      onClick={() => decreaseQuantity(product.id)}
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+                    <input 
+                      type="number" 
+                      className="quantity-input" 
+                      value={getQuantity(product.id)}
+                      onChange={(e) => {
+                        const value = parseInt(e.target.value) || 1;
+                        updateQuantity(product.id, value);
+                      }}
+                      min="1"
+                    />
+                    <button 
+                      className="quantity-btn quantity-btn--plus"
+                      onClick={() => increaseQuantity(product.id)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
                 <div className="book-card__actions">
                   <a 

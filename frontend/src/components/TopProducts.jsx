@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
 import Gallery from '../components/Gallery.jsx';
 
 const TopProducts = () => {
+  const [quantities, setQuantities] = useState({});
+
+  const getQuantity = (productId) => quantities[productId] || 1;
+
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity >= 1) {
+      setQuantities({ ...quantities, [productId]: newQuantity });
+    }
+  };
+
+  const decreaseQuantity = (productId) => {
+    const current = getQuantity(productId);
+    if (current > 1) {
+      updateQuantity(productId, current - 1);
+    }
+  };
+
+  const increaseQuantity = (productId) => {
+    const current = getQuantity(productId);
+    updateQuantity(productId, current + 1);
+  };
   const products = [
     {
       id: 1,
@@ -118,6 +139,35 @@ const TopProducts = () => {
                   <div className="product-card__rating">
                     {renderStars(product.rating)}
                     <span className="product-card__rating-text">({product.rating})</span>
+                  </div>
+                  <div className="product-card__quantity">
+                    <label className="product-card__quantity-label">Quantity</label>
+                    <div className="product-card__quantity-selector">
+                      <button 
+                        className="quantity-btn quantity-btn--minus"
+                        onClick={() => decreaseQuantity(product.id)}
+                        aria-label="Decrease quantity"
+                      >
+                        −
+                      </button>
+                      <input 
+                        type="number" 
+                        className="quantity-input" 
+                        value={getQuantity(product.id)}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value) || 1;
+                          updateQuantity(product.id, value);
+                        }}
+                        min="1"
+                      />
+                      <button 
+                        className="quantity-btn quantity-btn--plus"
+                        onClick={() => increaseQuantity(product.id)}
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                   <div className="product-card__actions">
                     <button className="productbtn--add-cart">
