@@ -1,14 +1,18 @@
+import servicesData from '../mocks/services.json';
+import barbersData from '../mocks/barbers.json';
+import galleryData from '../mocks/gallery.json';
+
 export async function getServices() {
-  const res = await fetch('/src/mocks/services.json');
-  return res.json();
+  // Simulate async behavior for consistency with real API
+  return Promise.resolve(servicesData);
 }
 
 export async function getBarbers() {
-  const res = await fetch('/src/mocks/barbers.json');
-  return res.json();
+  // Simulate async behavior for consistency with real API
+  return Promise.resolve(barbersData);
 }
 
 export async function getGallery() {
-  const res = await fetch('/src/mocks/gallery.json');
-  return res.json();
+  // Simulate async behavior for consistency with real API
+  return Promise.resolve(galleryData);
 }

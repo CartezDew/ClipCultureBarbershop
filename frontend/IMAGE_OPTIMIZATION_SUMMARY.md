@@ -83,6 +83,7 @@ const galleryModules = import.meta.glob('../assets/gallery/*.webp', { eager: tru
 3. `/src/components/Gallery.jsx` - Implemented dynamic imports with import.meta.glob
 4. `/src/pages/ProductDetail.jsx` - Fixed imports, added lazy loading
 5. `/src/components/BookingForm.jsx` - Fixed imports, added lazy loading
+6. `/src/lib/mockApi.js` - Fixed JSON file imports (was causing 404 errors in production)
 
 ## Testing Checklist
 
@@ -136,6 +137,37 @@ Vite uses ES modules and requires images to be imported at build time so they ca
 - Browser handles this automatically
 - No JavaScript required for lazy loading logic
 - Works on all modern browsers
+
+## Additional Fix: Mock API JSON Files
+
+### Problem
+The `mockApi.js` file was trying to fetch JSON files at runtime using `fetch('/src/mocks/services.json')`, which caused 404 errors in production because these files don't exist in the built distribution.
+
+### Solution
+Changed from runtime fetch to build-time imports:
+
+**Before:**
+```javascript
+export async function getServices() {
+  const res = await fetch('/src/mocks/services.json');
+  return res.json();
+}
+```
+
+**After:**
+```javascript
+import servicesData from '../mocks/services.json';
+
+export async function getServices() {
+  return Promise.resolve(servicesData);
+}
+```
+
+**Benefits:**
+- JSON files are bundled with the application at build time
+- No 404 errors in production
+- Faster data access (no network request needed)
+- Still maintains async interface for consistency
 
 ## Maintenance Notes
 
