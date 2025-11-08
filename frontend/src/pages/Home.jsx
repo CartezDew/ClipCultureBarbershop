@@ -268,7 +268,7 @@ const Home = () => {
                 className="hero-logo-splash"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
-                transition={{ duration: 1.8, ease: 'easeOut', delay: 0.3 }}
+                transition={{ duration: 3.7, ease: 'easeOut', delay: 0.5 }}
                 onAnimationComplete={() => setShowTaglineAnim(true)}
               >
                 <img
