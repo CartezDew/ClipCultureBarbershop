@@ -303,10 +303,10 @@
 
 @media (max-width: 475px) {
   .top-products__title {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
   .top-products__subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .productbtn--add-cart:hover {
