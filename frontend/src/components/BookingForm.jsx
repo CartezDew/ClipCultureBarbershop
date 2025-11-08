@@ -523,12 +523,14 @@ const BookingForm = ({ showMainForm = true }) => {
       if (showPopupForm) {
         handleBarberSelect(portfolioBarber.id);
         handleClosePortfolio();
+        scrollPopupNextIntoView(260);
       } else {
         openPopupForm({
           barberId: portfolioBarber.id,
           skipBarber: true
         });
         handleClosePortfolio();
+        scrollPopupNextIntoView(260);
       }
     }
   };
@@ -550,12 +552,14 @@ const BookingForm = ({ showMainForm = true }) => {
       if (showPopupForm) {
         handleBarberSelect(bioBarber.id);
         handleCloseBio();
+        scrollPopupNextIntoView(260);
       } else {
         openPopupForm({
           barberId: bioBarber.id,
           skipBarber: true
         });
         handleCloseBio();
+        scrollPopupNextIntoView(260);
       }
     }
   };
@@ -596,19 +600,14 @@ const BookingForm = ({ showMainForm = true }) => {
         barber: barberId,
         location: locationId
       }));
-      
-      // Scroll to next button if not in view
-      setTimeout(() => {
-        const nextButton = document.querySelector('.btn-next');
-        if (nextButton) {
-          nextButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 100);
+      // Scroll to Next button inside modal (mobile)
+      scrollPopupNextIntoView(220);
     } else {
       setFormData(prev => ({
         ...prev,
         barber: barberId
       }));
+      scrollPopupNextIntoView(220);
     }
   };
 
@@ -2072,6 +2071,70 @@ const BookingForm = ({ showMainForm = true }) => {
   const handleCloseSuccessMessage = () => {
     setShowSuccessMessage(false);
     navigate('/');
+  };
+
+  const scrollPopupNextIntoView = (delay = 200) => {
+    const attempt = () => {
+      const target =
+        document.querySelector('.popup-actions') ||
+        document.querySelector('.popup-actions .btn-next') ||
+        document.querySelector('.popup-actions .btn-confirm');
+      if (!target) return;
+
+      const getScrollableAncestor = (el) => {
+        let node = el;
+        while (node && node !== document.body) {
+          const style = window.getComputedStyle(node);
+          const overflowY = style.overflowY;
+          if (overflowY === 'auto' || overflowY === 'scroll') return node;
+          node = node.parentElement;
+        }
+        return document.scrollingElement || document.documentElement;
+      };
+
+      const container = getScrollableAncestor(target.closest('.popup-form') || target);
+
+      const containerRect = container === document.scrollingElement
+        ? { top: 0, bottom: window.innerHeight }
+        : container.getBoundingClientRect();
+
+      const targetRect = target.getBoundingClientRect();
+
+      const currentTop = container === document.scrollingElement
+        ? (document.scrollingElement?.scrollTop || window.pageYOffset || 0)
+        : container.scrollTop;
+
+      const bottomDelta = targetRect.bottom - (containerRect.bottom - 24); // keep a 24px margin
+      const topDelta = (containerRect.top + 16) - targetRect.top; // ensure not hidden above with 16px offset
+
+      if (bottomDelta > 0) {
+        const newTop = currentTop + bottomDelta;
+        if (typeof container.scrollTo === 'function') {
+          container.scrollTo({ top: newTop, behavior: 'smooth' });
+        } else {
+          container.scrollTop = newTop;
+        }
+      } else if (topDelta > 0) {
+        const newTop = Math.max(currentTop - topDelta, 0);
+        if (typeof container.scrollTo === 'function') {
+          container.scrollTo({ top: newTop, behavior: 'smooth' });
+        } else {
+          container.scrollTop = newTop;
+        }
+      } else {
+        // Already in view; gently align
+        try {
+          target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        } catch (e) {
+          // noop
+        }
+      }
+    };
+
+    setTimeout(() => {
+      requestAnimationFrame(attempt);
+      setTimeout(() => requestAnimationFrame(attempt), 140);
+    }, delay);
   };
 
   return (
