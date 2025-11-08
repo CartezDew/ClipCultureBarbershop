@@ -4,7 +4,7 @@ import '../styles/facts.css';
 import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/gallery/image-14.webp';
 import Shop2Image from '../assets/gallery/image-4.webp';
-import HatsImage from '../assets/about_home/products-hats.webp';
+import HatsImage from '../assets/About_Home/Products-hats.webp';
 import Gallery from '../components/Gallery.jsx';
 import AdvertisePurchaseModal from '../components/AdvertisePurchaseModal.jsx';
 import AdvertiseRequestInfoModal from '../components/AdvertiseRequestInfoModal.jsx';
