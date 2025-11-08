@@ -5,6 +5,8 @@ import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
 import Shop2Image from '../assets/Contact/Shop_2.webp';
 import Gallery from '../components/Gallery.jsx';
+import FranchiseRequestInfoModal from '../components/FranchiseRequestInfoModal.jsx';
+import FranchiseApplyModal from '../components/FranchiseApplyModal.jsx';
 // FAQ data moved inline to avoid import issues
 const franchiseFaqs = [
   {
@@ -79,6 +81,8 @@ const Franchise = () => {
   const [openFact, setOpenFact] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const accordionRef = useRef(null);
+  const [showRequestInfoModal, setShowRequestInfoModal] = useState(false);
+  const [showApplyModal, setShowApplyModal] = useState(false);
 
   const toggleFact = (id) => {
     setOpenFact(openFact === id ? null : id);
@@ -198,7 +202,7 @@ const Franchise = () => {
                 CALL TODAY TO GET MORE INFO!<br/>
                 <strong>1 (404) 458-2993</strong>
                 </p>
-                <button className="btn btn--franchise">
+                <button className="btn btn--franchise" onClick={() => setShowRequestInfoModal(true)}>
                   Request Information
                 </button>
               </div>
@@ -236,7 +240,7 @@ const Franchise = () => {
                   </ul>
                 </div>
                 
-                <button className="btn btn--franchise">
+                <button className="btn btn--franchise" onClick={() => setShowApplyModal(true)}>
                   Apply Now
                 </button>
               </div>
@@ -314,6 +318,17 @@ const Franchise = () => {
           </div>
         </div>
         </div>
+
+        <FranchiseRequestInfoModal 
+          isOpen={showRequestInfoModal}
+          onClose={() => setShowRequestInfoModal(false)}
+        />
+
+        <FranchiseApplyModal 
+          isOpen={showApplyModal}
+          onClose={() => setShowApplyModal(false)}
+        />
+
         <Gallery />
       <div className="franchise-joinus-wrapper">
         <JoinUs />

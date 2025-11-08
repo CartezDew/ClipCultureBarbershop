@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/mentorship.css';
 import MentorshipImage from '../assets/Mentorship/Mentorship-1.webp';
 import CoachingCallImage from '../assets/Mentorship/Coaching Call.webp';
 import InPersonMentorshipImage from '../assets/Mentorship/Mentorship-3.webp';
 import JoinUs from '../components/JoinUs.jsx';
+import ApplicantFormModal from '../components/ApplicantFormModal.jsx';
 
 const Mentorship = () => {
+  const [showCoachingModal, setShowCoachingModal] = useState(false);
+  const [showMentorshipModal, setShowMentorshipModal] = useState(false);
+
   return (
     <div className="mentorship-page">
       <div className="mentorship-container">
@@ -85,9 +89,9 @@ const Mentorship = () => {
               Ready to launch your career as a <strong>licensed barber?</strong> We’ve been where you are—starting from the ground up with a vision to build something greater.
               </p>
               <p className="mentorship-program-description">
-              If you’re seeking guidance on <strong>entrepreneurship, mastering the craft, developing the right mindset, or building a thriving, profitable business</strong> for yourself and your family, this program was designed for you.
+              If you're seeking guidance on <strong>entrepreneurship, mastering the craft, developing the right mindset, or building a thriving, profitable business</strong> for yourself and your family, this program was designed for you.
               </p>
-              <button className="btn btn--coaching">
+              <button className="btn btn--coaching" onClick={() => setShowCoachingModal(true)}>
                 Book Coaching
               </button>
             </div>
@@ -111,13 +115,28 @@ const Mentorship = () => {
               <p className="mentorship-program-description">
               Working directly with <strong>David Brown</strong> gives you insider access to the strategies, mindset, and systems behind building and growing a thriving barbershop brand.
               </p>
-              <button className="btn btn--mentorship">
+              <button className="btn btn--mentorship" onClick={() => setShowMentorshipModal(true)}>
                 Enroll in Mentorship
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <ApplicantFormModal 
+        isOpen={showCoachingModal}
+        onClose={() => setShowCoachingModal(false)}
+        title="Book a Coaching Call"
+        subtitle="Let's connect and discuss how we can help you achieve your barbering goals."
+      />
+
+      <ApplicantFormModal 
+        isOpen={showMentorshipModal}
+        onClose={() => setShowMentorshipModal(false)}
+        title="Enroll in Mentorship"
+        subtitle="Take your barbering career to the next level with personalized guidance from David Brown."
+      />
+
       <div className="mentorship-joinus-wrapper">
         <JoinUs />
       </div>

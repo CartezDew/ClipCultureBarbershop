@@ -6,6 +6,8 @@ import Shop1Image from '../assets/gallery/image-14.webp';
 import Shop2Image from '../assets/gallery/image-4.webp';
 import HatsImage from '../assets/about_home/products-hats.webp';
 import Gallery from '../components/Gallery.jsx';
+import AdvertisePurchaseModal from '../components/AdvertisePurchaseModal.jsx';
+import AdvertiseRequestInfoModal from '../components/AdvertiseRequestInfoModal.jsx';
 // FAQ data moved inline to avoid import issues
 const advertiseFaqs = [
   {
@@ -80,6 +82,8 @@ const Advertise = () => {
   const [openFact, setOpenFact] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const accordionRef = useRef(null);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  const [showRequestInfoModal, setShowRequestInfoModal] = useState(false);
 
   const toggleFact = (id) => {
     setOpenFact(openFact === id ? null : id);
@@ -338,6 +342,21 @@ const Advertise = () => {
               </div>
             </div>
           </div>
+          
+          <div className="advertise-packages-actions">
+            <button 
+              className="advertise-purchase-btn"
+              onClick={() => setShowPurchaseModal(true)}
+            >
+              Purchase Package
+            </button>
+            <button 
+              className="advertise-request-info-btn"
+              onClick={() => setShowRequestInfoModal(true)}
+            >
+              Request Information
+            </button>
+          </div>
         </div>
         
         {/* FAQ Section */}
@@ -382,6 +401,17 @@ const Advertise = () => {
           </div>
         </div> */}
         </div>
+
+        <AdvertisePurchaseModal 
+          isOpen={showPurchaseModal}
+          onClose={() => setShowPurchaseModal(false)}
+        />
+
+        <AdvertiseRequestInfoModal 
+          isOpen={showRequestInfoModal}
+          onClose={() => setShowRequestInfoModal(false)}
+        />
+
         {/* <Gallery /> */}
       <div className="advertise-joinus-wrapper">
         <JoinUs />

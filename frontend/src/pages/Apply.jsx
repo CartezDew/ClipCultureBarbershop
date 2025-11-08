@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/apply.css';
 import image8 from '../assets/gallery/image-25.webp';
 import JoinUs from '../components/JoinUs.jsx';
+import ApplicantFormModal from '../components/ApplicantFormModal.jsx';
 
 const Apply = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className="apply-page">
       {/* Header Section */}
       <div className="apply-header" style={{ backgroundImage: `url(${image8})` }}>
         <div className="apply-header-overlay">
           <h1 className="apply-title">Join the Culture. <br /> Shape the Standard.</h1>
-          <button className="apply-now-button">Apply Now</button>
+          <button className="apply-now-button" onClick={() => setShowModal(true)}>Apply Now</button>
         </div>
       </div>
+
+      <ApplicantFormModal 
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        title="Apply to Join Our Team"
+        subtitle="Fill out the form below and we'll get back to you within 24-48 hours."
+      />
 
       {/* Why Join Clip Culture Bento Grid */}
       <div className="apply-bento-section">

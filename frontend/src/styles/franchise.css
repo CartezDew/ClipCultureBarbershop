@@ -336,6 +336,9 @@
 
 .btn--franchise:hover {
   background: #1a365d;
+  background: white;
+  border: 2px solid var(--primary-black);
+  color: var(--primary-black);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(13, 35, 61, 0.3);
 }
@@ -586,10 +589,17 @@
   .btn--franchise {
     font-size: .8rem;
   }
+
+  .form0field-select {
+    font-size: .9rem;
+  }
 }
 
 @media (max-width: 380px) {
   .franchise-joinus-wrapper .join-email-input {
     max-width: 140px;
+  }
+  .form0field-select {
+    font-size: .85rem;
   }
 }
