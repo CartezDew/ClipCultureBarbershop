@@ -12,7 +12,8 @@ const Navbar = () => {
     
     // Pages where floating action buttons are NOT shown (so back-to-top should be lower)
     const floatingButtonsExcludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply']
-    const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname)
+    const isBarberBioPage = location.pathname.startsWith('/barber/')
+    const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname) || isBarberBioPage
 
     useEffect(() => {
         if (typeof window === 'undefined') return

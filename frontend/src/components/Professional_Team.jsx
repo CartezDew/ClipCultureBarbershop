@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/professional-team.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';    
@@ -19,6 +19,7 @@ import Image13 from '../assets/Barbers/Image_13.webp'
 const Professional_Team = () => {
   const [selectedLocation, setSelectedLocation] = useState('all'); // 'all', 'sandy-springs', 'summerhill'
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Update selected location based on URL parameter
   useEffect(() => {
@@ -33,6 +34,7 @@ const Professional_Team = () => {
   const sandySpringsBarbers = [
     {
       id: 1,
+      bookingId: 'david-brown',
       name: "David Brown",
       title: "Owner/Master Barber",
       location: "Sandy Springs",
@@ -40,6 +42,7 @@ const Professional_Team = () => {
     },
     {
       id: 2,
+      bookingId: 'daniel-l',
       name: "Daniel L.",
       title: "Barber",
       location: "Sandy Springs",
@@ -47,6 +50,7 @@ const Professional_Team = () => {
     },
     {
       id: 3,
+      bookingId: 'leelee-s',
       name: "LeeLee S.",
       title: "Barber",
       location: "Sandy Springs",
@@ -54,6 +58,7 @@ const Professional_Team = () => {
     },
     {
       id: 4,
+      bookingId: 'justin-h',
       name: "Justin H.",
       title: "Barber",
       location: "Sandy Springs",
@@ -61,6 +66,7 @@ const Professional_Team = () => {
     },
     {
       id: 5,
+      bookingId: 'tyrel-y',
       name: "Tyrel Y",
       title: "Barber",
       location: "Sandy Springs",
@@ -68,6 +74,7 @@ const Professional_Team = () => {
     },
     {
       id: 6,
+      bookingId: 'doug-l',
       name: "Doug L.",
       title: "Barber",
       location: "Sandy Springs",
@@ -78,6 +85,7 @@ const Professional_Team = () => {
   const summerhillBarbers = [
     {
       id: 7,
+      bookingId: 'aaron-w',
       name: "Aaron W.",
       title: "Barber",
       location: "Summerhill",
@@ -85,6 +93,7 @@ const Professional_Team = () => {
     },
     {
       id: 8,
+      bookingId: 'tj-s',
       name: "TJ S.",
       title: "Barber",
       location: "Summerhill",
@@ -92,6 +101,7 @@ const Professional_Team = () => {
     },
     {
       id: 9,
+      bookingId: 'cass-b',
       name: "Cass B.",
       title: "Barber",
       location: "Summerhill",
@@ -99,6 +109,7 @@ const Professional_Team = () => {
     },
     {
       id: 10,
+      bookingId: 'desean-p',
       name: "DeSean P.",
       title: "Barber",
       location: "Summerhill",
@@ -106,6 +117,7 @@ const Professional_Team = () => {
     },
     {
       id: 11,
+      bookingId: 'tray-w',
       name: "Tray W.",
       title: "Barber",
       location: "Summerhill",
@@ -113,6 +125,7 @@ const Professional_Team = () => {
     },
     {
       id: 12,
+      bookingId: 'hugo-d',
       name: "Hugo D.",
       title: "Barber",
       location: "Summerhill",
@@ -120,6 +133,7 @@ const Professional_Team = () => {
     },
     {
       id: 13,
+      bookingId: 'mula-s',
       name: "Mula S.",
       title: "Barber",
       location: "Summerhill",
@@ -140,6 +154,14 @@ const Professional_Team = () => {
   };
 
   const filteredBarbers = getFilteredBarbers();
+
+  const handleBarberClick = (barber) => {
+    if (!barber?.bookingId) {
+      return;
+    }
+
+    navigate(`/barber/${barber.bookingId}`);
+  };
 
   return (
     <section className="professional-team">
@@ -176,7 +198,20 @@ const Professional_Team = () => {
         {/* Barbers Grid */}
         <div className="professional-team__grid">
           {filteredBarbers.map((barber) => (
-            <div key={barber.id} className="professional-team__card">
+            <div
+              key={barber.id}
+              className="professional-team__card"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleBarberClick(barber)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  handleBarberClick(barber);
+                }
+              }}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="professional-team__image-placeholder">
                 {barber.image ? (
                   <img 

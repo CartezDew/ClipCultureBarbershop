@@ -865,6 +865,61 @@
   transform: none;
 }
 
+.btn-next.disabled {
+  background: grey;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+.btn-next.disabled:hover {
+  background: grey;
+  color: white;
+  transform: none;
+  scale: 1;
+}
+
+/* Required Asterisk Styling */
+.required-asterisk {
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-left: 0.25rem;
+}
+
+/* Style placeholder text - make asterisk stand out with color */
+.required-input {
+  position: relative;
+}
+
+.required-input::placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+/* Firefox */
+.required-input::-moz-placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+/* Chrome, Safari, Edge */
+.required-input::-webkit-input-placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+/* Create visual indication that field is required with a subtle green tint on focus */
+.required-input:focus::placeholder {
+  color: #999;
+}
+
+/* Asterisk in policy text */
+.policy-text .required-asterisk {
+  margin-right: 0.25rem;
+  margin-left: 0;
+}
+
 /* Popup Form Styles */
 .popup-overlay {
   position: fixed;
@@ -2695,17 +2750,17 @@
   position: relative;
   background: white;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 700px;
   width: 100%;
-  max-height: 85vh;
+  max-height: 90vh;
   overflow-y: auto;
   animation: slideUp 0.4s ease-out;
 }
 
 .portfolio-close-btn {
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   right: 1rem;
   background: transparent;
   border: none;
@@ -2748,15 +2803,18 @@
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 2rem;
+  max-width: 100%;
 }
 
 .portfolio-image-wrapper {
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #f0f0f0;
+  /* max-height: 100px; */
+  margin: 0 auto;
 }
 
 .portfolio-image-wrapper img {
@@ -2806,8 +2864,13 @@
   }
 
   .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
     margin-bottom: 1.5rem;
+  }
+
+  .portfolio-image-wrapper {
+    max-width: 120px;
   }
 
   .portfolio-book-btn {
@@ -2828,6 +2891,10 @@
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
+  }
+
+  .portfolio-image-wrapper {
+    max-width: 100px;
   }
 
   .portfolio-book-btn {
@@ -2858,9 +2925,9 @@
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
-  max-height: 85vh;
+  max-height: 90vh;
   overflow-y: auto;
   animation: slideUp 0.4s ease-out;
 }
@@ -2896,6 +2963,31 @@
 .bio-close-btn svg {
   width: 20px;
   height: 20px;
+}
+
+.bio-book-btn-bottom {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--primary-black);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  margin-top: 1.5rem;
+}
+
+.bio-book-btn-bottom:hover {
+  background: var(--green-new);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 151, 134, 0.3);
+}
+
+.bio-book-btn-bottom:active {
+  transform: translateY(0);
 }
 
 .bio-content {
@@ -2960,6 +3052,20 @@
   font-size: 0.95rem;
 }
 
+.bio-gallery-section {
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bio-gallery-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 .bio-book-btn {
   width: 100%;
   padding: 1rem 2rem;
@@ -2988,6 +3094,7 @@
   .bio-modal {
     padding: 1.5rem;
     max-height: 90vh;
+    max-width: 600px;
   }
 
   .bio-header {
@@ -2995,8 +3102,8 @@
   }
 
   .bio-image-wrapper {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 
   .bio-name {
@@ -3007,15 +3114,26 @@
     font-size: 0.9rem;
   }
 
+  .bio-gallery-title {
+    font-size: 1.1rem;
+  }
+
+  .bio-book-btn-bottom {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+
   .bio-book-btn {
     font-size: 1rem;
     padding: 0.875rem 1.5rem;
   }
+  
 }
 
 @media (max-width: 480px) {
   .bio-modal {
     padding: 1rem;
+    max-width: 100%;
   }
 
   .bio-header {
@@ -3030,6 +3148,15 @@
 
   .bio-name {
     font-size: 1.2rem;
+  }
+
+  .bio-gallery-title {
+    font-size: 1rem;
+  }
+
+  .bio-book-btn-bottom {
+    font-size: 0.95rem;
+    padding: 0.875rem 1.25rem;
   }
 
   .bio-book-btn {

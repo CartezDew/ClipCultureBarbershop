@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingActionButtons from './components/FloatingActionButtons.jsx';
@@ -13,11 +13,18 @@ import ProductDetail from './pages/ProductDetail.jsx';
 import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
 import Apply from './pages/Apply.jsx';
+import BarberBio from './pages/BarberBio.jsx';
+import BookingForm from './components/BookingForm.jsx';
 
 function AppContent() {
   const location = useLocation();
   const [showFloatingButtons, setShowFloatingButtons] = useState(false);
   const isHomePage = location.pathname === '/';
+
+  // Reset scroll position on route change without animating
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,7 +124,19 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="/barber/:barberId" element={
+            <>
+              <Navbar />
+              <main>
+                <BarberBio />
+              </main>
+              <Footer />
+            </>
+          } />
         </Routes>
+        
+        {/* Booking Form - Available on all pages (popup only) */}
+        <BookingForm showMainForm={false} />
         
         {/* Floating Action Buttons - Show on all pages except login */}
         <FloatingActionButtons showOnHome={showFloatingButtons} />

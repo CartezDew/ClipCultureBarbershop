@@ -24,7 +24,7 @@ import GalleryImage4 from '../assets/gallery/image-4.webp';
 import GalleryImage5 from '../assets/gallery/image-5.webp';
 import GalleryImage6 from '../assets/gallery/image-6.webp';
 
-const BookingForm = () => {
+const BookingForm = ({ showMainForm = true }) => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [popupStep, setPopupStep] = useState(2);
@@ -61,6 +61,8 @@ const BookingForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTimer, setAlertTimer] = useState(null);
+  const [skipBarberStep, setSkipBarberStep] = useState(false);
+  const [attemptedNext, setAttemptedNext] = useState(false);
 
   // Services from the Services page
   const regularServices = [
@@ -514,8 +516,16 @@ const BookingForm = () => {
 
   const handleBookFromPortfolio = () => {
     if (portfolioBarber) {
-      handleBarberSelect(portfolioBarber.id);
-      handleClosePortfolio();
+      if (showPopupForm) {
+        handleBarberSelect(portfolioBarber.id);
+        handleClosePortfolio();
+      } else {
+        openPopupForm({
+          barberId: portfolioBarber.id,
+          skipBarber: true
+        });
+        handleClosePortfolio();
+      }
     }
   };
 
@@ -533,8 +543,16 @@ const BookingForm = () => {
 
   const handleBookFromBio = () => {
     if (bioBarber) {
-      handleBarberSelect(bioBarber.id);
-      handleCloseBio();
+      if (showPopupForm) {
+        handleBarberSelect(bioBarber.id);
+        handleCloseBio();
+      } else {
+        openPopupForm({
+          barberId: bioBarber.id,
+          skipBarber: true
+        });
+        handleCloseBio();
+      }
     }
   };
 
@@ -597,7 +615,7 @@ const BookingForm = () => {
         : [...prev.services, serviceId];
       
       // Scroll to next button on first service selection (only when adding, not removing)
-      if (!prev.services.includes(serviceId) && newServices.length > 0 && popupStep === 3 && !hasScrolledOnStep3) {
+      if (!prev.services.includes(serviceId) && popupStep === 3 && !hasScrolledOnStep3) {
         setTimeout(() => {
           const nextButton = document.querySelector('.btn-next');
           if (nextButton) {
@@ -676,21 +694,47 @@ const BookingForm = () => {
   };
 
   const nextPopupStep = () => {
-    if (popupStep < 5) {
-      setPopupStep(popupStep + 1);
-      setIsDropdownOpen(false);
-      setIsEditingDate(false); // Reset date editing when changing steps
-      setManualDateInput('');
+    // Check if current step is valid before proceeding
+    if (!isStepValid(popupStep)) {
+      setAttemptedNext(true);
+      return;
     }
+
+    setPopupStep((prevStep) => {
+      if (prevStep >= 5) {
+        return prevStep;
+      }
+
+      if (skipBarberStep && (prevStep === 1 || prevStep === 2)) {
+        return 3;
+      }
+
+      return prevStep + 1;
+    });
+
+    setIsDropdownOpen(false);
+    setIsEditingDate(false); // Reset date editing when changing steps
+    setManualDateInput('');
+    setAttemptedNext(false); // Reset validation error for next step
   };
 
   const prevPopupStep = () => {
-    if (popupStep > 1) {
-      setPopupStep(popupStep - 1);
-      setIsDropdownOpen(false);
-      setIsEditingDate(false); // Reset date editing when changing steps
-      setManualDateInput('');
-    }
+    setPopupStep((prevStep) => {
+      if (prevStep <= 1) {
+        return prevStep;
+      }
+
+      if (skipBarberStep && prevStep === 3) {
+        return 1;
+      }
+
+      return prevStep - 1;
+    });
+
+    setIsDropdownOpen(false);
+    setIsEditingDate(false); // Reset date editing when changing steps
+    setManualDateInput('');
+    setAttemptedNext(false); // Reset validation error when going back
   };
 
   // Prevent body scroll when popup is open
@@ -792,11 +836,42 @@ const BookingForm = () => {
     }
   }, [viewingMonth, viewingYear, popupStep]);
 
-  const openPopupForm = (location = null) => {
-    // If contact info is already filled, skip to step 2 (Barber selection)
+  const openPopupForm = ({ location = null, barberId = null, skipBarber = false } = {}) => {
     const contactInfoFilled = formData.firstName && formData.lastName && formData.email && formData.phone;
-    setPopupStep(contactInfoFilled ? 2 : 1);
-    setLocationFilter(location);
+
+    const matchedBarber = barberId
+      ? allBarbers.find((barber) => barber.id === barberId)
+      : null;
+
+    const derivedLocation = location || (matchedBarber
+      ? matchedBarber.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill'
+      : null);
+
+    const shouldSkipBarber = skipBarber || Boolean(matchedBarber);
+
+    setSkipBarberStep(shouldSkipBarber);
+    setPopupStep(contactInfoFilled ? (shouldSkipBarber ? 3 : 2) : 1);
+    setLocationFilter(derivedLocation);
+
+    setFormData((prev) => {
+      let updatedData = { ...prev };
+
+      if (matchedBarber) {
+        updatedData = {
+          ...updatedData,
+          barber: matchedBarber.id,
+          location: derivedLocation || updatedData.location
+        };
+      } else if (derivedLocation) {
+        updatedData = {
+          ...updatedData,
+          location: derivedLocation
+        };
+      }
+
+      return updatedData;
+    });
+
     setShowPopupForm(true);
     setPolicyAgreed(false); // Reset policy agreement
   };
@@ -804,8 +879,20 @@ const BookingForm = () => {
   // Listen for hero button click to open popup
   useEffect(() => {
     const handleOpenBooking = (event) => {
-      const location = event.detail?.location || null;
-      openPopupForm(location);
+      const detail = event.detail || {};
+
+      if (detail.action === 'showBarberProfile' && detail.barberId) {
+        const matchedBarber = allBarbers.find((barber) => barber.id === detail.barberId);
+
+        if (matchedBarber) {
+          setBioBarber(matchedBarber);
+          setShowBio(true);
+        }
+
+        return;
+      }
+
+      openPopupForm(detail);
     };
 
     window.addEventListener('openBookingForm', handleOpenBooking);
@@ -825,6 +912,8 @@ const BookingForm = () => {
     setHasScrolledOnStep4(false);
     setIsEditingDate(false); // Reset date editing state
     setManualDateInput('');
+    setSkipBarberStep(false);
+    setAttemptedNext(false); // Reset validation error
     closeCustomAlert(); // Close any open alerts
   };
 
@@ -855,6 +944,7 @@ const BookingForm = () => {
     console.log('Booking submitted:', formData);
     setShowPopupForm(false); // Close the booking modal first
     setShowSuccessMessage(true); // Then show the success message
+    setSkipBarberStep(false);
     
     // Scroll to top to show success message
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1039,20 +1129,22 @@ const BookingForm = () => {
                 <input
                   type="text"
                   name="firstName"
-                  placeholder="First Name"
+                  placeholder="First Name *"
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
+                  className="required-input"
                 />
               </div>
               <div className="form-group half">
                 <input
                   type="text"
                   name="lastName"
-                  placeholder="Last Name"
+                  placeholder="Last Name *"
                   value={formData.lastName}
                   onChange={handleInputChange}
                   required
+                  className="required-input"
                 />
               </div>
             </div>
@@ -1061,20 +1153,22 @@ const BookingForm = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email Address"
+                  placeholder="Email Address *"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
+                  className="required-input"
                 />
               </div>
               <div className="form-group half">
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="Phone Number"
+                  placeholder="Phone Number *"
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
+                  className="required-input"
                 />
               </div>
             </div>
@@ -1094,7 +1188,34 @@ const BookingForm = () => {
         
         return (
           <div className="booking-step">
-            <h3>Select Your Barber</h3>
+            <h3>Select Your Barber <span className="required-asterisk">*</span></h3>
+            
+            {/* Show pre-selected barber message if applicable */}
+            {skipBarberStep && selectedBarber && (
+              <div style={{
+                background: 'linear-gradient(135deg, #e8f5f3 0%, #d4ebe7 100%)',
+                border: '2px solid var(--primary-green)',
+                borderRadius: '8px',
+                padding: '1rem',
+                marginBottom: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem'
+              }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green)" strokeWidth="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <div>
+                  <strong style={{color: 'var(--primary-black)', display: 'block', marginBottom: '0.25rem'}}>
+                    Barber Pre-Selected
+                  </strong>
+                  <span style={{color: 'var(--primary-black)', opacity: 0.8, fontSize: '0.95rem'}}>
+                    You've chosen {selectedBarber.name}. You can change your selection below if needed.
+                  </span>
+                </div>
+              </div>
+            )}
             
             {/* Earliest Available Option */}
             <div 
@@ -1185,11 +1306,11 @@ const BookingForm = () => {
         
         return (
           <div className="booking-step">
-            <h3>Select Service</h3>
+            <h3>Select Service <span className="required-asterisk">*</span></h3>
             
             {/* Custom Service Dropdown */}
             <div className="form-group">
-              <label className="service-label">Choose Your Service</label>
+              <label className="service-label">Choose Your Service <span className="required-asterisk">*</span></label>
               <div className="custom-dropdown-wrapper">
                 <div 
                   className={`custom-dropdown-trigger ${isDropdownOpen ? 'open' : ''}`}
@@ -1392,7 +1513,7 @@ const BookingForm = () => {
         
         return (
           <div className="booking-step">
-            <h3>Select Date & Time</h3>
+            <h3>Select Date & Time <span className="required-asterisk">*</span></h3>
             <div className="custom-calendar-container">
               {/* Month/Year Selector */}
               <div className="calendar-header">
@@ -1689,7 +1810,7 @@ const BookingForm = () => {
                     required
                   />
                   <span className="policy-text">
-                    I agree to arrive 10–15 minutes early to allow time for my initial consultation prior to my service. 
+                    <span className="required-asterisk">*</span> I agree to arrive 10–15 minutes early to allow time for my initial consultation prior to my service. 
                     I am aware of the cancellation policy: Missed appointments incur a $15 no-show fee, which will be applied to my next booking.
                   </span>
                 </label>
@@ -1784,7 +1905,7 @@ const BookingForm = () => {
               </div>
               <motion.button 
                 className="btn-book-now" 
-                onClick={openPopupForm}
+                onClick={() => openPopupForm()}
                 disabled={!formData.firstName || !formData.lastName || !formData.email || !formData.phone}
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
@@ -1953,45 +2074,47 @@ const BookingForm = () => {
 
   return (
     <>
-      <div className="booking-form-container">
-        <div className="booking-form">
-          <div className="booking-header">
-            <h2>Book Your Appointment</h2>
-            <p className="booking-subtitle">Walk-ins are welcome!</p>
-            <div className="step-indicator">
-              <span>Step {currentStep} of 5</span>
+      {showMainForm && (
+        <div className="booking-form-container">
+          <div className="booking-form">
+            <div className="booking-header">
+              <h2>Book Your Appointment</h2>
+              <p className="booking-subtitle">Walk-ins are welcome!</p>
+              <div className="step-indicator">
+                <span>Step {currentStep} of 5</span>
+              </div>
+            </div>
+
+            {renderStep()}
+
+            <div className="booking-actions">
+              {currentStep > 1 && (
+                <button className="btn-back" onClick={prevStep}>
+                  ← Back
+                </button>
+              )}
+              
+              {currentStep > 1 && currentStep < 5 ? (
+                <button 
+                  className="btn-next" 
+                  onClick={nextStep}
+                  disabled={!isStepValid()}
+                >
+                  Next →
+                </button>
+              ) : currentStep === 5 ? (
+                <button 
+                  className="btn-confirm" 
+                  onClick={handleSubmit}
+                  disabled={!isStepValid()}
+                >
+                  Confirm Appointment
+                </button>
+              ) : null}
             </div>
           </div>
-
-          {renderStep()}
-
-          <div className="booking-actions">
-            {currentStep > 1 && (
-              <button className="btn-back" onClick={prevStep}>
-                ← Back
-              </button>
-            )}
-            
-            {currentStep > 1 && currentStep < 5 ? (
-              <button 
-                className="btn-next" 
-                onClick={nextStep}
-                disabled={!isStepValid()}
-              >
-                Next →
-              </button>
-            ) : currentStep === 5 ? (
-              <button 
-                className="btn-confirm" 
-                onClick={handleSubmit}
-                disabled={!isStepValid()}
-              >
-                Confirm Appointment
-              </button>
-            ) : null}
-          </div>
         </div>
-      </div>
+      )}
 
       {/* Popup Form Modal - Rendered using Portal at document root */}
       {showPopupForm && ReactDOM.createPortal(
@@ -2053,13 +2176,19 @@ const BookingForm = () => {
                         <div className="step-circle">1</div>
                         <div className="step-label">Contact</div>
                       </div>
-                      <div className={`step-line ${popupStep > 1 ? 'completed' : ''}`}></div>
+                      <div className={`step-line ${popupStep > 1 || (skipBarberStep && popupStep >= 3) ? 'completed' : ''}`}></div>
                       
-                      <div className={`step-item ${popupStep >= 2 ? 'active' : ''} ${popupStep > 2 ? 'completed' : ''}`}>
-                        <div className="step-circle">2</div>
+                      <div className={`step-item ${popupStep >= 2 || (skipBarberStep && popupStep >= 3) ? 'active' : ''} ${popupStep > 2 || (skipBarberStep && popupStep >= 3) ? 'completed' : ''}`}>
+                        <div className="step-circle">
+                          {skipBarberStep && popupStep >= 3 ? (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          ) : '2'}
+                        </div>
                         <div className="step-label">Barber</div>
                       </div>
-                      <div className={`step-line ${popupStep > 2 ? 'completed' : ''}`}></div>
+                      <div className={`step-line ${popupStep > 2 || (skipBarberStep && popupStep >= 3) ? 'completed' : ''}`}></div>
                       
                       <div className={`step-item ${popupStep >= 3 ? 'active' : ''} ${popupStep > 3 ? 'completed' : ''}`}>
                         <div className="step-circle">3</div>
@@ -2091,9 +2220,12 @@ const BookingForm = () => {
                     
                     {popupStep < 5 ? (
                       <button 
-                        className="btn-next" 
+                        className={`btn-next ${!isStepValid(popupStep) ? 'disabled' : ''}`}
                         onClick={nextPopupStep}
-                        disabled={!isStepValid(popupStep)}
+                        style={{
+                          opacity: !isStepValid(popupStep) ? 0.5 : 1,
+                          cursor: !isStepValid(popupStep) ? 'not-allowed' : 'pointer'
+                        }}
                       >
                         Next →
                       </button>
@@ -2108,8 +2240,8 @@ const BookingForm = () => {
                     )}
                   </div>
 
-                  {/* Validation Error Message - Show when step is invalid */}
-                  {!isStepValid(popupStep) && (
+                  {/* Validation Error Message - Show only after user attempts to proceed */}
+                  {attemptedNext && !isStepValid(popupStep) && (
                     <div className="validation-error-message">
                       {getValidationErrorMessage(popupStep)}
                     </div>
@@ -2251,7 +2383,7 @@ const BookingForm = () => {
               className="portfolio-book-btn"
               onClick={handleBookFromPortfolio}
             >
-              Book {portfolioBarber.name}'s Services
+              Book Now
             </button>
           </div>
         </div>,
@@ -2290,14 +2422,14 @@ const BookingForm = () => {
               <div className="bio-text">
                 <p>{bioBarber.bio}</p>
               </div>
-
-              <button 
-                className="bio-book-btn"
-                onClick={handleBookFromBio}
-              >
-                Book with {bioBarber.name}
-              </button>
             </div>
+
+            <button 
+              className="bio-book-btn-bottom"
+              onClick={handleBookFromBio}
+            >
+              Book {bioBarber.name}
+            </button>
           </div>
         </div>,
         document.body
