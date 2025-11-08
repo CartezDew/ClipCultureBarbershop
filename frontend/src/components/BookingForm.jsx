@@ -23,6 +23,10 @@ import GalleryImage3 from '../assets/gallery/image-3.webp';
 import GalleryImage4 from '../assets/gallery/image-4.webp';
 import GalleryImage5 from '../assets/gallery/image-5.webp';
 import GalleryImage6 from '../assets/gallery/image-6.webp';
+// Product images
+import Product1 from '../assets/products/Product-1.png';
+import Product2 from '../assets/products/Product-2.png';
+import Product3 from '../assets/products/Product-3.png';
 
 const BookingForm = ({ showMainForm = true }) => {
   const navigate = useNavigate();
@@ -104,7 +108,7 @@ const BookingForm = ({ showMainForm = true }) => {
       id: 1,
       name: "Curl Twist",
       price: 15,
-      image: "/src/assets/products/Product-1.png",
+      image: Product1,
       slug: "curl-twist",
       size: "8 oz"
     },
@@ -112,7 +116,7 @@ const BookingForm = ({ showMainForm = true }) => {
       id: 2,
       name: "Beard Balm",
       price: 20,
-      image: "/src/assets/products/Product-2.png",
+      image: Product2,
       slug: "beard-balm",
       size: "8 oz"
     },
@@ -120,7 +124,7 @@ const BookingForm = ({ showMainForm = true }) => {
       id: 3,
       name: "Beard Oil",
       price: 20,
-      image: "/src/assets/products/Product-3.png",
+      image: Product3,
       slug: "beard-oil",
       size: "4 oz"
     }
@@ -1278,6 +1282,7 @@ const BookingForm = ({ showMainForm = true }) => {
                         src={barber.image} 
                         alt={barber.name}
                         className="barber-image"
+                        loading="lazy"
                       />
                     </div>
                     <div className="barber-info">
@@ -2257,7 +2262,7 @@ const BookingForm = ({ showMainForm = true }) => {
                             onClick={() => setShowPopupForm(false)}
                           >
                             <div className="booking-product-image">
-                              <img src={product.image} alt={product.name} />
+                              <img src={product.image} alt={product.name} loading="lazy" />
                             </div>
                             <div className="booking-product-info">
                               <h5 className="booking-product-name">{product.name}</h5>
@@ -2371,7 +2376,7 @@ const BookingForm = ({ showMainForm = true }) => {
             <div className="portfolio-grid">
               {portfolioImages.map((image, index) => (
                 <div key={index} className="portfolio-image-wrapper">
-                  <img src={image} alt={`${portfolioBarber.name}'s work ${index + 1}`} />
+                  <img src={image} alt={`${portfolioBarber.name}'s work ${index + 1}`} loading="lazy" />
                 </div>
               ))}
             </div>
@@ -2405,7 +2410,7 @@ const BookingForm = ({ showMainForm = true }) => {
             <div className="bio-content">
               <div className="bio-header">
                 <div className="bio-image-wrapper">
-                  <img src={bioBarber.image} alt={bioBarber.name} />
+                  <img src={bioBarber.image} alt={bioBarber.name} loading="lazy" />
                 </div>
                 <div className="bio-header-info">
                   <h3 className="bio-name">{bioBarber.name}</h3>

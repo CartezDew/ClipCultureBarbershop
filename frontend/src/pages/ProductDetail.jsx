@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import '../styles/product-detail.css';
+import Product1 from '../assets/products/Product-1.png';
+import Product2 from '../assets/products/Product-2.png';
+import Product3 from '../assets/products/Product-3.png';
+import Product4 from '../assets/products/Product-4.png';
+import Product5 from '../assets/products/Product-5 .png';
+import Product6 from '../assets/products/Product-6.png';
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -24,7 +30,7 @@ const ProductDetail = () => {
       price: 15,
       size: "8 oz",
       rating: 5,
-      image: "/src/assets/products/Product-1.png",
+      image: Product1,
       description: "Premium curl defining cream that enhances natural texture and provides long-lasting hold without stiffness.",
       features: [
         "Defines and enhances natural curls",
@@ -40,7 +46,7 @@ const ProductDetail = () => {
       price: 20,
       size: "8 oz",
       rating: 5,
-      image: "/src/assets/products/Product-2.png",
+      image: Product2,
       description: "Nourishing beard balm that conditions, styles, and tames unruly facial hair while promoting healthy growth.",
       features: [
         "Conditions and softens beard hair",
@@ -56,7 +62,7 @@ const ProductDetail = () => {
       price: 20,
       size: "4 oz",
       rating: 5,
-      image: "/src/assets/products/Product-3.png",
+      image: Product3,
       description: "Lightweight beard oil that moisturizes the skin underneath while adding shine and softness to your beard.",
       features: [
         "Moisturizes skin and hair",
@@ -72,7 +78,7 @@ const ProductDetail = () => {
       price: 18,
       size: "8 oz",
       rating: 5,
-      image: "/src/assets/products/Product-4.png",
+      image: Product4,
       description: "Gentle cleansing wash specifically formulated for facial hair and the sensitive skin underneath.",
       features: [
         "Gentle cleansing formula",
@@ -88,7 +94,7 @@ const ProductDetail = () => {
       price: 15,
       size: "16 oz",
       rating: 4.6,
-      image: "/src/assets/products/Product-5 .png",
+      image: Product5,
       description: "Intensive body lotion that deeply moisturizes and nourishes skin, leaving it soft and smooth all day.",
       features: [
         "Deep moisturizing formula",
@@ -104,7 +110,7 @@ const ProductDetail = () => {
       price: 15,
       size: "16 oz",
       rating: 4,
-      image: "/src/assets/products/Product-6.png",
+      image: Product6,
       description: "Refreshing body wash that cleanses while moisturizing, leaving skin feeling clean and refreshed.",
       features: [
         "Gentle cleansing action",
@@ -158,7 +164,7 @@ const ProductDetail = () => {
 
         <div className="product-detail__content">
           <div className="product-detail__image">
-            <img src={product.image} alt={product.name} />
+            <img src={product.image} alt={product.name} loading="lazy" />
           </div>
 
           <div className="product-detail__info">

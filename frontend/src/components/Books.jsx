@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/books.css';
 import AmazonImage from '../assets/Books/Amazon.png';
+import ClipCultureManual from '../assets/Books/Clip Culture Manual.webp';
+import ClipCultureManual2 from '../assets/Books/Clip Culture Manual 2.webp';
+import ClipCultureManual2Extended from '../assets/Books/Clip Culture Manual 2- Extended Edition.webp';
 
 const Books = () => {
   const gridRef = useRef(null);
@@ -59,7 +62,7 @@ const Books = () => {
       name: "Clip Culture Manual",
       price: 9.99,
       rating: 4.8,
-      image: "/src/assets/Books/Clip Culture Manual.webp",
+      image: ClipCultureManual,
       slug: "Clip Culture Manual",
       amazonLink: "https://a.co/d/6JUYT4X"
     },
@@ -68,7 +71,7 @@ const Books = () => {
       name: "Clip Culture Mnaual 2",
       price: 9.19,
       rating: 5,
-      image: "/src/assets/Books/Clip Culture Manual 2.webp",
+      image: ClipCultureManual2,
       slug: "Clip Culture Mnaual 2",
       amazonLink: "https://a.co/d/5lDgae3"
     },
@@ -77,7 +80,7 @@ const Books = () => {
       name: "Clip Culture Mnaual 2- Extended Edition",
       price: 9.19,
       rating: 4.9,
-      image: "/src/assets/Books/Clip Culture Manual 2- Extended Edition.webp",
+      image: ClipCultureManual2Extended,
       slug: "Clip Culture Mnaual 2- Extended Edition",
       amazonLink: "https://a.co/d/7J9qXKz"
     },
@@ -129,6 +132,7 @@ const Books = () => {
                   src={product.image} 
                   alt={product.name}
                   className="book-card__image"
+                  loading="lazy"
                 />
               </div>
               <div className="book-card__content">
@@ -181,6 +185,7 @@ const Books = () => {
                       src={AmazonImage} 
                       alt="Order now at amazon.com" 
                       className="amazon-button__image"
+                      loading="lazy"
                     />
                   </a>
                 </div>

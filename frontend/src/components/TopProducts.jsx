@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
 import Gallery from '../components/Gallery.jsx';
+import Product1 from '../assets/products/Product-1.png';
+import Product2 from '../assets/products/Product-2.png';
+import Product3 from '../assets/products/Product-3.png';
+import Product4 from '../assets/products/Product-4.png';
+import Product5 from '../assets/products/Product-5 .png';
+import Product6 from '../assets/products/Product-6.png';
 
 const TopProducts = () => {
   const [quantities, setQuantities] = useState({});
@@ -32,7 +38,7 @@ const TopProducts = () => {
       name: "Curl Twist",
       price: 15,
       rating: 5,
-      image: "/src/assets/products/Product-1.png",
+      image: Product1,
       slug: "curl-twist",
       size: "8 oz"
     },
@@ -41,7 +47,7 @@ const TopProducts = () => {
       name: "Beard Balm",
       price: 20,
       rating: 5,
-      image: "/src/assets/products/Product-2.png",
+      image: Product2,
       slug: "beard-balm",
       size: "8 oz"
     },
@@ -50,7 +56,7 @@ const TopProducts = () => {
       name: "Beard Oil",
       price: 20,
       rating: 5,
-      image: "/src/assets/products/Product-3.png",
+      image: Product3,
       slug: "beard-oil",
       size: "4 oz"
     },
@@ -59,7 +65,7 @@ const TopProducts = () => {
       name: "Beard Wash",
       price: 18,
       rating: 5,
-      image: "/src/assets/products/Product-4.png",
+      image: Product4,
       slug: "beard-wash",
       size: "8 oz"
     },
@@ -68,7 +74,7 @@ const TopProducts = () => {
       name: "Body Lotion",
       price: 15,
       rating: 4.6,
-      image: "/src/assets/products/Product-5 .png",
+      image: Product5,
       slug: "body-lotion",
       size: "16 oz"
     },
@@ -77,7 +83,7 @@ const TopProducts = () => {
       name: "Body Wash",
       price: 15,
       rating: 4,
-      image: "/src/assets/products/Product-6.png",
+      image: Product6,
       slug: "body-wash",
       size: "16 oz"
     }
@@ -130,6 +136,7 @@ const TopProducts = () => {
                     src={product.image} 
                     alt={product.name}
                     className="product-card__image"
+                    loading="lazy"
                   />
                 </div>
                 <div className="product-card__content">

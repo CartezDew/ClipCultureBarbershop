@@ -5,13 +5,22 @@ const Gallery = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const wrapperRef = useRef(null);
 
-  // Gallery images - dynamically generate array for all 63 images
-  const totalImages = 66;
-  const images = Array.from({ length: totalImages }, (_, index) => ({
-    id: index + 1,
-    src: `/src/assets/gallery/image-${index + 1}.webp`,
-    alt: `Barbershop Interior ${index + 1}`
-  }));
+  // Gallery images - dynamically import all gallery images using Vite's import.meta.glob
+  const galleryModules = import.meta.glob('../assets/gallery/*.webp', { eager: true });
+  
+  // Convert the modules object into an array of image objects
+  const images = Object.entries(galleryModules)
+    .map(([path, module]) => {
+      // Extract the image number from the path
+      const match = path.match(/image-(\d+)\.webp$/);
+      const imageNumber = match ? parseInt(match[1]) : 0;
+      return {
+        id: imageNumber,
+        src: module.default,
+        alt: `Barbershop Interior ${imageNumber}`
+      };
+    })
+    .sort((a, b) => a.id - b.id); // Sort by image number
 
   const nextSlide = () => {
     if (isTransitioning) return;
