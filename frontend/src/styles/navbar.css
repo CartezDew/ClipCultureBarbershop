@@ -628,7 +628,7 @@
   display: none;
   position: fixed;
   right: .3rem;
-  bottom: 5rem;
+  bottom: 6rem;
   width: 2.7rem;
   height: 2.7rem;
   background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
