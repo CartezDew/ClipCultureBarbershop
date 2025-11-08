@@ -1060,6 +1060,7 @@
     box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
     cursor: pointer;
     animation: borderGlow 3s ease-in-out infinite;
+    padding: .75rem 1rem;
   }
   
   .hero__btn--book:hover {

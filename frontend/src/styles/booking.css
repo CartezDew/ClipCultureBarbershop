@@ -1282,29 +1282,8 @@
 }
 
 .custom-dropdown-scroll {
-  max-height: 500px;
-  overflow-y: auto;
+  /* Removed max-height and overflow to allow modal scrollbar to handle all scrolling */
   overflow-x: hidden;
-}
-
-/* Custom Scrollbar */
-.custom-dropdown-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-dropdown-scroll::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-.custom-dropdown-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 107, 53, 0.5);
-  background: var(--primary-green);
-  border-radius: 10px;
-}
-
-.custom-dropdown-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 107, 53, 0.7);
 }
 
 .dropdown-group {
@@ -1426,6 +1405,7 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: all 0.25s ease;
+  margin-right: 1rem;
 }
 
 .addon-chip-icon {
@@ -2141,10 +2121,6 @@
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 
-  .custom-dropdown-scroll {
-    max-height: 400px;
-  }
-
   .step-circle {
     width: 30px;
     height: 30px;
@@ -2811,9 +2787,8 @@
 .portfolio-image-wrapper {
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 4px;
   background: #f0f0f0;
-  /* max-height: 100px; */
   margin: 0 auto;
 }
 
@@ -2869,9 +2844,6 @@
     margin-bottom: 1.5rem;
   }
 
-  .portfolio-image-wrapper {
-    max-width: 120px;
-  }
 
   .portfolio-book-btn {
     font-size: 1rem;
@@ -2886,15 +2858,6 @@
 
   .portfolio-title {
     font-size: 1.2rem;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-
-  .portfolio-image-wrapper {
-    max-width: 100px;
   }
 
   .portfolio-book-btn {

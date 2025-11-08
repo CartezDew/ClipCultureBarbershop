@@ -724,10 +724,7 @@ const BookingForm = ({ showMainForm = true }) => {
         return prevStep;
       }
 
-      if (skipBarberStep && prevStep === 3) {
-        return 1;
-      }
-
+      // Allow users to go back to step 2 even if barber is prefilled
       return prevStep - 1;
     });
 
