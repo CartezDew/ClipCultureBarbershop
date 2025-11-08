@@ -344,16 +344,6 @@
   .product-card__name {
     font-size: 0.9rem;
   }
-  
-  .star {
-    font-size: .95rem;
-  }
-
-  .productbtn--add-cart, .productbtn--learn-more {
-    gap: 0.3rem;
-    font-size: 0.7rem;
-    padding: 0.5rem .3rem;
-  }
 }
 
 @media (max-width: 360px) {
