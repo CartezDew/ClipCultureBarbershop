@@ -348,9 +348,11 @@ const Home = () => {
 
       {/* Services Gallery */}
       {/* <HomeGallery/>  */}
-
+      <div className="home-barbershop-gallery-wrapper">
+        <BarbershopGallery />
+      </div>
       {/* Barbershop Gallery */}
-      <BarbershopGallery />
+      {/* <BarbershopGallery /> */}
 
       {/* Testimonials */}
       <Testimonials />

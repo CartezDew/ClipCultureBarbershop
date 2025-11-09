@@ -6,7 +6,9 @@
     max-width: 1400px;
     box-sizing: border-box;
   }
-  
+  .home-barbershop-gallery-wrapper .barbershop-gallery-section {
+    background: black;
+  }
   /* horizontal gallery */
   .gallery-slider-wrapper {
     display: grid;
