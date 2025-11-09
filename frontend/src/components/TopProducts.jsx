@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
-import Gallery from '../components/Gallery.jsx';
 import Product1 from '../assets/products/Product-1.png';
 import Product2 from '../assets/products/Product-2.png';
 import Product3 from '../assets/products/Product-3.png';
@@ -192,9 +191,6 @@ const TopProducts = () => {
           </div>
         </div>
       </section>
-      <div className="top-products-gallery-wrapper">
-        <Gallery />
-      </div>
     </>
   );
 };

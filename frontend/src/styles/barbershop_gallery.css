@@ -1,0 +1,129 @@
+.barbershop-gallery-section {
+    position: relative;
+    background: black;
+    padding: 0 1rem 1.5rem;
+    margin: 0 auto;
+    max-width: 1400px;
+    box-sizing: border-box;
+  }
+  
+  /* horizontal gallery */
+  .gallery-slider-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    margin-bottom: 1rem;
+  }
+  
+  .gallery-slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* image wrapper for per-image count */
+  .gallery-image-wrapper {
+    position: relative;
+    scroll-snap-align: start;
+  }
+  
+  .barbershop-gallery-image {
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    display: block;
+  }
+  
+  /* per-image counter */
+  .gallery-image-count {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.2rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 999px;
+  }
+  
+  /* scrollbar container */
+  .gallery-slider-scrollbar {
+    width: 100%;
+    height: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* track (the bar) */
+  .gallery-slider-scrollbar-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgba(240, 243, 243, 0.25);
+    border-radius: 999px;
+    cursor: grab;
+  }
+  
+
+  .gallery-slider-scrollbar-track:hover {
+    height: 8px;
+  }
+  
+
+  .scrollbar-thumb {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15%;            /* adjust here to make it longer */
+    height: 100%;
+    background: var(--green-new);
+    border-radius: 999px;
+    cursor: grab;
+  }
+  
+  /* bigger + grabbing when active (mousedown) */
+  .scrollbar-thumb.active,
+  .scrollbar-thumb:active {
+    cursor: grabbing;
+    height: 10px;
+    top: -2px;
+  }
+  
+  /* nav buttons */
+  .gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  
+  .gallery-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+    transform: translateY(-50%) scale(1.03);
+  }
+  
+  .gallery-nav-left {
+    left: 0.25rem;
+  }
+  
+  .gallery-nav-right {
+    right: 0.25rem;
+  }
+  

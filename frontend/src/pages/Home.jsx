@@ -16,6 +16,9 @@ import Footer from '../components/Footer.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
+import HomeGallery from '../components/Home_Gallery.jsx';
+import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
+
 // Flexed Bicep Icon
 const BicepIcon = ({ size = 24 }) => (
   <svg
@@ -342,6 +345,12 @@ const Home = () => {
 
       {/* Top Products */}
       <TopProducts />
+
+      {/* Services Gallery */}
+      <HomeGallery/> 
+
+      {/* Barbershop Gallery */}
+      <BarbershopGallery />
 
       {/* Testimonials */}
       <Testimonials />
