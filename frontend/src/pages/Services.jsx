@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ServicesGallery from '../components/ServicesGallery.jsx';
+import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import '../styles/services.css';
 
 const Services = () => {
@@ -105,6 +106,7 @@ const Services = () => {
 
         {/* Services Gallery Component - Outside container for full width */}
         <ServicesGallery />
+        <BarbershopGallery />
 
         <div className="services-container-main">
           {/* Regular Services */}

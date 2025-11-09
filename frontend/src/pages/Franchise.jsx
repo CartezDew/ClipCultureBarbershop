@@ -7,6 +7,7 @@ import Shop2Image from '../assets/Contact/Shop_2.webp';
 import Gallery from '../components/Gallery.jsx';
 import FranchiseRequestInfoModal from '../components/FranchiseRequestInfoModal.jsx';
 import FranchiseApplyModal from '../components/FranchiseApplyModal.jsx';
+import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 // FAQ data moved inline to avoid import issues
 const franchiseFaqs = [
   {
@@ -329,7 +330,9 @@ const Franchise = () => {
           onClose={() => setShowApplyModal(false)}
         />
 
-        <Gallery />
+      <div className="franchise-gallery-wrapper">
+          <BarbershopGallery />
+      </div>
       <div className="franchise-joinus-wrapper">
         <JoinUs />
       </div>

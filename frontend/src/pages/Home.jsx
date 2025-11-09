@@ -347,7 +347,7 @@ const Home = () => {
       <TopProducts />
 
       {/* Services Gallery */}
-      <HomeGallery/> 
+      {/* <HomeGallery/>  */}
 
       {/* Barbershop Gallery */}
       <BarbershopGallery />

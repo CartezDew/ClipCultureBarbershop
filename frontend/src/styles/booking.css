@@ -1936,7 +1936,7 @@
 
 @media (max-width: 768px) {
   .btn-book-now {
-    max-width: 90px;
+    max-width: 100px;
   }
   .booking-header h2 {  
     font-size: 1.3rem;
@@ -1948,7 +1948,7 @@
     font-size: 1.1rem;
   }
   .btn-book-now {
-    font-size: .9rem;
+    font-size: 1rem;
   }
   .form-row {
     gap: 0.3rem;
@@ -2021,9 +2021,7 @@
   .booking-step h3 {
     font-size: 1rem;
   }
-  .btn-book-now {
-    font-size: .8rem;
-  }
+
   .form-group input {
     font-size: .8rem;
     padding: .5rem;
@@ -2042,7 +2040,7 @@
     padding: 0.7rem;
   }
   .btn-book-now {
-    max-width: 70px;
+    max-width: 90px;
   }
   .form-row {
     gap: 0.2;
