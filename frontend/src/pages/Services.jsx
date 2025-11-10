@@ -105,8 +105,10 @@ const Services = () => {
         </div>
 
         {/* Services Gallery Component - Outside container for full width */}
-        <ServicesGallery />
-        <BarbershopGallery />
+        {/* <ServicesGallery /> */}
+        <div className="services-gallery-wrapper"> 
+          <BarbershopGallery />
+        </div>
 
         <div className="services-container-main">
           {/* Regular Services */}

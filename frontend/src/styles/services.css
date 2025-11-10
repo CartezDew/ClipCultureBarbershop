@@ -6,7 +6,10 @@
 }
 
 .services-container-main {
-  padding: 0 1rem;
+  width: 100%;
+  max-width: 1400px;   /* <- cap it */
+  margin: 0 auto;      /* <- center it */
+  padding: 0 1rem;     /* <- keep your side padding */
 }
 
 

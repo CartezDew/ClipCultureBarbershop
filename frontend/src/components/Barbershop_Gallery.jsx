@@ -191,56 +191,58 @@ const BarbershopGallery = () => {
   };
 
   return (
-    <div
-      className={`barbershop-gallery-section ${
-        showCounts ? "show-counts" : "hide-counts"
-      }`}
-    >
-      {canScrollLeft && (
-        <button
-          type="button"
-          className="gallery-nav-btn gallery-nav-left"
-          onClick={() => handleScrollBtn("left")}
-          aria-label="Scroll left"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <div className="barbershop-gallery-outer">
+      <div
+        className={`barbershop-gallery-section ${
+          showCounts ? "show-counts" : "hide-counts"
+        }`}
+      >
+        {canScrollLeft && (
+          <button
+            type="button"
+            className="gallery-nav-btn gallery-nav-left"
+            onClick={() => handleScrollBtn("left")}
+            aria-label="Scroll left"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="15,18 9,12 15,6"></polyline>
-           </svg>
-        </button>
-      )}
-
-      <div className="gallery-slider-wrapper" ref={sliderRef}>
-        {imageEntries.map((img, index) => (
-          <div className="gallery-image-wrapper" key={img.path}>
-            <img
-              src={img.src}
-              alt={img.filename}
-              loading="lazy"
-              className="barbershop-gallery-image"
-            />
-            <span className="gallery-image-count">
-              {index + 1}/{totalImages}
-            </span>
+            </svg>
+          </button>
+        )}
+  
+        <div className="gallery-slider-wrapper" ref={sliderRef}>
+          {imageEntries.map((img, index) => (
+            <div className="gallery-image-wrapper" key={img.path}>
+              <img
+                src={img.src}
+                alt={img.filename}
+                loading="lazy"
+                className="barbershop-gallery-image"
+              />
+              <span className="gallery-image-count">
+                {index + 1}/{totalImages}
+              </span>
+            </div>
+          ))}
+        </div>
+  
+        {canScrollRight && (
+          <button
+            type="button"
+            className="gallery-nav-btn gallery-nav-right"
+            onClick={() => handleScrollBtn("right")}
+            aria-label="Scroll right"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        )}
+  
+        <div className="gallery-slider-scrollbar">
+          <div className="gallery-slider-scrollbar-track" ref={trackRef}>
+            <div className="scrollbar-thumb" ref={thumbRef}></div>
           </div>
-        ))}
-      </div>
-
-      {canScrollRight && (
-        <button
-          type="button"
-          className="gallery-nav-btn gallery-nav-right"
-          onClick={() => handleScrollBtn("right")}
-          aria-label="Scroll right"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="9,18 15,12 9,6"></polyline>
-           </svg>
-        </button>
-      )}
-
-      <div className="gallery-slider-scrollbar">
-        <div className="gallery-slider-scrollbar-track" ref={trackRef}>
-          <div className="scrollbar-thumb" ref={thumbRef}></div>
         </div>
       </div>
     </div>
