@@ -8,7 +8,7 @@ const rawImages = import.meta.glob(
 );
 
 // Services gallery image order - same as ServicesGallery component
-const servicesImageOrder = [7, 2, 20, 10, 13, 22, 37, 15, 16, 18, 23, 25, 26, 29, 31, 47];
+const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 22, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
 
 const BarbershopGallery = () => {
   const location = useLocation();
@@ -72,27 +72,66 @@ const BarbershopGallery = () => {
     setCanScrollLeft(!atStart);
     setCanScrollRight(!atEnd);
 
-    // Calculate current visible image index
+    // Calculate current visible image index - find the first image that's visible from the left
     const imageWrappers = slider.querySelectorAll('.gallery-image-wrapper');
     if (imageWrappers.length > 0) {
       const sliderRect = slider.getBoundingClientRect();
-      const sliderCenter = sliderRect.left + sliderRect.width / 2;
+      const sliderLeft = sliderRect.left;
+      const sliderRight = sliderRect.right;
       
-      let closestIndex = 0;
-      let closestDistance = Infinity;
+      // Find the first image that has any part visible in the viewport
+      let firstVisibleIndex = 0;
+      let found = false;
       
-      imageWrappers.forEach((wrapper, index) => {
+      for (let i = 0; i < imageWrappers.length; i++) {
+        const wrapper = imageWrappers[i];
         const wrapperRect = wrapper.getBoundingClientRect();
-        const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
-        const distance = Math.abs(wrapperCenter - sliderCenter);
+        const imageLeft = wrapperRect.left;
+        const imageRight = wrapperRect.right;
         
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
+        // Check if image overlaps with the visible area
+        // Image is visible if its right edge is past slider left AND its left edge is before slider right
+        if (imageRight > sliderLeft && imageLeft < sliderRight) {
+          // Check how much of the image is visible
+          const visibleWidth = Math.min(imageRight, sliderRight) - Math.max(imageLeft, sliderLeft);
+          const imageWidth = wrapperRect.width;
+          const visibilityRatio = visibleWidth / imageWidth;
+          
+          // Use the first image that has at least 30% visibility
+          if (visibilityRatio >= 0.3) {
+            firstVisibleIndex = i;
+            found = true;
+            break;
+          }
         }
-      });
+      }
       
-      setCurrentVisibleIndex(closestIndex);
+      // Fallback: if at start, use index 0; otherwise find closest to left edge
+      if (!found) {
+        if (slider.scrollLeft <= 2) {
+          firstVisibleIndex = 0;
+        } else {
+          // Find the image closest to the left edge of the slider
+          let closestIndex = 0;
+          let minDistance = Infinity;
+          
+          imageWrappers.forEach((wrapper, index) => {
+            const wrapperRect = wrapper.getBoundingClientRect();
+            const imageLeft = wrapperRect.left;
+            // Only consider images that are to the right of or at the slider left edge
+            if (imageLeft >= sliderLeft - 50) {
+              const distance = Math.abs(imageLeft - sliderLeft);
+              if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
+              }
+            }
+          });
+          firstVisibleIndex = closestIndex;
+        }
+      }
+      
+      setCurrentVisibleIndex(firstVisibleIndex);
     }
   };
 
@@ -368,19 +407,29 @@ const BarbershopGallery = () => {
         )}
   
         <div className="gallery-slider-wrapper" ref={sliderRef}>
-          {imageEntries.map((img, index) => (
-            <div className="gallery-image-wrapper" key={img.path}>
-              <img
-                src={img.src}
-                alt={img.filename}
-                loading="lazy"
-                className="barbershop-gallery-image"
-              />
-              <span className="gallery-image-count">
-                {currentVisibleIndex + 1} of {totalImages}
-              </span>
-            </div>
-          ))}
+          {imageEntries.map((img, index) => {
+            const isActive = index === currentVisibleIndex;
+            return (
+              <div
+                className="gallery-image-wrapper"
+                key={`${img.path}-${index}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.filename}
+                  loading="lazy"
+                  className="barbershop-gallery-image"
+                />
+                <span
+                  className={`gallery-image-count ${
+                    isActive ? "active" : ""
+                  }`}
+                >
+                  {index + 1} of {totalImages}
+                </span>
+              </div>
+            );
+          })}
         </div>
   
         {canScrollRight && (

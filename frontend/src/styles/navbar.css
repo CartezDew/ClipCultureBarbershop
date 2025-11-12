@@ -311,12 +311,12 @@
 .mobile-nav-menu {
   display: block; /* Framer Motion handles mount/unmount */
   position: fixed;
-  top: 2.8rem;
+  top: 3.2rem;
   left: 0;
   
  
   width: 40vw; /* one-third of the viewport width */
-  min-width: 180px;
+  min-width: 200px;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -402,7 +402,7 @@
   width: 100%;
   padding: 0.75rem 0.75rem;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--primary-green);
@@ -680,7 +680,7 @@
   }
 
   .mobile-nav-item {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   /* Hide when navbar is hidden (hero section) */
   .App.navbar-hidden .back-to-top-btn {

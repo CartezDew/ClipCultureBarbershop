@@ -49,7 +49,6 @@ const TopProducts = ({ limit }) => {
     const computeSync = () => {
       const firstCard = cardRefs.current[0];
       if (!firstCard) {
-        console.log('No first card found');
         return;
       }
 
@@ -73,10 +72,6 @@ const TopProducts = ({ limit }) => {
           maxRatingHeight = Math.max(maxRatingHeight, ratingEl.offsetHeight);
         }
       });
-      
-      console.log('First row indices:', Array.from(indices));
-      console.log('Max name height:', maxNameHeight);
-      console.log('Max rating height:', maxRatingHeight);
 
       setFirstRowIndices(indices);
       setFirstRowNameHeight(maxNameHeight); // Apply the maximum name height

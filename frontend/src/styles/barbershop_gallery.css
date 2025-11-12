@@ -91,6 +91,12 @@
     transform: translateY(-6px);
     transition: opacity 0.65s ease, transform 0.65s ease;
   }
+
+.gallery-image-count.active {
+  background: rgba(10, 151, 134, 0.75);
+  color: #ffffff;
+  font-weight: 600;
+}
   
   /* when scroll has STOPPED */
   .barbershop-gallery-section.show-counts .gallery-image-count {
@@ -120,7 +126,7 @@
     position: relative;
     width: 100%;
     height: 4px;
-    background: rgba(240, 243, 243, 0.35);
+    background: rgba(240, 243, 243, 0.15);
     border-radius: 999px;
     cursor: grab;
     touch-action: none;

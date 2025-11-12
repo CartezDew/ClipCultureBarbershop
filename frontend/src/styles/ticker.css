@@ -117,29 +117,7 @@
 
 @media (max-width: 480px) {
   .services-ticker {
-    padding: 0.5rem 0.2rem;
-  }
-
-  .ticker-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0rem;
-  }
-  
-  .ticker-item {
-    font-size: clamp(1rem, 3vw, 1.4rem);
-  }
-  .ticker-separator {
-    font-size: 1rem;
-  }
-  
-  
-  /* Maintain line break after Mentorship */
-  .ticker-separator:nth-of-type(3) {
-    flex-basis: 100%;
-    height: 0;
-    margin: 0;
-    opacity: 0;
+    display: none;
   }
 }
 
@@ -153,5 +131,10 @@
     margin-left: 1rem;
     margin-right: 1rem;
 
+  }
+  .services-ticker {
+    display: none;
+    padding: 0rem 0rem;
+    margin: 0rem 0rem;
   }
 }

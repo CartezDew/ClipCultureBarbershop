@@ -5,9 +5,6 @@ import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
 import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
 
-// Debug image imports
-console.log('Image imports:', { AdultHaircut, KidsHaircut, MenHaircut });
-
 // --- Usage -------------------------------------------------------------
 // <TestimonialSection testimonials={data} />
 // where data = [{
@@ -135,7 +132,6 @@ export default function Testimonials({
 }
 
 function TestimonialCard({ name, location, quote, rating = 5, photoUrl, verified = true }) {
-  console.log('TestimonialCard photoUrl for', name, ':', photoUrl);
   return (
     <article className="group relative rounded-2xl overflow-hidden bg-neutral-900/80 border border-white/10 shadow-[0_10px_40px_-8px_rgba(0,0,0,0.6)]">
       {/* glow border */}
@@ -156,10 +152,8 @@ function TestimonialCard({ name, location, quote, rating = 5, photoUrl, verified
                 className="h-full w-full-testimonials object-cover rounded-full relative z-10" 
                 style={{ display: 'block' }}
                 onError={(e) => {
-                  console.log('Image failed to load for', name, ':', photoUrl);
                   e.target.style.display = 'none';
                 }}
-                onLoad={() => console.log('Image loaded successfully for', name, ':', photoUrl)}
               />
               <span className="absolute inset-0 rounded-full ring-2 ring-emerald-400/40 group-hover:ring-teal-300/60 transition pointer-events-none" />
             </div>
