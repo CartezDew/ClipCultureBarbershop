@@ -27,7 +27,7 @@
 .facts-subtitle::after {
   content: '';
   position: absolute;
-  bottom: -1rem;
+  bottom: -1.5rem;
   left: 50%;
   transform: translateX(-50%);
   width: 190px;
@@ -244,6 +244,6 @@
     padding: 3.5rem 1rem;
   }
   .facts-accordion {
-    margin: 0 1.5rem;
+    margin: 4rem 1.5rem;
   }
 }
