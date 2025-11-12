@@ -833,7 +833,7 @@
   }
 
   .shop-by-category__heading {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
   }
 
   .shop-by-category__carousel {
@@ -860,6 +860,12 @@
   .carousel-nav-button svg {
     width: 20px;
     height: 20px;
+  }
+}
+
+@media (max-width: 405px) {
+  .shop-by-category__heading {
+    font-size: 1.5rem;
   }
 }
 

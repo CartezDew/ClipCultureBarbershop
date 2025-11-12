@@ -111,7 +111,7 @@
   height: 28px;
   border-radius: 50%;
   background: var(--green-new);
-  color: var(--black);
+  color: var(--primary-black);
   font-size: 18px;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -139,7 +139,7 @@
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.2rem, 1.7vw, 1.3rem);
   font-weight: 600;
-  color: var(--color-eerie-black);
+  color: var(--primary-black);
   line-height: 1.4;
   flex: 1;
   text-align: left;
