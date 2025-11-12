@@ -35,6 +35,8 @@ html {
   padding: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  height: 100%;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -49,6 +51,14 @@ body {
   color: #333;
   background-color: #fafafa;
   overflow-x: hidden;
+  min-height: 100%;
+  overscroll-behavior-y: none;
+}
+
+/* Ensure main elements don't add extra spacing */
+main {
+  margin: 0;
+  padding: 0;
 }
 
 /* Typography */

@@ -1,6 +1,8 @@
 /* Footer Styles */
 .footer {
   margin-top: 0rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .footer .container {
