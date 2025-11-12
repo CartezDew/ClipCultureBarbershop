@@ -20,6 +20,7 @@ const BarbershopGallery = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [showCounts, setShowCounts] = useState(true);
+  const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
 
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
@@ -70,6 +71,29 @@ const BarbershopGallery = () => {
 
     setCanScrollLeft(!atStart);
     setCanScrollRight(!atEnd);
+
+    // Calculate current visible image index
+    const imageWrappers = slider.querySelectorAll('.gallery-image-wrapper');
+    if (imageWrappers.length > 0) {
+      const sliderRect = slider.getBoundingClientRect();
+      const sliderCenter = sliderRect.left + sliderRect.width / 2;
+      
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      
+      imageWrappers.forEach((wrapper, index) => {
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+        const distance = Math.abs(wrapperCenter - sliderCenter);
+        
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+      
+      setCurrentVisibleIndex(closestIndex);
+    }
   };
 
   // Update UI when route changes
@@ -114,7 +138,7 @@ const BarbershopGallery = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isServicesRoute]);
 
-  // draggable thumb
+  // draggable thumb - supports both mouse and touch events
   useEffect(() => {
     const slider = sliderRef.current;
     const track = trackRef.current;
@@ -124,19 +148,20 @@ const BarbershopGallery = () => {
     let isDragging = false;
     let startX = 0;
     let startLeft = 0;
+    let touchStartedOnThumb = false;
 
-    const onMouseDown = (e) => {
+    const startDrag = (clientX) => {
       isDragging = true;
-      startX = e.clientX;
+      startX = clientX;
       startLeft = thumb.offsetLeft;
       thumb.classList.add("active");
       document.body.style.userSelect = "none";
       setShowCounts(false);
     };
 
-    const onMouseMove = (e) => {
+    const onDrag = (clientX) => {
       if (!isDragging) return;
-      const dx = e.clientX - startX;
+      const dx = clientX - startX;
       const maxLeft = track.clientWidth - thumb.offsetWidth;
       let newLeft = startLeft + dx;
       if (newLeft < 0) newLeft = 0;
@@ -150,9 +175,10 @@ const BarbershopGallery = () => {
       updateUI();
     };
 
-    const onMouseUp = () => {
+    const endDrag = () => {
       if (!isDragging) return;
       isDragging = false;
+      touchStartedOnThumb = false;
       thumb.classList.remove("active");
       document.body.style.userSelect = "";
 
@@ -162,14 +188,78 @@ const BarbershopGallery = () => {
       }, 200);
     };
 
+    // Mouse events
+    const onMouseDown = (e) => {
+      e.preventDefault();
+      startDrag(e.clientX);
+    };
+
+    const onMouseMove = (e) => {
+      onDrag(e.clientX);
+    };
+
+    const onMouseUp = () => {
+      endDrag();
+    };
+
+    // Touch events for mobile
+    const onTouchStart = (e) => {
+      // Check if touch started on thumb or track
+      const touch = e.touches[0];
+      if (!touch) return;
+      
+      const target = e.target;
+      const isOnThumb = thumb.contains(target) || target === thumb;
+      const isOnTrack = track.contains(target) || target === track;
+      
+      if (isOnThumb || isOnTrack) {
+        touchStartedOnThumb = true;
+        e.preventDefault();
+        e.stopPropagation();
+        startDrag(touch.clientX);
+      }
+    };
+
+    const onTouchMove = (e) => {
+      // Only prevent default if we started dragging on the thumb
+      if (!isDragging || !touchStartedOnThumb) return;
+      const touch = e.touches[0];
+      if (touch) {
+        e.preventDefault();
+        e.stopPropagation();
+        onDrag(touch.clientX);
+      }
+    };
+
+    const onTouchEnd = (e) => {
+      // Only prevent default if we were dragging from the thumb
+      if (!isDragging || !touchStartedOnThumb) return;
+      e.preventDefault();
+      e.stopPropagation();
+      endDrag();
+    };
+
+    // Add event listeners
     thumb.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
+    
+    // Only attach touch listeners to the thumb, not window
+    thumb.addEventListener("touchstart", onTouchStart, { passive: false });
+    // Use document instead of window for touchmove/touchend to be more specific
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener("touchend", onTouchEnd, { passive: false });
+    document.addEventListener("touchcancel", onTouchEnd, { passive: false });
 
     return () => {
       thumb.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
+      
+      thumb.removeEventListener("touchstart", onTouchStart);
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+      document.removeEventListener("touchcancel", onTouchEnd);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -220,7 +310,7 @@ const BarbershopGallery = () => {
                 className="barbershop-gallery-image"
               />
               <span className="gallery-image-count">
-                {index + 1}/{totalImages}
+                {currentVisibleIndex + 1} of {totalImages}
               </span>
             </div>
           ))}

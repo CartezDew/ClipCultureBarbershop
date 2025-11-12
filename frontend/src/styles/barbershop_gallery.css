@@ -10,6 +10,21 @@
     background: var(--primary-black);
   }
 
+  /* Override wrapper constraints to show scrollbar */
+  .services-gallery-wrapper {
+    height: auto !important;
+    min-height: 300px;
+    overflow-y: visible !important;
+    overflow-x: visible !important;
+  }
+
+  /* Ensure scrollbar is always visible on services page */
+  .services-gallery-wrapper .gallery-slider-scrollbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
   .barbershop-gallery-section {
     position: relative;
     background: var(--primary-black);
@@ -95,7 +110,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4px;
+    height: 6px;
+    padding: 4px 0;
+    margin-top: 0.5rem;
   }
   
   /* track (the bar) */
@@ -103,14 +120,17 @@
     position: relative;
     width: 100%;
     height: 4px;
-    background: rgba(240, 243, 243, 0.25);
+    background: rgba(240, 243, 243, 0.35);
     border-radius: 999px;
     cursor: grab;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
   }
   
 
   .gallery-slider-scrollbar-track:hover {
-    height: 8px;
+    height: 6px;
+    background: rgba(240, 243, 243, 0.5);
   }
   
 
@@ -123,6 +143,12 @@
     background: var(--primary-green);
     border-radius: 999px;
     cursor: grab;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 2;
+    pointer-events: auto;
   }
 
   .franchise-gallery-wrapper .scrollbar-thumb {
@@ -134,15 +160,27 @@
     background: var(--green-new);
     border-radius: 999px;
     cursor: grab;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   
-  /* bigger + grabbing when active (mousedown) */
+  /* bigger + grabbing when active (mousedown/touchstart) */
   .scrollbar-thumb.active,
   .scrollbar-thumb:active {
     cursor: grabbing;
-    height: 10px;
+    height: 8px;
     top: -2px;
+    background: var(--primary-green);
+    box-shadow: 0 0 8px rgba(10, 151, 134, 0.5);
+  }
+
+  .franchise-gallery-wrapper .scrollbar-thumb.active,
+  .franchise-gallery-wrapper .scrollbar-thumb:active {
+    background: var(--green-new);
+    box-shadow: 0 0 8px rgba(10, 151, 134, 0.5);
   }
   
   /* nav buttons */
@@ -185,5 +223,27 @@
     .barbershop-gallery-image {
         max-height: 200px;
       }
+    
+    /* Make scrollbar more visible and touch-friendly on mobile */
+    /* .gallery-slider-scrollbar {
+      height: 8px;
+      padding: 6px 0;
+    } */
+    
+    /* .gallery-slider-scrollbar-track {
+      height: 6px;
+      background: rgba(240, 243, 243, 0.5);
+    } */
+    
+    /* .scrollbar-thumb {
+      height: 6px;
+      min-width: 40px; /* Ensure thumb is large enough to grab on mobile */
+    
+    
+    .scrollbar-thumb.active,
+    .scrollbar-thumb:active {
+      height: 10px;
+      top: -2px;
+    }
   }
   

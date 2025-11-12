@@ -71,6 +71,23 @@
   -ms-overflow-style: none; /* IE 10+ */
 }
 
+/* When BarbershopGallery is inside, allow the scrollbar to be visible */
+.services-gallery-wrapper:has(.barbershop-gallery-outer) {
+  height: auto !important;
+  min-height: 300px;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+}
+
+.services-gallery-wrapper .barbershop-gallery-outer {
+  height: auto;
+  min-height: 300px;
+}
+
+.services-gallery-wrapper .barbershop-gallery-section {
+  padding-bottom: 2rem; /* Extra space for scrollbar */
+}
+
 .services-gallery-track {
   display: flex;
   width: 100%;
