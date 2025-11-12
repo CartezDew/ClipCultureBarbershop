@@ -164,10 +164,12 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="hero">
-        {/* Hero Navbar - Fixed at top of hero section */}
-        {showHeroNavbar && <HeroNavbar showTaglineAnim={showTaglineAnim} isMobile600={isMobile600} />}
+      {/* Hero Navbar - Mounted above hero section */}
+      {showHeroNavbar && <HeroNavbar showTaglineAnim={showTaglineAnim} isMobile600={isMobile600} />}
+      {/* Hero Background Container */}
+      <div className="hero-background-container">
+        {/* Hero Section */}
+        <section className="hero">
         <div className="hero__background">
           <picture>
             <source srcSet={heroImageWebP} type="image/webp" />
@@ -340,6 +342,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Main Navbar - Shows when hero section is out of view */}
       {!showHeroNavbar && <Navbar />}

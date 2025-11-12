@@ -1,11 +1,8 @@
 /* Hero Navbar Styles */
 .hero-navbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+  background: var(--primary-black);
+  width: 100%;
 }
 
 .hero-navbar-container {
@@ -17,7 +14,6 @@
   padding: 1rem 2rem;
   height: 70px;
   position: relative;
-  z-index: 14;
 }
 
 .hero-logo {
