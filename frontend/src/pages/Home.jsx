@@ -18,6 +18,7 @@ import { FaRegThumbsUp } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 import HomeGallery from '../components/Home_Gallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
+import ShopByCategory from '../components/ShopByCategory.jsx';
 
 // Flexed Bicep Icon
 const BicepIcon = ({ size = 24 }) => (
@@ -343,8 +344,11 @@ const Home = () => {
       {/* Main Navbar - Shows when hero section is out of view */}
       {!showHeroNavbar && <Navbar />}
 
+      {/* Shop by Category */}
+      <ShopByCategory />
+
       {/* Top Products */}
-      <TopProducts />
+      <TopProducts limit={6} />
 
       {/* Services Gallery */}
       {/* <HomeGallery/>  */}

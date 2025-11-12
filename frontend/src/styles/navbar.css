@@ -509,17 +509,9 @@
   .navbar-visible-desktop {
     display: none !important;
   }
-  
-  .navbar-visible-mobile {
-    display: block !important;
-  }
-
-  .navbar navbar-mobile {
-    display: block !important;
-  }
-  
   .navbar-mobile {
     display: block !important;
+    /* border-bottom: 7px solid rgba(255, 255, 255, 0.1); */
   }
   
   .mobile-nav-toggle { 
@@ -545,14 +537,14 @@
     order: 2;
   }
   .logo-image-nav {
-    height: 45px;
+    height: 50px;
     width: auto;
     margin-top: 1rem;
   }
   .navbar-container {
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 50px;
     /* display:none; */
   } 
   .icon-section {

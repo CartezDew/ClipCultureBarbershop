@@ -24,9 +24,9 @@ import GalleryImage4 from '../assets/gallery/image-4.webp';
 import GalleryImage5 from '../assets/gallery/image-5.webp';
 import GalleryImage6 from '../assets/gallery/image-6.webp';
 // Product images
-import Product1 from '../assets/products/Product-1.png';
-import Product2 from '../assets/products/Product-2.png';
-import Product3 from '../assets/products/Product-3.png';
+import Product1 from '../assets/products/Product-1.webp';
+import Product2 from '../assets/products/Product-2.webp';
+import Product3 from '../assets/products/Product-3.webp';
 
 const BookingForm = ({ showMainForm = true }) => {
   const navigate = useNavigate();

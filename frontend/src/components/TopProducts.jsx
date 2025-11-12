@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
-import Product1 from '../assets/products/Product-1.png';
-import Product2 from '../assets/products/Product-2.png';
-import Product3 from '../assets/products/Product-3.png';
-import Product4 from '../assets/products/Product-4.png';
-import Product5 from '../assets/products/Product-5 .png';
-import Product6 from '../assets/products/Product-6.png';
+import Product1 from '../assets/products/Product-1.webp';
+import Product2 from '../assets/products/Product-2.webp';
+import Product3 from '../assets/products/Product-3.webp';
+import Product4 from '../assets/products/Product-4.webp';
+import Product5 from '../assets/products/Product-5 .webp';
+import Product6 from '../assets/products/Product-6.webp';
+import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
+import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
-const TopProducts = () => {
+const TopProducts = ({ limit }) => {
   const [quantities, setQuantities] = useState({});
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+
+  // Refs to card containers, name elements, and rating elements
+  const cardRefs = useRef([]);
+  const nameRefs = useRef([]);
+  const ratingRefs = useRef([]);
+
+  // Dynamic first-row syncing
+  const [firstRowNameHeight, setFirstRowNameHeight] = useState(null); // px number
+  const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null); // px number
+  const [firstRowIndices, setFirstRowIndices] = useState(new Set());
 
   const getQuantity = (productId) => quantities[productId] || 1;
 
@@ -31,7 +44,71 @@ const TopProducts = () => {
     const current = getQuantity(productId);
     updateQuantity(productId, current + 1);
   };
+
+  useEffect(() => {
+    const computeSync = () => {
+      const firstCard = cardRefs.current[0];
+      if (!firstCard) {
+        console.log('No first card found');
+        return;
+      }
+
+      const rowTop = firstCard.offsetTop;
+      const indices = new Set();
+      cardRefs.current.forEach((el, idx) => {
+        if (el && el.offsetTop === rowTop) indices.add(idx);
+      });
+
+      // Find the maximum heights among all first-row cards
+      let maxNameHeight = 0;
+      let maxRatingHeight = 0;
+      
+      indices.forEach(idx => {
+        const nameEl = nameRefs.current[idx];
+        const ratingEl = ratingRefs.current[idx];
+        if (nameEl) {
+          maxNameHeight = Math.max(maxNameHeight, nameEl.offsetHeight);
+        }
+        if (ratingEl) {
+          maxRatingHeight = Math.max(maxRatingHeight, ratingEl.offsetHeight);
+        }
+      });
+      
+      console.log('First row indices:', Array.from(indices));
+      console.log('Max name height:', maxNameHeight);
+      console.log('Max rating height:', maxRatingHeight);
+
+      setFirstRowIndices(indices);
+      setFirstRowNameHeight(maxNameHeight); // Apply the maximum name height
+      setFirstRowRatingHeight(maxRatingHeight); // Apply the maximum rating height
+    };
+
+    // Initial computation after a delay for layout to settle
+    const id = window.setTimeout(computeSync, 100);
+    
+    // Also recompute after a bit more time for images to load
+    const id2 = window.setTimeout(computeSync, 500);
+    
+    window.addEventListener('resize', computeSync);
+    
+    return () => {
+      window.clearTimeout(id);
+      window.clearTimeout(id2);
+      window.removeEventListener('resize', computeSync);
+    };
+  }, []); // Empty dependency - runs once on mount and cleanup on unmount
   const products = [
+    {
+      id: 0,
+      name: "Beard & Line Up Enhancement",
+      price: 18,
+      rating: null,
+      image: BeardLineUp1,
+      hoverImage: BeardLineUp2,
+      slug: "premium-beard-line-up-enhancement",
+      size: "4 oz",
+      isNewDrop: true
+    },
     {
       id: 1,
       name: "Curl Twist",
@@ -89,6 +166,10 @@ const TopProducts = () => {
   ];
 
   const renderStars = (rating) => {
+    if (rating === null || rating === undefined) {
+      return null;
+    }
+    
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -128,23 +209,52 @@ const TopProducts = () => {
           </div>
           
           <div className="top-products__grid">
-            {products.map((product) => (
-              <div key={product.id} className="product-card">
+            {(limit ? products.slice(0, limit) : products).map((product, index) => (
+              <div 
+                key={product.id} 
+                className="product-card"
+                ref={(el) => (cardRefs.current[index] = el)}
+                onMouseEnter={() => setHoveredProduct(product.id)}
+                onMouseLeave={() => setHoveredProduct(null)}
+              >
                 <div className="product-card__image-container">
                   <img 
-                    src={product.image} 
+                    src={hoveredProduct === product.id && product.hoverImage ? product.hoverImage : product.image} 
                     alt={product.name}
                     className="product-card__image"
                     loading="lazy"
                   />
                 </div>
                 <div className="product-card__content">
-                  <h3 className="product-card__name">{product.name}</h3>
+                  <h3 
+                    className="product-card__name"
+                    ref={(el) => (nameRefs.current[index] = el)}
+                    style={firstRowNameHeight && firstRowIndices.has(index) ? { minHeight: `${firstRowNameHeight}px` } : undefined}
+                  >
+                    {product.name}
+                  </h3>
                   {product.size && <div className="product-card__size">{product.size}</div>}
                   <div className="product-card__price">${product.price}</div>
-                  <div className="product-card__rating">
-                    {renderStars(product.rating)}
-                    <span className="product-card__rating-text">({product.rating})</span>
+                  <div 
+                    className="product-card__rating"
+                    ref={(el) => (ratingRefs.current[index] = el)}
+                    style={firstRowRatingHeight && firstRowIndices.has(index) ? { minHeight: `${firstRowRatingHeight}px` } : undefined}
+                  >
+                    {product.isNewDrop ? (
+                      <span className="product-card__new-drop">
+                        new drop{' '}
+                        <span className="fire-emoji">🔥</span>
+                        <span className="fire-emoji">🔥</span>
+                        <span className="fire-emoji">🔥</span>
+                      </span>
+                    ) : (
+                      <>
+                        {renderStars(product.rating)}
+                        {product.rating !== null && product.rating !== undefined && (
+                          <span className="product-card__rating-text">({product.rating})</span>
+                        )}
+                      </>
+                    )}
                   </div>
                   <div className="product-card__quantity">
                     <label className="product-card__quantity-label">Quantity</label>

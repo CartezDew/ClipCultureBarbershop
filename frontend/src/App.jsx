@@ -21,6 +21,37 @@ function AppContent() {
   const [showFloatingButtons, setShowFloatingButtons] = useState(false);
   const isHomePage = location.pathname === '/';
 
+  // Map routes to page names for dynamic titles
+  const getPageName = (pathname) => {
+    const routeMap = {
+      '/': 'Home',
+      '/services': 'Services',
+      '/about': 'About',
+      '/shop': 'Shop',
+      '/mentorship': 'Mentorship',
+      '/advertise': 'Advertise',
+      '/franchise': 'Franchise',
+      '/apply': 'Apply',
+      '/speaking': 'Speaking Engagements',
+    };
+    
+    // Handle dynamic routes
+    if (pathname.startsWith('/products/')) {
+      return 'Product';
+    }
+    if (pathname.startsWith('/barber/')) {
+      return 'Barber';
+    }
+    
+    return routeMap[pathname] || 'Home';
+  };
+
+  // Update document title dynamically based on route
+  useEffect(() => {
+    const pageName = getPageName(location.pathname);
+    document.title = `Clip Culture | ${pageName}`;
+  }, [location.pathname]);
+
   // Reset scroll position on route change without animating
   useLayoutEffect(() => {
     window.scrollTo(0, 0);

@@ -433,7 +433,9 @@
   grid-template-areas: "left right";
   overflow: hidden;
   align-items: end;
-  padding-top: 80px; 
+  padding-top: 0; 
+  border-top: 7px solid var(--primary-black);
+  border-top: 7px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero__background {
@@ -563,19 +565,13 @@
   display: none;
 }
 
-@media (max-width: 900px) {
-  .hero__social-proof {
-    gap: 1rem;
-    padding: 0.75rem;
-  }
-}
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .hero {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
     align-items: stretch;
-    padding-top: 3rem;
+    padding-top: 0;
     border-bottom: 7px solid rgba(16, 15, 15, 0.796);
   }
   
@@ -586,8 +582,8 @@
 
   .hero__left {
     background-color: var(--primary-black);
-    padding: 4rem 1.5rem;
-    margin-bottom: -2rem;
+    padding: 2rem 1.5rem;
+    margin-bottom: 0rem;
 
   }
 
@@ -598,7 +594,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 2rem;
-    padding: 2.5rem 1.75rem 6.5rem;
+    padding: 2.5rem 1rem 0rem;
     width: 100%;
     overflow: hidden;
     border-left: 7px solid rgba(16, 15, 15, 0.796);
@@ -633,21 +629,20 @@
   .hero__tagline {
     order: 2;
     position: absolute;
-    bottom: calc(1.75rem + 80px); /* Position above social proof (1.75rem + social proof height) */
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: calc(3rem + 70px); /* Position above social proof (1.75rem + social proof height) */
     text-align: center;
-    width: min(92%, 360px);
+
     background: rgba(0, 0, 0, 0.1);
-    padding: 0rem 1rem;
+    padding: 0rem 0.5rem;
     z-index: 2;
   }
 
     .hero__tagline h2 {
-      font-size: clamp(1.3rem, 2vw, 1.5rem);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
       letter-spacing: 0.5px;
       padding: 0.5rem 0.75rem;
       padding-bottom: 1rem;
+      opacity: 0.8;
     }
 
 
@@ -655,21 +650,19 @@
   .hero__social-proof {
     order: 2;
     position: absolute;
-    left: 50%;
     bottom: 2rem;
-    transform: translateX(-50%);
-    width: min(92%, 360px);
     display: flex;
     align-items: center;
     justify-content: space-around;
     gap: 0.5rem;
-    padding: 0.9rem 1.25rem;
+    padding: 0.9rem 1rem;
     border-radius: 14px;
     background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
     z-index: 3;
+    margin: 0 2rem;
   }
 
   .hero__social-proof .social-proof__item {
@@ -679,16 +672,28 @@
   }
 
   .social-proof__number {
-    font-size: 1.05rem;
+    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
   }
 
   .social-proof__label {
-    font-size: 0.58rem;
+    font-size: clamp(0.6rem, 1.3vw, 0.9rem);
   }
 
   .social-proof__icon {
     width: 18px;
     height: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 0;
+  }
+  .hero__social-proof {
+    bottom: 1.5rem;
+  }
+  .hero__tagline {
+    bottom: calc(3rem + 44px);
   }
 }
 
@@ -710,9 +715,6 @@
     padding: .75rem .35rem;
     align-items: center;
     justify-content: center;
-  }
-  .hero__tagline h2 {
-    padding-bottom: .5rem;
   }
 }
 
@@ -739,16 +741,14 @@
     font-size: 1rem;
   }
   .social-proof__label {
-    font-size: 0.6rem;
+    font-size: clamp(0.55rem, 1.5vw, 0.95rem);
   }
   .hero__social-proof {
     padding: .7rem .35rem;
     align-items: center;
     justify-content: center;
-    background: none;
-    backdrop-filter: none;
+    border-radius: 0rem;
     border: none;
-    box-shadow: none;
   }
   .social-proof__label {
     text-align: left;
@@ -767,6 +767,16 @@
   }
 }
 
+@media (max-width: 605px) {
+  .hero {
+    padding-top: 0;
+    border-top: 7px solid var(--primary-black);
+  }
+  .hero__left {
+    margin-top: 0rem;
+  }
+}
+
 @media (max-width: 600px) {
   .hero {
     position: relative;
@@ -776,7 +786,7 @@
     align-items: stretch;
     /* border-top: 3.5rem solid var(--primary-black); */
     margin-top: none;
-    padding-top: 40px;
+    padding-top: 0;
     border-bottom: 7px solid var(--primary-black);
     border-bottom: none;
     background: var(--primary-black);
@@ -935,17 +945,25 @@
     box-sizing: border-box;
   }
 
+  .social-proof__content {
+    padding-left: .5rem;
+  }
+
+  .hero__social-proof .social-proof__item:nth-child(2) {
+    display: none;
+  }
+
   .social-proof__number {
     font-size: 1.2rem;
-    text-align: left;
+    text-align: center;
   }
   .social-proof__icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 
   .social-proof__label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   
   .hero__left {
@@ -1070,6 +1088,31 @@
   }
 }
 
+@media (max-width: 505px) {
+  .social-proof__content {
+    padding-left: .3rem;
+  }
+
+  .hero__social-proof {
+    padding: .75rem .4rem;
+    gap: 0.3rem;
+  }
+
+
+  .social-proof__number {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+  .social-proof__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .social-proof__label {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 468px) {
   .hero__tagline h2 {
     font-size: 1.8rem;
@@ -1092,35 +1135,14 @@
   .social-proof__number {
     font-size: 1.1rem;
   }
-  /* .social-proof__label {
-    font-size: 0.5rem;
-  }
-  .social-proof__icon {
-    width: 13px;
-    height: 13px;
-  }  */
-  /* .store-location-name {
-    font-size: 0.8rem;
-  } */
-  /* .store-location-image {
-    max-height: 150px;
-  } */
-  /* .store-location-item:nth-child(2) .store-location-icon {
-    color: var(--primary-green);
-  } */
 }
 
-@media (max-width: 440px) {
-  .hero {
-    padding-top: 35px;
-  }
-}
 
 @media (max-width: 430px) {
   .hero__social-proof {
-    padding: 0.7rem 0.3rem;
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
+
   .social-proof__number {
     font-size: 1rem;
   }
@@ -1136,6 +1158,9 @@
 @media (max-width: 405px) {
   .hero__tagline h2 {
     font-size: 1.65rem;
+  }
+  .social-proof__content {
+    padding-left: .3rem;
   }
 }
 @media (max-width: 380px) {
@@ -1160,10 +1185,10 @@
   }
 
   .social-proof__number {
-  font-size: 0.9rem;
+  font-size: 1rem;
  }
   .social-proof__label {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
   .social-proof__icon {
     width: 14px;
@@ -1176,15 +1201,12 @@
   .hero__tagline h2 {
     font-size: 1.3rem;
   }
-  .social-proof__number {
-    font-size: 0.9rem;
-  }
   .social-proof__label {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
   .social-proof__icon {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
   }
   .hero__left .hero__btn--book {
     font-size: 0.8rem;

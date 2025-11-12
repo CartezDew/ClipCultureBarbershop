@@ -33,6 +33,12 @@
   align-items: start;
 }
 
+.product-detail__left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .product-detail__image {
   display: flex;
   justify-content: center;
@@ -41,12 +47,28 @@
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Show desktop actions above 700px */
+.product-detail__actions-desktop {
+  display: block;
+}
+
+/* Hide mobile actions above 700px */
+.product-detail__actions-mobile {
+  display: none;
 }
 
 .product-detail__image img {
   max-width: 100%;
   max-height: 400px;
   object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.product-detail__image:hover img {
+  transform: scale(1.02);
 }
 
 .product-detail__info {
@@ -171,6 +193,33 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+.product-detail__how-to-use {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.product-detail__how-to-use h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  padding-top: 1rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.product-detail__how-to-use ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.product-detail__how-to-use li {
+  padding: 0.5rem 0;
+  color: #4a5568;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
 .product-detail__actions {
   margin-top: 2rem;
 }
@@ -231,6 +280,16 @@
 
 /* Responsive Design */
 @media (max-width: 700px) {
+  /* Hide desktop actions below 700px */
+  .product-detail__actions-desktop {
+    display: none;
+  }
+
+  /* Show mobile actions below 700px */
+  .product-detail__actions-mobile {
+    display: block;
+  }
+
   .product-detail__content {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -360,7 +419,6 @@
   font-weight: 600;
   color: var(--primary-black);
   font-family: inherit;
-  -moz-appearance: textfield;
 }
 
 .quantity-input::-webkit-outer-spin-button,

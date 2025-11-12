@@ -15,7 +15,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
-  height: 52px;
+  height: 70px;
   position: relative;
   z-index: 14;
 }
@@ -39,9 +39,9 @@
 }
 
 .hero-logo-image {
-  margin-top: .6rem;
-  padding-bottom: .1rem;
-  height: 45px;
+  margin-top: 1rem;
+  padding-bottom: .5rem;
+  height: clamp(45px, 6vw, 55px);
   width: auto;
   max-width: 250px;
   object-fit: contain;
@@ -156,7 +156,7 @@
 
 .hero-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 30px;
   left: 0;
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
@@ -229,7 +229,7 @@
 
 .hero-cart-count {
   position: absolute;
-  top: -8px;
+  top: -12px;
   right: -8px;
   background: #0a9786;
   color: white;
@@ -272,7 +272,7 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .hero-navbar {
     position: fixed;
     background: rgba(26, 26, 26, 0.95);
@@ -295,7 +295,7 @@
     color: white;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: clamp(.8rem, 1.7vw, 1.3rem);
     padding: 0rem .5rem;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -306,7 +306,7 @@
   }
 
   .hero-book-btn {
-    font-size: 0.8rem;
+    font-size: clamp(.9rem, 1.5vw, 1.3rem);
   }
 }
 

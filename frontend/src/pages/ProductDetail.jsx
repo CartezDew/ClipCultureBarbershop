@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import '../styles/product-detail.css';
-import Product1 from '../assets/products/Product-1.png';
-import Product2 from '../assets/products/Product-2.png';
-import Product3 from '../assets/products/Product-3.png';
-import Product4 from '../assets/products/Product-4.png';
-import Product5 from '../assets/products/Product-5 .png';
-import Product6 from '../assets/products/Product-6.png';
+import Product1 from '../assets/products/Product-1.webp';
+import Product2 from '../assets/products/Product-2.webp';
+import Product3 from '../assets/products/Product-3.webp';
+import Product4 from '../assets/products/Product-4.webp';
+import Product5 from '../assets/products/Product-5 .webp';
+import Product6 from '../assets/products/Product-6.webp';
+import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
+import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -24,6 +27,31 @@ const ProductDetail = () => {
   };
 
   const products = {
+    'premium-beard-line-up-enhancement': {
+      id: 0,
+      name: "Revive by Clip Culture Haircare",
+      price: 18,
+      size: "4 fl oz (120 ml)",
+      rating: 5,
+      reviewCount: 12,
+      image: BeardLineUp1,
+      hoverImage: BeardLineUp2,
+      description: "Developed by master barber David Brown, owner of Clip Culture Barbershop. <strong>Revive</strong> is a premium beard and hair line-up enhancement designed for precision, performance, and staying power. This semi-permanent airbrush dye delivers a clean, natural-looking definition that holds through sweat, humidity, and long days behind the chair.",
+      features: [
+        "Enhances beard and hairline definition for a sharp, clean finish",
+        "Sweat-resistant and long-lasting formula for active lifestyles",
+        "Semi-permanent color that maintains a natural look",
+        "Easy-apply nozzle for professional precision",
+        "Safe and skin-friendly ingredients"
+      ],
+      ingredients: "Water, Acrylic Acid (Ester) C/VA Copolymer, Propylene Glycol, CI 42090, CI 19140, CI 16035, Phenoxyethanol",
+      howToUse: [
+        "Start with a clean, dry hairline or beard.",
+        "Apply Revive directly to the desired area using an applicator or fine brush.",
+        "Allow 30–60 seconds to set before blending.",
+        "For a lasting finish, avoid heavy friction or water immediately after application."
+      ]
+    },
     'curl-twist': {
       id: 1,
       name: "Curl Twist",
@@ -163,8 +191,58 @@ const ProductDetail = () => {
         </Link>
 
         <div className="product-detail__content">
-          <div className="product-detail__image">
-            <img src={product.image} alt={product.name} loading="lazy" />
+          <div className="product-detail__left-column">
+            <div 
+              className="product-detail__image"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <img 
+                src={isHovering && product.hoverImage ? product.hoverImage : product.image} 
+                alt={product.name} 
+                loading="lazy" 
+              />
+            </div>
+
+            {/* Quantity and Add to Cart for desktop (above 700px) */}
+            <div className="product-detail__actions-desktop">
+              <div className="product-detail__quantity">
+                <label className="product-detail__quantity-label">Quantity</label>
+                <div className="product-detail__quantity-selector">
+                  <button 
+                    className="quantity-btn quantity-btn--minus"
+                    onClick={decreaseQuantity}
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <input 
+                    type="number" 
+                    className="quantity-input" 
+                    value={quantity}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value) || 1;
+                      setQuantity(value > 0 ? value : 1);
+                    }}
+                    min="1"
+                  />
+                  <button 
+                    className="quantity-btn quantity-btn--plus"
+                    onClick={increaseQuantity}
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="product-detail__actions">
+                <button className="btn btn--add-cart">
+                  <ShoppingCart size={20} />
+                  Add to Cart
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="product-detail__info">
@@ -176,9 +254,9 @@ const ProductDetail = () => {
             </div>
             <div className="product-detail__rating">
               {renderStars(product.rating)}
-              <span className="product-detail__rating-text">({product.rating})</span>
+              <span className="product-detail__rating-text">({product.reviewCount || product.rating})</span>
             </div>
-            <p className="product-detail__description">{product.description}</p>
+            <p className="product-detail__description" dangerouslySetInnerHTML={{ __html: product.description }}></p>
 
             <div className="product-detail__features">
               <h3>Key Features:</h3>
@@ -194,41 +272,55 @@ const ProductDetail = () => {
               <p>{product.ingredients}</p>
             </div>
 
-            <div className="product-detail__quantity">
-              <label className="product-detail__quantity-label">Quantity</label>
-              <div className="product-detail__quantity-selector">
-                <button 
-                  className="quantity-btn quantity-btn--minus"
-                  onClick={decreaseQuantity}
-                  aria-label="Decrease quantity"
-                >
-                  −
-                </button>
-                <input 
-                  type="number" 
-                  className="quantity-input" 
-                  value={quantity}
-                  onChange={(e) => {
-                    const value = parseInt(e.target.value) || 1;
-                    setQuantity(value > 0 ? value : 1);
-                  }}
-                  min="1"
-                />
-                <button 
-                  className="quantity-btn quantity-btn--plus"
-                  onClick={increaseQuantity}
-                  aria-label="Increase quantity"
-                >
-                  +
+            {product.howToUse && (
+              <div className="product-detail__how-to-use">
+                <h3>How to Use:</h3>
+                <ol>
+                  {product.howToUse.map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            {/* Quantity and Add to Cart for mobile (below 700px) */}
+            <div className="product-detail__actions-mobile">
+              <div className="product-detail__quantity">
+                <label className="product-detail__quantity-label">Quantity</label>
+                <div className="product-detail__quantity-selector">
+                  <button 
+                    className="quantity-btn quantity-btn--minus"
+                    onClick={decreaseQuantity}
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <input 
+                    type="number" 
+                    className="quantity-input" 
+                    value={quantity}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value) || 1;
+                      setQuantity(value > 0 ? value : 1);
+                    }}
+                    min="1"
+                  />
+                  <button 
+                    className="quantity-btn quantity-btn--plus"
+                    onClick={increaseQuantity}
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="product-detail__actions">
+                <button className="btn btn--add-cart">
+                  <ShoppingCart size={20} />
+                  Add to Cart
                 </button>
               </div>
-            </div>
-
-            <div className="product-detail__actions">
-              <button className="btn btn--add-cart">
-                <ShoppingCart size={20} />
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>
