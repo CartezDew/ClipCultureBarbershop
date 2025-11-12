@@ -582,6 +582,9 @@
 
 
 @media (max-width: 1000px) {
+  .hero-background-container {
+    background: none;
+  }
   .hero {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
@@ -785,7 +788,7 @@
 @media (max-width: 605px) {
   .hero {
     padding-top: 0;
-    border-top: 7px solid var(--primary-black);
+    border-top: 7px solid rgba(16, 15, 15, 0.796);
   }
   .hero__left {
     margin-top: 0rem;
@@ -793,6 +796,9 @@
 }
 
 @media (max-width: 600px) {
+  .hero-background-container {
+    background: none;
+  }
   .hero {
     position: relative;
     display: grid;
@@ -802,9 +808,8 @@
     /* border-top: 3.5rem solid var(--primary-black); */
     margin-top: none;
     padding-top: 0;
-    border-bottom: 7px solid var(--primary-black);
+    border-top: none;
     border-bottom: none;
-    background: var(--primary-black);
     background: linear-gradient(0deg, rgba(26, 26, 26, 1) 40%, rgba(30, 32, 33, 1) 52%, rgba(106, 146, 152, 1) 100%);
   }
   
@@ -1240,6 +1245,7 @@
 }
 
 @media (max-width: 605px) {
+ 
   .floating-action-buttons {
     display: flex;
     position: fixed;
