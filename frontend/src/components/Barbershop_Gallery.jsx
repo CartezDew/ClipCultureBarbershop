@@ -148,13 +148,51 @@ const BarbershopGallery = () => {
     let isDragging = false;
     let startX = 0;
     let startLeft = 0;
-    let touchStartedOnThumb = false;
+    let touchStartedOnScrollbar = false;
+    let activeTimeout = null;
 
-    const startDrag = (clientX) => {
+    const setThumbActive = () => {
+      thumb.classList.add("active");
+      // Clear any existing timeout
+      if (activeTimeout) {
+        clearTimeout(activeTimeout);
+        activeTimeout = null;
+      }
+    };
+
+    const clearThumbActive = () => {
+      // Delay removing active class on mobile to keep it active longer
+      if (activeTimeout) {
+        clearTimeout(activeTimeout);
+      }
+      activeTimeout = setTimeout(() => {
+        thumb.classList.remove("active");
+      }, 300); // Keep active for 300ms after touch ends
+    };
+
+    const startDrag = (clientX, isTrackClick = false) => {
       isDragging = true;
       startX = clientX;
-      startLeft = thumb.offsetLeft;
-      thumb.classList.add("active");
+      
+      if (isTrackClick) {
+        // If clicking on track, calculate position and jump thumb there
+        const trackRect = track.getBoundingClientRect();
+        const clickX = clientX - trackRect.left;
+        const maxLeft = track.clientWidth - thumb.offsetWidth;
+        const newLeft = Math.max(0, Math.min(clickX - thumb.offsetWidth / 2, maxLeft));
+        thumb.style.left = `${newLeft}px`;
+        startLeft = newLeft;
+        
+        // Update slider scroll position
+        const scrollRatio = maxLeft > 0 ? newLeft / maxLeft : 0;
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        slider.scrollLeft = scrollRatio * maxScroll;
+        updateUI();
+      } else {
+        startLeft = thumb.offsetLeft;
+      }
+      
+      setThumbActive();
       document.body.style.userSelect = "none";
       setShowCounts(false);
     };
@@ -178,17 +216,19 @@ const BarbershopGallery = () => {
     const endDrag = () => {
       if (!isDragging) return;
       isDragging = false;
-      touchStartedOnThumb = false;
-      thumb.classList.remove("active");
+      touchStartedOnScrollbar = false;
       document.body.style.userSelect = "";
 
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
         setShowCounts(true);
       }, 200);
+      
+      // Keep thumb active for a bit longer on mobile
+      clearThumbActive();
     };
 
-    // Mouse events
+    // Mouse events (desktop)
     const onMouseDown = (e) => {
       e.preventDefault();
       startDrag(e.clientX);
@@ -200,11 +240,24 @@ const BarbershopGallery = () => {
 
     const onMouseUp = () => {
       endDrag();
+      thumb.classList.remove("active");
+    };
+
+    // Track click handler for desktop
+    const onTrackClick = (e) => {
+      if (e.target === track || track.contains(e.target)) {
+        e.preventDefault();
+        startDrag(e.clientX, true);
+        // On desktop, end immediately after click
+        setTimeout(() => {
+          endDrag();
+          thumb.classList.remove("active");
+        }, 100);
+      }
     };
 
     // Touch events for mobile
     const onTouchStart = (e) => {
-      // Check if touch started on thumb or track
       const touch = e.touches[0];
       if (!touch) return;
       
@@ -213,27 +266,34 @@ const BarbershopGallery = () => {
       const isOnTrack = track.contains(target) || target === track;
       
       if (isOnThumb || isOnTrack) {
-        touchStartedOnThumb = true;
+        touchStartedOnScrollbar = true;
         e.preventDefault();
         e.stopPropagation();
-        startDrag(touch.clientX);
+        
+        if (isOnTrack) {
+          // If touching track, jump thumb to that position and start dragging
+          startDrag(touch.clientX, true);
+        } else {
+          // If touching thumb, start dragging from current position
+          startDrag(touch.clientX, false);
+        }
       }
     };
 
     const onTouchMove = (e) => {
-      // Only prevent default if we started dragging on the thumb
-      if (!isDragging || !touchStartedOnThumb) return;
+      if (!isDragging || !touchStartedOnScrollbar) return;
       const touch = e.touches[0];
       if (touch) {
         e.preventDefault();
         e.stopPropagation();
         onDrag(touch.clientX);
+        // Keep thumb active while dragging
+        setThumbActive();
       }
     };
 
     const onTouchEnd = (e) => {
-      // Only prevent default if we were dragging from the thumb
-      if (!isDragging || !touchStartedOnThumb) return;
+      if (!isDragging || !touchStartedOnScrollbar) return;
       e.preventDefault();
       e.stopPropagation();
       endDrag();
@@ -241,25 +301,32 @@ const BarbershopGallery = () => {
 
     // Add event listeners
     thumb.addEventListener("mousedown", onMouseDown);
+    track.addEventListener("click", onTrackClick);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
     
-    // Only attach touch listeners to the thumb, not window
+    // Touch listeners - attach to both thumb and track
     thumb.addEventListener("touchstart", onTouchStart, { passive: false });
-    // Use document instead of window for touchmove/touchend to be more specific
+    track.addEventListener("touchstart", onTouchStart, { passive: false });
     document.addEventListener("touchmove", onTouchMove, { passive: false });
     document.addEventListener("touchend", onTouchEnd, { passive: false });
     document.addEventListener("touchcancel", onTouchEnd, { passive: false });
 
     return () => {
       thumb.removeEventListener("mousedown", onMouseDown);
+      track.removeEventListener("click", onTrackClick);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
       
       thumb.removeEventListener("touchstart", onTouchStart);
+      track.removeEventListener("touchstart", onTouchStart);
       document.removeEventListener("touchmove", onTouchMove);
       document.removeEventListener("touchend", onTouchEnd);
       document.removeEventListener("touchcancel", onTouchEnd);
+      
+      if (activeTimeout) {
+        clearTimeout(activeTimeout);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

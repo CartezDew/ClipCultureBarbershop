@@ -179,10 +179,25 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
     }
 
     const toggleSection = (section) => {
-        setExpandedSections(prev => ({
-            ...prev,
-            [section]: !prev[section]
-        }))
+        setExpandedSections(prev => {
+            // If the clicked section is already expanded, close it
+            if (prev[section]) {
+                return {
+                    Services: false,
+                    Barbers: false,
+                    Shop: false,
+                    About: false
+                }
+            }
+            // Otherwise, close all sections and open the clicked one
+            return {
+                Services: false,
+                Barbers: false,
+                Shop: false,
+                About: false,
+                [section]: true
+            }
+        })
     }
 
     const getIconForMenuItem = (iconName) => {
@@ -367,7 +382,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                             initial={{ height: 0, opacity: 0 }}
                                                             animate={{ height: 'auto', opacity: 1 }}
                                                             exit={{ height: 0, opacity: 0 }}
-                                                            transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                                                         >
                                                             {sectionItems.map((item) => {
                                                                 const icon = getIconForMenuItem(item.icon)
