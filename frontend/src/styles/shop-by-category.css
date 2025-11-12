@@ -129,7 +129,7 @@
 }
 .shop-by-category__heading {
   margin: 0;
-  font-size: clamp(2.2rem, 4vw, 4rem);
+  font-size: clamp(2.2rem, 3vw, 4rem);
   font-weight: 800;
   line-height: 1.3;
   color: var(--primary-white);
@@ -140,7 +140,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   max-width: 450px;
-  padding: 1rem 0 0 1rem;
+  padding: 1rem 0rem 0 1rem;
   position: relative;
   z-index: 5;
   transition: opacity 0.3s ease;
@@ -323,6 +323,7 @@
   overflow: hidden;
   position: relative;
   align-self: center;
+  margin-left: 10rem;
 
 
   mask-image: linear-gradient(
@@ -577,6 +578,19 @@
   .carousel-nav-button {
     width: 44px;
     height: 44px;
+  }
+  .shop-by-category__carousel-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    align-self: center;
+    margin-left: 3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .shop-by-category__carousel-wrapper {
+    margin-left: 0;
   }
 }
 
