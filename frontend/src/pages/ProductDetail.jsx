@@ -32,10 +32,11 @@ const ProductDetail = () => {
       name: "Revive by Clip Culture Haircare",
       price: 18,
       size: "4 fl oz (120 ml)",
-      rating: 5,
+      rating: null,
       reviewCount: 12,
       image: BeardLineUp1,
       hoverImage: BeardLineUp2,
+      isNewDrop: true,
       description: "Developed by master barber David Brown, owner of Clip Culture Barbershop. <strong>Revive</strong> is a premium beard and hair line-up enhancement designed for precision, performance, and staying power. This semi-permanent airbrush dye delivers a clean, natural-looking definition that holds through sweat, humidity, and long days behind the chair.",
       features: [
         "Enhances beard and hairline definition for a sharp, clean finish",
@@ -253,8 +254,19 @@ const ProductDetail = () => {
               <span className="product-detail__size">{product.size}</span>
             </div>
             <div className="product-detail__rating">
-              {renderStars(product.rating)}
-              <span className="product-detail__rating-text">({product.reviewCount || product.rating})</span>
+              {product.isNewDrop ? (
+                <span className="product-detail__new-drop">
+                  new drop{' '}
+                  <span className="fire-emoji">🔥</span>
+                  <span className="fire-emoji">🔥</span>
+                  <span className="fire-emoji">🔥</span>
+                </span>
+              ) : (
+                <>
+                  {renderStars(product.rating)}
+                  <span className="product-detail__rating-text">({product.reviewCount || product.rating})</span>
+                </>
+              )}
             </div>
             <p className="product-detail__description" dangerouslySetInnerHTML={{ __html: product.description }}></p>
 
