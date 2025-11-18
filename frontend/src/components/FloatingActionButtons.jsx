@@ -47,17 +47,7 @@ const FloatingActionButtons = ({ showOnHome }) => {
 
   const handleBookNowClick = (e) => {
     e.preventDefault();
-    
-    if (isHomePage) {
-      // On home page, just trigger the booking form
-      window.dispatchEvent(new CustomEvent('openBookingForm'));
-    } else {
-      // On other pages, navigate to home and trigger booking form
-      navigate('/');
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('openBookingForm'));
-      }, 100);
-    }
+    navigate('/booking');
   };
 
   const handleShopNowClick = (e) => {

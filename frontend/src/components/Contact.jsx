@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
@@ -6,6 +6,8 @@ import Shop2Image from '../assets/Contact/Shop_2.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 
 const Contact = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="contact" className="contact">
       <div className="contact__container">
@@ -41,9 +43,7 @@ const Contact = () => {
               className="book__btn book__btn--sandy-springs"
               onClick={(e) => {
                 e.preventDefault();
-                window.dispatchEvent(new CustomEvent('openBookingForm', { 
-                  detail: { location: 'sandy-springs' } 
-                }));
+                navigate('/booking', { state: { location: 'sandy-springs' } });
               }}
             >
               Book Now
@@ -63,9 +63,7 @@ const Contact = () => {
               className="book__btn book__btn--summerhill"
               onClick={(e) => {
                 e.preventDefault();
-                window.dispatchEvent(new CustomEvent('openBookingForm', { 
-                  detail: { location: 'summerhill' } 
-                }));
+                navigate('/booking', { state: { location: 'summerhill' } });
               }}
             >
               Book Now

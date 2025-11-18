@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
 import HeroNavbar from '../components/HeroNavbar.jsx';
@@ -53,6 +52,7 @@ const Home = () => {
   const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 600 : false);
   const [showTaglineAnim, setShowTaglineAnim] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     getServices().then(setServices);
   }, []);
@@ -189,7 +189,7 @@ const Home = () => {
             className="hero__btn hero__btn--book"
             onClick={(e) => {
               e.preventDefault();
-              window.dispatchEvent(new CustomEvent('openBookingForm'));
+              navigate('/booking');
             }}
           >
             Book Now

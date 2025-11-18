@@ -14,7 +14,7 @@ import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
 import Apply from './pages/Apply.jsx';
 import BarberBio from './pages/BarberBio.jsx';
-import BookingForm from './components/BookingForm.jsx';
+import Booking from './pages/Booking.jsx';
 
 function AppContent() {
   const location = useLocation();
@@ -32,6 +32,7 @@ function AppContent() {
       '/advertise': 'Advertise',
       '/franchise': 'Franchise',
       '/apply': 'Apply',
+      '/booking': 'Book Appointment',
       '/speaking': 'Speaking Engagements',
     };
     
@@ -164,10 +165,16 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="/booking" element={
+            <>
+              <Navbar />
+              <main>
+                <Booking />
+              </main>
+              <Footer />
+            </>
+          } />
         </Routes>
-        
-        {/* Booking Form - Available on all pages (popup only) */}
-        <BookingForm showMainForm={false} />
         
         {/* Floating Action Buttons - Show on all pages except login */}
         <FloatingActionButtons showOnHome={showFloatingButtons} />

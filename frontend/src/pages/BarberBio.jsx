@@ -157,13 +157,13 @@ const BarberBio = () => {
       ? 'sandy-springs'
       : 'summerhill';
 
-    window.dispatchEvent(new CustomEvent('openBookingForm', {
-      detail: {
+    navigate('/booking', {
+      state: {
         barberId: barber.id,
         location: locationParam,
         skipBarber: true
       }
-    }));
+    });
   };
 
   return (
