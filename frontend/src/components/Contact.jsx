@@ -79,7 +79,10 @@ const Contact = () => {
             </div>
             <div className="contact__hours">
               <div className="contact__hours-row">
-                <span className="contact__day">Mon - Sat</span>
+                <span className="contact__day">
+                  <span className="contact__day-short">Mon - Sat</span>
+                  <span className="contact__day-full">Monday-Saturday</span>
+                </span>
                 <span className="contact__time">9 AM - 7 PM</span>
               </div>
               <div className="contact__hours-row">

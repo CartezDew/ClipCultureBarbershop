@@ -571,12 +571,12 @@
 
 @media (max-width: 530px) {
 
-  .contact__hours-row:last-child {
+  /* .contact__hours-row:last-child {
     padding: 0.4rem 0rem 0.4rem 0rem;
   }
   .contact__hours-row:first-child {
     padding: 0.4rem 0rem 0.4rem 0rem;
-  }
+  } */
   .contact__column {
     padding: 1rem .5rem 1rem .5rem;
     height: 180px;
@@ -593,19 +593,48 @@
     padding-bottom: 1rem;
   }
 
+  .contact__image-container {
+    height: 200px;
+  }
+
   .contact__column {
     padding: 1.5rem 1rem 1rem 1rem;
-    height: 180px;
+    height: 200px;
     margin-left: -1rem;
     border-left: 7px solid var(--primary-black);
     /* border-radius : 2px 2px 0 2px; */
   }
-  .contact__day{
-    font-size: .85rem;
+  
+  /* Shop Hours Layout - Centered with day above time */
+  .contact__hours-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
   }
+  
+  .contact__day {
+    font-size: .9rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .contact__day-short {
+    display: none;
+  }
+  
+  .contact__day-full {
+    display: inline;
+  }
+  
   .contact__time {
-    font-size: .85rem;
+    font-size: .9rem;
+    text-align: center;
+    width: 100%;
+    font-weight: 700;
+    color: var(--primary-black);
   }
+  
   .contact__location-title {
     font-size: 1.05rem;
   }
@@ -658,11 +687,11 @@
   .contact__city {
     font-size: .9rem;
   }
-  .contact__image-container {
+  /* .contact__image-container {
     height: 160px;
   }
   .contact__column {
     height: 160px;
-  }
+  } */
 
 }
