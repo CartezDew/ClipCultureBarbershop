@@ -934,11 +934,12 @@
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* allow vertical scrolling */
   justify-content: center;
   z-index: 99999;
-  padding: 1rem;
+  padding: 2rem 1rem 2.5rem 1rem;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .popup-form {
@@ -952,8 +953,7 @@
   backdrop-filter: blur(5px);
   max-width: 70vw;
   width: 100%;
-  /* max-height: 75vh; */
-  overflow-y: auto;
+  /* No max-height - let it grow and use page scroll */
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
   animation: popupSlideIn 0.3s ease-out;
@@ -1194,6 +1194,7 @@
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.5rem;
 }
 
 /* Custom Dropdown Styles */
@@ -1269,6 +1270,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   overflow: hidden;
+  max-height: 22rem;
   animation: dropdownSlideIn 0.2s ease-out;
 }
 
@@ -1284,8 +1286,10 @@
 }
 
 .custom-dropdown-scroll {
-  /* Removed max-height and overflow to allow modal scrollbar to handle all scrolling */
+  max-height: 22rem;
+  overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 0.25rem;
 }
 
 .dropdown-group {
@@ -1650,6 +1654,7 @@
   padding: 1rem;
   align-items: flex-start;
   background: rgba(24, 24, 24, 0.4);
+  display: none;
 }
 
 .barber-card.earliest-available:hover {
@@ -1677,13 +1682,21 @@
   z-index: 2;
   flex-direction: column;
   transition: opacity 0.3s ease;
-  /* opacity: 0; */
+  opacity: 0; /* Hidden by default above 550px */
 }
 
-/* .barber-card:hover .barber-card-icons,
+/* Show icons on hover above 550px */
+.barber-card:hover .barber-card-icons,
 .barber-card.selected .barber-card-icons {
   opacity: 1;
-} */
+}
+
+/* Always visible below 550px */
+@media (max-width: 550px) {
+  .barber-card-icons {
+    opacity: 1;
+  }
+}
 
 .card-icon-btn {
   width: 35px;
@@ -1788,12 +1801,13 @@
   font-style: italic;
   font-size: 0.75rem;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 
 }
 
+
 .barber-availability {
-  margin-top: 0.5rem;
+  margin-top: 0;
   font-size: 0.75rem;
   text-align: center;
 }
@@ -1804,6 +1818,10 @@
   opacity: 0.6;
   display: block;
   font-style: italic;
+  border-top: 1px solid rgba(226, 221, 221, 0.3);
+  border-radius: 10px;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid rgba(226, 221, 221, 0.3);
 }
 
 .availability-day {
