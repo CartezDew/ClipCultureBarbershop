@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Footer from '../components/Footer';
-import '../styles/book.css';
+import SuccessModal from '../components/SuccessModal';
+import '../styles/booking.css';
+import Logo from '../assets/images/New_Logo.webp';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';
 import Image3 from '../assets/Barbers/Image_3.webp';
@@ -66,6 +68,17 @@ const Booking = () => {
   const [alertTimer, setAlertTimer] = useState(null);
   const [skipBarberStep, setSkipBarberStep] = useState(false);
   const [attemptedNext, setAttemptedNext] = useState(false);
+
+  // Add/remove class to body for styling
+  useEffect(() => {
+    document.body.classList.add('booking-page-active');
+    document.documentElement.classList.add('booking-page-active');
+    
+    return () => {
+      document.body.classList.remove('booking-page-active');
+      document.documentElement.classList.remove('booking-page-active');
+    };
+  }, []);
 
   // Services from the Services page
   const regularServices = [
@@ -417,6 +430,20 @@ const Booking = () => {
     setViewingMonth(date.getMonth());
     setViewingYear(date.getFullYear());
     setCalendarOpen(false);
+
+    // Scroll to time slots on step 4 after date is selected
+    if (currentStep === 4) {
+      setTimeout(() => {
+        const timeSlots = document.querySelector('.time-slots-section');
+        if (timeSlots) {
+          timeSlots.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start',
+            inline: 'nearest'
+          });
+        }
+      }, 300);
+    }
   };
 
   const handleMonthChange = (direction) => {
@@ -515,6 +542,27 @@ const Booking = () => {
     return availableMonths;
   };
 
+  // Check if previous month navigation should be disabled
+  const isPrevMonthDisabled = () => {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    return viewingYear === currentYear && viewingMonth === currentMonth;
+  };
+
+  // Check if next month navigation should be disabled
+  const isNextMonthDisabled = () => {
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 60);
+    const maxYear = maxDate.getFullYear();
+    const maxMonth = maxDate.getMonth();
+    
+    if (viewingYear > maxYear) return true;
+    if (viewingYear === maxYear && viewingMonth >= maxMonth) return true;
+    return false;
+  };
+
   // Portfolio functions
   const handleOpenPortfolio = (e, barber) => {
     e.stopPropagation();
@@ -596,6 +644,11 @@ const Booking = () => {
         barber: barberId
       }));
     }
+    
+    // Scroll to Next button on step 2
+    if (currentStep === 2) {
+      scrollToNextButton();
+    }
   };
 
   const handleServiceToggle = (serviceId) => {
@@ -640,6 +693,11 @@ const Booking = () => {
       
       return updatedData;
     });
+
+    // Scroll to Next button on step 4 after time selection
+    if (currentStep === 4) {
+      scrollToNextButton();
+    }
   };
 
   const nextStep = () => {
@@ -665,6 +723,19 @@ const Booking = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToNextButton = () => {
+    setTimeout(() => {
+      const nextButton = document.querySelector('.booking-page-actions .btn-next');
+      if (nextButton) {
+        nextButton.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center',
+          inline: 'nearest'
+        });
+      }
+    }, 300);
   };
 
   // Close dropdown when clicking outside
@@ -851,6 +922,20 @@ const Booking = () => {
 
   const handlePolicyCheckboxChange = (checked) => {
     setPolicyAgreed(checked);
+    
+    // Scroll to Confirm button on step 5 after checkbox is checked
+    if (checked && currentStep === 5) {
+      setTimeout(() => {
+        const confirmButton = document.querySelector('.booking-page-actions .btn-confirm');
+        if (confirmButton) {
+          confirmButton.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }, 300);
+    }
   };
 
   const isStepValid = (step = currentStep) => {
@@ -899,7 +984,7 @@ const Booking = () => {
           <div className="booking-step">
             <h3>Your Information</h3>
             <div className="form-row">
-              <div className="form-group half">
+              <div className="booking-form-group half">
                 <input
                   type="text"
                   name="firstName"
@@ -910,7 +995,7 @@ const Booking = () => {
                   className="required-input"
                 />
               </div>
-              <div className="form-group half">
+              <div className="booking-form-group half">
                 <input
                   type="text"
                   name="lastName"
@@ -923,7 +1008,7 @@ const Booking = () => {
               </div>
             </div>
             <div className="form-row">
-              <div className="form-group half">
+              <div className="booking-form-group half">
                 <input
                   type="email"
                   name="email"
@@ -934,7 +1019,7 @@ const Booking = () => {
                   className="required-input"
                 />
               </div>
-              <div className="form-group half">
+              <div className="booking-form-group half">
                 <input
                   type="tel"
                   name="phone"
@@ -961,7 +1046,7 @@ const Booking = () => {
         
         return (
           <div className="booking-step">
-            <h3>Select Your Barber <span className="required-asterisk">*</span></h3>
+            <h3>Select Your Barber <span className="booking-required-asterisk">*</span></h3>
             
             {skipBarberStep && selectedBarber && (
               <div style={{
@@ -1074,11 +1159,11 @@ const Booking = () => {
       case 3:
         return (
           <div className="booking-step">
-            <h3>Select Service <span className="required-asterisk">*</span></h3>
+            <h3>Select Service <span className="booking-required-asterisk">*</span></h3>
             
             {/* Custom Service Dropdown */}
-            <div className="form-group">
-              <label className="service-label">Choose Your Service <span className="required-asterisk">*</span></label>
+            <div className="booking-form-group">
+              <label className="service-label">Choose Your Service <span className="booking-required-asterisk">*</span></label>
               <div className="custom-dropdown-wrapper">
                 <div 
                   className={`custom-dropdown-trigger ${isDropdownOpen ? 'open' : ''}`}
@@ -1277,14 +1362,15 @@ const Booking = () => {
         
         return (
           <div className="booking-step">
-            <h3>Select Date & Time <span className="required-asterisk">*</span></h3>
+            <h3>Select Date & Time <span className="booking-required-asterisk">*</span></h3>
             <div className="custom-calendar-container">
               {/* Month/Year Selector */}
               <div className="calendar-header">
                 <div className="month-year-selector">
                   <button 
-                    className="month-nav-btn prev"
-                    onClick={() => handleMonthChange('prev')}
+                    className={`month-nav-btn prev ${isPrevMonthDisabled() ? 'disabled' : ''}`}
+                    onClick={() => !isPrevMonthDisabled() && handleMonthChange('prev')}
+                    disabled={isPrevMonthDisabled()}
                     aria-label="Previous month"
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1304,8 +1390,9 @@ const Booking = () => {
                     </span>
                   </div>
                   <button 
-                    className="month-nav-btn next"
-                    onClick={() => handleMonthChange('next')}
+                    className={`month-nav-btn next ${isNextMonthDisabled() ? 'disabled' : ''}`}
+                    onClick={() => !isNextMonthDisabled() && handleMonthChange('next')}
+                    disabled={isNextMonthDisabled()}
                     aria-label="Next month"
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1574,7 +1661,7 @@ const Booking = () => {
                     required
                   />
                   <span className="policy-text">
-                    <span className="required-asterisk">*</span> I agree to arrive 10–15 minutes early to allow time for my initial consultation prior to my service. 
+                    <span className="booking-required-asterisk">*</span> I agree to arrive 10–15 minutes early to allow time for my initial consultation prior to my service. 
                     I am aware of the cancellation policy: Missed appointments incur a $15 no-show fee, which will be applied to my next booking.
                   </span>
                 </label>
@@ -1620,7 +1707,7 @@ const Booking = () => {
                   <Link 
                     key={product.id} 
                     to={`/products/${product.slug}`} 
-                    className="booking-product-card"
+                    className="booking-page-product-card"
                   >
                     <div className="booking-product-image">
                       <img src={product.image} alt={product.name} loading="lazy" />
@@ -1650,13 +1737,51 @@ const Booking = () => {
     navigate('/');
   };
 
+  const handleBackNavigation = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <div className="booking-page-wrapper">
         <div className="booking-page-content">
+          <button 
+            className="booking-page-back-btn" 
+            onClick={handleBackNavigation}
+            aria-label="Go back"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            {/* <span>Back</span> */}
+          </button>
+          
           <div className="booking-page-header">
-            <h1>Book Your Appointment</h1>
-            <p className="booking-page-subtitle">Walk-ins are welcome!</p>
+            <img src={Logo} alt="Clip Culture Logo" className="booking-page-logo" />
+            <div className="booking-page-header-text">
+              <h1>Book Your Appointment</h1>
+              <p className="booking-page-subtitle">Walk-ins are welcome!</p>
+            </div>
+
+          {/* Compact Step Header (for mobile) */}
+          <div className="step-header-compact">
+            <div className="step-title-text">
+              Step {currentStep} of 5: {
+                currentStep === 1 ? 'Contact Information' :
+                currentStep === 2 ? 'Choose Your Barber' :
+                currentStep === 3 ? 'Choose Your Service' :
+                currentStep === 4 ? 'Select Date & Time' :
+                'Confirm Appointment'
+              }
+            </div>
+            <div className="step-progress-bar">
+              <div className={`step-segment ${currentStep >= 1 ? 'active' : ''}`}></div>
+              <div className={`step-segment ${currentStep >= 2 ? 'active' : ''}`}></div>
+              <div className={`step-segment ${currentStep >= 3 ? 'active' : ''}`}></div>
+              <div className={`step-segment ${currentStep >= 4 ? 'active' : ''}`}></div>
+              <div className={`step-segment ${currentStep >= 5 ? 'active' : ''}`}></div>
+            </div>
+          </div>
           
           {/* Step Progress Indicator */}
           <div className="step-progress-container">
@@ -1735,75 +1860,12 @@ const Booking = () => {
       </div>
 
       {/* Success Message Modal */}
-      {showSuccessMessage && ReactDOM.createPortal(
-        (() => {
-          const confirmedBarber = allBarbers.find(b => b.id === formData.barber);
-          const locationName = formData.location === 'sandy-springs' ? 'Sandy Springs' : 'Summerhill';
-          const locationAddress = formData.location === 'sandy-springs' 
-            ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328'
-            : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312';
-          
-          return (
-            <div className="success-message-overlay" onClick={handleCloseSuccessMessage}>
-              <div className="success-message-container" onClick={(e) => e.stopPropagation()}>
-                <button 
-                  className="success-close-btn"
-                  onClick={handleCloseSuccessMessage}
-                  aria-label="Close"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-                <div className="success-icon">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" stroke="var(--primary-green)" fill="none" strokeWidth="2"/>
-                    <path d="M9 12l2 2 4-4" stroke="var(--primary-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <h2 className="success-title">Appointment confirmed!</h2>
-                <div className="success-details">
-                  <p className="success-message">
-                    We'll be ready for you, {formData.firstName}— sharp lines, fresh vibes!
-                  </p>
-                  <div className="success-appointment-info">
-                    <h3>Your Appointment Details:</h3>
-                    <div className="success-info-grid">
-                      <div className="success-info-item success-date-time-row">
-                        <div className="success-date-time-group">
-                          <span className="success-label">Date:</span>
-                          <span className="success-value">{formatSuccessDate(formData.date)}</span>
-                        </div>
-                        <div className="success-date-time-group">
-                          <span className="success-label">Time:</span>
-                          <span className="success-value">{formData.time}</span>
-                        </div>
-                      </div>
-                      <div className="success-info-item">
-                        <span className="success-label">Location:</span>
-                        <span className="success-value">
-                          {locationName} - {locationAddress}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="success-reminder">
-                    Remember to arrive 10-15 minutes early for your appointment.
-                  </p>
-                  <button 
-                    className="success-btn-home"
-                    onClick={handleCloseSuccessMessage}
-                  >
-                    Return to Home
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })(),
-        document.body
-      )}
+      <SuccessModal 
+        isOpen={showSuccessMessage}
+        onClose={handleCloseSuccessMessage}
+        formData={formData}
+        formatSuccessDate={formatSuccessDate}
+      />
 
       {/* Portfolio Modal */}
       {showPortfolio && portfolioBarber && ReactDOM.createPortal(
@@ -1915,7 +1977,9 @@ const Booking = () => {
         document.body
       )}
       </div>
-      <Footer />
+      <div className="booking-page-footer-wrapper">
+        <Footer />
+      </div>
     </>
   );
 };

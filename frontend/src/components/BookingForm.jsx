@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import '../styles/booking.css';
+import SuccessModal from './SuccessModal';
+import '../styles/booking-form.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';
 import Image3 from '../assets/Barbers/Image_3.webp';
@@ -2366,76 +2367,13 @@ const BookingForm = ({ showMainForm = true }) => {
         document.body
       )}
 
-      {/* Success Message Modal - Rendered using Portal at document root, above all other elements */}
-      {showSuccessMessage && ReactDOM.createPortal(
-        (() => {
-          const confirmedBarber = allBarbers.find(b => b.id === formData.barber);
-          const locationName = formData.location === 'sandy-springs' ? 'Sandy Springs' : 'Summerhill';
-          const locationAddress = formData.location === 'sandy-springs' 
-            ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328'
-            : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312';
-          
-          return (
-            <div className="success-message-overlay" onClick={handleCloseSuccessMessage}>
-              <div className="success-message-container" onClick={(e) => e.stopPropagation()}>
-                <button 
-                  className="success-close-btn"
-                  onClick={handleCloseSuccessMessage}
-                  aria-label="Close"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-                <div className="success-icon">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" stroke="var(--primary-green)" fill="none" strokeWidth="2"/>
-                    <path d="M9 12l2 2 4-4" stroke="var(--primary-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <h2 className="success-title">Appointment confirmed!</h2>
-                <div className="success-details">
-                  <p className="success-message">
-                    We'll be ready for you, {formData.firstName}— sharp lines, fresh vibes!
-                  </p>
-                  <div className="success-appointment-info">
-                    <h3>Your Appointment Details:</h3>
-                    <div className="success-info-grid">
-                      <div className="success-info-item success-date-time-row">
-                        <div className="success-date-time-group">
-                          <span className="success-label">Date:</span>
-                          <span className="success-value">{formatSuccessDate(formData.date)}</span>
-                        </div>
-                        <div className="success-date-time-group">
-                          <span className="success-label">Time:</span>
-                          <span className="success-value">{formData.time}</span>
-                        </div>
-                      </div>
-                      <div className="success-info-item">
-                        <span className="success-label">Location:</span>
-                        <span className="success-value">
-                          {locationName} - {locationAddress}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="success-reminder">
-                    Remember to arrive 10-15 minutes early for your appointment.
-                  </p>
-                  <button 
-                    className="success-btn-home"
-                    onClick={handleCloseSuccessMessage}
-                  >
-                    Return to Home
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })(),
-        document.body
-      )}
+      {/* Success Message Modal */}
+      <SuccessModal 
+        isOpen={showSuccessMessage}
+        onClose={handleCloseSuccessMessage}
+        formData={formData}
+        formatSuccessDate={formatSuccessDate}
+      />
 
       {/* Portfolio Modal */}
       {showPortfolio && portfolioBarber && ReactDOM.createPortal(

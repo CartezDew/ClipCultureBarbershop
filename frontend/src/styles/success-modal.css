@@ -1,0 +1,375 @@
+/* Success Message Modal Styling */
+.success-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(10, 151, 134, 0.95) 0%, rgba(81, 92, 75, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100001;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.success-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.success-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.success-close-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.success-close-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.success-message-container {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
+  border-radius: 20px;
+  padding: 1.25rem 2rem;
+  max-width: 700px;
+  width: 100%;
+  max-height: calc(100vh - 4rem);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.6s ease-out;
+  cursor: default;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.success-icon {
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  animation: scaleIn 0.8s ease-out 0.3s backwards;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-icon svg {
+  width: clamp(45px, 5vw, 55px);
+  height: clamp(45px, 5vw, 55px);
+}
+
+.success-title {
+  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.success-details {
+  margin-top: 0.75rem;
+}
+
+.success-message {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+.success-appointment-info {
+  background: linear-gradient(135deg, rgba(10, 151, 134, 0.08) 0%, rgba(81, 92, 75, 0.08) 100%);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 2px solid rgba(10, 151, 134, 0.2);
+}
+
+.success-appointment-info h3 {
+  font-size: 1.15rem;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.success-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.success-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.65rem;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-green);
+}
+
+.success-date-time-row {
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.success-date-time-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.success-label {
+  font-size: 0.8rem;
+  color: var(--primary-green);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.success-value {
+  font-size: 1rem;
+  color: var(--primary-black);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.success-reminder {
+  font-size: 0.95rem;
+  color: var(--primary-black);
+  opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.success-btn-home {
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+}
+
+.success-btn-home:hover {
+  background: var(--green-new);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(10, 151, 134, 0.4);
+}
+
+.success-btn-home:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .success-message-overlay {
+    padding: 3rem;
+  }
+  .success-close-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .success-close-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .success-icon svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .success-title {
+    font-size: 1.5rem;
+  }
+
+  .success-message {
+    font-size: 1rem;
+  }
+
+  .success-appointment-info {
+    padding: 1.5rem;
+  }
+
+  .success-appointment-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .success-value {
+    font-size: 1rem;
+  } 
+
+  .success-btn-home {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    border-radius: 50px;
+  }
+}
+
+@media (max-width: 670px) {
+  .success-value {
+    font-size: 0.9rem;
+  }
+  .success-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .success-message-container {
+    padding: 1rem 1.5rem;
+  }
+
+  .success-message-overlay {
+    padding: 2rem;
+  }
+  .success-icon svg {
+    width: clamp(40px, 7vw, 50px);
+    height: clamp(40px, 7vw, 50px);
+  }
+  .success-info-item {
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  .success-reminder {
+    font-size: 0.8rem;
+  }
+  .success-btn-home {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+  }
+}
+
+@media (max-width: 520px) {
+  .success-date-time-group:first-child {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+  .success-date-time-group:last-child {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-message-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .success-appointment-info {
+    padding: 1rem;
+  }
+
+  .success-info-item {
+    padding: 0.5rem;
+  }
+
+  .success-message-container {
+    max-height: 730px;
+  }
+  .success-message-overlay {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 415px) {
+  .success-info-item {
+    padding: 0.75rem 1rem;
+  }
+  .success-title {
+    font-size: 1.4rem;
+  }
+  .success-appointment-info h3 {
+    font-size: 1rem;
+  }
+  .success-label {
+    font-size: 0.65rem;
+  }
+  .success-message {
+    font-size: 0.9rem;
+  }
+  .success-reminder {
+    font-size: 0.9rem;
+  }
+  .success-btn-home {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+  }
+  .success-date-time-row {
+    gap: .5rem;
+    flex-direction: row;
+  }
+  
+
+}
+
+
+
+
+

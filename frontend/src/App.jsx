@@ -170,8 +170,10 @@ function AppContent() {
           } />
         </Routes>
         
-        {/* Floating Action Buttons - Show on all pages except login */}
-        <FloatingActionButtons showOnHome={showFloatingButtons} />
+        {/* Floating Action Buttons - Show on all pages except booking and product details */}
+        {location.pathname !== '/booking' && !location.pathname.startsWith('/products/') && (
+          <FloatingActionButtons showOnHome={showFloatingButtons} />
+        )}
       </div>
   );
 }
