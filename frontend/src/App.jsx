@@ -166,13 +166,7 @@ function AppContent() {
             </>
           } />
           <Route path="/booking" element={
-            <>
-              <Navbar />
-              <main>
-                <Booking />
-              </main>
-              <Footer />
-            </>
+            <Booking />
           } />
         </Routes>
         

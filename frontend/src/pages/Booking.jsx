@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import '../styles/booking.css';
+import Footer from '../components/Footer';
+import '../styles/book.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';
 import Image3 from '../assets/Barbers/Image_3.webp';
@@ -1650,11 +1651,12 @@ const Booking = () => {
   };
 
   return (
-    <div className="booking-page">
-      <div className="booking-page-container">
-        <div className="booking-page-header">
-          <h1>Book Your Appointment</h1>
-          <p className="booking-subtitle">Walk-ins are welcome!</p>
+    <>
+      <div className="booking-page-wrapper">
+        <div className="booking-page-content">
+          <div className="booking-page-header">
+            <h1>Book Your Appointment</h1>
+            <p className="booking-page-subtitle">Walk-ins are welcome!</p>
           
           {/* Step Progress Indicator */}
           <div className="step-progress-container">
@@ -1691,7 +1693,7 @@ const Booking = () => {
           </div>
         </div>
 
-        <div className="booking-page-content">
+        <div className="booking-step-content">
           {renderStep()}
 
           {/* Validation Error Message */}
@@ -1912,7 +1914,9 @@ const Booking = () => {
         </div>,
         document.body
       )}
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 
