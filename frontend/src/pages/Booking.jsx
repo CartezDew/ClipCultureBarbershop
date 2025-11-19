@@ -320,7 +320,20 @@ const Booking = () => {
   // Initialize from location state if provided
   useEffect(() => {
     if (location.state) {
-      const { barberId, skipBarber, location: loc } = location.state;
+      const { barberId, skipBarber, location: loc, contactInfo } = location.state;
+      
+      // Set contact information if provided
+      if (contactInfo) {
+        setFormData(prev => ({
+          ...prev,
+          firstName: contactInfo.firstName || prev.firstName,
+          lastName: contactInfo.lastName || prev.lastName,
+          email: contactInfo.email || prev.email,
+          phone: contactInfo.phone || prev.phone
+        }));
+        // Skip to step 2 if contact info is filled
+        setCurrentStep(2);
+      }
       
       if (barberId) {
         const matchedBarber = allBarbers.find(b => b.id === barberId);
@@ -340,7 +353,8 @@ const Booking = () => {
       
       if (skipBarber) {
         setSkipBarberStep(true);
-        setCurrentStep(2); // Skip to services if barber is pre-selected
+        // If contact info is filled and barber is pre-selected, skip to services (step 3)
+        setCurrentStep(contactInfo ? 3 : 2);
       }
     }
   }, [location.state]);
@@ -431,14 +445,14 @@ const Booking = () => {
     setViewingYear(date.getFullYear());
     setCalendarOpen(false);
 
-    // Scroll to time slots on step 4 after date is selected
+    // Scroll to selected date display on step 4 after date is selected
     if (currentStep === 4) {
       setTimeout(() => {
-        const timeSlots = document.querySelector('.time-slots-section');
-        if (timeSlots) {
-          timeSlots.scrollIntoView({ 
+        const selectedDateContainer = document.querySelector('.selected-date-container');
+        if (selectedDateContainer) {
+          selectedDateContainer.scrollIntoView({ 
             behavior: 'smooth', 
-            block: 'start',
+            block: 'center',
             inline: 'nearest'
           });
         }
@@ -722,7 +736,8 @@ const Booking = () => {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Instantly position page at top without animation
+    window.scrollTo(0, 0);
   };
 
   const scrollToNextButton = () => {
@@ -755,6 +770,18 @@ const Booking = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDropdownOpen]);
+
+  // Scroll to next button when dropdown closes on step 3 and services are selected
+  useEffect(() => {
+    if (!isDropdownOpen && currentStep === 3 && formData.services.length > 0) {
+      scrollToNextButton();
+    }
+  }, [isDropdownOpen, currentStep, formData.services.length]);
+
+  // Ensure page is at top when step changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep]);
 
   // Close month dropdown when clicking outside
   useEffect(() => {

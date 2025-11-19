@@ -395,6 +395,20 @@ const BookingForm = ({ showMainForm = true }) => {
     setViewingMonth(date.getMonth());
     setViewingYear(date.getFullYear());
     setCalendarOpen(false);
+
+    // Scroll to selected date display on step 4 after date is selected
+    if (popupStep === 4) {
+      setTimeout(() => {
+        const selectedDateContainer = document.querySelector('.selected-date-container');
+        if (selectedDateContainer) {
+          selectedDateContainer.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }, 300);
+    }
   };
 
   const handleMonthChange = (direction) => {
@@ -521,18 +535,11 @@ const BookingForm = ({ showMainForm = true }) => {
 
   const handleBookFromPortfolio = () => {
     if (portfolioBarber) {
-      if (showPopupForm) {
-        handleBarberSelect(portfolioBarber.id);
-        handleClosePortfolio();
-        scrollPopupNextIntoView(260);
-      } else {
-        openPopupForm({
-          barberId: portfolioBarber.id,
-          skipBarber: true
-        });
-        handleClosePortfolio();
-        scrollPopupNextIntoView(260);
-      }
+      navigateToBookingPage({
+        barberId: portfolioBarber.id,
+        skipBarber: true
+      });
+      handleClosePortfolio();
     }
   };
 
@@ -550,18 +557,11 @@ const BookingForm = ({ showMainForm = true }) => {
 
   const handleBookFromBio = () => {
     if (bioBarber) {
-      if (showPopupForm) {
-        handleBarberSelect(bioBarber.id);
-        handleCloseBio();
-        scrollPopupNextIntoView(260);
-      } else {
-        openPopupForm({
-          barberId: bioBarber.id,
-          skipBarber: true
-        });
-        handleCloseBio();
-        scrollPopupNextIntoView(260);
-      }
+      navigateToBookingPage({
+        barberId: bioBarber.id,
+        skipBarber: true
+      });
+      handleCloseBio();
     }
   };
 
@@ -709,15 +709,22 @@ const BookingForm = ({ showMainForm = true }) => {
     });
   };
 
+  const scrollToFormTop = () => {
+    // Instantly position page at top without animation
+    window.scrollTo(0, 0);
+  };
+
   const nextStep = () => {
     if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
+      scrollToFormTop();
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      scrollToFormTop();
     }
   };
 
@@ -744,6 +751,7 @@ const BookingForm = ({ showMainForm = true }) => {
     setIsEditingDate(false); // Reset date editing when changing steps
     setManualDateInput('');
     setAttemptedNext(false); // Reset validation error for next step
+    scrollToFormTop();
   };
 
   const prevPopupStep = () => {
@@ -760,6 +768,7 @@ const BookingForm = ({ showMainForm = true }) => {
     setIsEditingDate(false); // Reset date editing when changing steps
     setManualDateInput('');
     setAttemptedNext(false); // Reset validation error when going back
+    scrollToFormTop();
   };
 
   // Prevent body scroll when popup is open
@@ -795,6 +804,19 @@ const BookingForm = ({ showMainForm = true }) => {
     };
   }, [showSuccessMessage]);
 
+  const scrollToNextButton = () => {
+    setTimeout(() => {
+      const nextButton = document.querySelector('.booking-actions .btn-next, .popup-actions .btn-next');
+      if (nextButton) {
+        nextButton.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center',
+          inline: 'nearest'
+        });
+      }
+    }, 300);
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -812,6 +834,20 @@ const BookingForm = ({ showMainForm = true }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDropdownOpen]);
+
+  // Scroll to next button when dropdown closes on step 3 and services are selected
+  useEffect(() => {
+    const isStep3 = currentStep === 3 || popupStep === 3;
+    const hasServices = formData.services.length > 0;
+    if (!isDropdownOpen && isStep3 && hasServices) {
+      scrollToNextButton();
+    }
+  }, [isDropdownOpen, currentStep, popupStep, formData.services.length]);
+
+  // Ensure page is at top when step changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep, popupStep]);
 
   // Close month dropdown when clicking outside
   useEffect(() => {
@@ -861,7 +897,7 @@ const BookingForm = ({ showMainForm = true }) => {
     }
   }, [viewingMonth, viewingYear, popupStep]);
 
-  const openPopupForm = ({ location = null, barberId = null, skipBarber = false } = {}) => {
+  const navigateToBookingPage = ({ location = null, barberId = null, skipBarber = false } = {}) => {
     const contactInfoFilled = formData.firstName && formData.lastName && formData.email && formData.phone;
 
     const matchedBarber = barberId
@@ -874,31 +910,20 @@ const BookingForm = ({ showMainForm = true }) => {
 
     const shouldSkipBarber = skipBarber || Boolean(matchedBarber);
 
-    setSkipBarberStep(shouldSkipBarber);
-    setPopupStep(contactInfoFilled ? (shouldSkipBarber ? 3 : 2) : 1);
-    setLocationFilter(derivedLocation);
-
-    setFormData((prev) => {
-      let updatedData = { ...prev };
-
-      if (matchedBarber) {
-        updatedData = {
-          ...updatedData,
-          barber: matchedBarber.id,
-          location: derivedLocation || updatedData.location
-        };
-      } else if (derivedLocation) {
-        updatedData = {
-          ...updatedData,
-          location: derivedLocation
-        };
+    // Navigate to booking page with state
+    navigate('/booking', {
+      state: {
+        contactInfo: contactInfoFilled ? {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone
+        } : null,
+        barberId: matchedBarber?.id,
+        location: derivedLocation,
+        skipBarber: shouldSkipBarber
       }
-
-      return updatedData;
     });
-
-    setShowPopupForm(true);
-    setPolicyAgreed(false); // Reset policy agreement
   };
 
   // Listen for hero button click to open popup
@@ -917,7 +942,7 @@ const BookingForm = ({ showMainForm = true }) => {
         return;
       }
 
-      openPopupForm(detail);
+      navigateToBookingPage(detail);
     };
 
     window.addEventListener('openBookingForm', handleOpenBooking);
@@ -925,7 +950,7 @@ const BookingForm = ({ showMainForm = true }) => {
     return () => {
       window.removeEventListener('openBookingForm', handleOpenBooking);
     };
-  }, []);
+  }, [formData]);
 
   const closePopupForm = () => {
     setShowPopupForm(false);
@@ -1936,7 +1961,7 @@ const BookingForm = ({ showMainForm = true }) => {
               </div>
               <motion.button 
                 className="btn-book-now" 
-                onClick={() => openPopupForm()}
+                onClick={() => navigateToBookingPage()}
                 disabled={!formData.firstName || !formData.lastName || !formData.email || !formData.phone}
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
