@@ -80,7 +80,7 @@ body.booking-page-active .App {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.3rem .3rem;
+  padding: 0.5rem .5rem;
   background-color: transparent;
   border: 2px solid rgba(10, 151, 134, 0.2);
   border-radius: 8px;
@@ -830,7 +830,7 @@ body.booking-page-active .App {
   border-bottom: 3px solid var(--primary-green);
   color: var(--primary-black);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border-radius: 8px;
   margin-bottom: 0.25rem;
 }
@@ -851,7 +851,8 @@ body.booking-page-active .App {
   border-radius: 6px;
   transition: all 0.2s ease;
   color: var(--primary-black);
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .month-option:hover {
