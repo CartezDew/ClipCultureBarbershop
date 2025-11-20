@@ -56,7 +56,15 @@ function AppContent() {
 
   // Reset scroll position on route change without animating
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+      });
+    }, 100); // 100ms delay before positioning at top
+    
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   useEffect(() => {
