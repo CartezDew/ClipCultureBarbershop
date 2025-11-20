@@ -406,7 +406,6 @@ const Home = () => {
                 style={{ cursor: 'pointer' }}
               >
                 <h3>{service.name}</h3>
-                <p className="service-description">{service.description}</p>
                 <div className="service-details">
                   <div className="service-price">${service.price}</div>
                   <div className="service-divider">|</div>
