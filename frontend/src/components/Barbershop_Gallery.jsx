@@ -10,6 +10,9 @@ const rawImages = import.meta.glob(
 // Services gallery image order - same as ServicesGallery component
 const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 22, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
 
+// Speaking engagements gallery image order
+const speakingImageOrder = [61, 68, 63, 14, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
+
 const BarbershopGallery = () => {
   const location = useLocation();
   const sliderRef = useRef(null);
@@ -24,6 +27,8 @@ const BarbershopGallery = () => {
 
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
+  // Check if we're on the speaking route
+  const isSpeakingRoute = location.pathname === "/speaking";
 
   // Process all images and filter based on route
   const imageEntries = useMemo(() => {
@@ -42,13 +47,18 @@ const BarbershopGallery = () => {
       return servicesImageOrder
         .map((id) => allImageEntries.find((img) => img.id === id))
         .filter(Boolean);
+    } else if (isSpeakingRoute) {
+      // On speaking route: only show images from speakingImageOrder
+      return speakingImageOrder
+        .map((id) => allImageEntries.find((img) => img.id === id))
+        .filter(Boolean);
     } else {
       // On other routes: show all images sorted by ID
       return allImageEntries.sort(
         (a, b) => a.id - b.id || a.filename.localeCompare(b.filename)
       );
     }
-  }, [isServicesRoute]);
+  }, [isServicesRoute, isSpeakingRoute]);
 
   // Total images count - dynamically updates based on route
   const totalImages = imageEntries.length;
@@ -143,7 +153,7 @@ const BarbershopGallery = () => {
     }
     updateUI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isServicesRoute]);
+  }, [isServicesRoute, isSpeakingRoute]);
 
   // scroll listener
   useEffect(() => {
@@ -175,7 +185,7 @@ const BarbershopGallery = () => {
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isServicesRoute]);
+  }, [isServicesRoute, isSpeakingRoute]);
 
   // draggable thumb - supports both mouse and touch events
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2 } from 'lucide-react'
 
 import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
@@ -37,6 +37,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
         { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
         { id: 'shop-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'Shop' },
+        { id: 'shop-speaking', name: 'Speaking Engagements', path: '/speaking', icon: 'Mic2', section: 'Shop' },
         
         // About section
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
@@ -246,6 +247,8 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 return <LogIn {...iconProps} />
             case 'Info':
                 return <Info {...iconProps} />
+            case 'Mic2':
+                return <Mic2 {...iconProps} />
             default:
                 return null
         }

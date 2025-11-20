@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2 } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2, Mic2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
@@ -39,7 +39,8 @@ const NavbarDesktop = () => {
             { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
             { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
-            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }
+            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
+            { name: 'Speaking Engagements', link: '/speaking', icon: <Mic2 size={16} /> }
         ],
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
@@ -73,13 +74,16 @@ const NavbarDesktop = () => {
                 const delta = Math.abs(curY - prevY)
                 if (delta < 6) return // ignore micro scroll noise
 
-                if (!scrollingHide) setScrollingHide(true)
+                if (!scrollingHide) {
+                    setScrollingHide(true)
+                    setActiveDropdown(null)
+                }
                 if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
                 scrollTimerRef.current = setTimeout(() => {
                     setScrollingHide(false)
                     // small cooldown so minor residual scroll doesn't immediately hide again
                     cooldownUntilRef.current = Date.now() + 600
-                }, 240)
+                }, 350)
             })
         }
         window.addEventListener('scroll', onScroll, { passive: true })
@@ -168,8 +172,8 @@ const NavbarDesktop = () => {
                     style={{ willChange: 'opacity, transform' }}
                     initial={{ opacity: 1, y: 0 }}
                     animate={ scrollingHide
-                      ? { opacity: 0, y: -4, pointerEvents: 'none', transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] } }
-                      : { opacity: 1, y: 0, pointerEvents: 'auto', transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }
+                      ? { opacity: 0, y: -10, pointerEvents: 'none', transition: { duration: 0.2, ease: "easeOut" } }
+                      : { opacity: 1, y: 0, pointerEvents: 'auto', transition: { duration: 0.5, ease: "easeOut" } }
                     }
                   >
                     {menuItems.map((item) => {

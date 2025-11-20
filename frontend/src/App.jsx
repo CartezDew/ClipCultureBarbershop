@@ -15,6 +15,7 @@ import Advertise from './pages/Advertise.jsx';
 import Apply from './pages/Apply.jsx';
 import BarberBio from './pages/BarberBio.jsx';
 import Booking from './pages/Booking.jsx';
+import SpeakingEngagements from './pages/SpeakingEngagements.jsx';
 
 function AppContent() {
   const location = useLocation();
@@ -167,6 +168,15 @@ function AppContent() {
           } />
           <Route path="/booking" element={
             <Booking />
+          } />
+          <Route path="/speaking" element={
+            <>
+              <Navbar />
+              <main>
+                <SpeakingEngagements />
+              </main>
+              <Footer />
+            </>
           } />
         </Routes>
         
