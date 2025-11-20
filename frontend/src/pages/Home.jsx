@@ -18,6 +18,7 @@ import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 import HomeGallery from '../components/Home_Gallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import ShopByCategory from '../components/ShopByCategory.jsx';
+import ServiceDetailModal from '../components/ServiceDetailModal.jsx';
 
 // Flexed Bicep Icon
 const BicepIcon = ({ size = 24 }) => (
@@ -51,11 +52,24 @@ const Home = () => {
   const [showHeroNavbar, setShowHeroNavbar] = useState(true);
   const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 600 : false);
   const [showTaglineAnim, setShowTaglineAnim] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [showServiceModal, setShowServiceModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  
   useEffect(() => {
     getServices().then(setServices);
   }, []);
+
+  const handleServiceClick = (service) => {
+    setSelectedService(service);
+    setShowServiceModal(true);
+  };
+
+  const handleCloseServiceModal = () => {
+    setShowServiceModal(false);
+    setSelectedService(null);
+  };
 
   // Scroll to anchors when arriving on this page with a hash (e.g., /#contact, /#faq)
   useEffect(() => {
@@ -388,6 +402,8 @@ const Home = () => {
                   delay: 0.5 + (index * 0.1),
                   ease: "easeOut"
                 }}
+                onClick={() => handleServiceClick(service)}
+                style={{ cursor: 'pointer' }}
               >
                 <h3>{service.name}</h3>
                 <p className="service-description">{service.description}</p>
@@ -406,6 +422,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDetailModal 
+        isOpen={showServiceModal}
+        onClose={handleCloseServiceModal}
+        service={selectedService}
+      />
 
       {/* Home Welcome */}
       <Home_Welcome />

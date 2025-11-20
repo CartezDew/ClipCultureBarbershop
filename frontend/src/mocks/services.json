@@ -1,9 +1,50 @@
 [
-  { "id": 1, "name": "Basic Haircut", "price": 20, "durationMins": 30},
-  { "id": 2, "name": "Basic Lineup", "price": 20, "durationMins": 20},
-  { "id": 3, "name": "Bald Fade", "price": 35, "durationMins": 30},
-  { "id": 4, "name": "Taper Fade", "price": 35, "durationMins": 30},
-  { "id": 5, "name": "Drop Fade", "price": 35, "durationMins": 30},
-  { "id": 6, "name": "Beard Trim", "price": 20, "durationMins": 20}
-
+  { 
+    "id": "basic-haircut", 
+    "name": "Basic Haircut", 
+    "price": 20, 
+    "durationMins": 30,
+    "duration": "30 mins <strong>*</strong>",
+    "description": "A classic, clean cut tailored to your style. Includes a consultation and precision styling."
+  },
+  { 
+    "id": "basic-lineup", 
+    "name": "Basic Lineup", 
+    "price": 20, 
+    "durationMins": 20,
+    "duration": "20 min <strong>*</strong>",
+    "description": "Crisp edging of the hairline and beard to keep you looking sharp between full haircuts."
+  },
+  { 
+    "id": "bald-fade", 
+    "name": "Bald Fade", 
+    "price": 35, 
+    "durationMins": 25,
+    "duration": "25 min <strong>*</strong>",
+    "description": "Smooth transition from skin to hair. A modern, high-contrast look executed with precision."
+  },
+  { 
+    "id": "taper-fade-beard", 
+    "name": "Taper Fade + Beard", 
+    "price": 35, 
+    "durationMins": 35,
+    "duration": "35 min <strong>*</strong>",
+    "description": "A stylish taper fade combined with expert beard grooming and shaping."
+  },
+  { 
+    "id": "drop-fade", 
+    "name": "Drop Fade", 
+    "price": 35, 
+    "durationMins": 25,
+    "duration": "25 min <strong>*</strong>",
+    "description": "A fade that drops behind the ear for a unique, contoured profile."
+  },
+  { 
+    "id": "beard-trim", 
+    "name": "Beard Trim", 
+    "price": 20, 
+    "durationMins": 20,
+    "duration": "20 min <strong>*</strong>",
+    "description": "Professional trimming and shaping to maintain your beard's health and style."
+  }
 ]

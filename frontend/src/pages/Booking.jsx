@@ -320,7 +320,7 @@ const Booking = () => {
   // Initialize from location state if provided
   useEffect(() => {
     if (location.state) {
-      const { barberId, skipBarber, location: loc, contactInfo } = location.state;
+      const { barberId, skipBarber, location: loc, contactInfo, serviceId } = location.state;
       
       // Set contact information if provided
       if (contactInfo) {
@@ -349,6 +349,16 @@ const Booking = () => {
       if (loc) {
         setLocationFilter(loc);
         setFormData(prev => ({ ...prev, location: loc }));
+      }
+
+      if (serviceId) {
+        setFormData(prev => {
+          if (prev.services.includes(serviceId)) return prev;
+          return {
+            ...prev,
+            services: [...prev.services, serviceId]
+          };
+        });
       }
       
       if (skipBarber) {

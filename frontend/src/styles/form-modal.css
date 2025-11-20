@@ -63,20 +63,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   z-index: 10;
 }
 
 .form0modal-close:hover {
   background: #1a1a1a;
   color: white;
-  transform: rotate(90deg);
 }
 
 .form0modal-close svg {
-  width: 24px;
-  height: 24px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
 }
+
+.form0modal-close:hover svg {
+  transform: rotate(90deg);
+}
+
 
 .form0modal-header {
   margin-bottom: 32px;
@@ -138,7 +142,7 @@
   font-family: inherit;
   background: white;
   color: #1a1a1a;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form0field-input:focus {
@@ -175,7 +179,7 @@
   cursor: pointer;
   padding: 12px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .form0radio-option:hover {
@@ -210,7 +214,7 @@
   background: white;
   color: #1a1a1a;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   appearance: none;
 }
 
@@ -239,7 +243,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   font-family: inherit;
   margin-top: 8px;
 }
