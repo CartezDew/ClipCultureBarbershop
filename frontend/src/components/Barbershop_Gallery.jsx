@@ -11,7 +11,7 @@ const rawImages = import.meta.glob(
 const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 22, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
 
 // Speaking engagements gallery image order
-const speakingImageOrder = [61, 68, 63, 14, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
+const speakingImageOrder = [61, 68, 71, 63, 14, 40, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
 
 const BarbershopGallery = () => {
   const location = useLocation();

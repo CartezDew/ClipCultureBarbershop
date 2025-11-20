@@ -373,14 +373,6 @@
   font-size: 1.5rem;
 }
 
-/* .speaking-final-cta {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  line-height: 1.8;
-  margin: 2rem 0 2.5rem 0;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: center;
-} */
-
 .speaking-cta-button {
   display: block;
   margin: 3rem auto 0;
@@ -406,6 +398,11 @@
 }
 
 /* Gallery Section */
+.speaking-gallery-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .speaking-gallery-wrapper .barbershop-gallery-section {
   background: var(--primary-black);
 }
