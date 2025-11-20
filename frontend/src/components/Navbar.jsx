@@ -11,7 +11,7 @@ const Navbar = () => {
     const location = useLocation()
     
     // Pages where floating action buttons are NOT shown (so back-to-top should be lower)
-    const floatingButtonsExcludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply', '/booking']
+    const floatingButtonsExcludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply', '/booking', '/speaking-engagements']
     const isBarberBioPage = location.pathname.startsWith('/barber/')
     const isProductDetailPage = location.pathname.startsWith('/products/')
     const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname) || isBarberBioPage || isProductDetailPage
