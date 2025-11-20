@@ -38,9 +38,7 @@ const NavbarDesktop = () => {
             { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
             { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
-            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
-            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
-            { name: 'Speaking Engagements', link: '/speaking', icon: <Mic2 size={16} /> }
+            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> }
         ],
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
@@ -48,6 +46,8 @@ const NavbarDesktop = () => {
             { name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> },
             { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
             { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
+            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
+            { name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> },
             { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
         ]
     }

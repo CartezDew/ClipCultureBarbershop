@@ -36,14 +36,14 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
         { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
         { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
-        { id: 'shop-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'Shop' },
-        { id: 'shop-speaking', name: 'Speaking Engagements', path: '/speaking', icon: 'Mic2', section: 'Shop' },
         
         // About section
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
         { id: 'about-faq', name: 'FAQ', path: '/#faq', icon: 'HelpCircle', section: 'About' },
         { id: 'about-join', name: 'Join Team', path: '/apply', icon: 'UserPlus', section: 'About' },
         { id: 'about-contact', name: 'Contact Us', path: '/#contact', icon: 'Mail', section: 'About' },
+        { id: 'about-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'About' },
+        { id: 'about-speaking', name: 'Speaking Engagements', path: '/speaking-engagements', icon: 'Mic2', section: 'About' },
         { id: 'about-login', name: 'Log In', path: '/login', icon: 'LogIn', section: 'About' }
     ]
     const menuRef = useRef(null)

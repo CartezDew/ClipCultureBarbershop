@@ -34,7 +34,7 @@ function AppContent() {
       '/franchise': 'Franchise',
       '/apply': 'Apply',
       '/booking': 'Book Appointment',
-      '/speaking': 'Speaking Engagements',
+      '/speaking-engagements': 'Speaking Engagements',
     };
     
     // Handle dynamic routes
@@ -177,7 +177,7 @@ function AppContent() {
           <Route path="/booking" element={
             <Booking />
           } />
-          <Route path="/speaking" element={
+          <Route path="/speaking-engagements" element={
             <>
               <Navbar />
               <main>
@@ -188,8 +188,8 @@ function AppContent() {
           } />
         </Routes>
         
-        {/* Floating Action Buttons - Show on all pages except booking and product details */}
-        {location.pathname !== '/booking' && !location.pathname.startsWith('/products/') && (
+        {/* Floating Action Buttons - Show on all pages except booking, product details, and speaking engagements */}
+        {location.pathname !== '/booking' && !location.pathname.startsWith('/products/') && location.pathname !== '/speaking-engagements' && (
           <FloatingActionButtons showOnHome={showFloatingButtons} />
         )}
       </div>

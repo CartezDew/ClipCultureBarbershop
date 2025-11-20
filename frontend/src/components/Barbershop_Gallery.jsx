@@ -28,7 +28,7 @@ const BarbershopGallery = () => {
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
   // Check if we're on the speaking route
-  const isSpeakingRoute = location.pathname === "/speaking";
+  const isSpeakingRoute = location.pathname === "/speaking-engagements";
 
   // Process all images and filter based on route
   const imageEntries = useMemo(() => {

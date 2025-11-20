@@ -84,15 +84,15 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
       { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
       { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
       { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
-      { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> },
-      { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
-      { name: 'Speaking Engagements', link: '/speaking', icon: <Mic2 size={16} /> }
+      { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> }
     ],
     about: [
       { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
       { name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> },
       { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
       { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
+      { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
+      { name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> },
       { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
     ]
   };

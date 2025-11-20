@@ -93,7 +93,7 @@ const categories = [
   { name: 'Mentorship', image: mentorshipImage, route: '/mentorship' },
   { name: 'Advertise', image: advertisementCategoryImage, route: '/advertise' },
   { name: 'Franchise', image: Shop3, route: '/franchise' }, // Default image, will be overridden by active testimonial
-  { name: 'Speaking Engagements', image: speakingImage, route: '/speaking' }
+  { name: 'Speaking Engagements', image: speakingImage, route: '/speaking-engagements' }
   
 ];
 
