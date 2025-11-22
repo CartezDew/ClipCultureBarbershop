@@ -296,6 +296,7 @@
     gap: 0.5rem;
     flex-wrap: nowrap;
     justify-content: center;
+    padding-top: 2rem;
   }
   
   .home-welcome__mobile-image {
