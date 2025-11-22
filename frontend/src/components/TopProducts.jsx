@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
 import Product1 from '../assets/products/Product-1.webp';
@@ -12,6 +12,8 @@ import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
 const TopProducts = ({ limit }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   const [quantities, setQuantities] = useState({});
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -294,6 +296,15 @@ const TopProducts = ({ limit }) => {
               </div>
             ))}
           </div>
+          
+          {isHomePage && (
+            <div className="top-products__cta">
+              <Link to="/shop" className="top-products__view-all-btn">
+                View All Products
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          )}
         </div>
       </section>
     </>

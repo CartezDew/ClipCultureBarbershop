@@ -41,6 +41,40 @@
   font-weight: 400;
 }
 
+.top-products__cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+}
+
+.top-products__view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--primary-black);
+  color: var(--primary-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  box-shadow: 0 4px 12px rgba(8, 80, 120, 0.2);
+}
+
+.top-products__view-all-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(8, 80, 120, 0.4);
+}
+
+.top-products__view-all-btn:active {
+  transform: translateY(0);
+}
+
 .top-products__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -296,6 +330,16 @@
   .productbtn--add-cart, .productbtn--learn-more {
     padding: 0.75rem .5rem;
   }
+  
+  .top-products__cta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+  
+  .top-products__view-all-btn {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 700px) {
@@ -362,6 +406,11 @@
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(8, 80, 120, 0.3);
     font-size: .9rem;
+  }
+  
+  .top-products__view-all-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
   }
 }
 

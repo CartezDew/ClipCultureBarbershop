@@ -16,8 +16,8 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
     
     // Menu items matching the desktop navbar with all dropdown links
     const menuItems = [
-        // Home (only show if not on home page)
-        ...(location.pathname !== '/' ? [{ id: 'home', name: 'Home', path: '/', icon: 'Home' }] : []),
+        // Home (always show)
+        { id: 'home', name: 'Home', path: '/', icon: 'Home' },
         
         // Services section
         { id: 'services-all', name: 'All Services', path: '/services', icon: 'Scissors', section: 'Services' },
@@ -341,10 +341,11 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                     >
                         <div className="mobile-nav-items">
                             {(() => {
-                                const sections = ['Services', 'Barbers', 'Shop', 'About']
+                                // Define section order: About first, then Services (default expanded), then Shop, then Barbers
+                                const sections = ['About', 'Services', 'Shop', 'Barbers']
                                 const items = []
                                 
-                                // Add home link if not on home page
+                                // Add Home link first (always visible)
                                 const homeItem = menuItems.find(item => item.id === 'home')
                                 if (homeItem) {
                                     items.push(
@@ -352,7 +353,13 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                             key={homeItem.id} 
                                             to={homeItem.path} 
                                             className="mobile-nav-item" 
-                                            onClick={() => { setIsOpen(false) }}
+                                            onClick={(e) => { 
+                                                if (location.pathname === '/') {
+                                                    e.preventDefault()
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                }
+                                                setIsOpen(false) 
+                                            }}
                                         >
                                             {getIconForMenuItem(homeItem.icon)}
                                             {homeItem.name}
