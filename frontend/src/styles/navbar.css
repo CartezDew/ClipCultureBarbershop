@@ -375,6 +375,14 @@
   position: relative; /* Ensure proper positioning context for icons */
 }
 
+.mobile-nav-item-home {
+  padding-left: 1.75rem; /* Only padding for icon space */
+}
+
+.mobile-nav-item-home .mobile-nav-icon {
+  left: 0; /* Flush left */
+}
+
 .mobile-nav-item:hover {
   background-color: rgba(42, 90, 47, 0.05);
   color: var(--color-sinopia);

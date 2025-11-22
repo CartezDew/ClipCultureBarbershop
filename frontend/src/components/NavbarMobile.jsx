@@ -358,7 +358,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                         <Link 
                                             key={homeItem.id} 
                                             to={homeItem.path} 
-                                            className="mobile-nav-item" 
+                                            className="mobile-nav-item mobile-nav-item-home" 
                                             onClick={(e) => { 
                                                 if (location.pathname === '/') {
                                                     e.preventDefault()
