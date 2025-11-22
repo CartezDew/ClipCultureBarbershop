@@ -2,18 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import '../styles/top-products.css';
-import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
-import Product4 from '../assets/products/Product-4.webp';
-import Product5 from '../assets/products/Product-5 .webp';
-import Product6 from '../assets/products/Product-6.webp';
-import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
-import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
+import Product7 from '../assets/products/Product-7.webp';
+import Product10 from '../assets/products/Product-10.webp';
+import Product11 from '../assets/products/Product-11.webp';
+import Product8 from '../assets/products/Product-12.webp';
+import Product9 from '../assets/products/Product-13.webp';
+import Product12 from '../assets/products/Product-8.webp';
 
-const TopProducts = ({ limit }) => {
+const Apparel = ({ limit }) => {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
   const [quantities, setQuantities] = useState({});
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -23,8 +20,8 @@ const TopProducts = ({ limit }) => {
   const ratingRefs = useRef([]);
 
   // Dynamic first-row syncing
-  const [firstRowNameHeight, setFirstRowNameHeight] = useState(null); // px number
-  const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null); // px number
+  const [firstRowNameHeight, setFirstRowNameHeight] = useState(null);
+  const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null);
   const [firstRowIndices, setFirstRowIndices] = useState(new Set());
 
   const getQuantity = (productId) => quantities[productId] || 1;
@@ -60,7 +57,6 @@ const TopProducts = ({ limit }) => {
         if (el && el.offsetTop === rowTop) indices.add(idx);
       });
 
-      // Find the maximum heights among all first-row cards
       let maxNameHeight = 0;
       let maxRatingHeight = 0;
       
@@ -76,14 +72,11 @@ const TopProducts = ({ limit }) => {
       });
 
       setFirstRowIndices(indices);
-      setFirstRowNameHeight(maxNameHeight); // Apply the maximum name height
-      setFirstRowRatingHeight(maxRatingHeight); // Apply the maximum rating height
+      setFirstRowNameHeight(maxNameHeight);
+      setFirstRowRatingHeight(maxRatingHeight);
     };
 
-    // Initial computation after a delay for layout to settle
     const id = window.setTimeout(computeSync, 100);
-    
-    // Also recompute after a bit more time for images to load
     const id2 = window.setTimeout(computeSync, 500);
     
     window.addEventListener('resize', computeSync);
@@ -93,72 +86,61 @@ const TopProducts = ({ limit }) => {
       window.clearTimeout(id2);
       window.removeEventListener('resize', computeSync);
     };
-  }, []); // Empty dependency - runs once on mount and cleanup on unmount
+  }, []);
+
   const products = [
     {
       id: 0,
-      name: "Beard & Line Up Enhancement",
-      price: 18,
+      name: "Clip Culture Barbershop Sweatpants",
+      price: 19.99,
       rating: null,
-      image: BeardLineUp1,
-      hoverImage: BeardLineUp2,
-      slug: "premium-beard-line-up-enhancement",
-      size: "4 oz",
-      isNewDrop: true
+      image: Product7,
+      slug: "clip-culture-sweatpants",
+      isSoldOut: true
     },
     {
       id: 1,
-      name: "Curl Twist",
-      price: 15,
-      rating: 5,
-      image: Product1,
-      slug: "curl-twist",
-      size: "8 oz"
+      name: "Clip Culture Snapback Bundle (3-Pack)",
+      price: 59.99,
+      originalPrice: 90.00,
+      rating: null,
+      image: Product11,
+      slug: "clip-culture-snapback-bundle",
+      isOnSale: true
     },
     {
       id: 2,
-      name: "Beard Balm",
-      price: 20,
-      rating: 5,
-      image: Product2,
-      slug: "beard-balm",
-      size: "8 oz"
+      name: "Clip Culture Barbershop Snapback – Black & Red Edition",
+      price: 29.99,
+      rating: null,
+      image: Product10,
+      slug: "clip-culture-snapback-black-red"
     },
     {
       id: 3,
-      name: "Beard Oil",
-      price: 20,
-      rating: 5,
-      image: Product3,
-      slug: "beard-oil",
-      size: "4 oz"
+      name: "Clip Culture Barbershop Snapback – Signature Green Edition",
+      price: 29.99,
+      rating: null,
+      image: Product8,
+      slug: "clip-culture-snapback-signature-green"
     },
     {
       id: 4,
-      name: "Beard Wash",
-      price: 18,
-      rating: 5,
-      image: Product4,
-      slug: "beard-wash",
-      size: "8 oz"
+      name: "Clip Culture Barbershop T-Shirt",
+      price: 10.99,
+      rating: null,
+      image: Product9,
+      slug: "clip-culture-barbershop-tshirt",
+      isSoldOut: true
     },
     {
       id: 5,
-      name: "Body Lotion",
-      price: 15,
-      rating: 4.6,
-      image: Product5,
-      slug: "body-lotion",
-      size: "16 oz"
-    },
-    {
-      id: 6,
-      name: "Body Wash",
-      price: 15,
-      rating: 4,
-      image: Product6,
-      slug: "body-wash",
-      size: "16 oz"
+      name: "Clip Culture Barbershop Beanie – Black & White Collection",
+      price: 9.99,
+      rating: null,
+      image: Product12,
+      slug: "clip-culture-barbershop-beanie",
+      isSoldOut: true
     }
   ];
 
@@ -171,21 +153,18 @@ const TopProducts = ({ limit }) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
 
-    // Full stars
     for (let i = 0; i < fullStars; i++) {
       stars.push(
         <span key={i} className="star full">★</span>
       );
     }
 
-    // Half star
     if (hasHalfStar) {
       stars.push(
         <span key="half" className="star half">★</span>
       );
     }
 
-    // Empty stars
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
@@ -198,11 +177,11 @@ const TopProducts = ({ limit }) => {
 
   return (
     <>
-      <section className="top-products">
+      <section className="top-products" id="apparel">
         <div className="top-products__container">
           <div className="top-products__header">
-            <h2 className="top-products__title">Premium Grooming Products</h2>
-            <p className="top-products__subtitle">Investing in yourself goes beyond the chair…</p>
+            <h2 className="top-products__title">Apparel</h2>
+            <p className="top-products__subtitle">Rep the culture in style</p>
           </div>
           
           <div className="top-products__grid">
@@ -215,8 +194,11 @@ const TopProducts = ({ limit }) => {
                 onMouseLeave={() => setHoveredProduct(null)}
               >
                 <div className="product-card__image-container">
+                  {product.isSoldOut && (
+                    <div className="product-card__sold-out">Sold out</div>
+                  )}
                   <img 
-                    src={hoveredProduct === product.id && product.hoverImage ? product.hoverImage : product.image} 
+                    src={product.image} 
                     alt={product.name}
                     className="product-card__image"
                     loading="lazy"
@@ -229,8 +211,16 @@ const TopProducts = ({ limit }) => {
                   >
                     {product.name}
                   </h3>
-                  {product.size && <div className="product-card__size">{product.size}</div>}
-                  <div className="product-card__price">${product.price}</div>
+                  <div className="product-card__price">
+                    {product.isOnSale ? (
+                      <>
+                        <span className="product-card__sale-price">${product.price}</span>
+                        <span className="product-card__original-price">${product.originalPrice}</span>
+                      </>
+                    ) : (
+                      `$${product.price}`
+                    )}
+                  </div>
                   <div 
                     className="product-card__rating"
                     ref={(el) => (ratingRefs.current[index] = el)}
@@ -259,6 +249,7 @@ const TopProducts = ({ limit }) => {
                         className="quantity-btn quantity-btn--minus"
                         onClick={() => decreaseQuantity(product.id)}
                         aria-label="Decrease quantity"
+                        disabled={product.isSoldOut}
                       >
                         −
                       </button>
@@ -271,22 +262,27 @@ const TopProducts = ({ limit }) => {
                           updateQuantity(product.id, value);
                         }}
                         min="1"
+                        disabled={product.isSoldOut}
                       />
                       <button 
                         className="quantity-btn quantity-btn--plus"
                         onClick={() => increaseQuantity(product.id)}
                         aria-label="Increase quantity"
+                        disabled={product.isSoldOut}
                       >
                         +
                       </button>
                     </div>
                   </div>
                   <div className="product-card__actions">
-                    <button className="productbtn--add-cart">
+                    <button 
+                      className="productbtn--add-cart"
+                      disabled={product.isSoldOut}
+                    >
                       <ShoppingCart size={16} />
-                      Add to Cart
+                      {product.isSoldOut ? 'Sold out' : 'Add to Cart'}
                     </button>
-                    <Link to={`/products/${product.slug}`} className="productbtn--learn-more">
+                    <Link to={`/apparel/${product.slug}`} className="productbtn--learn-more">
                       Learn More
                       <ArrowRight size={16} />
                     </Link>
@@ -295,19 +291,11 @@ const TopProducts = ({ limit }) => {
               </div>
             ))}
           </div>
-          
-          {isHomePage && (
-            <div className="top-products__cta">
-              <Link to="/shop" className="top-products__view-all-btn">
-                View All Products
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-          )}
         </div>
       </section>
     </>
   );
 };
 
-export default TopProducts;
+export default Apparel;
+

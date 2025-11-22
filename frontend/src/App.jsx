@@ -10,6 +10,7 @@ import About from './pages/About.jsx';
 import Shop from './pages/Shop.jsx';
 import Mentorship from './pages/Mentorship.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
+import ApparelDetail from './pages/ApparelDetail.jsx';
 import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
 import Apply from './pages/Apply.jsx';
@@ -40,6 +41,9 @@ function AppContent() {
     // Handle dynamic routes
     if (pathname.startsWith('/products/')) {
       return 'Product';
+    }
+    if (pathname.startsWith('/apparel/')) {
+      return 'Apparel';
     }
     if (pathname.startsWith('/barber/')) {
       return 'Barber';
@@ -147,6 +151,15 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="/apparel/:slug" element={
+            <>
+              <Navbar />
+              <main>
+                <ApparelDetail />
+              </main>
+              <Footer />
+            </>
+          } />
           <Route path="/franchise" element={
             <>
               <Navbar />
@@ -188,8 +201,8 @@ function AppContent() {
           } />
         </Routes>
         
-        {/* Floating Action Buttons - Show on all pages except booking, product details, and speaking engagements */}
-        {location.pathname !== '/booking' && !location.pathname.startsWith('/products/') && location.pathname !== '/speaking-engagements' && (
+        {/* Floating Action Buttons - Show on all pages except booking, product details, apparel details, and speaking engagements */}
+        {location.pathname !== '/booking' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (
           <FloatingActionButtons showOnHome={showFloatingButtons} />
         )}
       </div>

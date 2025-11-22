@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2, Mic2 } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2, Mic2, Shirt } from 'lucide-react'
+import Comb from './icons/Comb'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
@@ -36,6 +37,7 @@ const NavbarDesktop = () => {
         ],
         shop: [
             { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
+            { name: 'Apparel', link: '/shop#apparel', icon: <Shirt size={16} /> },
             { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
             { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> }

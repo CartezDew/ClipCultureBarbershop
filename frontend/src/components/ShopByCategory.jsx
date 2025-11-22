@@ -88,7 +88,7 @@ const categories = [
   { name: 'New Arrivals', image: beardLineUp1, route: '/shop' },
   { name: 'Hair Care', image: Product1, route: '/shop' }, // Default image, will be overridden by active testimonial
   { name: 'Body & Skin', image: Product5, route: '/shop' }, // Default image, will be overridden by active testimonial
-  { name: 'Apparel', image: apparelImage, route: '/shop'},
+  { name: 'Apparel', image: apparelImage, route: '/shop#apparel'},
   { name: 'Books', image: bookImage3, route: '/shop#books' },
   { name: 'Mentorship', image: mentorshipImage, route: '/mentorship' },
   { name: 'Advertise', image: advertisementCategoryImage, route: '/advertise' },

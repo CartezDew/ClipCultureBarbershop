@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { 
   Home, Scissors, Users, Camera, Phone, ShoppingCart, ChevronDown, Info, 
   User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, 
-  Megaphone, Store, FileText, HelpCircle, Mail, LogIn, UserPlus, Building2, Mic2
+  Megaphone, Store, FileText, HelpCircle, Mail, LogIn, UserPlus, Building2, Mic2, Shirt
 } from 'lucide-react';
+import Comb from './icons/Comb';
 import logoWebP from '../assets/images/CC-Logo.webp';
 import logoWebP2x from '../assets/images/CC-Logo-2x.webp';
 import logoPNG from '../assets/images/CC-Logo-blank.webp';
@@ -82,6 +83,7 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
     ],
     shop: [
       { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
+      { name: 'Apparel', link: '/shop#apparel', icon: <Shirt size={16} /> },
       { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
       { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
       { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> }

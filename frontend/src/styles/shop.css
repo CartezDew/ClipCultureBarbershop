@@ -41,6 +41,12 @@
   margin-bottom: 3rem;
 }
 
+.shop-apparel-wrapper {
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
 .shop-books-wrapper {
   border-radius: 4px;
   overflow: hidden;
@@ -74,6 +80,9 @@
     margin-bottom: 2.5rem;
   }
   .shop-products-wrapper {
+    border-radius: 10px;
+  }
+  .shop-apparel-wrapper {
     border-radius: 10px;
   }
   .shop-books-wrapper {

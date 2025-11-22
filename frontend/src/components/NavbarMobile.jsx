@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2 } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt } from 'lucide-react'
+import Comb from './icons/Comb'
 
 import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
@@ -31,11 +32,12 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'barbers-summerhill', name: 'Summerhill', path: '/?location=summerhill#team', icon: 'Building', section: 'Barbers' },
         { id: 'barbers-apply', name: 'Apply', path: '/apply', icon: 'UserPlus', section: 'Barbers' },
         
-        // Shop section
-        { id: 'shop-all', name: 'All Products', path: '/shop', icon: 'Store', section: 'Shop' },
-        { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
-        { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
-        { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
+               // Shop section
+               { id: 'shop-all', name: 'All Products', path: '/shop', icon: 'Store', section: 'Shop' },
+               { id: 'shop-apparel', name: 'Apparel', path: '/shop#apparel', icon: 'Shirt', section: 'Shop' },
+               { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
+               { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
+               { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
         
         // About section
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
@@ -249,6 +251,10 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 return <Info {...iconProps} />
             case 'Mic2':
                 return <Mic2 {...iconProps} />
+            case 'Shirt':
+                return <Shirt {...iconProps} />
+            case 'Comb':
+                return <Comb {...iconProps} />
             default:
                 return null
         }
