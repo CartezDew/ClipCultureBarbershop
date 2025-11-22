@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import '../styles/shop-by-category.css';
@@ -85,9 +85,9 @@ const categoryTestimonials = {
 };
 
 const categories = [
-  { name: 'New Arrivals', image: beardLineUp1, route: '/shop' },
-  { name: 'Hair Care', image: Product1, route: '/shop' }, // Default image, will be overridden by active testimonial
-  { name: 'Body & Skin', image: Product5, route: '/shop' }, // Default image, will be overridden by active testimonial
+  { name: 'New Arrivals', image: beardLineUp1, route: '/shop#premium-grooming-products' },
+  { name: 'Hair Care', image: Product1, route: '/shop#premium-grooming-products' }, // Default image, will be overridden by active testimonial
+  { name: 'Body & Skin', image: Product5, route: '/shop#premium-grooming-products' }, // Default image, will be overridden by active testimonial
   { name: 'Apparel', image: apparelImage, route: '/shop#apparel'},
   { name: 'Books', image: bookImage3, route: '/shop#books' },
   { name: 'Mentorship', image: mentorshipImage, route: '/mentorship' },
@@ -105,6 +105,7 @@ const RIGHT_ACTIVATION_INSET_PX = 120;
 
 const ShopByCategory = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isAutoScrolling, setIsAutoScrolling] = useState(false); // Start as false, will be enabled after delay
   const [activeGlobalIndex, setActiveGlobalIndex] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(null);
@@ -118,7 +119,13 @@ const ShopByCategory = () => {
   const activeIndexRef = useRef(0);
   const trackXRef = useRef(0); // current translateX (px)
 
-  const repeatedCategories = [...categories, ...categories];
+  // Filter categories for shop page only
+  const shopPageCategories = ['New Arrivals', 'Hair Care', 'Body & Skin', 'Apparel', 'Books'];
+  const displayCategories = location.pathname === '/shop' 
+    ? categories.filter(cat => shopPageCategories.includes(cat.name))
+    : categories;
+
+  const repeatedCategories = [...displayCategories, ...displayCategories];
   const titleRef = useRef(null);
   const bagRef = useRef(null);
   const prevActiveIndexRef = useRef(null);
@@ -346,12 +353,12 @@ const ShopByCategory = () => {
     
     // Only update if the index actually changed
     if (prevActiveIndexRef.current !== activeGlobalIndex) {
-      const baseIndex = activeGlobalIndex % categories.length;
-      const categoryName = categories[baseIndex]?.name || 'New Arrivals';
+      const baseIndex = activeGlobalIndex % displayCategories.length;
+      const categoryName = displayCategories[baseIndex]?.name || 'New Arrivals';
       setRandomTestimonialForCategory(categoryName);
       prevActiveIndexRef.current = activeGlobalIndex;
     }
-  }, [activeGlobalIndex, setRandomTestimonialForCategory]);
+  }, [activeGlobalIndex, setRandomTestimonialForCategory, displayCategories]);
 
   // Trigger bag wiggle animation when active category changes
   useEffect(() => {
@@ -431,8 +438,8 @@ const ShopByCategory = () => {
     }, 1000);
   };
 
-  const baseIndex = activeGlobalIndex % categories.length;
-  const currentName = categories[baseIndex]?.name || 'New Arrivals';
+  const baseIndex = activeGlobalIndex % displayCategories.length;
+  const currentName = displayCategories[baseIndex]?.name || 'New Arrivals';
   
   // Get the product/book/shop image for Products/Books/Franchise categories
   // Uses cached image that persists until the category becomes active again with a new testimonial
@@ -518,8 +525,8 @@ const ShopByCategory = () => {
             </div>
           )}
           {(() => {
-            const baseIndex = activeGlobalIndex % categories.length;
-            const currentName = categories[baseIndex]?.name || 'New Arrivals';
+            const baseIndex = activeGlobalIndex % displayCategories.length;
+            const currentName = displayCategories[baseIndex]?.name || 'New Arrivals';
             const hideBag =
               currentName === 'Franchise' ||
               currentName === 'Advertise' ||

@@ -302,12 +302,12 @@
   }
   
   .book-card__image-container {
-    height: 220px;
+    height: 260px;
   }
   
   .book-card__image {
-    max-width: 210px;
-    max-height: 210px;
+    max-width: 260px;
+    max-height: 260px;
   }
   
   .book-card__name {

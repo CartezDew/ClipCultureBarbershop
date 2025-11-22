@@ -41,6 +41,14 @@
   margin-bottom: 3rem;
 }
 
+.shop-category-wrapper {
+  padding-bottom: 3rem;
+}
+
+.shop-category-wrapper .shop-by-category {
+  border-radius: 4px;
+}
+
 .shop-apparel-wrapper {
   border-radius: 4px;
   overflow: hidden;
@@ -74,6 +82,13 @@
 @media (max-width: 530px) {
   .shop-container {
     padding: 0 0rem;
+  }
+
+  .shop-category-wrapper .shop-by-category {
+    border-radius: 10px;
+  }
+  .shop-category-wrapper {
+    border-radius: 10px;
   }
   
   .shop-header {

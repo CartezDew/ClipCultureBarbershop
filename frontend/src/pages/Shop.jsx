@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import ShopByCategory from '../components/ShopByCategory.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Apparel from '../components/Apparel.jsx';
 import '../styles/shop.css';
@@ -24,8 +25,8 @@ const Shop = () => {
 
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
-      // Use specific offset for books and apparel sections
-      const offset = targetId === 'books' || targetId === 'apparel' ? 80 : 100;
+      // Use specific offset for books, apparel, and premium-grooming-products sections
+      const offset = targetId === 'books' || targetId === 'apparel' || targetId === 'premium-grooming-products' ? 80 : 100;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
       console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition);
@@ -60,6 +61,10 @@ const Shop = () => {
         <div className="shop-header">
           <h1 className="shop-title">The Culture Collection</h1>
           <p className="shop-subtitle">Curated products and experiences that elevate how you look, lead, and live.</p>
+        </div>
+        
+        <div className="shop-category-wrapper">
+          <ShopByCategory />
         </div>
         
         <div className="shop-products-wrapper">

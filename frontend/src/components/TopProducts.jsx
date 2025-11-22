@@ -198,7 +198,7 @@ const TopProducts = ({ limit }) => {
 
   return (
     <>
-      <section className="top-products">
+      <section className="top-products" id="premium-grooming-products">
         <div className="top-products__container">
           <div className="top-products__header">
             <h2 className="top-products__title">Premium Grooming Products</h2>
