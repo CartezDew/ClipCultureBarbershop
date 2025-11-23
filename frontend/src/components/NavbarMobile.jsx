@@ -39,13 +39,13 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
                { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
         
-        // About section
+        // About section (reordered: Our Story, Speaking Engagements, Franchise, FAQ, Join Team, Contact Us, Login)
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
+        { id: 'about-speaking', name: 'Speaking Engagements', path: '/speaking-engagements', icon: 'Mic2', section: 'About' },
+        { id: 'about-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'About' },
         { id: 'about-faq', name: 'FAQ', path: '/#faq', icon: 'HelpCircle', section: 'About' },
         { id: 'about-join', name: 'Join Team', path: '/apply', icon: 'UserPlus', section: 'About' },
         { id: 'about-contact', name: 'Contact Us', path: '/#contact', icon: 'Mail', section: 'About' },
-        { id: 'about-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'About' },
-        { id: 'about-speaking', name: 'Speaking Engagements', path: '/speaking-engagements', icon: 'Mic2', section: 'About' },
         { id: 'about-login', name: 'Log In', path: '/login', icon: 'LogIn', section: 'About' }
     ]
     const menuRef = useRef(null)
@@ -351,19 +351,15 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                 const sections = ['About', 'Services', 'Shop', 'Barbers']
                                 const items = []
                                 
-                                // Add Home link first (always visible)
+                                // Add Home link first (always visible unless on home page)
                                 const homeItem = menuItems.find(item => item.id === 'home')
-                                if (homeItem) {
+                                if (homeItem && location.pathname !== '/') {
                                     items.push(
                                         <Link 
                                             key={homeItem.id} 
                                             to={homeItem.path} 
                                             className="mobile-nav-item mobile-nav-item-home" 
                                             onClick={(e) => { 
-                                                if (location.pathname === '/') {
-                                                    e.preventDefault()
-                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                                                }
                                                 setIsOpen(false) 
                                             }}
                                         >
@@ -373,9 +369,41 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                     )
                                 }
                                 
+                                // Helper function to check if current path matches a menu item path
+                                const isCurrentPage = (itemPath) => {
+                                    const currentPath = location.pathname
+                                    const currentHash = location.hash
+                                    const currentSearch = location.search
+                                    const fullCurrentPath = currentPath + currentSearch + currentHash
+                                    
+                                    // For hash-based paths like /#faq, compare with full path
+                                    if (itemPath.startsWith('/#')) {
+                                        return fullCurrentPath === itemPath || (currentPath === '/' && currentHash === itemPath.substring(1))
+                                    }
+                                    // For regular paths, compare pathname
+                                    return currentPath === itemPath || fullCurrentPath === itemPath
+                                }
+                                
                                 // Group and render by sections
                                 sections.forEach(section => {
-                                    const sectionItems = menuItems.filter(item => item.section === section)
+                                    let sectionItems = menuItems.filter(item => item.section === section)
+                                    
+                                    // Filter out current page items based on section
+                                    if (section === 'Services') {
+                                        // Remove "All Services" when on /services page
+                                        if (location.pathname === '/services') {
+                                            sectionItems = sectionItems.filter(item => item.id !== 'services-all')
+                                        }
+                                    } else if (section === 'Shop') {
+                                        // Remove "All Products" when on /shop page
+                                        if (location.pathname === '/shop') {
+                                            sectionItems = sectionItems.filter(item => item.id !== 'shop-all')
+                                        }
+                                    } else if (section === 'About') {
+                                        // Remove current About page item when on any About page
+                                        sectionItems = sectionItems.filter(item => !isCurrentPage(item.path))
+                                    }
+                                    
                                     const isExpanded = expandedSections[section]
                                     
                                     if (sectionItems.length > 0) {

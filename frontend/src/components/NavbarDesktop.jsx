@@ -24,7 +24,7 @@ const NavbarDesktop = () => {
     // Dropdown menus matching HeroNavbar
     const dropdownMenus = {
         services: [
-            { name: 'All Services', link: '/services', icon: <Scissors size={16} /> },
+            ...(location.pathname !== '/services' ? [{ name: 'All Services', link: '/services', icon: <Scissors size={16} /> }] : []),
             { name: 'Men', link: '/services', icon: <User size={16} /> },
             { name: 'Women', link: '/services#specialty-services', icon: <Users2 size={16} /> },
             { name: 'Kids', link: '/services#specialty-services', icon: <Baby size={16} /> }
@@ -36,7 +36,7 @@ const NavbarDesktop = () => {
             { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
         ],
         shop: [
-            { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
+            ...(location.pathname !== '/shop' ? [{ name: 'All Products', link: '/shop', icon: <Store size={16} /> }] : []),
             { name: 'Apparel', link: '/shop#apparel', icon: <Shirt size={16} /> },
             { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
@@ -44,13 +44,13 @@ const NavbarDesktop = () => {
         ],
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
-            { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },
-            { name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> },
-            { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
-            { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
-            { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
-            { name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> },
-            { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
+            ...(location.pathname !== '/about' ? [{ name: 'Our Story', link: '/about', icon: <FileText size={16} /> }] : []),
+            ...(location.pathname !== '/speaking-engagements' ? [{ name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> }] : []),
+            ...(location.pathname !== '/franchise' ? [{ name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }] : []),
+            ...(location.pathname !== '/' || (location.pathname === '/' && location.hash !== '#faq') ? [{ name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> }] : []),
+            ...(location.pathname !== '/apply' ? [{ name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> }] : []),
+            ...(location.pathname !== '/' || (location.pathname === '/' && location.hash !== '#contact') ? [{ name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> }] : []),
+            ...(location.pathname !== '/login' ? [{ name: 'Log In', link: '/login', icon: <LogIn size={16} /> }] : [])
         ]
     }
 
