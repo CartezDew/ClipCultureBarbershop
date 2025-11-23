@@ -212,9 +212,15 @@ const Home = () => {
         
         {/* Shop Now Section for 600px grid */}
         <div className="hero__shop-section">
-          <Link to="/shop" className="hero__btn hero__btn--shop">
+          <button 
+            className="hero__btn hero__btn--shop"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/shop');
+            }}
+          >
             Shop Now
-          </Link>
+          </button>
         </div>
         
         {/* Mobile Social Links Section - 600px */}
@@ -316,7 +322,23 @@ const Home = () => {
           
           {/* Store Locations - visible only at 600px */}
           <div className="store_locations">
-            <div className="store-location-item">
+            <div 
+              className="store-location-item"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  const elementPosition = contactSection.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - 80;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                } else {
+                  navigate('/#contact');
+                }
+              }}
+              style={{ cursor: 'pointer' }}
+            >
               <img 
                 src={shopImage1} 
                 alt="Sandy Springs Barbershop" 
@@ -327,7 +349,23 @@ const Home = () => {
                 Sandy Springs
               </h3>
             </div>
-            <div className="store-location-item">
+            <div 
+              className="store-location-item"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  const elementPosition = contactSection.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - 80;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                } else {
+                  navigate('/#contact');
+                }
+              }}
+              style={{ cursor: 'pointer' }}
+            >
               <img 
                 src={shopImage2} 
                 alt="Summerhill Barbershop" 

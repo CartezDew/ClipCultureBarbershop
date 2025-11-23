@@ -1024,6 +1024,8 @@
     padding: 1rem;
     padding-bottom: 3rem;
     border-right: 1rem solid rgba(16, 15, 15, 0.6);
+    position: relative;
+    z-index: 20;
   }
   
   .hero__mobile-social-links {
@@ -1098,13 +1100,23 @@
     background: transparent;
     color: white;
     border: 2px solid white;
-
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 21;
+    pointer-events: auto;
   }
   
   .hero__btn--shop:hover {
     background: white;
     color: var(--primary-black);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    border-color: white;
+  }
+  
+  .hero__btn--shop:active {
+    transform: translateY(-1px);
   }
 }
 
