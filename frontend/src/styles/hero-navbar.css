@@ -4,6 +4,7 @@
   background: var(--primary-black);
   width: 100%;
   z-index: 3000;
+  border-bottom: 7px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-navbar-container {
@@ -374,7 +375,7 @@
   }
 }
 
-@media (max-width: 605px) {
+@media (max-width: 650px) {
   .hero-navbar-container {
     display: none;
   }

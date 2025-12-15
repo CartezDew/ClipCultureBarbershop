@@ -507,13 +507,13 @@
   }
 }
 
-/* Hide hamburger above 605px */
-@media (min-width: 606px) {
+/* Hide hamburger above 650px */
+@media (min-width: 651px) {
   .hamburger-line { display: none !important; }
 }
 
 /* Show toggle on small screens */
-@media (max-width: 605px) {
+@media (max-width: 650px) {
   .navbar-visible-desktop {
     display: none !important;
   }
@@ -611,7 +611,7 @@
 .navbar-mobile .menu-section { display: none !important; }
 
 /* Ensure mobile navbar is visible while menu is open - only on mobile screens */
-@media (max-width: 605px) {
+@media (max-width: 650px) {
   body.mobile-menu-opened .navbar-visible-mobile { display: block !important; }
   body.mobile-menu-opened .navbar-visible-desktop { display: none !important; }
   
@@ -679,8 +679,8 @@
   }
 }
 
-/* Show back to top button at 680px and below */
-@media (max-width: 600px) {
+/* Show back to top button at 650px and below */
+@media (max-width: 650px) {
   .back-to-top-btn {
     display: flex;
     align-items: center;

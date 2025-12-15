@@ -440,18 +440,21 @@
   justify-content: center;
 }
 
+
+
 /* Hero Section with Background Image */
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "left right";
   overflow: hidden;
-  align-items: end;
+  align-items: stretch;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  min-height: 520px;
 }
 
 .hero__background {
@@ -473,11 +476,186 @@
 .hero__left {
   grid-area: left;
   display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 3rem 2.5rem;
+  z-index: 1;
+  background-color: var(--primary-black);
+}
+
+/* Desktop Content Container */
+.hero__desktop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 520px;
+}
+
+/* Eyebrow/Pill Text */
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 500;
+  /* text-transform: uppercase; */
+  letter-spacing: 2px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.hero__eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  animation: pulse-glow 2s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 4px var(--primary-green), 0 0 8px var(--primary-green);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 8px var(--primary-green), 0 0 16px var(--primary-green);
+    opacity: 0.8;
+  }
+}
+
+/* Headline */
+.hero__headline {
+  color: white;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.5px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.hero__headline-line {
+  display: block;
+}
+
+.hero__headline em {
+  color: var(--primary-green);
+  font-style: italic;
+}
+
+/* Subtitle */
+.hero__subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.7;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  max-width: 420px;
+}
+
+/* CTA Buttons Container */
+.hero__cta-buttons {
+  display: flex;
+  gap: 1rem;
+  /* flex-wrap: wrap; */
+  margin-top: 0.75rem;
+}
+
+/* Desktop Button Styles */
+.hero__desktop-content .hero__btn {
+  padding: 0.9rem 1.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  z-index: 1;
+  gap: 0.5rem;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
 
+.hero__desktop-content .hero__btn--book {
+  background: var(--primary-green);
+  color: white;
+  border-color: var(--primary-green);
+}
+
+.hero__desktop-content .hero__btn--book:hover {
+  background: var(--green-new);
+  border-color: var(--green-new);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(10, 151, 134, 0.4);
+}
+
+.hero__btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.hero__desktop-content .hero__btn--book:hover .hero__btn-arrow {
+  transform: translateX(4px);
+}
+
+.hero__desktop-content .hero__btn--shop {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.hero__desktop-content .hero__btn--shop:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-3px);
+}
+
+/* Desktop Social Links */
+.hero__desktop-social-links {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero__desktop-social-links .social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.hero__desktop-social-links .social-link:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.hero__desktop-social-links .social-link svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Hide mobile-only book button on desktop */
+.hero__mobile-book-btn {
+  display: none;
 }
 
 .hero__right {
@@ -565,32 +743,41 @@
   line-height: 1.2;
 }
 
-.hero__shop-section,
-.hero__left .hero__btn--book {
+/* Hide mobile-only elements above 600px */
+.hero__shop-section {
   display: none;
 }
 
-/* Hide store locations above 600px */
 .store_locations {
   display: none;
 }
 
-/* Hide mobile social links above 600px */
 .hero__mobile-social-links {
   display: none;
 }
 
+/* Hide the tagline in hero__right - it's now in hero__left */
+.hero__tagline {
+  display: none;
+}
 
-@media (max-width: 1000px) {
+/* Hide booking form on desktop - using new hero content */
+/* .hero__left .booking-form-container {
+  display: none;
+} */
+
+
+
   .hero-background-container {
-    background: none;
+    /* background: none; */
+    border-bottom: 7px solid rgba(255, 255, 255, 0.1);
   }
   .hero {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
     align-items: stretch;
     padding-top: 0;
-    border-bottom: 7px solid rgba(16, 15, 15, 0.796);
+    /* border-bottom: 7px solid rgba(255, 255, 255, 0.1); */
   }
   
 
@@ -615,7 +802,7 @@
     padding: 2.5rem 1rem 0rem;
     width: 100%;
     overflow: hidden;
-    border-left: 7px solid rgba(16, 15, 15, 0.796);
+    border-left: 7px solid rgba(255, 255, 255, 0.1);
   }
   
 
@@ -644,24 +831,24 @@
     z-index: 1;
   }
 
+  /* Keep tagline hidden - content is now in hero__left */
   .hero__tagline {
-    order: 2;
-    position: absolute;
-    bottom: calc(3rem + 70px); /* Position above social proof (1.75rem + social proof height) */
-    text-align: center;
-
-    background: rgba(0, 0, 0, 0.1);
-    padding: 0rem 0.5rem;
-    z-index: 2;
+    display: none;
   }
-
-    .hero__tagline h2 {
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      letter-spacing: 0.5px;
-      padding: 0.5rem 0.75rem;
-      padding-bottom: 1rem;
-      opacity: 0.8;
-    }
+  
+  /* Adjust desktop content for smaller screens */
+  .hero__headline {
+    font-size: clamp(2rem, 3.8vw, 2.7rem);
+  }
+  
+  .hero__subtitle {
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
+  }
+  
+  .hero__desktop-content .hero__btn {
+    padding: 0.8rem 1.3rem;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+  }
 
 
 
@@ -701,7 +888,51 @@
     width: 18px;
     height: 18px;
   }
+  
+@media (min-width: 1000px) {
+  .hero__headline-line {
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  }
+  .hero__subtitle {
+    font-size: clamp(1.2rem, 1.7vw, 2rem);
+    max-width: 600px;
+  }
+  .hero__desktop-content .hero__btn {
+    padding: 0.8rem 1.3rem;
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  }
+  .hero__desktop-social-links .social-link {
+    font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+  }
+  .hero__eyebrow {
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  }
 }
+  
+  /* Center align social proof content and numbers */
+
+  /* @media (min-width: 1100px) {
+  .hero__social-proof .social-proof__item {
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .hero__social-proof .social-proof__content {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero__social-proof .social-proof__number {
+    text-align: center;
+  }
+  
+  .hero__social-proof .social-proof__label {
+    text-align: center;
+  }
+  .hero__social-proof {
+    gap: 1.2rem;
+  }
+} */
 
 @media (max-width: 768px) {
   .hero {
@@ -710,8 +941,14 @@
   .hero__social-proof {
     bottom: 1.5rem;
   }
-  .hero__tagline {
-    bottom: calc(3rem + 44px);
+  
+  .hero__headline {
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  }
+  
+  .hero__desktop-content .hero__btn {
+    padding: 0.75rem 1.1rem;
+    font-size: 1rem;
   }
 }
 
@@ -738,18 +975,16 @@
 
 @media (max-width: 700px) {
   .hero__social-proof {
-    padding: .7rem .3rem;
-  }
-  .hero__tagline {
-    padding: .2rem .2rem;
-  }
-  .hero__tagline h2 {
-    letter-spacing: 0.5px;
-    padding: 0.5rem 0.75rem;
-    font-size: 1.3rem;
+    padding: .7rem .35rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0rem;
+    border: none;
   }
   .hero__social-proof .social-proof__item {
     gap: 0.25rem;
+    justify-content: center;
+    text-align: center;
   }
   .social-proof__icon {
     width: 15px;
@@ -757,35 +992,37 @@
   }
   .social-proof__number {
     font-size: 1rem;
+    text-align: left;
   }
   .social-proof__label {
     font-size: clamp(0.55rem, 1.5vw, 0.95rem);
-  }
-  .hero__social-proof {
-    padding: .7rem .35rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0rem;
-    border: none;
-  }
-  .social-proof__label {
     text-align: left;
-  }
-  .social-proof__number {
-    font-size: 1rem;
-    text-align: left;
-  }
-
-  .hero__social-proof .social-proof__item {
-    justify-content: center;
-    text-align: center;
   }
   .social-proof__content {
     text-align: center;
   }
+  
+  /* Desktop content adjustments */
+  .hero__headline {
+    font-size: clamp(1.7rem, 3vw, 1.8rem);
+  }
+  
+  .hero__cta-buttons {
+    /* flex-direction: column; */
+    gap: 0.75rem;
+  }
+  
+  .hero__desktop-content .hero__btn {
+    width: 100%;
+    max-width: 200px;
+  }
 }
 
-@media (max-width: 605px) {
+@media (max-width: 650px) {
+  .hero__headline {
+    font-size: clamp(1.55rem, 3.2vw, 2rem);
+  }
+  
   .hero {
     padding-top: 0;
     border-top: 7px solid rgba(16, 15, 15, 0.796);
@@ -795,9 +1032,10 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .hero-background-container {
     background: none;
+    border-bottom: none;
   }
   .hero {
     position: relative;
@@ -1006,14 +1244,20 @@
     border-left: 1rem solid rgba(16, 15, 15, 0.6);
   }
   
-  .hero__left .booking-form-container {
+  /* Hide desktop content at 600px */
+  .hero__desktop-content {
     display: none;
   }
   
-  .hero__left .hero__btn--book {
+  /* Show mobile book button at 600px */
+  .hero__mobile-book-btn {
     display: inline-block;
   }
   
+  .hero__left .booking-form-container {
+    display: none;
+  }
+
   .hero__shop-section {
     grid-column: 2;
     grid-row: 2;
@@ -1256,7 +1500,7 @@
   display: none;
 }
 
-@media (max-width: 605px) {
+@media (max-width: 650px) {
  
   .floating-action-buttons {
     display: flex;
@@ -1336,4 +1580,4 @@
       opacity: 1;
     }
   }
-} 
+}

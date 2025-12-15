@@ -54,7 +54,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
     // Check screen size and update mobile state
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth <= 605)
+            setIsMobile(window.innerWidth <= 650)
         }
         
         // Check on mount

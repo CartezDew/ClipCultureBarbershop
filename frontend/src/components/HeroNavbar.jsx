@@ -14,7 +14,7 @@ import '../styles/hero-navbar.css';
 
 const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 605 : false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
   const navRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -33,7 +33,7 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const mql = window.matchMedia('(max-width: 605px)');
+    const mql = window.matchMedia('(max-width: 650px)');
     const handleChange = (e) => setIsMobile(e.matches);
     setIsMobile(mql.matches);
     if (mql.addEventListener) mql.addEventListener('change', handleChange);
