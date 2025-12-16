@@ -372,8 +372,8 @@ body.book-now-page-active .App {
 }
 
 .book-now-option-card.selected {
-  border-color: var(--book-now-accent);
-  box-shadow: 0 0 0 3px rgba(10, 151, 134, 0.15), var(--book-now-shadow-hover);
+  border-color: 8px solid var(--book-now-accent);
+  box-shadow: 0 0 0 6px rgba(10, 151, 134, 0.15), var(--book-now-shadow-hover);
 }
 
 .book-now-option-image {
@@ -500,7 +500,7 @@ body.book-now-page-active .App {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 280px 1fr;
-  border-color: var(--book-now-gold);
+  border-color: var(--green-new);
 }
 
 .book-now-option-card--featured .book-now-option-image {
