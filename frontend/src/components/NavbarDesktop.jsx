@@ -16,9 +16,8 @@ const NavbarDesktop = () => {
     // Menu items with dropdown support
     const menuItems = [
         { id: 1, name: 'Services', path: '/services', hasDropdown: true, dropdownKey: 'services' },
-        { id: 2, name: 'Barbers', path: '/team', hasDropdown: true, dropdownKey: 'barbers' },
-        { id: 3, name: 'Shop', path: '/shop', hasDropdown: true, dropdownKey: 'shop' },
-        { id: 4, name: 'About', path: '/about', hasDropdown: true, dropdownKey: 'about' },
+        { id: 2, name: 'Shop', path: '/shop', hasDropdown: true, dropdownKey: 'shop' },
+        { id: 3, name: 'About', path: '/about', hasDropdown: true, dropdownKey: 'about' },
     ]
 
     // Dropdown menus matching HeroNavbar
@@ -28,12 +27,6 @@ const NavbarDesktop = () => {
             { name: 'Men', link: '/services', icon: <User size={16} /> },
             { name: 'Women', link: '/services#specialty-services', icon: <Users2 size={16} /> },
             { name: 'Kids', link: '/services#specialty-services', icon: <Baby size={16} /> }
-        ],
-        barbers: [
-            { name: 'All Locations', link: '/?location=all#team', icon: <MapPin size={16} /> },
-            { name: 'Sandy Springs', link: '/?location=sandy-springs#team', icon: <Building size={16} /> },
-            { name: 'Summerhill', link: '/?location=summerhill#team', icon: <Building size={16} /> },
-            { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
         ],
         shop: [
             ...(location.pathname !== '/shop' ? [{ name: 'All Products', link: '/shop', icon: <Store size={16} /> }] : []),
@@ -131,8 +124,6 @@ const NavbarDesktop = () => {
                 return <Home className="menu-icon" size={18} />
             case 'Services':
                 return <Scissors className="menu-icon" size={18} />
-            case 'Barbers':
-                return <Users className="menu-icon" size={18} />
             case 'Shop':
                 return <ShoppingCart className="menu-icon" size={18} />
             case 'About':

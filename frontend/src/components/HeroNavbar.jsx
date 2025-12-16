@@ -49,8 +49,6 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
     switch (itemName) {
       case 'Services':
         return <Scissors className="hero-menu-icon" size={18} />
-      case 'Barbers':
-        return <Users className="hero-menu-icon" size={18} />
       case 'About':
         return <Info className="hero-menu-icon" size={18} />
       case 'Shop':
@@ -74,12 +72,6 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
       { name: 'Men', link: '/services', icon: <User size={16} /> },
       { name: 'Women', link: '/services#specialty-services', icon: <Users2 size={16} /> },
       { name: 'Kids', link: '/services#specialty-services', icon: <Baby size={16} /> }
-    ],
-    barbers: [
-      { name: 'All Locations', link: '/?location=all#team', icon: <MapPin size={16} /> },
-      { name: 'Sandy Springs', link: '/?location=sandy-springs#team', icon: <Building size={16} /> },
-      { name: 'Summerhill', link: '/?location=summerhill#team', icon: <Building size={16} /> },
-      { name: 'Apply', link: '/apply', icon: <UserPlus size={16} /> }
     ],
     shop: [
       { name: 'All Products', link: '/shop', icon: <Store size={16} /> },
@@ -138,33 +130,6 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
             {activeDropdown === 'services' && (
               <div className="hero-dropdown-menu">
                 {dropdownMenus.services.map((item, index) => (
-                  <Link 
-                    key={index} 
-                    to={item.link} 
-                    className="hero-dropdown-item"
-                    onClick={closeDropdown}
-                  >
-                    <span className="hero-dropdown-icon">{item.icon}</span>
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Barbers Dropdown */}
-          <div className="hero-dropdown-container">
-            <button 
-              className="hero-nav-link hero-dropdown-trigger"
-              onClick={() => toggleDropdown('barbers')}
-            >
-              {getIconForMenuItem('Barbers')}
-              <span>Barbers</span>
-              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'barbers' ? 'active' : ''}`} size={14} />
-            </button>
-            {activeDropdown === 'barbers' && (
-              <div className="hero-dropdown-menu">
-                {dropdownMenus.barbers.map((item, index) => (
                   <Link 
                     key={index} 
                     to={item.link} 

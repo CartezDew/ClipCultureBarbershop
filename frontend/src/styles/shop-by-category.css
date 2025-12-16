@@ -129,7 +129,7 @@
 }
 .shop-by-category__heading {
   margin: 0;
-  font-size: clamp(2.2rem, 3vw, 4rem);
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
   font-weight: 800;
   line-height: 1.3;
   color: var(--primary-white);

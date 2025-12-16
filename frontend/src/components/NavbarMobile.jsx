@@ -26,11 +26,6 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'services-women', name: 'Women', path: '/services#specialty-services', icon: 'Users2', section: 'Services' },
         { id: 'services-kids', name: 'Kids', path: '/services#specialty-services', icon: 'Baby', section: 'Services' },
         
-        // Barbers section
-        { id: 'barbers-all', name: 'All Locations', path: '/?location=all#team', icon: 'MapPin', section: 'Barbers' },
-        { id: 'barbers-sandy', name: 'Sandy Springs', path: '/?location=sandy-springs#team', icon: 'Building', section: 'Barbers' },
-        { id: 'barbers-summerhill', name: 'Summerhill', path: '/?location=summerhill#team', icon: 'Building', section: 'Barbers' },
-        { id: 'barbers-apply', name: 'Apply', path: '/apply', icon: 'UserPlus', section: 'Barbers' },
         
                // Shop section
                { id: 'shop-all', name: 'All Products', path: '/shop', icon: 'Store', section: 'Shop' },
@@ -187,7 +182,6 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
             if (prev[section]) {
                 return {
                     Services: false,
-                    Barbers: false,
                     Shop: false,
                     About: false
                 }
@@ -195,7 +189,6 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
             // Otherwise, close all sections and open the clicked one
             return {
                 Services: false,
-                Barbers: false,
                 Shop: false,
                 About: false,
                 [section]: true
@@ -347,8 +340,8 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                     >
                         <div className="mobile-nav-items">
                             {(() => {
-                                // Define section order: About first, then Services (default expanded), then Shop, then Barbers
-                                const sections = ['About', 'Services', 'Shop', 'Barbers']
+                                // Define section order: About first, then Services (default expanded), then Shop
+                                const sections = ['About', 'Services', 'Shop']
                                 const items = []
                                 
                                 // Add Home link first (always visible unless on home page)

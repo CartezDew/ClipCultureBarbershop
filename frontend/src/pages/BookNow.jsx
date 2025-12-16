@@ -7,9 +7,11 @@ import ShopImage1 from '../assets/Contact/Shop_1.webp';
 import ShopImage2 from '../assets/Contact/Shop_2.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 // Product images
+import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import Product1 from '../assets/products/Product-1.webp';
 import Product2 from '../assets/products/Product-2.webp';
 import Product3 from '../assets/products/Product-3.webp';
+import Product5 from '../assets/products/Product-5 .webp';
 
 const BookNow = () => {
   const navigate = useNavigate();
@@ -52,8 +54,17 @@ const BookNow = () => {
     }
   }, [showError]);
 
-  // Featured grooming products (same as booking form step 5)
+  // Featured grooming products - New arrivals first
   const featuredProducts = [
+    {
+      id: 0,
+      name: "Beard & Line Up Enhancement",
+      price: 18,
+      image: BeardLineUp1,
+      slug: "premium-beard-line-up-enhancement",
+      size: "4 oz",
+      isNewDrop: true
+    },
     {
       id: 1,
       name: "Curl Twist",
@@ -77,8 +88,41 @@ const BookNow = () => {
       image: Product3,
       slug: "beard-oil",
       size: "4 oz"
+    },
+    {
+      id: 4,
+      name: "Body Lotion",
+      price: 15,
+      image: Product5,
+      slug: "body-lotion",
+      size: "16 oz"
     }
   ];
+  
+  // State and ref for product carousel
+  const [productScrollIndex, setProductScrollIndex] = useState(0);
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const productsContainerRef = useRef(null);
+  const carouselRef = useRef(null);
+  const visibleCount = 3; // Show 3 items at a time on desktop
+  const maxScrollIndex = featuredProducts.length - visibleCount; // Maximum scroll positions (5 - 3 = 2)
+  
+  // Calculate and update scroll offset when index changes or on resize
+  useEffect(() => {
+    const calculateOffset = () => {
+      if (!carouselRef.current) return;
+      const containerWidth = carouselRef.current.offsetWidth;
+      const gap = 16; // 1rem = 16px
+      // Each card width = (containerWidth - (visibleCount - 1) * gap) / visibleCount
+      const cardWidth = (containerWidth - (visibleCount - 1) * gap) / visibleCount;
+      // Scroll by one card width + gap per index
+      setScrollOffset(productScrollIndex * (cardWidth + gap));
+    };
+    
+    calculateOffset();
+    window.addEventListener('resize', calculateOffset);
+    return () => window.removeEventListener('resize', calculateOffset);
+  }, [productScrollIndex, visibleCount]);
 
   const bookingOptions = [
     { 
@@ -573,13 +617,76 @@ const BookNow = () => {
         <div className="book-now-products-section">
           <h2 className="book-now-products-title">Shop Our Grooming Products</h2>
           <p className="book-now-products-subtitle">Complete your look with our premium products</p>
-          <div className="book-now-products-grid">
-            {featuredProducts.map((product) => (
+          
+          {/* Desktop Carousel */}
+          <div className="book-now-products-carousel">
+            {/* Track wrapper for clipping - ref for width measurement */}
+            <div className="book-now-products-track-wrapper" ref={carouselRef}>
+              <div 
+                className="book-now-products-track" 
+                ref={productsContainerRef}
+                style={{ transform: `translateX(-${scrollOffset}px)` }}
+              >
+                {featuredProducts.map((product) => (
+                  <Link 
+                    key={product.id} 
+                    to={`/products/${product.slug}`} 
+                    className="book-now-product-card"
+                  >
+                    {product.isNewDrop && (
+                      <span className="book-now-product-badge">New Arrival</span>
+                    )}
+                    <div className="book-now-product-image">
+                      <img src={product.image} alt={product.name} loading="lazy" />
+                    </div>
+                    <div className="book-now-product-info">
+                      <h5 className="book-now-product-name">{product.name}</h5>
+                      <p className="book-now-product-size">{product.size}</p>
+                      <p className="book-now-product-price">${product.price}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            
+            {/* Scroll Arrow - only show if there are more items */}
+            {productScrollIndex < maxScrollIndex && (
+              <button 
+                className="book-now-products-arrow book-now-products-arrow--right"
+                onClick={() => setProductScrollIndex(prev => Math.min(prev + 1, maxScrollIndex))}
+                aria-label="View more products"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </button>
+            )}
+            
+            {/* Left Arrow - show when scrolled */}
+            {productScrollIndex > 0 && (
+              <button 
+                className="book-now-products-arrow book-now-products-arrow--left"
+                onClick={() => setProductScrollIndex(prev => Math.max(prev - 1, 0))}
+                aria-label="View previous products"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </button>
+            )}
+          </div>
+          
+          {/* Mobile Grid - shows 4 products */}
+          <div className="book-now-products-grid-mobile">
+            {featuredProducts.slice(0, 4).map((product) => (
               <Link 
                 key={product.id} 
                 to={`/products/${product.slug}`} 
                 className="book-now-product-card"
               >
+                {product.isNewDrop && (
+                  <span className="book-now-product-badge">New</span>
+                )}
                 <div className="book-now-product-image">
                   <img src={product.image} alt={product.name} loading="lazy" />
                 </div>
@@ -591,6 +698,7 @@ const BookNow = () => {
               </Link>
             ))}
           </div>
+          
           <Link to="/shop" className="book-now-view-all-btn">
             View All Products
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
