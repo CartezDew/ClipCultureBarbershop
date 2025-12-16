@@ -1,0 +1,1345 @@
+/* Book Now Page - Warm & Inviting Redesign */
+
+/* CSS Variables for consistent theming */
+:root {
+  --book-now-bg: #f8f6f3;
+  --book-now-bg-warm: #f5f2ed;
+  --book-now-accent: #0a9786;
+  --book-now-accent-light: #e8f5f3;
+  --book-now-accent-dark: #087d6f;
+  --book-now-text: #2d3436;
+  --book-now-text-light: #636e72;
+  --book-now-card-bg: #ffffff;
+  --book-now-border: rgba(0, 0, 0, 0.08);
+  --book-now-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --book-now-shadow-hover: 0 8px 30px rgba(10, 151, 134, 0.15);
+  --book-now-gold: #c9a962;
+  --book-now-error: #e74c3c;
+  --book-now-error-light: #fdf2f2;
+}
+
+.book-now-page {
+  min-height: 100vh;
+  background: var(--book-now-bg);
+  padding: 2rem 2rem 0 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Decorative Background */
+.book-now-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 500px;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(10, 151, 134, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(201, 169, 98, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.book-now-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 350px;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.8) 0%, 
+    rgba(248, 246, 243, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Remove min-height from parent containers */
+html:has(.book-now-page),
+html.book-now-page-active {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+body:has(.book-now-page),
+body.book-now-page-active {
+  min-height: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--book-now-bg) !important;
+}
+
+#root:has(.book-now-page),
+body.book-now-page-active #root {
+  min-height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.App:has(.book-now-page),
+body.book-now-page-active .App {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+/* Error Alert */
+.book-now-error-alert {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.book-now-error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--book-now-error-light);
+  border: 1px solid var(--book-now-error);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 30px rgba(231, 76, 60, 0.2);
+}
+
+.book-now-error-content svg {
+  color: var(--book-now-error);
+  flex-shrink: 0;
+}
+
+.book-now-error-content span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--book-now-error);
+}
+
+.book-now-error-close {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: var(--book-now-error);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-now-error-close:hover {
+  opacity: 1;
+}
+
+/* Back Button */
+.book-now-back-btn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: var(--book-now-card-bg);
+  border: 1px solid var(--book-now-border);
+  border-radius: 50%;
+  color: var(--book-now-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-back-btn:hover {
+  background: var(--book-now-accent);
+  border-color: var(--book-now-accent);
+  color: white;
+  transform: translateX(-3px);
+}
+
+/* Header */
+.book-now-header {
+  text-align: center;
+  padding: 2rem 0 2.5rem 0;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.book-now-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.book-now-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--book-now-text);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+}
+
+.book-now-tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--primary-black);
+    text-align: center;
+    padding-left: 0rem;
+    margin-bottom: 0rem;
+    font-weight: 600;
+    font-style: italic;
+    opacity: 0.6;
+}
+
+/* Progress Steps */
+.book-now-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.book-now-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+  min-width: 100px;
+}
+
+.book-now-step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--book-now-card-bg);
+  border: 2px solid var(--book-now-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--book-now-text-light);
+  transition: all 0.4s ease;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-step.active .book-now-step-circle {
+  background: var(--book-now-accent);
+  border-color: var(--book-now-accent);
+  color: white;
+  transform: scale(1.1);
+}
+
+.book-now-step.completed .book-now-step-circle {
+  background: var(--book-now-accent);
+  border-color: var(--book-now-accent);
+  color: white;
+}
+
+.book-now-step.completed .book-now-step-circle svg {
+  stroke: white;
+}
+
+.book-now-step-info {
+  text-align: center;
+}
+
+.book-now-step-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--book-now-text-light);
+  transition: color 0.3s ease;
+}
+
+.book-now-step.active .book-now-step-label,
+.book-now-step.completed .book-now-step-label {
+  color: var(--book-now-accent);
+}
+
+.book-now-step-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--book-now-text-light);
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
+
+.book-now-step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--book-now-border);
+  margin-top: 22px;
+  min-width: 40px;
+  max-width: 80px;
+  transition: background 0.4s ease;
+}
+
+.book-now-step-line.completed {
+  background: var(--book-now-accent);
+}
+
+/* Content Container */
+.book-now-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.book-now-step-content {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.book-now-section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--book-now-text);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.book-now-section-subtitle {
+  font-size: 1rem;
+  color: var(--book-now-text-light);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* STEP 1: Options Grid */
+.book-now-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.book-now-options-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.book-now-option-card {
+  background: var(--book-now-card-bg);
+  border: 2px solid var(--book-now-border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-option-card:hover {
+  border-color: var(--book-now-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--book-now-shadow-hover);
+}
+
+.book-now-option-card.selected {
+  border-color: var(--book-now-accent);
+  box-shadow: 0 0 0 3px rgba(10, 151, 134, 0.15), var(--book-now-shadow-hover);
+}
+
+.book-now-option-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-now-option-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.book-now-option-card:hover .book-now-option-image img {
+  transform: scale(1.05);
+}
+
+.book-now-option-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.book-now-option-icon {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--book-now-accent);
+}
+
+.book-now-option-icon--featured {
+  background: linear-gradient(135deg, var(--book-now-accent), var(--book-now-accent-dark));
+  color: white;
+}
+
+.book-now-option-info {
+  padding: 1.25rem;
+}
+
+.book-now-option-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--book-now-accent);
+  background: var(--book-now-accent-light);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.book-now-option-badge--featured {
+  background: linear-gradient(135deg, var(--book-now-accent), var(--book-now-accent-dark));
+  color: white;
+}
+
+.book-now-option-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.book-now-option-address {
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  line-height: 1.5;
+}
+
+.book-now-option-description {
+  font-size: 0.9rem;
+  color: var(--book-now-text-light);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.book-now-option-location-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--book-now-accent);
+  font-weight: 500;
+}
+
+.book-now-option-check {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background: var(--book-now-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s ease;
+}
+
+.book-now-option-card.selected .book-now-option-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Featured Card (David) */
+.book-now-option-card--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  border-color: var(--book-now-gold);
+}
+
+.book-now-option-card--featured .book-now-option-image {
+  height: 100%;
+  min-height: 200px;
+}
+
+.book-now-option-card--featured .book-now-option-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+}
+
+.book-now-option-card--featured.selected {
+  border-color: var(--book-now-accent);
+}
+
+/* Owner Divider */
+.book-now-owner-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.book-now-owner-divider::before,
+.book-now-owner-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--book-now-border);
+}
+
+.book-now-owner-divider span {
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Step 1 Continue Button Container */
+.book-now-step1-btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 0 1rem 0;
+  margin-top: 1rem;
+}
+
+/* Unified Action Buttons */
+.book-now-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 200px;
+  padding: 1.1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.book-now-action-btn svg {
+  transition: transform 0.3s ease;
+}
+
+/* Primary Button (Continue/Complete) */
+.book-now-action-btn--primary {
+  background: linear-gradient(135deg, var(--book-now-accent), var(--book-now-accent-dark));
+  color: white;
+  border-color: var(--book-now-accent);
+  box-shadow: 0 4px 15px rgba(10, 151, 134, 0.3);
+}
+
+.book-now-action-btn--primary:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(10, 151, 134, 0.4);
+}
+
+.book-now-action-btn--primary:hover:not(.disabled) svg {
+  transform: translateX(3px);
+}
+
+.book-now-action-btn--primary.disabled {
+  background: #d1d5db;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary Button (Back) */
+.book-now-action-btn--secondary {
+  background: var(--book-now-card-bg);
+  color: var(--book-now-text);
+  border-color: var(--book-now-border);
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-action-btn--secondary:hover {
+  border-color: var(--book-now-accent);
+  color: var(--book-now-accent);
+  background: var(--book-now-accent-light);
+}
+
+.book-now-action-btn--secondary:hover svg {
+  transform: translateX(-3px);
+}
+
+/* Button Group for Steps 2 & 3 */
+.book-now-btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* STEP 2: Policy */
+.book-now-selected-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--book-now-card-bg);
+  border: 1px solid var(--book-now-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-selected-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.book-now-selected-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-now-selected-info {
+  flex: 1;
+}
+
+.book-now-selected-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--book-now-accent);
+  background: var(--book-now-accent-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.book-now-selected-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  margin-bottom: 0.25rem;
+}
+
+.book-now-selected-info p {
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  margin: 0;
+}
+
+.book-now-selected-info .location-note {
+  color: var(--book-now-accent);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Policy Card */
+.book-now-policy-card {
+  background: var(--book-now-card-bg);
+  border: 1px solid var(--book-now-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-policy-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--book-now-accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--book-now-accent);
+  margin: 0 auto 1.5rem auto;
+}
+
+.book-now-policy-summary h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.book-now-policy-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-now-policy-summary li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--book-now-text);
+  line-height: 1.5;
+}
+
+.book-now-policy-summary li svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--book-now-accent);
+}
+
+.book-now-read-policy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  background: transparent;
+  border: 1px solid var(--book-now-border);
+  border-radius: 8px;
+  color: var(--book-now-text-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-now-read-policy-btn:hover {
+  background: var(--book-now-bg-warm);
+  border-color: var(--book-now-accent);
+  color: var(--book-now-accent);
+}
+
+.book-now-full-policy {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--book-now-border);
+  animation: fadeInUp 0.3s ease;
+}
+
+.book-now-full-policy h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  margin-bottom: 1rem;
+}
+
+.book-now-full-policy p {
+  font-size: 0.9rem;
+  color: var(--book-now-text-light);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.book-now-full-policy p:last-child {
+  margin-bottom: 0;
+}
+
+.book-now-full-policy strong {
+  color: var(--book-now-text);
+}
+
+/* Agreement Checkbox */
+.book-now-agreement {
+  margin-top: 2rem;
+  background: var(--book-now-accent-light);
+  border: 1px solid rgba(10, 151, 134, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.book-now-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.book-now-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.book-now-checkbox-custom {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  background: white;
+  border: 2px solid var(--book-now-accent);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin-top: 0.1rem;
+}
+
+.book-now-checkbox:checked + .book-now-checkbox-custom {
+  background: var(--book-now-accent);
+  border-color: var(--book-now-accent);
+}
+
+.book-now-checkbox-custom::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 7px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+.book-now-checkbox:checked + .book-now-checkbox-custom::after {
+  display: block;
+}
+
+.book-now-agreement-text {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--book-now-text);
+}
+
+.required-asterisk {
+  color: #e74c3c;
+  font-weight: 700;
+  margin-right: 0.15rem;
+}
+
+/* STEP 3: Confirmation */
+.book-now-confirmation-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--book-now-accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--book-now-accent);
+  margin: 0 auto 1.5rem auto;
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.book-now-final-card {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--book-now-card-bg);
+  border: 2px solid var(--book-now-accent);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 500px;
+  box-shadow: var(--book-now-shadow-hover);
+}
+
+.book-now-final-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.book-now-final-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-now-final-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-now-final-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--book-now-accent);
+  background: var(--book-now-accent-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  width: fit-content;
+}
+
+.book-now-final-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  margin-bottom: 0.35rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.book-now-final-address {
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.book-now-final-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--book-now-accent);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.book-now-final-policy-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--book-now-accent);
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.book-now-redirect-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Products Section */
+.book-now-products-section {
+  max-width: 900px;
+  margin: 4rem auto 0 auto;
+  padding: 3rem 0;
+  border-top: 1px solid var(--book-now-border);
+  position: relative;
+  z-index: 1;
+}
+
+.book-now-products-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--book-now-text);
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.book-now-products-subtitle {
+  font-size: 1rem;
+  color: var(--book-now-text-light);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.book-now-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.book-now-product-card {
+  background: var(--book-now-card-bg);
+  border: 1px solid var(--book-now-border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--book-now-shadow);
+}
+
+.book-now-product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--book-now-accent);
+  box-shadow: var(--book-now-shadow-hover);
+}
+
+.book-now-product-image {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--book-now-bg-warm);
+  padding: 1.5rem;
+}
+
+.book-now-product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.book-now-product-info {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.book-now-product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--book-now-text);
+  margin-bottom: 0.25rem;
+}
+
+.book-now-product-size {
+  font-size: 0.85rem;
+  color: var(--book-now-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.book-now-product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--book-now-accent);
+}
+
+.book-now-view-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  border: 2px solid var(--book-now-accent);
+  color: var(--book-now-accent);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.book-now-view-all-btn:hover {
+  background: var(--book-now-accent);
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .book-now-options-row {
+    gap: 1rem;
+  }
+  
+  .book-now-option-image {
+    height: 150px;
+  }
+  
+  .book-now-option-card--featured {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-now-page {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+  }
+  
+  .book-now-progress {
+    padding: 0;
+    gap: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .book-now-step {
+    min-width: 80px;
+  }
+  
+  .book-now-step-desc {
+    display: none;
+  }
+  
+  .book-now-step-circle {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+  }
+  
+  .book-now-step-line {
+    margin-top: 19px;
+    min-width: 30px;
+  }
+  
+  .book-now-options-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-now-option-card--featured {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-now-option-card--featured .book-now-option-image {
+    height: 200px;
+  }
+  
+  .book-now-option-card--featured .book-now-option-info {
+    padding: 1.25rem;
+  }
+  
+  .book-now-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .book-now-back-btn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.6rem;
+  }
+  
+  .book-now-final-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem;
+  }
+  
+  .book-now-final-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .book-now-final-badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .book-now-error-alert {
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .book-now-page {
+    padding: 1rem 1rem 0 1rem;
+  }
+  
+  .book-now-header {
+    padding: 2.5rem 0 1.5rem 0;
+  }
+  
+  .book-now-logo {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  
+  .book-now-step {
+    min-width: 60px;
+  }
+  
+  .book-now-step-label {
+    font-size: 0.8rem;
+  }
+  
+  .book-now-section-subtitle {
+    margin-bottom: 1.5rem;
+  }
+  
+  .book-now-option-info {
+    padding: 1rem;
+  }
+  
+  .book-now-option-info h3 {
+    font-size: 1.1rem;
+  }
+  
+  .book-now-policy-card {
+    padding: 1.5rem;
+  }
+  
+  .book-now-policy-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .book-now-policy-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .book-now-agreement {
+    padding: 1rem;
+  }
+  
+  .book-now-agreement-text {
+    font-size: 0.85rem;
+  }
+  
+  .book-now-step1-btn-container {
+    padding: 2rem 0 1rem 0;
+  }
+  
+  .book-now-btn-group {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+  
+  .book-now-action-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+  
+  .book-now-products-section {
+    margin-top: 2.5rem;
+    padding: 2rem 0;
+  }
+  
+  .book-now-error-content {
+    padding: 0.875rem 1rem;
+  }
+  
+  .book-now-error-content span {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-now-products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .book-now-product-card {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .book-now-product-image {
+    width: 120px;
+    height: 100px;
+    flex-shrink: 0;
+  }
+  
+  .book-now-product-info {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .book-now-option-image {
+    height: 160px;
+  }
+  
+  .book-now-selected-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .book-now-selected-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .book-now-confirmation-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .book-now-confirmation-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 380px) {
+  .book-now-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .book-now-section-title {
+    font-size: 1.3rem;
+  }
+  
+  .book-now-option-info h3 {
+    font-size: 1rem;
+  }
+}

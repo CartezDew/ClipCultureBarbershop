@@ -223,7 +223,7 @@ const Home = () => {
                 className="hero__btn hero__btn--book"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate('/booking');
+                  navigate('/book-now');
                 }}
               >
                 Book Now 
@@ -303,7 +303,7 @@ const Home = () => {
             className="hero__btn hero__btn--book hero__mobile-book-btn"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/booking');
+              navigate('/book-now');
             }}
           >
             Book Now
