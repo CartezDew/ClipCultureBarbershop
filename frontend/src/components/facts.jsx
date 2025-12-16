@@ -36,28 +36,30 @@ export default function Facts({ items = sampleFacts }) {
   }, [animationsTriggered]);
 
   return (
-    <section 
-      id="faq"
-      ref={factsRef}
-      aria-labelledby="facts-heading" 
-      className={`w-full ${animationsTriggered ? 'facts-animated' : ''}`}
-    >
-      <h2 id="facts-heading">Frequently Asked Questions</h2>
-      <p className="facts-subtitle"> Everything you need to know before your visit.</p>
-      <ul className={`facts-accordion ${animationsTriggered ? 'facts-accordion-animated' : ''}`}>
-        {items.map(({ id, q, a }) => (
-          <FactItem
-            key={id}
-            id={id}
-            q={q}
-            isOpen={openId === id}
-            onToggle={() => setOpenId(openId === id ? null : id)}
-          >
-            {a}
-          </FactItem>
-        ))}
-      </ul>
-    </section>
+    <div className="facts-background-container">
+      <section 
+        id="faq"
+        ref={factsRef}
+        aria-labelledby="facts-heading" 
+        className={`w-full ${animationsTriggered ? 'facts-animated' : ''}`}
+      >
+        <h2 id="facts-heading">Frequently Asked Questions</h2>
+        <p className="facts-subtitle"> Everything you need to know before your visit.</p>
+        <ul className={`facts-accordion ${animationsTriggered ? 'facts-accordion-animated' : ''}`}>
+          {items.map(({ id, q, a }) => (
+            <FactItem
+              key={id}
+              id={id}
+              q={q}
+              isOpen={openId === id}
+              onToggle={() => setOpenId(openId === id ? null : id)}
+            >
+              {a}
+            </FactItem>
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 }
 
