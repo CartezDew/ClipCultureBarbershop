@@ -88,16 +88,16 @@ const BookNow = () => {
       subtitle: 'Location',
       address: '6309 Roswell Road NE #2D, Sandy Springs, GA 30328',
       image: ShopImage1,
-      bookingUrl: 'https://clipculturebarbershop.as.me/schedule.php'
+      bookingUrl: 'https://getsquire.com/booking/book/clip-culture-sandy-springs-sandy-springs',
     },
-    { 
+      { 
       id: 'summerhill', 
       type: 'location',
       name: 'Summerhill', 
       subtitle: 'Location',
       address: '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312',
       image: ShopImage2,
-      bookingUrl: 'https://clipculturebarbershop.as.me/schedule.php'
+      bookingUrl: 'https://getsquire.com/booking/book/clip-culture-barbershop-atlanta'
     },
     { 
       id: 'david', 
@@ -161,12 +161,8 @@ const BookNow = () => {
         setShowError(true);
         return;
       }
-      // If David Brown is selected, redirect directly to Acuity booking
-      if (selectedOption?.id === 'david') {
-        window.open(selectedOption.bookingUrl, '_blank', 'noopener,noreferrer');
-        return;
-      }
-      setCurrentStep(3);
+      // Redirect directly to booking URL for all options
+      window.open(selectedOption.bookingUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -491,18 +487,12 @@ const BookNow = () => {
                   className={`book-now-action-btn book-now-action-btn--primary ${!policyAgreed ? 'disabled' : ''}`}
                   onClick={handleContinue}
                 >
-                  {selectedOption?.id === 'david' ? 'Complete' : 'Continue'}
-                  {selectedOption?.id === 'david' ? (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                  ) : (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  )}
+                  Complete
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
                 </button>
               </div>
             </div>

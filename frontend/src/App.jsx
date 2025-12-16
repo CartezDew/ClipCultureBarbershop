@@ -77,13 +77,25 @@ function AppContent() {
     const handleScroll = () => {
       // On home page, check if hero buttons are out of view
       if (isHomePage) {
-        const heroBookButton = document.querySelector('.hero__btn--book');
-        if (heroBookButton) {
-          const buttonRect = heroBookButton.getBoundingClientRect();
+        // Find all hero book buttons and check if any visible one is in view
+        const heroBookButtons = document.querySelectorAll('.hero__btn--book');
+        let visibleButton = null;
+        
+        // Find the first visible button (one with non-zero dimensions)
+        for (const btn of heroBookButtons) {
+          const rect = btn.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            visibleButton = btn;
+            break;
+          }
+        }
+        
+        if (visibleButton) {
+          const buttonRect = visibleButton.getBoundingClientRect();
           setShowFloatingButtons(buttonRect.bottom < 0);
         }
       } else {
-        // On other pages, always show (CSS will handle 605px breakpoint)
+        // On other pages, always show (CSS will handle 650px breakpoint)
         setShowFloatingButtons(true);
       }
     };

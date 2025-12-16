@@ -2,6 +2,7 @@
 .professional-team {
   padding: 3rem 0;
   background-color: #1a1a1a;
+  display: none;
 }
 
 .professional-team__container {
