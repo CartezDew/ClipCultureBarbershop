@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import '../styles/top-products.css';
 import Product7 from '../assets/products/Product-7.webp';
 import Product10 from '../assets/products/Product-10.webp';
@@ -10,8 +10,6 @@ import Product9 from '../assets/products/Product-13.webp';
 import Product12 from '../assets/products/Product-8.webp';
 
 const Apparel = ({ limit }) => {
-  const location = useLocation();
-  const [quantities, setQuantities] = useState({});
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
   // Refs to card containers, name elements, and rating elements
@@ -23,26 +21,6 @@ const Apparel = ({ limit }) => {
   const [firstRowNameHeight, setFirstRowNameHeight] = useState(null);
   const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null);
   const [firstRowIndices, setFirstRowIndices] = useState(new Set());
-
-  const getQuantity = (productId) => quantities[productId] || 1;
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity >= 1) {
-      setQuantities({ ...quantities, [productId]: newQuantity });
-    }
-  };
-
-  const decreaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    if (current > 1) {
-      updateQuantity(productId, current - 1);
-    }
-  };
-
-  const increaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    updateQuantity(productId, current + 1);
-  };
 
   useEffect(() => {
     const computeSync = () => {
@@ -242,47 +220,15 @@ const Apparel = ({ limit }) => {
                       </>
                     )}
                   </div>
-                  <div className="product-card__quantity">
-                    <label className="product-card__quantity-label">Quantity</label>
-                    <div className="product-card__quantity-selector">
-                      <button 
-                        className="quantity-btn quantity-btn--minus"
-                        onClick={() => decreaseQuantity(product.id)}
-                        aria-label="Decrease quantity"
-                        disabled={product.isSoldOut}
-                      >
-                        −
-                      </button>
-                      <input 
-                        type="number" 
-                        className="quantity-input" 
-                        value={getQuantity(product.id)}
-                        onChange={(e) => {
-                          const value = parseInt(e.target.value) || 1;
-                          updateQuantity(product.id, value);
-                        }}
-                        min="1"
-                        disabled={product.isSoldOut}
-                      />
-                      <button 
-                        className="quantity-btn quantity-btn--plus"
-                        onClick={() => increaseQuantity(product.id)}
-                        aria-label="Increase quantity"
-                        disabled={product.isSoldOut}
-                      >
-                        +
-                      </button>
-                    </div>
+                  <div className="product-card__in-store-notice">
+                    <span className="product-card__in-store-badge">In-Store Only</span>
                   </div>
-                  <div className="product-card__actions">
-                    <button 
-                      className="productbtn--add-cart"
-                      disabled={product.isSoldOut}
+                  <div className="product-card__actions product-card__actions--single">
+                    <Link 
+                      to={`/apparel/${product.slug}`} 
+                      state={{ from: 'shop' }}
+                      className="productbtn--learn-more productbtn--full-width"
                     >
-                      <ShoppingCart size={16} />
-                      {product.isSoldOut ? 'Sold out' : 'Add to Cart'}
-                    </button>
-                    <Link to={`/apparel/${product.slug}`} className="productbtn--learn-more">
                       Learn More
                       <ArrowRight size={16} />
                     </Link>

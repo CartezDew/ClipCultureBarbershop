@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingCart } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
+import { ArrowLeft, ChevronLeft, ChevronRight, Store } from 'lucide-react';
 import '../styles/product-detail.css';
 import Product7 from '../assets/products/Product-7.webp';
 import Product10 from '../assets/products/Product-10.webp';
@@ -11,7 +11,16 @@ import Product12 from '../assets/products/Product-12.webp';
 
 const ApparelDetail = () => {
   const { slug } = useParams();
-  const [quantity, setQuantity] = useState(1);
+  const location = useLocation();
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const carouselRef = useRef(null);
+  
+  // Determine back navigation destination based on where user came from
+  const fromPage = location.state?.from;
+  const backPath = fromPage === 'home' ? '/' : '/shop#apparel';
+  const backText = fromPage === 'home' ? 'Back to Home' : 'Back to Apparel';
   
   // Get product to determine initial color
   const products = {
@@ -145,18 +154,25 @@ const ApparelDetail = () => {
     }
   };
 
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
   const product = products[slug];
   const [selectedColor, setSelectedColor] = useState(null);
+
+  // All apparel products for "You may also like"
+  const allApparelProducts = [
+    { id: 0, name: "Clip Culture Barbershop Sweatpants", price: 19.99, image: Product7, slug: "clip-culture-sweatpants", isSoldOut: true },
+    { id: 1, name: "Snapback Bundle (3-Pack)", price: 59.99, originalPrice: 90.00, image: Product11, slug: "clip-culture-snapback-bundle", isOnSale: true },
+    { id: 2, name: "Snapback – Black & Red", price: 29.99, image: Product10, slug: "clip-culture-snapback-black-red" },
+    { id: 3, name: "Snapback – Signature Green", price: 29.99, image: Product8, slug: "clip-culture-snapback-signature-green" },
+    { id: 4, name: "Clip Culture T-Shirt", price: 10.99, image: Product9, slug: "clip-culture-barbershop-tshirt", isSoldOut: true },
+    { id: 5, name: "Beanie – Black & White", price: 9.99, image: Product12, slug: "clip-culture-barbershop-beanie", isSoldOut: true }
+  ];
+
+  // Filter out current product from related products
+  const relatedProducts = allApparelProducts.filter(p => p.slug !== slug);
+  
+  // Carousel configuration
+  const visibleCount = isMobile ? 2 : 4;
+  const maxCarouselIndex = Math.max(0, relatedProducts.length - visibleCount);
 
   useEffect(() => {
     if (product?.hasColorOptions && product.colors && product.colors.length > 0) {
@@ -165,6 +181,31 @@ const ApparelDetail = () => {
       setSelectedColor(null);
     }
   }, [slug, product]);
+
+  // Responsive check
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Calculate scroll offset
+  useEffect(() => {
+    const calculateOffset = () => {
+      if (!carouselRef.current) return;
+      const containerWidth = carouselRef.current.offsetWidth;
+      const gap = 16;
+      const cardWidth = (containerWidth - (visibleCount - 1) * gap) / visibleCount;
+      setScrollOffset(carouselIndex * (cardWidth + gap));
+    };
+    
+    calculateOffset();
+    window.addEventListener('resize', calculateOffset);
+    return () => window.removeEventListener('resize', calculateOffset);
+  }, [carouselIndex, visibleCount]);
 
   if (!product) {
     return (
@@ -178,9 +219,9 @@ const ApparelDetail = () => {
   return (
     <div className="product-detail">
       <div className="product-detail__container">
-        <Link to="/shop#apparel" className="product-detail__back">
+        <Link to={backPath} className="product-detail__back">
           <ArrowLeft size={20} />
-          Back to Apparel
+          {backText}
         </Link>
 
         <div className="product-detail__content">
@@ -196,7 +237,7 @@ const ApparelDetail = () => {
               )}
             </div>
 
-            {/* Quantity and Add to Cart for desktop (above 700px) */}
+            {/* Color selector and In-Store notice for desktop (above 700px) */}
             <div className="product-detail__actions-desktop">
               {product.hasColorOptions && (
                 <div className="product-detail__color-selector">
@@ -215,52 +256,14 @@ const ApparelDetail = () => {
                 </div>
               )}
 
-              <div className="product-detail__quantity">
-                <label className="product-detail__quantity-label">Quantity</label>
-                <div className="product-detail__quantity-selector">
-                  <button 
-                    className="quantity-btn quantity-btn--minus"
-                    onClick={decreaseQuantity}
-                    aria-label="Decrease quantity"
-                    disabled={product.isSoldOut}
-                  >
-                    −
-                  </button>
-                  <input 
-                    type="number" 
-                    className="quantity-input" 
-                    value={quantity}
-                    onChange={(e) => {
-                      const value = parseInt(e.target.value) || 1;
-                      setQuantity(value > 0 ? value : 1);
-                    }}
-                    min="1"
-                    disabled={product.isSoldOut}
-                  />
-                  <button 
-                    className="quantity-btn quantity-btn--plus"
-                    onClick={increaseQuantity}
-                    aria-label="Increase quantity"
-                    disabled={product.isSoldOut}
-                  >
-                    +
-                  </button>
+              <div className="product-detail__in-store-notice">
+                <div className="product-detail__in-store-badge">
+                  <Store size={18} />
+                  <span>In-Store Purchase Only</span>
                 </div>
-              </div>
-
-              <div className="product-detail__actions">
-                <button 
-                  className="btn btn--add-cart"
-                  disabled={product.isSoldOut}
-                >
-                  <ShoppingCart size={20} />
-                  {product.isSoldOut ? 'Sold out' : 'Add to Cart'}
-                </button>
-                {!product.isSoldOut && (
-                  <button className="btn btn--buy-now">
-                    Buy it now
-                  </button>
-                )}
+                <p className="product-detail__in-store-text">
+                  Visit one of our locations to purchase this item.
+                </p>
               </div>
             </div>
           </div>
@@ -339,7 +342,7 @@ const ApparelDetail = () => {
               </p>
             )}
 
-            {/* Quantity and Add to Cart for mobile (below 700px) */}
+            {/* Color selector and In-Store notice for mobile (below 700px) */}
             <div className="product-detail__actions-mobile">
               {product.hasColorOptions && (
                 <div className="product-detail__color-selector">
@@ -358,56 +361,120 @@ const ApparelDetail = () => {
                 </div>
               )}
 
-              <div className="product-detail__quantity">
-                <label className="product-detail__quantity-label">Quantity</label>
-                <div className="product-detail__quantity-selector">
-                  <button 
-                    className="quantity-btn quantity-btn--minus"
-                    onClick={decreaseQuantity}
-                    aria-label="Decrease quantity"
-                    disabled={product.isSoldOut}
-                  >
-                    −
-                  </button>
-                  <input 
-                    type="number" 
-                    className="quantity-input" 
-                    value={quantity}
-                    onChange={(e) => {
-                      const value = parseInt(e.target.value) || 1;
-                      setQuantity(value > 0 ? value : 1);
-                    }}
-                    min="1"
-                    disabled={product.isSoldOut}
-                  />
-                  <button 
-                    className="quantity-btn quantity-btn--plus"
-                    onClick={increaseQuantity}
-                    aria-label="Increase quantity"
-                    disabled={product.isSoldOut}
-                  >
-                    +
-                  </button>
+              <div className="product-detail__in-store-notice">
+                <div className="product-detail__in-store-badge">
+                  <Store size={18} />
+                  <span>In-Store Purchase Only</span>
                 </div>
-              </div>
-
-              <div className="product-detail__actions">
-                <button 
-                  className="btn btn--add-cart"
-                  disabled={product.isSoldOut}
-                >
-                  <ShoppingCart size={20} />
-                  {product.isSoldOut ? 'Sold out' : 'Add to Cart'}
-                </button>
-                {!product.isSoldOut && (
-                  <button className="btn btn--buy-now">
-                    Buy it now
-                  </button>
-                )}
+                <p className="product-detail__in-store-text">
+                  Visit one of our locations to purchase this item.
+                </p>
               </div>
             </div>
           </div>
         </div>
+
+        {/* You May Also Like Section */}
+        <section className="product-detail__related">
+          <h2 className="product-detail__related-title">You may also like</h2>
+          
+          <div className="product-detail__carousel" ref={carouselRef}>
+            {/* Left Arrow */}
+            {carouselIndex > 0 && (
+              <button 
+                className="product-detail__carousel-arrow product-detail__carousel-arrow--left"
+                onClick={() => setCarouselIndex(prev => Math.max(prev - 1, 0))}
+                aria-label="Previous products"
+              >
+                <ChevronLeft size={24} />
+              </button>
+            )}
+            
+            <div className="product-detail__carousel-wrapper">
+              <div 
+                className="product-detail__carousel-track"
+                style={{ transform: `translateX(-${scrollOffset}px)` }}
+              >
+                {relatedProducts.map((relProduct) => (
+                  <Link
+                    key={relProduct.id}
+                    to={`/apparel/${relProduct.slug}`}
+                    state={{ from: fromPage || 'shop' }}
+                    className="product-detail__related-card"
+                  >
+                    <div className="product-detail__related-image">
+                      <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
+                      {relProduct.isSoldOut && (
+                        <span className="product-detail__related-sold-out">Sold out</span>
+                      )}
+                    </div>
+                    <div className="product-detail__related-info">
+                      <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                      <p className="product-detail__related-price">
+                        {relProduct.isOnSale ? (
+                          <>
+                            <span className="product-detail__related-sale">${relProduct.price}</span>
+                            <span className="product-detail__related-original">${relProduct.originalPrice}</span>
+                          </>
+                        ) : (
+                          `$${relProduct.price}`
+                        )}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Arrow */}
+            {carouselIndex < maxCarouselIndex && (
+              <button 
+                className="product-detail__carousel-arrow product-detail__carousel-arrow--right"
+                onClick={() => setCarouselIndex(prev => Math.min(prev + 1, maxCarouselIndex))}
+                aria-label="Next products"
+              >
+                <ChevronRight size={24} />
+              </button>
+            )}
+          </div>
+
+          {/* Mobile Grid */}
+          <div className="product-detail__related-grid-mobile">
+            {relatedProducts.slice(0, 4).map((relProduct) => (
+              <Link
+                key={relProduct.id}
+                to={`/apparel/${relProduct.slug}`}
+                state={{ from: fromPage || 'shop' }}
+                className="product-detail__related-card"
+              >
+                <div className="product-detail__related-image">
+                  <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
+                  {relProduct.isSoldOut && (
+                    <span className="product-detail__related-sold-out">Sold out</span>
+                  )}
+                </div>
+                <div className="product-detail__related-info">
+                  <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                  <p className="product-detail__related-price">
+                    {relProduct.isOnSale ? (
+                      <>
+                        <span className="product-detail__related-sale">${relProduct.price}</span>
+                        <span className="product-detail__related-original">${relProduct.originalPrice}</span>
+                      </>
+                    ) : (
+                      `$${relProduct.price}`
+                    )}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <Link to="/shop#apparel" className="product-detail__view-all">
+            View All Apparel
+            <ChevronRight size={18} />
+          </Link>
+        </section>
       </div>
     </div>
   );

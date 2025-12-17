@@ -6,7 +6,7 @@
 }
 
 .product-detail__container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -412,6 +412,50 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Variant Selector */
+.product-detail__variants {
+  margin: 1.5rem 0;
+}
+
+.product-detail__variants-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.product-detail__variants-options {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.product-detail__variant-btn {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.product-detail__variant-btn:hover {
+  border-color: #085078;
+  color: #085078;
+}
+
+.product-detail__variant-btn.active {
+  border-color: #085078;
+  background: #085078;
+  color: white;
+}
+
 .product-not-found {
   text-align: center;
   padding: 4rem 2rem;
@@ -437,6 +481,222 @@
 .btn--primary:hover {
   background: #0a9786;
   transform: translateY(-2px);
+}
+
+/* ===================================
+   You May Also Like Section
+   =================================== */
+.product-detail__related {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-detail__related-title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+}
+
+/* Carousel Container */
+.product-detail__carousel {
+  position: relative;
+  overflow: visible;
+}
+
+.product-detail__carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.product-detail__carousel-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Carousel Arrows */
+.product-detail__carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail__carousel-arrow:hover {
+  background: #1a1a1a;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-detail__carousel-arrow--left {
+  left: -24px;
+}
+
+.product-detail__carousel-arrow--right {
+  right: -24px;
+}
+
+/* Related Product Card */
+.product-detail__related-card {
+  flex: 0 0 calc((100% - 3rem) / 4);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+.product-detail__related-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-detail__related-image {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 50%, #d8d8d8 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.product-detail__related-image img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-detail__related-card:hover .product-detail__related-image img {
+  transform: scale(1.05);
+}
+
+.product-detail__related-info {
+  text-align: left;
+}
+
+.product-detail__related-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-detail__related-price {
+  font-size: 0.95rem;
+  color: #666;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Mobile Grid (hidden by default) */
+.product-detail__related-grid-mobile {
+  display: none;
+}
+
+/* View All Button */
+.product-detail__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  color: #1a1a1a;
+  text-decoration: none;
+  border: 2px solid #1a1a1a;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.product-detail__view-all:hover {
+  background: #1a1a1a;
+  color: white;
+}
+
+/* Related Product Sold Out Badge */
+.product-detail__related-sold-out {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.product-detail__related-image {
+  position: relative;
+}
+
+/* Related Product Sale Pricing */
+.product-detail__related-sale {
+  color: #c41e3a;
+  font-weight: 600;
+}
+
+.product-detail__related-original {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* In-Store Purchase Notice */
+.product-detail__in-store-notice {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.product-detail__in-store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(8, 80, 120, 0.1);
+  color: #085078;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.product-detail__in-store-text {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* Responsive Design */
@@ -492,6 +752,35 @@
   }
   .product-detail {
     padding: 5rem 0;
+  }
+
+  /* Related Products - Carousel hidden, grid shown */
+  .product-detail__carousel {
+    display: none;
+  }
+
+  .product-detail__related-grid-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .product-detail__related-card {
+    flex: none;
+  }
+
+  .product-detail__related-title {
+    font-size: 1.5rem;
+  }
+
+  .product-detail__related {
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  .product-detail__view-all {
+    width: 100%;
+    justify-content: center;
   }
 }
 

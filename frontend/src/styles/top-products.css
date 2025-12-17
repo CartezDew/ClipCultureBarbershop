@@ -161,12 +161,21 @@
   margin-bottom: 1rem;
 }
 
-.product-card__size {
-  font-size: 0.75rem;
+/* Floating sizes badge on image */
+.product-card__sizes-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.95);
   color: #1a1a1a;
-  opacity: 0.7;
-  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .product-card__price {
@@ -283,7 +292,35 @@
   margin-top: 1rem;
 }
 
-.productbtn--add-cart, .productbtn--learn-more {
+.product-card__actions--single {
+  margin-top: 0.5rem;
+}
+
+/* In-Store Only Notice */
+.product-card__in-store-notice {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card__in-store-badge {
+  display: inline-block;
+  background: rgba(8, 80, 120, 0.1);
+  color: #085078;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.productbtn--full-width {
+  width: 100%;
+}
+
+.productbtn--buy-now, .productbtn--learn-more {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -299,24 +336,24 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-.productbtn--add-cart {
+.productbtn--buy-now {
   background: linear-gradient(135deg, #085078 0%, #85D8CE 50%, #085078 100%);
   color: white;
   width: 100%;
 }
 
-.productbtn--add-cart:disabled {
+.productbtn--buy-now:disabled {
   background: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.productbtn--add-cart:disabled:hover {
+.productbtn--buy-now:disabled:hover {
   transform: none;
   box-shadow: none;
 }
 
-.productbtn--add-cart:hover {
+.productbtn--buy-now:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(8, 80, 120, 0.3);
   font-size: 1.03em;
@@ -345,7 +382,7 @@
     gap: 0.5rem;
     padding: 0.5rem .5rem;
   }
-  .productbtn--add-cart, .productbtn--learn-more {
+  .productbtn--buy-now, .productbtn--learn-more {
     gap: .3rem;
   }
 }
@@ -379,10 +416,10 @@
   .top-products__grid {
     margin-top: -2rem;
   }
-  .productbtn--add-cart, .productbtn--learn-more {
+  .productbtn--buy-now, .productbtn--learn-more {
     font-size: 0.95rem;
   }
-  .productbtn--add-cart, .productbtn--learn-more {
+  .productbtn--buy-now, .productbtn--learn-more {
     padding: 0.75rem .5rem;
   }
   
@@ -470,7 +507,7 @@
     font-size: 1.1rem;
   }
 
-  .productbtn--add-cart:hover {
+  .productbtn--buy-now:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(8, 80, 120, 0.3);
     font-size: .9rem;
@@ -519,7 +556,7 @@
 }
 
 @media (max-width: 380px) {
-  .productbtn--add-cart, .productbtn--learn-more {
+  .productbtn--buy-now, .productbtn--learn-more {
     font-size: 0.9rem;
   }
 }
@@ -530,13 +567,14 @@
   .top-products__subtitle {
     font-size: 1rem;
   }
-  .product-card__size {
-    font-size: 0.7rem;
+  .product-card__sizes-badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 
 @media (max-width: 345px) {
-  .productbtn--add-cart, .productbtn--learn-more {
+  .productbtn--buy-now, .productbtn--learn-more {
     gap: 0.2rem;
     font-size: 0.8rem;
     padding: 0.5rem .3rem;

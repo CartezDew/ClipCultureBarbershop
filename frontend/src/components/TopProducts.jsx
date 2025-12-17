@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, ShoppingCart } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import '../styles/top-products.css';
 import Product1 from '../assets/products/Product-1.webp';
 import Product2 from '../assets/products/Product-2.webp';
 import Product3 from '../assets/products/Product-3.webp';
 import Product4 from '../assets/products/Product-4.webp';
 import Product5 from '../assets/products/Product-5 .webp';
-import Product6 from '../assets/products/Product-6.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
@@ -98,67 +97,64 @@ const TopProducts = ({ limit }) => {
     {
       id: 0,
       name: "Beard & Line Up Enhancement",
-      price: 18,
+      priceFrom: 25,
       rating: null,
       image: BeardLineUp1,
       hoverImage: BeardLineUp2,
-      slug: "premium-beard-line-up-enhancement",
-      size: "4 oz",
-      isNewDrop: true
+      slug: "beard-line-up-enhancement",
+      sizes: ["2 oz", "4 oz"],
+      isNewDrop: true,
+      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
     },
     {
       id: 1,
       name: "Curl Twist",
-      price: 15,
+      price: 20,
       rating: 5,
       image: Product1,
       slug: "curl-twist",
-      size: "8 oz"
+      size: null,
+      buyLink: "https://shopclipculture.com/products/curl-twist"
     },
     {
       id: 2,
-      name: "Beard Balm",
+      name: "Magic Beard Balm",
       price: 20,
       rating: 5,
       image: Product2,
-      slug: "beard-balm",
-      size: "8 oz"
+      slug: "magic-beard-balm",
+      size: null,
+      buyLink: "https://shopclipculture.com/products/magic-beard-balm"
     },
     {
       id: 3,
-      name: "Beard Oil",
+      name: "Premium Beard Oil",
       price: 20,
       rating: 5,
       image: Product3,
-      slug: "beard-oil",
-      size: "4 oz"
+      slug: "premium-beard-oil",
+      size: null,
+      buyLink: "https://shopclipculture.com/products/premium-beard-oil"
     },
     {
       id: 4,
       name: "Beard Wash",
-      price: 18,
+      price: 20,
       rating: 5,
       image: Product4,
       slug: "beard-wash",
-      size: "8 oz"
+      size: null,
+      buyLink: "https://shopclipculture.com/products/beard-wash"
     },
     {
       id: 5,
       name: "Body Lotion",
-      price: 15,
+      price: 20,
       rating: 4.6,
       image: Product5,
       slug: "body-lotion",
-      size: "16 oz"
-    },
-    {
-      id: 6,
-      name: "Body Wash",
-      price: 15,
-      rating: 4,
-      image: Product6,
-      slug: "body-wash",
-      size: "16 oz"
+      size: null,
+      buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
     }
   ];
 
@@ -221,6 +217,11 @@ const TopProducts = ({ limit }) => {
                     className="product-card__image"
                     loading="lazy"
                   />
+                  {product.sizes && (
+                    <span className="product-card__sizes-badge">
+                      {product.sizes.join(' / ')}
+                    </span>
+                  )}
                 </div>
                 <div className="product-card__content">
                   <h3 
@@ -229,8 +230,9 @@ const TopProducts = ({ limit }) => {
                   >
                     {product.name}
                   </h3>
-                  {product.size && <div className="product-card__size">{product.size}</div>}
-                  <div className="product-card__price">${product.price}</div>
+                  <div className="product-card__price">
+                    {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                  </div>
                   <div 
                     className="product-card__rating"
                     ref={(el) => (ratingRefs.current[index] = el)}
@@ -282,11 +284,20 @@ const TopProducts = ({ limit }) => {
                     </div>
                   </div>
                   <div className="product-card__actions">
-                    <button className="productbtn--add-cart">
-                      <ShoppingCart size={16} />
-                      Add to Cart
-                    </button>
-                    <Link to={`/products/${product.slug}`} className="productbtn--learn-more">
+                    <a 
+                      href={product.buyLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="productbtn--buy-now"
+                    >
+                      <ExternalLink size={16} />
+                      Buy Now
+                    </a>
+                    <Link 
+                      to={`/products/${product.slug}`} 
+                      state={{ from: isHomePage ? 'home' : 'shop' }}
+                      className="productbtn--learn-more"
+                    >
                       Learn More
                       <ArrowRight size={16} />
                     </Link>

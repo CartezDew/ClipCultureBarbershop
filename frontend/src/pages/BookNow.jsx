@@ -59,43 +59,44 @@ const BookNow = () => {
     {
       id: 0,
       name: "Beard & Line Up Enhancement",
-      price: 18,
+      priceFrom: 25,
       image: BeardLineUp1,
-      slug: "premium-beard-line-up-enhancement",
-      size: "4 oz",
-      isNewDrop: true
+      slug: "beard-line-up-enhancement",
+      size: "2 oz / 4 oz",
+      isNewDrop: true,
+      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
     },
     {
       id: 1,
       name: "Curl Twist",
-      price: 15,
+      price: 20,
       image: Product1,
       slug: "curl-twist",
-      size: "8 oz"
+      buyLink: "https://shopclipculture.com/products/curl-twist"
     },
     {
       id: 2,
-      name: "Beard Balm",
+      name: "Magic Beard Balm",
       price: 20,
       image: Product2,
-      slug: "beard-balm",
-      size: "8 oz"
+      slug: "magic-beard-balm",
+      buyLink: "https://shopclipculture.com/products/magic-beard-balm"
     },
     {
       id: 3,
-      name: "Beard Oil",
+      name: "Premium Beard Oil",
       price: 20,
       image: Product3,
-      slug: "beard-oil",
-      size: "4 oz"
+      slug: "premium-beard-oil",
+      buyLink: "https://shopclipculture.com/products/premium-beard-oil"
     },
     {
       id: 4,
       name: "Body Lotion",
-      price: 15,
+      price: 20,
       image: Product5,
       slug: "body-lotion",
-      size: "16 oz"
+      buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
     }
   ];
   
@@ -628,9 +629,11 @@ const BookNow = () => {
                 style={{ transform: `translateX(-${scrollOffset}px)` }}
               >
                 {featuredProducts.map((product) => (
-                  <Link 
+                  <a 
                     key={product.id} 
-                    to={`/products/${product.slug}`} 
+                    href={product.buyLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="book-now-product-card"
                   >
                     {product.isNewDrop && (
@@ -641,10 +644,12 @@ const BookNow = () => {
                     </div>
                     <div className="book-now-product-info">
                       <h5 className="book-now-product-name">{product.name}</h5>
-                      <p className="book-now-product-size">{product.size}</p>
-                      <p className="book-now-product-price">${product.price}</p>
+                      {product.size && <p className="book-now-product-size">{product.size}</p>}
+                      <p className="book-now-product-price">
+                        {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                      </p>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
@@ -679,9 +684,11 @@ const BookNow = () => {
           {/* Mobile Grid - shows 4 products */}
           <div className="book-now-products-grid-mobile">
             {featuredProducts.slice(0, 4).map((product) => (
-              <Link 
+              <a 
                 key={product.id} 
-                to={`/products/${product.slug}`} 
+                href={product.buyLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="book-now-product-card"
               >
                 {product.isNewDrop && (
@@ -692,10 +699,12 @@ const BookNow = () => {
                 </div>
                 <div className="book-now-product-info">
                   <h5 className="book-now-product-name">{product.name}</h5>
-                  <p className="book-now-product-size">{product.size}</p>
-                  <p className="book-now-product-price">${product.price}</p>
+                  {product.size && <p className="book-now-product-size">{product.size}</p>}
+                  <p className="book-now-product-price">
+                    {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                  </p>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
           

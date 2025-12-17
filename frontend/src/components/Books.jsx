@@ -1,33 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { ExternalLink } from 'lucide-react';
 import '../styles/books.css';
-import AmazonImage from '../assets/Books/Amazon.png';
 import ClipCultureManual from '../assets/Books/Clip Culture Manual.webp';
 import ClipCultureManual2 from '../assets/Books/Clip Culture Manual 2.webp';
 import ClipCultureManual2Extended from '../assets/Books/Clip Culture Manual 2- Extended Edition.webp';
 
 const Books = () => {
   const gridRef = useRef(null);
-  const [quantities, setQuantities] = useState({});
-
-  const getQuantity = (productId) => quantities[productId] || 1;
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity >= 1) {
-      setQuantities({ ...quantities, [productId]: newQuantity });
-    }
-  };
-
-  const decreaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    if (current > 1) {
-      updateQuantity(productId, current - 1);
-    }
-  };
-
-  const increaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    updateQuantity(productId, current + 1);
-  };
 
   useEffect(() => {
     const measureAndSetTitleHeight = () => {
@@ -58,32 +37,44 @@ const Books = () => {
   }, []);
   const products = [
     {
-      id: 1,
+      id: 101,
       name: "Clip Culture Manual",
-      price: 9.99,
+      price: 18.5,
       rating: 4.8,
       image: ClipCultureManual,
-      slug: "Clip Culture Manual",
-      amazonLink: "https://a.co/d/6JUYT4X"
+      slug: "clip-culture-manual",
+      buyLink: "https://shop.ingramspark.com/b/084?params=nv5ulUqVf9ES5v2YNYUGcHbeQHfLZa5XBfd5giVrX4a",
+      format: "Paperback",
+      size: "5.5 × 8.5 inches",
+      pages: 176,
+      isbn: "978-1-953307-48-4"
     },
     {
-      id: 2,
-      name: "Clip Culture Mnaual 2",
-      price: 9.19,
+      id: 102,
+      name: "Clip Culture Manual 2",
+      price: 22,
       rating: 5,
       image: ClipCultureManual2,
-      slug: "Clip Culture Mnaual 2",
-      amazonLink: "https://a.co/d/5lDgae3"
+      slug: "clip-culture-manual-2",
+      buyLink: "https://shop.ingramspark.com/b/084?params=rps7H6hG1HCmZxRsFHT71PDpSfy0Lz9HKTnFGokLzOM",
+      format: "Paperback",
+      size: "5 × 8 inches",
+      pages: 186,
+      isbn: "9781963874020"
     },
     {
-      id: 3,
-      name: "Clip Culture Mnaual 2- Extended Edition",
-      price: 9.19,
+      id: 103,
+      name: "Clip Culture Manual 2 - Extended Edition",
+      price: 22,
       rating: 4.9,
       image: ClipCultureManual2Extended,
-      slug: "Clip Culture Mnaual 2- Extended Edition",
-      amazonLink: "https://a.co/d/7J9qXKz"
-    },
+      slug: "clip-culture-manual-2-extended-edition",
+      buyLink: "https://shop.ingramspark.com/b/084?params=kGQtRncWXZY5F4PhfMqloz4XWCw5scnMTe6xPsyEzpo",
+      format: "Paperback",
+      size: "5 × 8 inches",
+      pages: 156,
+      isbn: "978-1-957092-96-6"
+    }
   ];
 
   const renderStars = (rating) => {
@@ -145,48 +136,15 @@ const Books = () => {
                   {renderStars(product.rating)}
                   <span className="book-card__rating-text">({product.rating})</span>
                 </div>
-                <div className="book-card__quantity">
-                  <label className="book-card__quantity-label">Quantity</label>
-                  <div className="book-card__quantity-selector">
-                    <button 
-                      className="quantity-btn quantity-btn--minus"
-                      onClick={() => decreaseQuantity(product.id)}
-                      aria-label="Decrease quantity"
-                    >
-                      −
-                    </button>
-                    <input 
-                      type="number" 
-                      className="quantity-input" 
-                      value={getQuantity(product.id)}
-                      onChange={(e) => {
-                        const value = parseInt(e.target.value) || 1;
-                        updateQuantity(product.id, value);
-                      }}
-                      min="1"
-                    />
-                    <button 
-                      className="quantity-btn quantity-btn--plus"
-                      onClick={() => increaseQuantity(product.id)}
-                      aria-label="Increase quantity"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
                 <div className="book-card__actions">
                   <a 
-                    href={product.amazonLink} 
+                    href={product.buyLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="amazon-button"
+                    className="book-card__buy-btn"
                   >
-                    <img 
-                      src={AmazonImage} 
-                      alt="Order now at amazon.com" 
-                      className="amazon-button__image"
-                      loading="lazy"
-                    />
+                    <ExternalLink size={16} />
+                    Buy Now
                   </a>
                 </div>
               </div>
