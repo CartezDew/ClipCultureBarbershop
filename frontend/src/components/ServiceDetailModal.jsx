@@ -9,10 +9,10 @@ const ServiceDetailModal = ({ isOpen, onClose, service }) => {
   if (!isOpen || !service) return null;
 
   const handleBookNow = () => {
-    navigate('/booking', {
+    navigate('/book-now', {
       state: {
         serviceId: service.id,
-        // If we want to skip straight to step 3 (services) or handle it in Booking.jsx logic
+        // If we want to skip straight to step 3 (services) or handle it in BookNow.jsx logic
         // For now, passing serviceId is key.
       }
     });

@@ -204,7 +204,7 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
         
         <div className="hero-nav-actions">
           <Link 
-            to="/booking"
+            to="/book-now"
             className="hero-book-btn" 
           >
             Book Now

@@ -1,0 +1,278 @@
+/* Mobile Promo Section - Only visible at 900px and below */
+.mobile-promo-section {
+  display: none;
+  background-color: #1a1a1a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Show only at 900px and below */
+@media (max-width: 900px) {
+  .mobile-promo-section {
+    display: block;
+  }
+}
+
+.mobile-promo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+/* Left Image Container - Logos Wall */
+.mobile-promo-image--left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mobile-promo-image--left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: linear-gradient(
+    to right,
+    rgba(26, 26, 26, 0.2) 0%,
+    rgba(26, 26, 26, 0.6) 60%,
+    rgba(26, 26, 26, 0.95) 100%
+  );
+  z-index: 1; */
+}
+
+.mobile-promo-image--left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Right Image Container - Dave Full Body */
+.mobile-promo-image--right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mobile-promo-image--right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: linear-gradient(
+    to left,
+    rgba(26, 26, 26, 0.2) 0%,
+    rgba(26, 26, 26, 0.6) 60%,
+    rgba(26, 26, 26, 0.95) 100%
+  );
+  z-index: 1; */
+}
+
+.mobile-promo-image--right img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: bottom center;
+  position: relative;
+  z-index: 0;
+}
+
+/* Center Content Overlay */
+.mobile-promo-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+  padding: 2rem;
+}
+
+/* Links Container */
+.mobile-promo-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Individual Link Card */
+.mobile-promo-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.mobile-promo-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Main Link Text */
+.mobile-promo-link-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+/* Accent Text Below */
+.mobile-promo-link-accent {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Divider with Ampersand */
+.mobile-promo-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+}
+
+.mobile-promo-ampersand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.4);
+  color: var(--primary-green);
+  font-weight: 800;
+}
+
+@media (max-width: 785px) {
+    .mobile-promo-image--right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 700px) {
+  .mobile-promo-container {
+    min-height: 450px;
+  }
+  
+  .mobile-promo-content {
+    max-width: 280px;
+    padding: 1.5rem;
+  }
+  
+  .mobile-promo-link {
+    padding: 0.875rem 1.5rem;
+  }
+  
+  .mobile-promo-link-text {
+    font-size: 1.25rem;
+  }
+  
+  .mobile-promo-link-accent {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 540px) {
+    .mobile-promo-content {
+        max-width: 240px;
+    }
+
+    .mobile-promo-link-accent {
+        font-size: 0.55rem;
+    }
+
+    .mobile-promo-link-text {
+        font-size: 1.15rem;
+    }
+
+    .mobile-promo-link {
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+  .mobile-promo-container {
+    min-height: 400px;
+  }
+  
+  .mobile-promo-content {
+    max-width: 200px;
+    padding: 1rem;
+  }
+  
+  .mobile-promo-link {
+    padding: 0.75rem 1rem;
+  }
+  
+  .mobile-promo-link-text {
+    font-size: 1.1rem;
+  }
+  
+  .mobile-promo-ampersand {
+    font-size: 1rem;
+  }
+  
+  .mobile-promo-links {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile-promo-container {
+    min-height: 410px;
+  }
+  
+  .mobile-promo-link-text {
+    font-size: 1rem;
+  }
+  
+  .mobile-promo-link-accent {
+    font-size: 0.6rem;
+  }
+
+  .mobile-promo-content {
+    max-width: 180px;
+    padding: 1rem;
+  }
+}

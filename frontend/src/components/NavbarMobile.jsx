@@ -27,12 +27,12 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'services-kids', name: 'Kids', path: '/services#specialty-services', icon: 'Baby', section: 'Services' },
         
         
-               // Shop section
-               { id: 'shop-all', name: 'All Products', path: '/shop', icon: 'Store', section: 'Shop' },
+        // Shop section
+        { id: 'shop-all', name: 'All Products', path: '/shop', icon: 'Store', section: 'Shop' },
                { id: 'shop-apparel', name: 'Apparel', path: '/shop#apparel', icon: 'Shirt', section: 'Shop' },
-               { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
-               { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
-               { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
+        { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
+        { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
+        { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
         
         // About section (reordered: Our Story, Speaking Engagements, Franchise, FAQ, Join Team, Contact Us, Login)
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },

@@ -212,7 +212,7 @@ const Services = () => {
           <div className="services__cta">
             <motion.button 
               className="btn-book-now" 
-              onClick={() => navigate('/booking')}
+              onClick={() => navigate('/book-now')}
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
               }}

@@ -221,7 +221,7 @@ const NavbarDesktop = () => {
                   </motion.div>
                 )}
                 <div className="icon-section">
-                    <Link to="/#contact" className="book-now-btn">
+                    <Link to="/book-now" className="book-now-btn">
                         Book Now
                     </Link>
                 </div>

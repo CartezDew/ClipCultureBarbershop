@@ -47,7 +47,7 @@ const FloatingActionButtons = ({ showOnHome }) => {
 
   const handleBookNowClick = (e) => {
     e.preventDefault();
-    navigate('/booking');
+    navigate('/book-now');
   };
 
   const handleShopNowClick = (e) => {

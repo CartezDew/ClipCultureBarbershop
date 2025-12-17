@@ -11,6 +11,7 @@ import Home_Welcome from '../components/Home_Welcome.jsx';
 import Professional_Team from '../components/Professional_Team.jsx';
 import Contact from '../components/Contact.jsx';
 import Facts from '../components/facts.jsx';
+import MobilePromoSection from '../components/MobilePromoSection.jsx';
 import Footer from '../components/Footer.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
@@ -571,6 +572,10 @@ const Home = () => {
 
       {/* Professional Team */}
       <Professional_Team />
+
+      {/* Mobile Showcase - Products, Mentorship & Speaking */}
+      {/* Mobile Promo Section - Only visible at 900px and below */}
+      <MobilePromoSection />
 
       {/* Facts */}
       <Facts />
