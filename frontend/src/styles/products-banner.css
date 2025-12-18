@@ -29,6 +29,10 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* GPU acceleration hints for smoother rendering */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .products-banner__overlay {
