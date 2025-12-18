@@ -37,7 +37,7 @@ const About = () => {
             
             <div className="about-stat">
               <div className="about-stat-content">
-                <div className="about-stat-value">7+</div>
+                <div className="about-stat-value">8+</div>
                 <div className="about-stat-label">years strong</div>
               </div>
             </div>

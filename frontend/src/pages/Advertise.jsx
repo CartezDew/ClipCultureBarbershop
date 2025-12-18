@@ -124,7 +124,7 @@ const Advertise = () => {
             <div className="advertise-intro">
               <p className="advertise-intro-text">
               At Clip Culture Barbershop, your brand gets more than visibility — it gets credibility.
-              With <strong>134,000+ clients served</strong>, a <strong>94% customer satisfaction rate</strong>, and <strong>7+ years of trusted service</strong>, our audience represents a thriving, loyal, and diverse community across Atlanta.
+              With <strong>134,000+ clients served</strong>, a <strong>94% customer satisfaction rate</strong>, and <strong>8+ years of trusted service</strong>, our audience represents a thriving, loyal, and diverse community across Atlanta.
               </p>
               <p className="advertise-intro-text-2">
               Advertising with Clip Culture means positioning your business in front of an engaged audience that values quality, authenticity, and culture. It’s more than exposure — it’s connection.

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/barbershop_gallery.css";
 
@@ -13,17 +13,28 @@ const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 22, 27, 28, 29, 37, 18,
 // Speaking engagements gallery image order
 const speakingImageOrder = [61, 68, 71, 63, 14, 40, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
 
+// Auto-scroll speed (pixels per frame at 60fps)
+// 0.5 = ~30px/second (slow, subtle), 1.0 = ~60px/second
+const AUTO_SCROLL_SPEED = 0.5;
+
 const BarbershopGallery = () => {
   const location = useLocation();
   const sliderRef = useRef(null);
   const trackRef = useRef(null);
   const thumbRef = useRef(null);
   const scrollTimeoutRef = useRef(null);
+  const animationRef = useRef(null);
+  const isUserInteractingRef = useRef(false);
+  const resumeTimeoutRef = useRef(null);
+  const countHideTimeoutRef = useRef(null);
+  const previousVisibleIndexRef = useRef(0);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [showCounts, setShowCounts] = useState(true);
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [snapEnabled, setSnapEnabled] = useState(false);
 
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
@@ -31,7 +42,7 @@ const BarbershopGallery = () => {
   const isSpeakingRoute = location.pathname === "/speaking-engagements";
 
   // Process all images and filter based on route
-  const imageEntries = useMemo(() => {
+  const baseImageEntries = useMemo(() => {
     // Process all images
     const allImageEntries = Object.entries(rawImages)
       .map(([path, mod]) => {
@@ -60,8 +71,13 @@ const BarbershopGallery = () => {
     }
   }, [isServicesRoute, isSpeakingRoute]);
 
-  // Total images count - dynamically updates based on route
-  const totalImages = imageEntries.length;
+  // Total images count - dynamically updates based on route (original count, not duplicated)
+  const totalImages = baseImageEntries.length;
+
+  // Duplicate images for seamless infinite loop
+  const imageEntries = useMemo(() => {
+    return [...baseImageEntries, ...baseImageEntries];
+  }, [baseImageEntries]);
 
   const updateUI = () => {
     const slider = sliderRef.current;
@@ -145,6 +161,75 @@ const BarbershopGallery = () => {
     }
   };
 
+  // Auto-scroll animation with seamless infinite loop
+  const startAutoScroll = useCallback(() => {
+    // Cancel any existing animation
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+
+    const animate = () => {
+      const slider = sliderRef.current;
+      
+      // Continue animation loop even if paused
+      if (!slider) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      
+      // Only scroll if not interacting
+      if (!isUserInteractingRef.current) {
+        slider.scrollLeft += AUTO_SCROLL_SPEED;
+        
+        // Check for loop reset - when we reach the duplicated set, jump back
+        const imageWrappers = slider.querySelectorAll('.gallery-image-wrapper');
+        if (imageWrappers.length > 0) {
+          let totalWidth = 0;
+          const halfCount = Math.floor(imageWrappers.length / 2);
+          for (let i = 0; i < halfCount; i++) {
+            totalWidth += imageWrappers[i].offsetWidth;
+            if (i < halfCount - 1) totalWidth += 16; // gap
+          }
+          
+          if (totalWidth > 0 && slider.scrollLeft >= totalWidth) {
+            slider.scrollLeft = slider.scrollLeft - totalWidth;
+          }
+        }
+      }
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  // Stop auto-scroll
+  const stopAutoScroll = useCallback(() => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+  }, []);
+
+  // Pause auto-scroll on user interaction
+  const pauseAutoScroll = useCallback(() => {
+    isUserInteractingRef.current = true;
+    setIsAutoScrolling(false);
+    setSnapEnabled(true); // Enable scroll-snap for user interaction
+    
+    // Clear any existing resume timeout
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    
+    // Resume after 3 seconds of no interaction
+    resumeTimeoutRef.current = setTimeout(() => {
+      isUserInteractingRef.current = false;
+      setIsAutoScrolling(true);
+      setSnapEnabled(false); // Disable scroll-snap for auto-scroll
+    }, 3000);
+  }, []);
+
   // Update UI when route changes
   useEffect(() => {
     const slider = sliderRef.current;
@@ -155,37 +240,98 @@ const BarbershopGallery = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isServicesRoute, isSpeakingRoute]);
 
+  // Show count briefly when a new image becomes visible during auto-scroll
+  useEffect(() => {
+    const currentIndex = currentVisibleIndex % totalImages;
+    const previousIndex = previousVisibleIndexRef.current % totalImages;
+    
+    // Only trigger when index actually changes and we're auto-scrolling
+    if (currentIndex !== previousIndex && isAutoScrolling) {
+      // Show the count
+      setShowCounts(true);
+      
+      // Clear any existing hide timeout
+      if (countHideTimeoutRef.current) {
+        clearTimeout(countHideTimeoutRef.current);
+      }
+      
+      // Hide count after 2.5 seconds
+      countHideTimeoutRef.current = setTimeout(() => {
+        if (isAutoScrolling) {
+          setShowCounts(false);
+        }
+      }, 2500);
+    }
+    
+    previousVisibleIndexRef.current = currentVisibleIndex;
+    
+    return () => {
+      if (countHideTimeoutRef.current) {
+        clearTimeout(countHideTimeoutRef.current);
+      }
+    };
+  }, [currentVisibleIndex, totalImages, isAutoScrolling]);
+
+  // Start auto-scroll on mount
+  useEffect(() => {
+    // Delay start to allow images to load
+    const startDelay = setTimeout(() => {
+      startAutoScroll();
+    }, 1000);
+
+    return () => {
+      clearTimeout(startDelay);
+      stopAutoScroll();
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+    };
+  }, [startAutoScroll, stopAutoScroll]);
+
   // scroll listener
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
 
     const handleScroll = () => {
-      // hide counts while scrolling
-      setShowCounts(false);
+      // Only hide counts during manual user scrolling, not auto-scroll
+      if (isUserInteractingRef.current) {
+        setShowCounts(false);
 
-      // reset timer
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+        // reset timer
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
-      // bring counts back after scroll stops
-      scrollTimeoutRef.current = setTimeout(() => {
-        setShowCounts(true);
-      }, 200);
+        // bring counts back after scroll stops
+        scrollTimeoutRef.current = setTimeout(() => {
+          setShowCounts(true);
+        }, 200);
+      }
 
       updateUI();
     };
 
+    // Pause auto-scroll on user interaction
+    const handleUserInteraction = () => {
+      pauseAutoScroll();
+    };
+
     updateUI();
     slider.addEventListener("scroll", handleScroll);
+    slider.addEventListener("mousedown", handleUserInteraction);
+    slider.addEventListener("touchstart", handleUserInteraction, { passive: true });
+    slider.addEventListener("wheel", handleUserInteraction, { passive: true });
     window.addEventListener("resize", updateUI);
 
     return () => {
       slider.removeEventListener("scroll", handleScroll);
+      slider.removeEventListener("mousedown", handleUserInteraction);
+      slider.removeEventListener("touchstart", handleUserInteraction);
+      slider.removeEventListener("wheel", handleUserInteraction);
       window.removeEventListener("resize", updateUI);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isServicesRoute, isSpeakingRoute]);
+  }, [isServicesRoute, isSpeakingRoute, pauseAutoScroll]);
 
   // draggable thumb - supports both mouse and touch events
   useEffect(() => {
@@ -222,6 +368,14 @@ const BarbershopGallery = () => {
     const startDrag = (clientX, isTrackClick = false) => {
       isDragging = true;
       startX = clientX;
+      
+      // Pause auto-scroll when user drags scrollbar
+      isUserInteractingRef.current = true;
+      setIsAutoScrolling(false);
+      setSnapEnabled(true);
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
       
       if (isTrackClick) {
         // If clicking on track, calculate position and jump thumb there
@@ -272,6 +426,16 @@ const BarbershopGallery = () => {
       scrollTimeoutRef.current = setTimeout(() => {
         setShowCounts(true);
       }, 200);
+      
+      // Resume auto-scroll after 3 seconds
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+      resumeTimeoutRef.current = setTimeout(() => {
+        isUserInteractingRef.current = false;
+        setIsAutoScrolling(true);
+        setSnapEnabled(false); // Disable scroll-snap for auto-scroll
+      }, 3000);
       
       // Keep thumb active for a bit longer on mobile
       clearThumbActive();
@@ -383,6 +547,10 @@ const BarbershopGallery = () => {
   const handleScrollBtn = (dir) => {
     const slider = sliderRef.current;
     if (!slider) return;
+    
+    // Pause auto-scroll when user clicks navigation buttons
+    pauseAutoScroll();
+    
     setShowCounts(false);
     const amount = 350;
     slider.scrollBy({
@@ -416,13 +584,19 @@ const BarbershopGallery = () => {
           </button>
         )}
   
-        <div className="gallery-slider-wrapper" ref={sliderRef}>
+        <div 
+          className={`gallery-slider-wrapper ${snapEnabled ? 'snap-enabled' : ''}`} 
+          ref={sliderRef}
+        >
           {imageEntries.map((img, index) => {
-            const isActive = index === currentVisibleIndex;
+            // Calculate the display index (modulo for duplicated images)
+            const displayIndex = index % totalImages;
+            const isActive = displayIndex === (currentVisibleIndex % totalImages);
             return (
               <div
                 className="gallery-image-wrapper"
                 key={`${img.path}-${index}`}
+                onClick={pauseAutoScroll}
               >
                 <img
                   src={img.src}
@@ -435,7 +609,7 @@ const BarbershopGallery = () => {
                     isActive ? "active" : ""
                   }`}
                 >
-                  {index + 1} of {totalImages}
+                  {displayIndex + 1} of {totalImages}
                 </span>
               </div>
             );

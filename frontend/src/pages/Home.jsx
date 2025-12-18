@@ -166,7 +166,7 @@ const Home = () => {
     {
       key: 'years-strong',
       icon: <BicepIcon size={24} />,
-      number: '7+',
+      number: '8+',
       label: 'Years Strong',
     },
     {

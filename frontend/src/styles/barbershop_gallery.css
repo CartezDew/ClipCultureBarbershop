@@ -45,13 +45,18 @@
   grid-auto-columns: auto;
   gap: 1rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none; /* Disabled by default for auto-scroll */
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   margin-bottom: 1rem;
   width: 100%;               /* 👈 match the 1400px container */
+}
+
+/* Enable scroll-snap only when user is interacting */
+.gallery-slider-wrapper.snap-enabled {
+  scroll-snap-type: x mandatory;
 }
   
   .gallery-slider-wrapper::-webkit-scrollbar {
@@ -88,26 +93,29 @@
     padding: 0.1rem 0.3rem;
     border-radius: 999px;
     opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transform: translateY(-4px);
+    transition: opacity 0.8s ease-in-out, transform 0.6s ease-out;
+    pointer-events: none;
   }
 
-.gallery-image-count.active {
-  background: rgba(10, 151, 134, 0.75);
-  color: #ffffff;
-  font-weight: 600;
-}
+  .gallery-image-count.active {
+    background: rgba(10, 151, 134, 0.75);
+    color: #ffffff;
+    font-weight: 600;
+  }
   
-  /* when scroll has STOPPED */
+  /* when scroll has STOPPED - subtle fade in */
   .barbershop-gallery-section.show-counts .gallery-image-count {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out;
   }
   
-  /* when scrolling/dragging */
+  /* when scrolling/dragging - subtle fade out */
   .barbershop-gallery-section.hide-counts .gallery-image-count {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(-4px);
+    transition: opacity 1s ease-in-out, transform 0.6s ease-out;
   }
   
   /* scrollbar container */

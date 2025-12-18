@@ -118,7 +118,7 @@
 .hero-navbar--mobile .navbar {
   position: static;
   box-shadow: none;
-  background: transparent;
+  /* background: transparent; */
 }
 
 .hero-navbar--mobile .navbar-container {
