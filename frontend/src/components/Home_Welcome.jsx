@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../styles/home-welcome.css';
-import DaveHomeImage from '../assets/About_Home/Dave_Home.png';
+import DaveHomeImage from '../assets/About_Home/Dave_Home.webp';
 import ClipCultureLogo from '../assets/images/ClipCultureLogo2.webp';
 import ClipCultureLogoMobile from '../assets/images/Clip Culture Logo.webp';
 import Image1 from '../assets/About_Home_2/Barber_chair.webp';

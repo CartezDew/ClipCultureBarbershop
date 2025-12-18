@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShopByCategory from '../components/ShopByCategory.jsx';
+import ProductsBanner from '../components/ProductsBanner.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Apparel from '../components/Apparel.jsx';
 import '../styles/shop.css';
@@ -66,6 +67,8 @@ const Shop = () => {
         <div className="shop-category-wrapper">
           <ShopByCategory />
         </div>
+        
+        <ProductsBanner />
         
         <div className="shop-products-wrapper">
           <TopProducts />

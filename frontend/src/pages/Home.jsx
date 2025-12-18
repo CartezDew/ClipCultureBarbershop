@@ -42,7 +42,7 @@ const BicepIcon = ({ size = 24 }) => (
 );
 import '../styles/home.css';
 import heroImageWebP from '../assets/images/ClipCultureHero.webp';
-import heroImagePNG from '../assets/images/ClipCultureHero.png';
+import heroImagePNG from '../assets/images/ClipCultureHero.webp';
 import heroImageSplit from '../assets/images/clipculturehero2.webp';
 import shopImage1 from '../assets/Contact/Shop_1.webp';
 import shopImage2 from '../assets/Contact/Shop_2.webp';

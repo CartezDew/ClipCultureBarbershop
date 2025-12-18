@@ -1,0 +1,226 @@
+/* Products Banner Component */
+.products-banner {
+  width: 100%;
+  background-color: #0a0a0a;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 4rem;
+  border-radius: 4px;
+}
+
+.products-banner__container {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* Background Image */
+.products-banner__background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.products-banner__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.products-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.2) 60%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* Logo - Top Left */
+.products-banner__logo-wrapper {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 10;
+}
+
+.products-banner__logo {
+  width: 80px;
+  height: auto;
+  filter: invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  opacity: 0.45;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.products-banner__logo:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Slogan - Bottom */
+.products-banner__slogan-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.products-banner__slogan-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products-banner__slogan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding-top:  2rem;
+}
+
+.products-banner__slogan-line {
+  color: #ffffff;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.products-banner__slogan-line::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(10, 151, 134, 0.6) 20%,
+    rgba(10, 151, 134, 0.8) 50%,
+    rgba(10, 151, 134, 0.6) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.products-banner:hover .products-banner__slogan-line::after {
+  opacity: 1;
+}
+
+.products-banner__slogan-separator {
+  color: var(--primary-green, #0a9786);
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.5em;
+  opacity: 0.8;
+  text-shadow: 0 0 20px rgba(10, 151, 134, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .products-banner__container {
+    height: 400px;
+  }
+  
+  .products-banner__logo {
+    width: 65px;
+  }
+  
+  .products-banner__slogan-wrapper {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .products-banner__container {
+    height: 350px;
+  }
+  
+  .products-banner__logo-wrapper {
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .products-banner__logo {
+    width: 55px;
+  }
+
+  .products-banner__slogan {
+    font-size: clamp(.9rem, 3vw, 1.2rem);
+  }
+  
+  /* .products-banner__slogan {
+    flex-direction: column;
+    gap: 0.25rem;
+  } */
+  
+  /* .products-banner__slogan-separator {
+    display: none;
+  } */
+  
+  .products-banner__slogan-wrapper {
+    padding: 1.25rem 1rem;
+  }
+}
+
+@media (max-width: 530px) {
+    .products-banner__container {
+        border-radius: 10px;
+    }
+    .products-banner__background {
+        border-radius: 10px;
+    }
+    .products-banner__overlay {
+        border-radius: 10px;
+    }
+    .products-banner {
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+  .products-banner__container {
+    height: 300px;
+  }
+
+  .products-banner__slogan {
+    font-size: clamp(.8rem, 3vw, 1rem);
+    gap: 0.25rem 0.5rem;
+  }
+  
+  .products-banner__logo {
+    width: 45px;
+  }
+}
+
+@media (max-width: 340px) {
+  .products-banner__slogan-separator {
+    display: none;
+  }
+}
+

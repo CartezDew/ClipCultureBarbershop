@@ -8,7 +8,7 @@ import '../styles/shop-by-category.css';
 import bookImage1 from '../assets/Books/Clip Culture Manual.webp';
 import bookImage2 from '../assets/Books/Clip Culture Manual 2.webp';
 import bookImage3 from '../assets/Books/Clip Culture Manual 2- Extended Edition.webp';
-import amazonImage from '../assets/Books/Amazon.png';
+import amazonImage from '../assets/Books/Amazon.webp';
 
 // Mentorship image
 import mentorshipImage from '../assets/Mentorship/Mentorship-1.webp';
@@ -34,7 +34,7 @@ import beardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
 import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
-import DaveHeadshot from '../assets/Testimonials/Dave_headshot.png';
+import DaveHeadshot from '../assets/Testimonials/Dave_headshot.webp';
 
 // Product images for testimonials
 import Product1 from '../assets/products/Product-1.webp';

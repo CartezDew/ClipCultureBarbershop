@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/mobile-promo-section.css';
-import DaveFullBody from '../assets/About_Home/Dave_Full_Body.png';
-import LogosWall from '../assets/About_Home/Logos_wall.png';
+import DaveFullBody from '../assets/About_Home/Dave_Full_Body.webp';
+import LogosWall from '../assets/About_Home/Logos_wall.webp';
 
 const MobilePromoSection = () => {
   return (
