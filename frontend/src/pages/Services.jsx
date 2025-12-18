@@ -27,17 +27,12 @@ const Services = () => {
 
     const scrollWithOffset = () => {
       const el = document.getElementById(targetId);
-      if (!el) {
-        console.log('Element not found:', targetId);
-        return;
-      }
+      if (!el) return;
 
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
       const offset = 55;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition);
 
       window.scrollTo({
         top: offsetPosition,

@@ -79,10 +79,7 @@ const Home = () => {
 
     const scrollWithOffset = () => {
       const el = document.getElementById(targetId);
-      if (!el) {
-        console.log('Element not found:', targetId);
-        return;
-      }
+      if (!el) return;
 
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
@@ -91,8 +88,6 @@ const Home = () => {
       if (targetId === 'faq') offset = 40;
       if (targetId === 'team') offset = 65;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition, 'using offset:', offset);
 
       window.scrollTo({
         top: offsetPosition,

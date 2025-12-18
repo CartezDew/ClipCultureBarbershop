@@ -19,18 +19,13 @@ const Shop = () => {
 
     const scrollWithOffset = () => {
       const el = document.getElementById(targetId);
-      if (!el) {
-        console.log('Element not found:', targetId);
-        return;
-      }
+      if (!el) return;
 
       // Get the element's position
       const elementPosition = el.getBoundingClientRect().top;
       // Use specific offset for books, apparel, and premium-grooming-products sections
       const offset = targetId === 'books' || targetId === 'apparel' || targetId === 'premium-grooming-products' ? 80 : 100;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      console.log('Scrolling to:', targetId, 'offset:', offsetPosition, 'elementTop:', elementPosition);
 
       window.scrollTo({
         top: offsetPosition,
