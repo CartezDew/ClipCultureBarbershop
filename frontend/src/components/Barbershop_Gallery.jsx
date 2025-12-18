@@ -35,7 +35,7 @@ const BarbershopGallery = () => {
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [snapEnabled, setSnapEnabled] = useState(false);
-  const [isGalleryVisible, setIsGalleryVisible] = useState(true);
+  const isGalleryVisibleRef = useRef(true);
 
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
@@ -169,7 +169,10 @@ const BarbershopGallery = () => {
       cancelAnimationFrame(animationRef.current);
     }
 
-    const animate = () => {
+    let lastTime = 0;
+    const scrollSpeed = AUTO_SCROLL_SPEED * 60; // Convert to pixels per second
+
+    const animate = (currentTime) => {
       const slider = sliderRef.current;
       
       // Continue animation loop even if paused
@@ -177,10 +180,16 @@ const BarbershopGallery = () => {
         animationRef.current = requestAnimationFrame(animate);
         return;
       }
+
+      // Calculate delta time for smooth animation regardless of frame rate
+      const deltaTime = lastTime ? (currentTime - lastTime) / 1000 : 0.016;
+      lastTime = currentTime;
       
       // Only scroll if not interacting AND gallery is visible
-      if (!isUserInteractingRef.current && isGalleryVisible) {
-        slider.scrollLeft += AUTO_SCROLL_SPEED;
+      if (!isUserInteractingRef.current && isGalleryVisibleRef.current) {
+        // Use delta time for frame-rate independent scrolling
+        const scrollAmount = scrollSpeed * deltaTime;
+        slider.scrollLeft += scrollAmount;
         
         // Check for loop reset - when we reach the duplicated set, jump back
         const imageWrappers = slider.querySelectorAll('.gallery-image-wrapper');
@@ -196,13 +205,16 @@ const BarbershopGallery = () => {
             slider.scrollLeft = slider.scrollLeft - totalWidth;
           }
         }
+        
+        // Update UI periodically (not every frame to save performance)
+        updateUI();
       }
       
       animationRef.current = requestAnimationFrame(animate);
     };
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [isGalleryVisible]);
+  }, []);
 
   // Stop auto-scroll
   const stopAutoScroll = useCallback(() => {
@@ -281,7 +293,7 @@ const BarbershopGallery = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsGalleryVisible(entry.isIntersecting);
+          isGalleryVisibleRef.current = entry.isIntersecting;
         });
       },
       { threshold: 0.1 } // Trigger when 10% is visible
@@ -308,7 +320,7 @@ const BarbershopGallery = () => {
         clearTimeout(resumeTimeoutRef.current);
       }
     };
-  }, [startAutoScroll, stopAutoScroll, isGalleryVisible]);
+  }, [startAutoScroll, stopAutoScroll]);
 
   // scroll listener
   useEffect(() => {

@@ -44,14 +44,18 @@
   grid-auto-flow: column;
   grid-auto-columns: auto;
   gap: 1rem;
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   scroll-snap-type: none; /* Disabled by default for auto-scroll */
+  scroll-behavior: auto; /* Prevent CSS smooth scroll from interfering */
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   margin-bottom: 1rem;
   width: 100%;               /* 👈 match the 1400px container */
+  /* Allow programmatic scrolling on mobile */
+  touch-action: pan-y pinch-zoom;
 }
 
 /* Enable scroll-snap only when user is interacting */

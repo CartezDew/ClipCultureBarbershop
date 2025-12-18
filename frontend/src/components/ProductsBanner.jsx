@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/products-banner.css';
 import ProductsClientsImage from '../assets/About_Home/Products_Clients.webp';
 import Logo from '../assets/images/New_Logo.webp';
 
 const ProductsBanner = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sloganRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger when 30% visible
+    );
+
+    if (sloganRef.current) {
+      observer.observe(sloganRef.current);
+    }
+
+    return () => {
+      if (sloganRef.current) {
+        observer.unobserve(sloganRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section className="products-banner">
       <div className="products-banner__container">
@@ -30,12 +57,12 @@ const ProductsBanner = () => {
         </div>
         
         {/* Slogan - Bottom */}
-        <div className="products-banner__slogan-wrapper">
+        <div className="products-banner__slogan-wrapper" ref={sloganRef}>
           <div className="products-banner__slogan-container">
-            <h2 className="products-banner__slogan">
-              <span className="products-banner__slogan-line">Defining the Standard.</span>
-              <span className="products-banner__slogan-separator">—</span>
-              <span className="products-banner__slogan-line">Shaping the Culture.</span>
+            <h2 className={`products-banner__slogan ${isVisible ? 'animate-in' : ''}`}>
+              <span className="products-banner__slogan-line" style={{ animationDelay: '0s' }}>Defining the Standard.</span>
+              <span className="products-banner__slogan-separator" style={{ animationDelay: '0.2s' }}>—</span>
+              <span className="products-banner__slogan-line" style={{ animationDelay: '0.4s' }}>Shaping the Culture.</span>
             </h2>
           </div>
         </div>
