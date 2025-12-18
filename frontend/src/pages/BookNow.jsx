@@ -72,6 +72,7 @@ const BookNow = () => {
       price: 20,
       image: Product1,
       slug: "curl-twist",
+      size: "8 oz",
       buyLink: "https://shopclipculture.com/products/curl-twist"
     },
     {
@@ -80,6 +81,7 @@ const BookNow = () => {
       price: 20,
       image: Product2,
       slug: "magic-beard-balm",
+      size: "2 oz",
       buyLink: "https://shopclipculture.com/products/magic-beard-balm"
     },
     {
@@ -88,6 +90,7 @@ const BookNow = () => {
       price: 20,
       image: Product3,
       slug: "premium-beard-oil",
+      size: "4 oz",
       buyLink: "https://shopclipculture.com/products/premium-beard-oil"
     },
     {
@@ -96,6 +99,7 @@ const BookNow = () => {
       price: 20,
       image: Product5,
       slug: "body-lotion",
+      size: "16 oz",
       buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
     }
   ];
@@ -171,10 +175,10 @@ const BookNow = () => {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setShowError(false);
-    // Scroll to continue button after selection
+    // Scroll to top of continue button so products are visible below
     setTimeout(() => {
       if (step1ContinueBtnRef.current) {
-        step1ContinueBtnRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        step1ContinueBtnRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
   };
@@ -182,11 +186,11 @@ const BookNow = () => {
   const handlePolicyChange = (e) => {
     setPolicyAgreed(e.target.checked);
     setShowError(false);
-    // Scroll to continue button after checking
+    // Scroll to complete button so products are visible below
     if (e.target.checked) {
       setTimeout(() => {
         if (step2ContinueBtnRef.current) {
-          step2ContinueBtnRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          step2ContinueBtnRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 100);
     }
@@ -395,6 +399,19 @@ const BookNow = () => {
               </div>
 
               <div className="book-now-step1-btn-container" ref={step1ContinueBtnRef}>
+                {selectedOption && (
+                  <div className="book-now-selection-confirmation">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span>
+                      {selectedOption.type === 'barber' 
+                        ? `You've selected ${selectedOption.name}`
+                        : `You've selected our ${selectedOption.name} Location`
+                      }
+                    </span>
+                  </div>
+                )}
                 <button 
                   className={`book-now-action-btn book-now-action-btn--primary ${!selectedOption ? 'disabled' : ''}`}
                   onClick={handleContinue}

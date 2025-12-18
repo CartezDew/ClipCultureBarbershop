@@ -34,6 +34,7 @@ import beardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
 import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
+import DaveHeadshot from '../assets/Testimonials/Dave_headshot.png';
 
 // Product images for testimonials
 import Product1 from '../assets/products/Product-1.webp';
@@ -65,17 +66,17 @@ const categoryTestimonials = {
     { name: 'Chris A.', quote: 'I used one chapter and tightened up my prices immediately.', photoUrl: KidsHaircut, bookImage: bookCategoryImage },
   ],
   mentorship: [
-    { name: 'David Brown, Owner', quote: 'This isn’t just about cutting better — it’s about building a barber who can lead, earn, and last.', photoUrl: MenHaircut },
-    { name: 'David Brown, Owner', quote: 'I show you the systems I actually use in the shop — not theory. If you apply it, you grow.', photoUrl: AdultHaircut },
+    { name: 'David Brown, Owner', quote: 'This isn’t just about cutting better — it’s about building a barber who can lead, earn, and last.', photoUrl: DaveHeadshot },
+    { name: 'David Brown, Owner', quote: 'I show you the systems I actually use in the shop — not theory. If you apply it, you grow.', photoUrl: DaveHeadshot },
   ],
   advertise: [
     { name: 'Clip Culture Team', quote: 'Our audience is locked in. If your product fits the culture, we can help it move.', photoUrl: AdultHaircut, advertiseImage: advertisementCategoryImage },
     { name: 'Clip Culture Team', quote: 'We don\'t sell noise — we create placements where the right people are already listening.', photoUrl: MenHaircut, advertiseImage: advertisementCategoryImage },
   ],
   franchise: [
-    { name: 'David Brown, Owner', quote: 'We built a shop people trust. Now we\'re handing the blueprint to owners ready to lead.', photoUrl: AdultHaircut, shopImage: Shop3 },
-    { name: 'David Brown, Owner', quote: 'You\'re not buying a chair — you\'re stepping into a brand that already has momentum.', photoUrl: MenHaircut, shopImage: Shop3 },
-    { name: 'David Brown, Owner', quote: 'If you can protect the culture and run the play, we can help you build a location that lasts.', photoUrl: KidsHaircut, shopImage: Shop3 },
+    { name: 'David Brown, Owner', quote: 'We built a shop people trust. Now we\'re handing the blueprint to owners ready to lead.', photoUrl: DaveHeadshot, shopImage: Shop3 },
+    { name: 'David Brown, Owner', quote: 'You\'re not buying a chair — you\'re stepping into a brand that already has momentum.', photoUrl: DaveHeadshot, shopImage: Shop3 },
+    { name: 'David Brown, Owner', quote: 'If you can protect the culture and run the play, we can help you build a location that lasts.', photoUrl: DaveHeadshot, shopImage: Shop3 },
   ],
   speakingEngagements: [
     { name: 'Ashley W.', quote: 'Dave had the entire crowd\'s attention — powerful, authentic, and unforgettable.', photoUrl: AdultHaircut },

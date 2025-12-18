@@ -546,9 +546,44 @@ body.book-now-page-active .App {
 /* Step 1 Continue Button Container */
 .book-now-step1-btn-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
   padding: 2.5rem 0 1rem 0;
   margin-top: 1rem;
+  scroll-margin-top: 2rem;
+}
+
+/* Selection Confirmation Message */
+.book-now-selection-confirmation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  background: rgba(10, 151, 134, 0.12);
+  border: 1px solid rgba(10, 151, 134, 0.3);
+  border-radius: 50px;
+  color: var(--primary-green);
+  font-size: 1rem;
+  font-weight: 500;
+  animation: fadeSlideIn 0.4s ease-out;
+}
+
+.book-now-selection-confirmation svg {
+  flex-shrink: 0;
+  color: var(--primary-green);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Unified Action Buttons */
@@ -620,6 +655,7 @@ body.book-now-page-active .App {
   justify-content: center;
   gap: 1rem;
   margin-top: 2.5rem;
+  scroll-margin-top: 2rem;
 }
 
 /* STEP 2: Policy */
@@ -1018,6 +1054,8 @@ body.book-now-page-active .App {
 .book-now-products-track-wrapper {
   overflow: hidden;
   border-radius: 12px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .book-now-products-track {
@@ -1200,15 +1238,14 @@ body.book-now-page-active .App {
   .book-now-progress {
     padding: 0;
     gap: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
   
   .book-now-step {
     min-width: 80px;
-  }
-  
-  .book-now-step-desc {
-    display: none;
+
+  }.book-now-step-desc {
+    font-size: 0.6rem;
   }
   
   .book-now-step-circle {
@@ -1391,6 +1428,11 @@ body.book-now-page-active .App {
     padding: 2rem 0 1rem 0;
   }
   
+  .book-now-selection-confirmation {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
   .book-now-btn-group {
     flex-direction: column-reverse;
     gap: 0.75rem;
@@ -1500,6 +1542,9 @@ body.book-now-page-active .App {
     width: 32px;
     height: 32px;
   }
+  .book-now-step-desc {
+    font-size: 0.5rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -1521,5 +1566,8 @@ body.book-now-page-active .App {
   
   .book-now-option-info h3 {
     font-size: 1rem;
+  }
+  .book-now-step-desc {
+    font-size: 0.4rem;
   }
 }
