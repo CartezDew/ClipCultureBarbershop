@@ -54,9 +54,9 @@ const BookNow = () => {
     }
   }, [showError]);
 
-  // Featured grooming products - New arrivals first
-  const featuredProducts = [
-    {
+  // Featured grooming products - base product data
+  const allProducts = {
+    beardLineUp: {
       id: 0,
       name: "Beard & Line Up Enhancement",
       priceFrom: 25,
@@ -66,7 +66,7 @@ const BookNow = () => {
       isNewDrop: true,
       buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
     },
-    {
+    curlTwist: {
       id: 1,
       name: "Curl Twist",
       price: 20,
@@ -75,7 +75,7 @@ const BookNow = () => {
       size: "8 oz",
       buyLink: "https://shopclipculture.com/products/curl-twist"
     },
-    {
+    beardBalm: {
       id: 2,
       name: "Magic Beard Balm",
       price: 20,
@@ -84,7 +84,7 @@ const BookNow = () => {
       size: "8 oz",
       buyLink: "https://shopclipculture.com/products/magic-beard-balm"
     },
-    {
+    beardOil: {
       id: 3,
       name: "Premium Beard Oil",
       price: 20,
@@ -93,7 +93,7 @@ const BookNow = () => {
       size: "4 oz",
       buyLink: "https://shopclipculture.com/products/premium-beard-oil"
     },
-    {
+    bodyLotion: {
       id: 4,
       name: "Body Lotion",
       price: 20,
@@ -102,7 +102,14 @@ const BookNow = () => {
       size: "16 oz",
       buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
     }
-  ];
+  };
+
+  // Different product orderings based on step
+  // Step 1: Curl Twist as second item
+  // Step 2: Premium Beard Oil as second item
+  const featuredProducts = currentStep === 1 
+    ? [allProducts.beardLineUp, allProducts.curlTwist, allProducts.beardBalm, allProducts.beardOil, allProducts.bodyLotion]
+    : [allProducts.beardLineUp, allProducts.beardOil, allProducts.beardBalm, allProducts.curlTwist, allProducts.bodyLotion];
   
   // State and ref for product carousel
   const [productScrollIndex, setProductScrollIndex] = useState(0);
@@ -128,6 +135,11 @@ const BookNow = () => {
     window.addEventListener('resize', calculateOffset);
     return () => window.removeEventListener('resize', calculateOffset);
   }, [productScrollIndex, visibleCount]);
+
+  // Reset carousel scroll when step changes (product order changes)
+  useEffect(() => {
+    setProductScrollIndex(0);
+  }, [currentStep]);
 
   const bookingOptions = [
     { 
