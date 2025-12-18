@@ -643,7 +643,7 @@
   display: none;
   position: fixed;
   right: 0.5rem;
-  bottom: 6rem;
+  bottom: 4.85rem;
   width: 3rem;
   height: 3rem;
   background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
