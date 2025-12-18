@@ -144,33 +144,6 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
             )}
           </div>
 
-          {/* About Dropdown */}
-          <div className="hero-dropdown-container">
-            <button 
-              className="hero-nav-link hero-dropdown-trigger"
-              onClick={() => toggleDropdown('about')}
-            >
-              {getIconForMenuItem('About')}
-              <span>About</span>
-              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'about' ? 'active' : ''}`} size={14} />
-            </button>
-            {activeDropdown === 'about' && (
-              <div className="hero-dropdown-menu">
-                {dropdownMenus.about.map((item, index) => (
-                  <Link 
-                    key={index} 
-                    to={item.link} 
-                    className="hero-dropdown-item"
-                    onClick={closeDropdown}
-                  >
-                    <span className="hero-dropdown-icon">{item.icon}</span>
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
           {/* Shop Dropdown */}
           <div className="hero-dropdown-container">
             <button 
@@ -187,6 +160,33 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
             {activeDropdown === 'shop' && (
               <div className="hero-dropdown-menu">
                 {dropdownMenus.shop.map((item, index) => (
+                  <Link 
+                    key={index} 
+                    to={item.link} 
+                    className="hero-dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    <span className="hero-dropdown-icon">{item.icon}</span>
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* About Dropdown */}
+          <div className="hero-dropdown-container">
+            <button 
+              className="hero-nav-link hero-dropdown-trigger"
+              onClick={() => toggleDropdown('about')}
+            >
+              {getIconForMenuItem('About')}
+              <span>About</span>
+              <ChevronDown className={`hero-dropdown-arrow ${activeDropdown === 'about' ? 'active' : ''}`} size={14} />
+            </button>
+            {activeDropdown === 'about' && (
+              <div className="hero-dropdown-menu">
+                {dropdownMenus.about.map((item, index) => (
                   <Link 
                     key={index} 
                     to={item.link} 
