@@ -105,17 +105,29 @@ const Navbar = () => {
         }
     }, [location.pathname])
 
-    const scrollToTop = () => {
+    const scrollToTop = (e) => {
+        // Prevent any default behavior and stop propagation
+        if (e) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+        
         setShowBackToTop(false)
         autoScrollingRef.current = true
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        
+        // Use requestAnimationFrame for smoother scroll initiation
+        requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        })
+        
+        // Reset after scroll completes
         setTimeout(() => {
             autoScrollingRef.current = false
             // Restore visibility on routes where it should always show on mobile
             if (isMobile && (location.pathname === '/services' || location.pathname === '/get-started')) {
                 setShowBackToTop(true)
             }
-        }, 900)
+        }, 1000)
     }
 
     return (
@@ -134,10 +146,11 @@ const Navbar = () => {
                     className={`back-to-top-btn ${isFloatingButtonsExcluded ? 'low-position' : ''}`}
                     onClick={scrollToTop}
                     aria-label="Back to top"
+                    type="button"
                     style={{ 
                         opacity: showBackToTop ? 1 : 0, 
                         pointerEvents: showBackToTop ? 'auto' : 'none',
-                        transition: 'opacity 420ms ease'
+                        visibility: showBackToTop ? 'visible' : 'hidden'
                     }}
                 >
                     <ChevronUp />

@@ -1264,7 +1264,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+
 
     padding-bottom: 3rem;
     border-right: 1rem solid rgba(16, 15, 15, 0.6);
@@ -1412,7 +1413,7 @@
   }
   .hero__btn--shop {
     font-size: 0.95rem;
-    padding: 0.7rem 0.5rem;
+    padding: 0.7rem .5rem;
   }
   .social-proof__number {
     font-size: 1.1rem;

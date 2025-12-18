@@ -642,10 +642,10 @@
 .back-to-top-btn {
   display: none;
   position: fixed;
-  right: .3rem;
+  right: 0.5rem;
   bottom: 6rem;
-  width: 2.7rem;
-  height: 2.7rem;
+  width: 3rem;
+  height: 3rem;
   background-color: color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
   color: var(--color-timberwolf);
   border: none;
@@ -653,8 +653,13 @@
   cursor: pointer;
   z-index: 10000;
   box-shadow: 0 4px 12px color-mix(in srgb, var(--green-new) 85%, var(--primary-black) 15%);
-  transition: all 0.3s ease;
+  transition: opacity 0.35s ease, transform 0.2s ease;
   animation: pulse-glow 2s ease-in-out infinite, subtleBounce 2.5s ease-in-out infinite;
+  /* Ensure touch events work properly */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Lower position for pages without floating action buttons */
@@ -668,7 +673,9 @@
 }
 
 .back-to-top-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.9);
+  animation: none;
+  box-shadow: 0 2px 8px rgba(154, 109, 56, 0.5);
 }
 
 .back-to-top-btn svg {
