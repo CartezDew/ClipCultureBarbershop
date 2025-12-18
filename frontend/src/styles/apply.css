@@ -5,6 +5,8 @@
   color: white;
   padding: 0;
   margin: 0;
+  /* Prevent margin collapse from child elements */
+  overflow: hidden;
 }
 
 /* Header Section */

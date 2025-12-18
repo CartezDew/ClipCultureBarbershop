@@ -309,23 +309,24 @@
 /* Slide down animation for mobile dropdown */
 
 .mobile-nav-menu {
-  display: block; /* Framer Motion handles mount/unmount */
+  display: block;
   position: fixed;
   top: 3.2rem;
   left: 0;
-  
- 
-  width: 40vw; /* one-third of the viewport width */
+  width: 40vw;
   min-width: 200px;
+  max-height: calc(100vh - 3.2rem);
+  overflow-y: auto;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  z-index: 9999; /* Very high z-index to ensure visibility above backdrop blur */
+  z-index: 9999;
   border-left: 1px solid rgba(42, 90, 47, 0.12);
-  will-change: transform, opacity; /* Motion will own transforms */
-  
-  /* Remove backdrop filter from menu - keep solid background for visibility */
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9f8 25%, #f0f2f0 50%, #e8ebe8 75%, #e0e4e0 100%);
+  /* GPU acceleration for smoother animations */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Mobile nav overlay backdrop - only on mobile screens */
@@ -340,10 +341,13 @@
   -webkit-backdrop-filter: blur(10px);
   z-index: 9998; /* Just below the mobile menu */
   cursor: pointer;
+  /* GPU acceleration for smoother animations */
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* Hide mobile menu and overlay on desktop screens */
-@media (min-width: 606px) {
+@media (min-width: 651px) {
   .mobile-nav-overlay {
     display: none !important;
   }
@@ -373,6 +377,8 @@
   text-decoration: none;
   font-weight: 600;
   position: relative; /* Ensure proper positioning context for icons */
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform;
 }
 
 .mobile-nav-item-home {
@@ -391,6 +397,10 @@
   .mobile-nav-icon {
     color: var(--color-sinopia) !important;
   }
+}
+
+.mobile-nav-item:active {
+  transform: translateX(0.25rem) scale(0.98);
 }
 
 .mobile-nav-item:last-child {
@@ -434,9 +444,10 @@
 }
 
 .section-chevron {
-  transition: transform 0.2s ease;
+  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
   flex-shrink: 0;
   color: var(--primary-green);
+  will-change: transform;
 }
 
 .section-chevron.expanded {
@@ -445,6 +456,7 @@
 
 .mobile-nav-section-items {
   overflow: hidden;
+  will-change: height, opacity;
 }
 
 /* Mobile nav icons */
@@ -516,6 +528,9 @@
 @media (max-width: 650px) {
   .navbar-visible-desktop {
     display: none !important;
+  }
+  .navbar-visible-mobile {
+    display: block !important;
   }
   .navbar-mobile {
     display: block !important;

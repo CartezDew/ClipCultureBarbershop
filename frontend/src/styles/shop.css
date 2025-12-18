@@ -3,6 +3,8 @@
   background: linear-gradient(to bottom, #0d233d, #6a9298);
   color: white;
   padding: 5rem 0;
+  /* Prevent margin collapse from child elements */
+  overflow: hidden;
 }
 
 .shop-container {
@@ -105,6 +107,7 @@
   }
   .shop-page .join-email-section {
     border-top: 0px;
+    padding: 1rem 1.5rem 3rem 1.5rem;
   }
 }
 

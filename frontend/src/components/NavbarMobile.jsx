@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, LogIn, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt } from 'lucide-react'
 import Comb from './icons/Comb'
 
 import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
@@ -34,14 +34,13 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
         { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
         
-        // About section (reordered: Our Story, Speaking Engagements, Franchise, FAQ, Join Team, Contact Us, Login)
+        // About section (reordered: Our Story, Speaking Engagements, Franchise, FAQ, Join Team, Contact Us)
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
         { id: 'about-speaking', name: 'Speaking Engagements', path: '/speaking-engagements', icon: 'Mic2', section: 'About' },
         { id: 'about-franchise', name: 'Franchise', path: '/franchise', icon: 'Building2', section: 'About' },
         { id: 'about-faq', name: 'FAQ', path: '/#faq', icon: 'HelpCircle', section: 'About' },
         { id: 'about-join', name: 'Join Team', path: '/apply', icon: 'UserPlus', section: 'About' },
-        { id: 'about-contact', name: 'Contact Us', path: '/#contact', icon: 'Mail', section: 'About' },
-        { id: 'about-login', name: 'Log In', path: '/login', icon: 'LogIn', section: 'About' }
+        { id: 'about-contact', name: 'Contact Us', path: '/#contact', icon: 'Mail', section: 'About' }
     ]
     const menuRef = useRef(null)
     const openAtRef = useRef(0)
@@ -128,6 +127,11 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
             if (appObserver) appObserver.disconnect()
         }
     }, [])
+
+    // Sync isOpenRef with isOpen state
+    useEffect(() => {
+        isOpenRef.current = isOpen
+    }, [isOpen])
 
     // Publish state changes + duration tracking
     useEffect(() => {
@@ -238,8 +242,6 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 return <UserPlus {...iconProps} />
             case 'Building2':
                 return <Building2 {...iconProps} />
-            case 'LogIn':
-                return <LogIn {...iconProps} />
             case 'Info':
                 return <Info {...iconProps} />
             case 'Mic2':
@@ -308,7 +310,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 </div>
             </div>
 
-            <AnimatePresence initial={false} mode="wait" onExitComplete={() => { 
+            <AnimatePresence initial={false} mode="sync" onExitComplete={() => { 
               try { document.body.classList.remove('mobile-menu-opened') } catch {}
               try { window.dispatchEvent(new CustomEvent('mobileMenuCloseAnimationEnd', { detail: { open: false, ts: Date.now() } })) } catch {}
             }}>
@@ -321,7 +323,10 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ 
+                                duration: 0.35, 
+                                ease: [0.32, 0.72, 0, 1]
+                            }}
                             onClick={() => setIsOpen(false)}
                         />
                         {/* Menu */}
@@ -329,15 +334,28 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                             key="mobileMenu"
                             className="mobile-nav-menu"
                             ref={menuRef}
-                        initial={{ y: '-110%', opacity: 0 }}
-                        animate={{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 180, damping: 22, mass: 0.8 } }}
-                        exit={{ y: '-100%', opacity: 0.98, transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] } }}
-                        onAnimationStart={() => {}}
-                        onAnimationComplete={() => { 
-                          if (isOpen) { try { window.dispatchEvent(new CustomEvent('mobileMenuOpenAnimationEnd', { detail: { open: true, ts: Date.now() } })) } catch {} }
-                        }}
-                        style={{ left: 0, right: 'auto' }}
-                    >
+                            initial={{ y: '-100%', opacity: 0 }}
+                            animate={{ 
+                                y: 0, 
+                                opacity: 1,
+                                transition: { 
+                                    y: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                                    opacity: { duration: 0.25, ease: 'easeOut' }
+                                }
+                            }}
+                            exit={{ 
+                                y: '-100%', 
+                                opacity: 0,
+                                transition: { 
+                                    y: { duration: 0.32, ease: [0.32, 0, 0.67, 0] },
+                                    opacity: { duration: 0.2, ease: 'easeIn' }
+                                }
+                            }}
+                            onAnimationComplete={() => { 
+                              if (isOpen) { try { window.dispatchEvent(new CustomEvent('mobileMenuOpenAnimationEnd', { detail: { open: true, ts: Date.now() } })) } catch {} }
+                            }}
+                            style={{ left: 0, right: 'auto' }}
+                        >
                         <div className="mobile-nav-items">
                             {(() => {
                                 // Define section order: About first, then Services (default expanded), then Shop
@@ -419,7 +437,10 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                             initial={{ height: 0, opacity: 0 }}
                                                             animate={{ height: 'auto', opacity: 1 }}
                                                             exit={{ height: 0, opacity: 0 }}
-                                                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                                            transition={{ 
+                                                                height: { duration: 0.28, ease: [0.32, 0.72, 0, 1] },
+                                                                opacity: { duration: 0.2, ease: 'easeOut' }
+                                                            }}
                                                         >
                                                             {sectionItems.map((item) => {
                                                                 const icon = getIconForMenuItem(item.icon)

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   Home, Scissors, Users, Camera, Phone, ShoppingCart, ChevronDown, Info, 
   User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, 
-  Megaphone, Store, FileText, HelpCircle, Mail, LogIn, UserPlus, Building2, Mic2, Shirt
+  Megaphone, Store, FileText, HelpCircle, Mail, UserPlus, Building2, Mic2, Shirt
 } from 'lucide-react';
 import Comb from './icons/Comb';
 import logoWebP from '../assets/images/CC-Logo.webp';
@@ -86,8 +86,7 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
       { name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> },
       { name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> },
       { name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> },
-      { name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> },
-      { name: 'Log In', link: '/login', icon: <LogIn size={16} /> }
+      { name: 'Speaking Engagements', link: '/speaking-engagements', icon: <Mic2 size={16} /> }
     ]
   };
 

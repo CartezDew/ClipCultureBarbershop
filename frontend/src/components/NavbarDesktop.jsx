@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, LogIn, ShoppingCart, UserPlus, Building2, Mic2, Shirt } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, ShoppingCart, UserPlus, Building2, Mic2, Shirt } from 'lucide-react'
 import Comb from './icons/Comb'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
@@ -42,8 +42,7 @@ const NavbarDesktop = () => {
             ...(location.pathname !== '/franchise' ? [{ name: 'Franchise', link: '/franchise', icon: <Building2 size={16} /> }] : []),
             ...(location.pathname !== '/' || (location.pathname === '/' && location.hash !== '#faq') ? [{ name: 'FAQ', link: '/#faq', icon: <HelpCircle size={16} /> }] : []),
             ...(location.pathname !== '/apply' ? [{ name: 'Join Team', link: '/apply', icon: <UserPlus size={16} /> }] : []),
-            ...(location.pathname !== '/' || (location.pathname === '/' && location.hash !== '#contact') ? [{ name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> }] : []),
-            ...(location.pathname !== '/login' ? [{ name: 'Log In', link: '/login', icon: <LogIn size={16} /> }] : [])
+            ...(location.pathname !== '/' || (location.pathname === '/' && location.hash !== '#contact') ? [{ name: 'Contact Us', link: '/#contact', icon: <Mail size={16} /> }] : [])
         ]
     }
 

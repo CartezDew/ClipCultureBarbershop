@@ -3,6 +3,8 @@
   background: #1a1a1a;
   color: white;
   padding: 3rem 0;
+  /* Prevent margin collapse from child elements */
+  overflow: hidden;
 }
 
 .mentorship-container {
@@ -534,14 +536,14 @@
 
 @media (max-width: 380px) {
   .mentorship-joinus-wrapper {
-    margin-left: -1rem;
-    margin-right: -1rem;
+    margin-left: -.5rem;
+    margin-right: -.5rem;
   }
 }
-
+/* 
 @media (max-width: 350px) {
   .mentorship-joinus-wrapper {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
   }
-}
+} */

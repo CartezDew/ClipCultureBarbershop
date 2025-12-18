@@ -3,6 +3,8 @@
   background: #1a1a1a;
   color: white;
   padding: 3rem 0;
+  /* Prevent margin collapse from child elements */
+  overflow: hidden;
 }
 
 .advertise-container {
