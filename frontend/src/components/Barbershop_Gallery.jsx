@@ -35,6 +35,7 @@ const BarbershopGallery = () => {
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [snapEnabled, setSnapEnabled] = useState(false);
+  const [isGalleryVisible, setIsGalleryVisible] = useState(true);
 
   // Check if we're on the services route
   const isServicesRoute = location.pathname === "/services";
@@ -177,8 +178,8 @@ const BarbershopGallery = () => {
         return;
       }
       
-      // Only scroll if not interacting
-      if (!isUserInteractingRef.current) {
+      // Only scroll if not interacting AND gallery is visible
+      if (!isUserInteractingRef.current && isGalleryVisible) {
         slider.scrollLeft += AUTO_SCROLL_SPEED;
         
         // Check for loop reset - when we reach the duplicated set, jump back
@@ -201,7 +202,7 @@ const BarbershopGallery = () => {
     };
 
     animationRef.current = requestAnimationFrame(animate);
-  }, []);
+  }, [isGalleryVisible]);
 
   // Stop auto-scroll
   const stopAutoScroll = useCallback(() => {
@@ -272,7 +273,28 @@ const BarbershopGallery = () => {
     };
   }, [currentVisibleIndex, totalImages, isAutoScrolling]);
 
-  // Start auto-scroll on mount
+  // Track gallery visibility using IntersectionObserver
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsGalleryVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% is visible
+    );
+
+    observer.observe(slider);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Start auto-scroll on mount and when visibility/scroll function changes
   useEffect(() => {
     // Delay start to allow images to load
     const startDelay = setTimeout(() => {
@@ -286,12 +308,16 @@ const BarbershopGallery = () => {
         clearTimeout(resumeTimeoutRef.current);
       }
     };
-  }, [startAutoScroll, stopAutoScroll]);
+  }, [startAutoScroll, stopAutoScroll, isGalleryVisible]);
 
   // scroll listener
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isTouchHorizontal = false;
 
     const handleScroll = () => {
       // Only hide counts during manual user scrolling, not auto-scroll
@@ -310,23 +336,54 @@ const BarbershopGallery = () => {
       updateUI();
     };
 
-    // Pause auto-scroll on user interaction
-    const handleUserInteraction = () => {
+    // Pause auto-scroll on user interaction (desktop only for mousedown)
+    const handleMouseDown = () => {
+      pauseAutoScroll();
+    };
+
+    // Track touch start position to determine scroll direction
+    const handleTouchStart = (e) => {
+      const touch = e.touches[0];
+      if (touch) {
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isTouchHorizontal = false;
+      }
+    };
+
+    // Only pause auto-scroll if user is scrolling horizontally
+    const handleTouchMove = (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      const deltaX = Math.abs(touch.clientX - touchStartX);
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+
+      // If horizontal movement is greater than vertical, user is scrolling the gallery
+      if (deltaX > deltaY && deltaX > 10) {
+        isTouchHorizontal = true;
+        pauseAutoScroll();
+      }
+    };
+
+    const handleWheel = () => {
       pauseAutoScroll();
     };
 
     updateUI();
     slider.addEventListener("scroll", handleScroll);
-    slider.addEventListener("mousedown", handleUserInteraction);
-    slider.addEventListener("touchstart", handleUserInteraction, { passive: true });
-    slider.addEventListener("wheel", handleUserInteraction, { passive: true });
+    slider.addEventListener("mousedown", handleMouseDown);
+    slider.addEventListener("touchstart", handleTouchStart, { passive: true });
+    slider.addEventListener("touchmove", handleTouchMove, { passive: true });
+    slider.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("resize", updateUI);
 
     return () => {
       slider.removeEventListener("scroll", handleScroll);
-      slider.removeEventListener("mousedown", handleUserInteraction);
-      slider.removeEventListener("touchstart", handleUserInteraction);
-      slider.removeEventListener("wheel", handleUserInteraction);
+      slider.removeEventListener("mousedown", handleMouseDown);
+      slider.removeEventListener("touchstart", handleTouchStart);
+      slider.removeEventListener("touchmove", handleTouchMove);
+      slider.removeEventListener("wheel", handleWheel);
       window.removeEventListener("resize", updateUI);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
