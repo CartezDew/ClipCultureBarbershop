@@ -81,7 +81,7 @@ const BookNow = () => {
       price: 20,
       image: Product2,
       slug: "magic-beard-balm",
-      size: "2 oz",
+      size: "8 oz",
       buyLink: "https://shopclipculture.com/products/magic-beard-balm"
     },
     {
