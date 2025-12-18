@@ -248,6 +248,10 @@
     .mobile-promo-image--right {
         width: 45%;
       }
+
+    .mobile-promo-content {
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 410px) {
@@ -260,11 +264,11 @@
   }
   
   .mobile-promo-link-accent {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
 
   .mobile-promo-content {
-    max-width: 180px;
+    max-width: 190px;
     padding: 1rem;
   }
   .mobile-promo-image--left {
