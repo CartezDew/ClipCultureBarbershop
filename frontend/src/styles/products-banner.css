@@ -186,6 +186,19 @@
 }
 
 /* Responsive */
+
+@media (max-width: 1100px) {
+  .products-banner__bg-image {
+      object-position: 150% center; /* Shift image to the right */
+    }
+  }
+
+@media (max-width: 960px) {
+  .products-banner__bg-image {
+      object-position: 100% center; /* Shift image to the right */
+    }
+  }  
+
 @media (max-width: 900px) {
   .products-banner__container {
     height: 500px;
@@ -199,6 +212,12 @@
     padding: 1.5rem 1rem;
   }
 }
+
+@media (max-width: 700px) {
+  .products-banner__bg-image {
+      object-position: 60% center; /* Shift image to the right */
+    }
+  }  
 
 @media (max-width: 600px) {
   .products-banner__container {

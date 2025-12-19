@@ -1104,6 +1104,21 @@
     font-size: 2rem;
     letter-spacing: 0.5px;
     padding: 0.5rem 0.75rem;
+    text-align: center;
+  }
+
+  .hero__tagline .hero__exclamation {
+    display: inline-block;
+    position: relative;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.15em;
+    color: #C9A962;
+    color: var(--primary-white);
+    margin-left: 0.15em;
+    transform: rotate(-11deg);
+    transform-origin: bottom center;
   }
   
   /* Store locations on row 4, spans both columns */

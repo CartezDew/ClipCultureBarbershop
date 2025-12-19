@@ -51,7 +51,7 @@ import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
 const Home = () => {
   const [services, setServices] = useState([]);
   const [showHeroNavbar, setShowHeroNavbar] = useState(true);
-  const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 600 : false);
+  const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
   const [showTaglineAnim, setShowTaglineAnim] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [showServiceModal, setShowServiceModal] = useState(false);
@@ -134,7 +134,7 @@ const Home = () => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 650px)');
     const handleChange = (e) => setIsMobile600(e.matches);
     setIsMobile600(mql.matches);
     if (mql.addEventListener) mql.addEventListener('change', handleChange);
@@ -407,12 +407,12 @@ const Home = () => {
                 animate={showTaglineAnim ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
               >
-                "Defining the Standard. <br/> 
-                Shaping the Culture."
+                Defining the Standard. <br/> 
+                Shaping the Culture<span className="hero__exclamation">!</span>
               </motion.h2>
             ) : (
-              <h2>"Defining the Standard. <br/> 
-              Shaping the Culture."</h2>
+              <h2>Defining the Standard. <br/> 
+              Shaping the Culture.</h2>
             )}
           </div>
           
