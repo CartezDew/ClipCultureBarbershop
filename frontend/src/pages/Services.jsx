@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ServicesGallery from '../components/ServicesGallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import ServiceDetailModal from '../components/ServiceDetailModal.jsx';
+import StickyAdvertisement from '../components/StickyAdvertisement.jsx';
 import '../styles/services.css';
 
 const Services = () => {
@@ -119,7 +120,13 @@ const Services = () => {
           <BarbershopGallery />
         </div>
 
+        {/* Sticky Advertisement Section */}
+        <StickyAdvertisement />
+
         <div className="services-container-main">
+          {/* Section Title */}
+          <h2 className="services__standard-title">Standard Services</h2>
+          
           {/* Regular Services */}
           <h2 className="services__section-title-main">* Service times are approximate and may vary by complexity *.</h2>
           <div className="services__section">

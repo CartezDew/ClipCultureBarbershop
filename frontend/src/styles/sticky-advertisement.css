@@ -1,0 +1,423 @@
+/* ============================================
+   PROMO ADVERTISEMENT SECTION
+   Styled similar to mobile-promo-section
+   ============================================ */
+
+.promo-ad {
+  background-color: #1a1a1a;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-ad__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  height: 600px; /* Use explicit height since children are absolute */
+  overflow: hidden;
+}
+
+/* Background Image Wrapper */
+.promo-ad__image-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.promo-ad__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.promo-ad:hover .promo-ad__image {
+  transform: scale(1.03);
+}
+
+/* Overlay for text readability */
+.promo-ad__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+/* Corner Accents */
+.promo-ad__corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
+.promo-ad.animate-in .promo-ad__corner {
+  opacity: 1;
+}
+
+.promo-ad__corner::before,
+.promo-ad__corner::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
+}
+
+.promo-ad__corner--tl {
+  top: 1.25rem;
+  left: 1.25rem;
+}
+.promo-ad__corner--tl::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+.promo-ad__corner--tl::after {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+.promo-ad__corner--tr {
+  top: 1.25rem;
+  right: 1.25rem;
+}
+.promo-ad__corner--tr::before {
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+}
+.promo-ad__corner--tr::after {
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+}
+
+.promo-ad__corner--bl {
+  bottom: 1.25rem;
+  left: 1.25rem;
+}
+.promo-ad__corner--bl::before {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+.promo-ad__corner--bl::after {
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+.promo-ad__corner--br {
+  bottom: 1.25rem;
+  right: 1.25rem;
+}
+.promo-ad__corner--br::before {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+}
+.promo-ad__corner--br::after {
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* Content Overlay */
+.promo-ad__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  /* Animation initial state */
+  opacity: 0;
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+
+.promo-ad.animate-in .promo-ad__content {
+  opacity: 1;
+}
+
+.promo-ad__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.promo-ad.animate-in .promo-ad__eyebrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.promo-ad__headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+}
+
+.promo-ad.animate-in .promo-ad__headline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.promo-ad__highlight {
+  font-style: italic;
+  background: linear-gradient(135deg, #d4af37 0%, #f4e4ba 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.promo-ad__tagline {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
+}
+
+.promo-ad.animate-in .promo-ad__tagline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 1200px) {
+  .promo-ad__container {
+    height: 480px;
+  }
+
+  .promo-ad__corner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .promo-ad__corner--tl,
+  .promo-ad__corner--tr {
+    top: 1.25rem;
+  }
+  .promo-ad__corner--tl,
+  .promo-ad__corner--bl {
+    left: 1rem;
+  }
+  .promo-ad__corner--tr,
+  .promo-ad__corner--br {
+    right: 1.25rem;
+  }
+  .promo-ad__corner--bl,
+  .promo-ad__corner--br {
+    bottom: 1.25rem;
+  }
+}
+
+@media (max-width: 1050px) {
+  .promo-ad__container {
+    height: 440px;
+  }
+}
+@media (max-width: 960px) {
+  .promo-ad__container {
+    height: 410px;
+  }
+}
+
+@media (max-width: 910px) {
+  .promo-ad__container {
+    height: 350px;
+  }
+}
+
+@media (max-width: 800px) {
+  .promo-ad__container {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .promo-ad__container {
+    height: 320px;
+  }
+
+  .promo-ad__corner {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* .promo-ad__corner--tl,
+  .promo-ad__corner--tr {
+    top: 0.4rem;
+  }
+  .promo-ad__corner--tl,
+  .promo-ad__corner--bl {
+    left: 0.4rem;
+  }
+  .promo-ad__corner--tr,
+  .promo-ad__corner--br {
+    right: 0.4rem;
+  }
+  .promo-ad__corner--bl,
+  .promo-ad__corner--br {
+    bottom: 0.4rem;
+  } */
+
+  .promo-ad__eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    padding: 0.4rem 1rem;
+  }
+
+  .promo-ad__tagline {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 720px) {
+  .promo-ad__container {
+    height: 270px;
+  }
+}
+
+@media (max-width: 640px) {
+  .promo-ad__container {
+    height: 250px;
+  }
+  .promo-ad__image {
+    object-position: 20% center; /* Shift image to the right */
+  }
+}
+
+@media (max-width: 580px) {
+  .promo-ad__container {
+    height: 260px;
+  }
+  .promo-ad__image {
+    object-position: 40% center; /* Shift image to the right */
+  }
+  .promo-ad__corner {
+    display: none;
+  }
+
+}
+
+@media (max-width: 520px) {
+  .promo-ad__image {
+    object-position: 40% center; /* Shift image to the right */
+  }
+  .promo-ad__container {
+    height: 235px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .promo-ad__container {
+    height: 220px;
+  }
+  .promo-ad__image {
+    object-position: 40% center; /* Shift image to the right */
+  }
+
+  .promo-ad__corner {
+    width: 24px;
+    height: 24px;
+  }
+
+  .promo-ad__corner--tl,
+  .promo-ad__corner--tr {
+    top: 0.35rem;
+  }
+  .promo-ad__corner--tl,
+  .promo-ad__corner--bl {
+    left: 0.35rem;
+  }
+  .promo-ad__corner--tr,
+  .promo-ad__corner--br {
+    right: 0.35rem;
+  }
+  .promo-ad__corner--bl,
+  .promo-ad__corner--br {
+    bottom: 0.35rem;
+  }
+
+  .promo-ad__content {
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .promo-ad__eyebrow {
+    font-size: 0.6rem;
+  }
+
+  .promo-ad__headline {
+    font-size: clamp(1.75rem, 10vw, 2.5rem);
+  }
+
+  .promo-ad__tagline {
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 440px) {
+  .promo-ad__container {
+    height: 200px;
+  }
+  .promo-ad__image {
+    object-position: 40% center; /* Shift image to the right */
+  }
+  .promo-ad__eyebrow {
+    margin-top: 1rem;
+}}
+
+@media (max-width: 420px) {
+  .promo-ad__container {
+  display: none;
+}}
