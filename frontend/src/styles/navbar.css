@@ -66,6 +66,7 @@
   .navbar.scrolled .book-now-btn {
     padding: 0.3rem 0.5rem;
     font-size: 0.65rem;
+    text-decoration: none;
   }
   
   .navbar-container {
@@ -75,7 +76,7 @@
     height: 3rem;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 1.2rem 2rem;
     transition: height 0.3s ease;
     background: transparent;
     width: 100%;
@@ -158,7 +159,7 @@
   }
   
   .menu-text {
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     transition: font-size 0.3s ease;
   }
   
@@ -172,22 +173,26 @@
   
   
   .book-now-btn {
-    background-color: var(--color-hunter-green); /* hunter-green */
-    color: var(--color-timberwolf);
+    background-color: var(--primary-black); /* hunter-green */
+    color: var(--primary-white);
     padding: 0.4rem 0.6rem;
     border: none;
-    font-size: clamp(.9rem, 1.8vw, 1.3rem);
+    font-size: clamp(.8rem, 1.4vw, 1.2rem);
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s ease, padding 0.3s ease, font-size 0.3s ease;
     position: relative;
     overflow: hidden;
+    border-radius: 9px;
+    text-decoration: none;
   }
   
   .book-now-btn:hover {
     background-color: white;
-    border-radius: 6px;
+    color: var(--primary-black);
+    border: 1.5px solid var(--primary-black);
     scale: 1.05;
+    text-decoration: none;
   }
 
   /* Get Started button animation - moving sharpness effect */
@@ -519,6 +524,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .book-now-btn {
+    font-size: clamp(0.8rem, 1.6vw, 1rem);
+  }
+}
+
 /* Hide hamburger above 650px */
 @media (min-width: 651px) {
   .hamburger-line { display: none !important; }
@@ -615,7 +626,7 @@
 
 
 @media (max-width: 520px) {
-  .book-now-btn { padding: 0.35rem 0.3rem; font-size: 0.7rem; }
+  .book-now-btn { padding: 0.35rem 0.3rem; font-size: 0.7rem; text-decoration: none; }
 }
 
 /* Desktop variant marker */
