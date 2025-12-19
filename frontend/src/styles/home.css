@@ -1545,7 +1545,7 @@
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
