@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 1400px;   /* <- cap it */
   margin: 0 auto;      /* <- center it */
-  padding: 0 1rem;     /* <- keep your side padding */
+  padding: 0rem 1rem;     /* <- keep your side padding */
 }
 
 
@@ -28,12 +28,13 @@
 }
 
 .services__title {
-  font-size: clamp(2.8rem, 4vw, 3.2rem);
+  font-size: clamp(2.8rem, 4vw, 3.3rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #ffffff;
   margin-bottom: 1rem;
+  padding-top: 2rem;
 }
 
 .services__subtitle {

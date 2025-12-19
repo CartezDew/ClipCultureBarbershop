@@ -74,7 +74,7 @@
   }
   
   .barbershop-gallery-image {
-    max-height: 220px;
+    max-height: 320px;
     object-fit: cover;
     /* border-radius: 4px; */
     display: block;
@@ -233,13 +233,19 @@
     right: 0.25rem;
   }
 
+  @media (max-width: 900px) {
+    .barbershop-gallery-image {
+      max-height: 300px;
+    }
+  }
+
   @media (max-width: 768px) {
     .gallery-nav-btn {
       width: 30px;
       height: 30px;
     }
     .barbershop-gallery-image {
-        max-height: 200px;
+        max-height: 230px;
       }
     
     /* Make scrollbar more visible and touch-friendly on mobile */
@@ -264,4 +270,10 @@
       top: -2px;
     }
   }
-  
+
+
+  @media (max-width: 520px) {
+    .barbershop-gallery-image {
+      max-height: 210px;
+    }
+  }
