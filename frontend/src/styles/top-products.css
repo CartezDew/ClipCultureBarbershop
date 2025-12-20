@@ -517,8 +517,23 @@
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
   }
+  .product-card__sizes-badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.3rem;
+    opacity: 0.8;
+    right: 16px;
+  }
 }
 
+@media (max-width: 415px) {
+  .product-card__sizes-badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.3rem;
+    opacity: 0.8;
+    right: 20px;
+    bottom: 58px;
+  }
+}
 
 
 @media (max-width: 450px) {

@@ -170,7 +170,8 @@ const ProductDetail = () => {
       priceFrom: 25,
       image: BeardLineUp1,
       slug: "beard-line-up-enhancement",
-      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
+      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225",
+      isNewDrop: true
     },
     {
       id: 1,
@@ -445,6 +446,9 @@ const ProductDetail = () => {
                     className="product-detail__related-card"
                   >
                     <div className="product-detail__related-image">
+                      {relProduct.isNewDrop && (
+                        <span className="product-detail__related-badge">New</span>
+                      )}
                       <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
                     </div>
                     <div className="product-detail__related-info">
@@ -481,6 +485,9 @@ const ProductDetail = () => {
                 className="product-detail__related-card"
               >
                 <div className="product-detail__related-image">
+                  {relProduct.isNewDrop && (
+                    <span className="product-detail__related-badge">New</span>
+                  )}
                   <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
                 </div>
                 <div className="product-detail__related-info">
