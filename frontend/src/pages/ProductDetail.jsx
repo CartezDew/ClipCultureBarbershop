@@ -7,6 +7,7 @@ import Product2 from '../assets/products/Product-2.webp';
 import Product3 from '../assets/products/Product-3.webp';
 import Product4 from '../assets/products/Product-4.webp';
 import Product5 from '../assets/products/Product-5 .webp';
+import Product6 from '../assets/products/Product-6.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
@@ -139,6 +140,23 @@ const ProductDetail = () => {
         "Suitable for all skin types"
       ],
       ingredients: "Aqua (Water), Caprylic/Capric Triglyceride, Glycerin, Carthamus Tinctorius Seed Oil, Stearic Acid, Caprae Lac (Goat Milk), Glyceryl Stearate, Prunus Amygdalus Dulcis Oil, Cetyl Alcohol, Aloe Barbadensis Leaf Extract, Avena Sativa Bran Extract, Citrus Aurantium Dulcis Peel Extract, Oryza Sativa Bran Extract, Rosmarinus Officinalis Leaf Extract, Helianthus Annuus Extract, Tocopherol, Xanthan Gum, Carbomer, Triethanolamine, Phenoxyethanol, Hexylene Glycol, Caprylyl Glycol, Ethylhexylglycerin."
+    },
+    'body-wash': {
+      id: 6,
+      name: "Body Wash",
+      price: 20,
+      size: "16 oz",
+      rating: 4,
+      image: Product6,
+      buyLink: "https://shopclipculture.com/products/body-wash",
+      description: "A creamy wash, rich in lather, pearlescent liquid which is soft enough for the face, yet concentrated enough to be used all over the body. It nourishes and cleanses skin down to its deepest layers.",
+      features: [
+        "Gentle cleansing action",
+        "Moisturizing formula",
+        "Refreshing scent",
+        "Rich, luxurious lather"
+      ],
+      ingredients: "Deionized Water (Aqua), Sodium Methyl Cocoyl Taurate, Cocamidopropyl Betaine, Cocamide DIPA, Glycol Distearate, Laureth-4, Aloe Barbadensis Leaf Extract*, Hamamelis Virginiana (Witch Hazel) Distillate, Chamomilla Recutita (Chamomile) Flower Extract*, Phenoxyethanol, Ethylhexylglycerin, Caprylyl Glycol, Hexylene Glycol, Citric Acid, Sodium Chloride."
     }
   };
 
@@ -193,6 +211,14 @@ const ProductDetail = () => {
       image: Product5,
       slug: "body-lotion",
       buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
+    },
+    {
+      id: 6,
+      name: "Body Wash",
+      price: 15,
+      image: Product6,
+      slug: "body-wash",
+      buyLink: "https://shopclipculture.com/products/body-wash"
     }
   ];
 

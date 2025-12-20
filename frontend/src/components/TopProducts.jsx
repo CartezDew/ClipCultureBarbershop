@@ -7,6 +7,7 @@ import Product2 from '../assets/products/Product-2.webp';
 import Product3 from '../assets/products/Product-3.webp';
 import Product4 from '../assets/products/Product-4.webp';
 import Product5 from '../assets/products/Product-5 .webp';
+import Product6 from '../assets/products/Product-6.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
@@ -155,6 +156,16 @@ const TopProducts = ({ limit }) => {
       slug: "body-lotion",
       size: null,
       buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
+    },
+    {
+      id: 6,
+      name: "Body Wash",
+      price: 20,
+      rating: 4,
+      image: Product6,
+      slug: "body-wash",
+      size: "16 oz",
+      buyLink: "https://shopclipculture.com/products/body-wash"
     }
   ];
 
