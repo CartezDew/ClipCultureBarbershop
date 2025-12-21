@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
+import { submitFormWithAttachments } from '../services/formSubmissionService';
+import { validateEmail } from '../utils/emailValidation';
 
 const FranchiseApplyModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -29,6 +31,13 @@ const FranchiseApplyModal = ({ isOpen, onClose }) => {
         [name]: ''
       }));
     }
+    // Set custom validity for email inputs
+    if (name === 'email' && value) {
+      const emailValidation = validateEmail(value);
+      e.target.setCustomValidity(emailValidation.isValid ? '' : emailValidation.error);
+    } else if (name === 'email' && !value) {
+      e.target.setCustomValidity('');
+    }
   };
 
   const validateForm = () => {
@@ -44,8 +53,11 @@ const FranchiseApplyModal = ({ isOpen, onClose }) => {
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+    } else {
+      const emailValidation = validateEmail(formData.email);
+      if (!emailValidation.isValid) {
+        newErrors.email = emailValidation.error;
+      }
     }
     
     if (!formData.phone.trim()) {
@@ -73,7 +85,7 @@ const FranchiseApplyModal = ({ isOpen, onClose }) => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const newErrors = validateForm();
@@ -83,8 +95,14 @@ const FranchiseApplyModal = ({ isOpen, onClose }) => {
       return;
     }
     
-    // Submit form data here (e.g., to an API)
-    console.log('Franchise application submitted:', formData);
+    // Submit form with email, PDF, and Excel attachments
+    try {
+      await submitFormWithAttachments('Franchise Application', formData);
+      console.log('Franchise application submitted:', formData);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Still show success to user even if email fails
+    }
     
     setSubmitted(true);
     

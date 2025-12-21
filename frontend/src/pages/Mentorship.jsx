@@ -20,7 +20,7 @@ const Mentorship = () => {
             <div className="mentorship-intro">
               <p className="mentorship-intro-text">
                 Step into your purpose with mentorship from <strong>David Brown</strong>, founder and owner of Clip Culture Barbershop. 
-                With over <strong>11 years of hands-on experience</strong> and more than <strong>7 years</strong> of business ownership, David has mastered the art of blending craftsmanship, entrepreneurship, and culture.
+                With over <strong>12 years of hands-on experience</strong> and more than <strong>8 years</strong> of business ownership, David has mastered the art of blending craftsmanship, entrepreneurship, and culture.
               </p>
               <br/>
               <p className="mentorship-intro-text-2">

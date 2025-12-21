@@ -20,6 +20,7 @@ import HomeGallery from '../components/Home_Gallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import ShopByCategory from '../components/ShopByCategory.jsx';
 import ServiceDetailModal from '../components/ServiceDetailModal.jsx';
+import JoinUs from '../components/JoinUs.jsx';
 
 // Flexed Bicep Icon
 const BicepIcon = ({ size = 24 }) => (

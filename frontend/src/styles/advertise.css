@@ -10,7 +10,7 @@
 .advertise-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 1rem 3rem;
 }
 
 .advertise-header {
@@ -598,12 +598,14 @@
 
 /* Packages Actions Section */
 .advertise-packages-actions {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  flex-wrap: wrap;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Purchase Package Button */
@@ -864,6 +866,7 @@
 
   .advertise-container {
     padding: 0 2.2rem;
+    padding-top: 1rem;
   }
   .advertise-page {
     padding: 2.5rem 0;
@@ -919,6 +922,7 @@
 @media (max-width: 615px) {
   .advertise-container {
     padding: 0 1.5rem;
+    padding-top: 1rem;
   }
   .advertise-bento-grid {
     gap: 0.5rem;
@@ -1025,6 +1029,18 @@
     .advertise-packages-section {
       padding-bottom: 0rem;
     }
+    .advertise-packages-actions {
+     font-size: 1rem;
+     padding: 1rem 2rem;
+    }
+
+    .advertise-joinus-wrapper {
+      margin: 3rem 1rem 0 1rem;
+      margin-bottom: -4rem;
+    }
+    .advertise-joinus-wrapper .join-email-section {
+      padding: 2rem 1rem 4rem 1rem;
+    }
   }
 
 
@@ -1042,6 +1058,7 @@
   }
   .advertise-container {
     padding: 0 1.5rem;
+    padding-top: 1rem;
   }
   .advertise-page {
     padding: 2rem 0;
@@ -1067,10 +1084,10 @@
     grid-template-columns: 1fr;
     row-gap: 0.5rem;
   }
-  .advertise-joinus-wrapper {
+  /* .advertise-joinus-wrapper {
     margin: 0rem 1rem 0 1rem;
     margin-bottom: -4rem;
-  }
+  } */
 }
 
 /* Reorder header elements on very small screens */
@@ -1110,6 +1127,12 @@
     line-height: 1.4;
     padding-left: 1.5rem;
     margin-left: 1rem;
+  }
+  .advertise-packages-actions {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
   }
 }
 

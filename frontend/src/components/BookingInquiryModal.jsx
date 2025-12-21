@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
+import { validateEmail } from '../utils/emailValidation';
+import { submitFormWithAttachments } from '../services/formSubmissionService';
 
 const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
   const [formData, setFormData] = useState({
@@ -29,6 +31,13 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
         [name]: ''
       }));
     }
+    // Set custom validity for email inputs
+    if (name === 'email' && value) {
+      const emailValidation = validateEmail(value);
+      e.target.setCustomValidity(emailValidation.isValid ? '' : emailValidation.error);
+    } else if (name === 'email' && !value) {
+      e.target.setCustomValidity('');
+    }
   };
 
   const validateForm = () => {
@@ -44,8 +53,11 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email Address is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+    } else {
+      const emailValidation = validateEmail(formData.email);
+      if (!emailValidation.isValid) {
+        newErrors.email = emailValidation.error;
+      }
     }
     
     if (!formData.phone.trim()) {
@@ -63,7 +75,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const newErrors = validateForm();
@@ -73,8 +85,14 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
       return;
     }
     
-    // Submit form data here (e.g., to an API)
-    console.log('Booking Inquiry Form submitted:', formData);
+    // Submit form with email service - formName matches form title prop
+    try {
+      await submitFormWithAttachments(title || 'Booking Inquiry', formData);
+      console.log('Booking Inquiry Form submitted:', formData);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Still show success to user even if email fails
+    }
     
     setSubmitted(true);
     

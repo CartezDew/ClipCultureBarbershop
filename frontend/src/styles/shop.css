@@ -79,6 +79,9 @@
   .shop-title {
     font-size: clamp(2rem, 5vw, 3rem);
   }
+  .shop-page {
+    padding-top: 4rem
+  }
 }
 
 @media (max-width: 530px) {

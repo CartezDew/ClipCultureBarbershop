@@ -888,7 +888,7 @@
     width: 18px;
     height: 18px;
   }
-  
+
 @media (min-width: 1000px) {
   .hero__headline-line {
     font-size: clamp(1.8rem, 3.8vw, 2.8rem);

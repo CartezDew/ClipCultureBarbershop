@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SuccessModal from './SuccessModal';
 import '../styles/booking-form.css';
+import { submitFormWithAttachments } from '../services/formSubmissionService';
+import { validateEmail } from '../utils/emailValidation';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';
 import Image3 from '../assets/Barbers/Image_3.webp';
@@ -589,6 +591,13 @@ const BookingForm = ({ showMainForm = true }) => {
       ...prev,
       [name]: value
     }));
+    // Set custom validity for email inputs
+    if (name === 'email' && value) {
+      const emailValidation = validateEmail(value);
+      e.target.setCustomValidity(emailValidation.isValid ? '' : emailValidation.error);
+    } else if (name === 'email' && !value) {
+      e.target.setCustomValidity('');
+    }
   };
 
   const handleBarberSelect = (barberId) => {
@@ -989,9 +998,22 @@ const BookingForm = ({ showMainForm = true }) => {
     };
   }, [showAlert]);
 
-  const handleSubmit = () => {
-    // Here you would typically send the data to your backend
-    console.log('Booking submitted:', formData);
+  const handleSubmit = async () => {
+    // Submit form with email, PDF, and Excel attachments
+    try {
+      // Format services and addOns arrays for better readability
+      const formattedData = {
+        ...formData,
+        services: formData.services.join(', ') || 'None',
+        addOns: formData.addOns.join(', ') || 'None'
+      };
+      await submitFormWithAttachments('Booking Form', formattedData);
+      console.log('Booking submitted:', formData);
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+      // Still proceed with success message even if email fails
+    }
+    
     setShowPopupForm(false); // Close the booking modal first
     setShowSuccessMessage(true); // Then show the success message
     setSkipBarberStep(false);
@@ -1151,6 +1173,10 @@ const BookingForm = ({ showMainForm = true }) => {
       case 1:
         if (!formData.firstName || !formData.lastName) return 'Please enter your full name';
         if (!formData.email) return 'Please enter your email address';
+        if (formData.email) {
+          const emailValidation = validateEmail(formData.email);
+          if (!emailValidation.isValid) return emailValidation.error;
+        }
         if (!formData.phone) return 'Please enter your phone number';
         return '';
       case 2:

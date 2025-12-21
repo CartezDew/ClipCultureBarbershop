@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Footer from '../components/Footer';
 import SuccessModal from '../components/SuccessModal';
 import '../styles/booking.css';
+import { validateEmail } from '../utils/emailValidation';
 import Logo from '../assets/images/New_Logo.webp';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';
@@ -651,6 +652,13 @@ const Booking = () => {
       ...prev,
       [name]: value
     }));
+    // Set custom validity for email inputs
+    if (name === 'email' && value) {
+      const emailValidation = validateEmail(value);
+      e.target.setCustomValidity(emailValidation.isValid ? '' : emailValidation.error);
+    } else if (name === 'email' && !value) {
+      e.target.setCustomValidity('');
+    }
   };
 
   const handleBarberSelect = (barberId) => {
@@ -997,6 +1005,10 @@ const Booking = () => {
       case 1:
         if (!formData.firstName || !formData.lastName) return 'Please enter your full name';
         if (!formData.email) return 'Please enter your email address';
+        if (formData.email) {
+          const emailValidation = validateEmail(formData.email);
+          if (!emailValidation.isValid) return emailValidation.error;
+        }
         if (!formData.phone) return 'Please enter your phone number';
         return '';
       case 2:

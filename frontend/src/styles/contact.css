@@ -695,3 +695,22 @@
   } */
 
 }
+/* .contact-joinus-wrapper {
+  padding-top: 0rem;
+  padding-bottom: 5rem;
+  background: var(--primary-black);
+  border-top: none;
+  border-bottom: none;
+}
+.contact-joinus-wrapper .join-email-container {
+  padding-bottom: 2rem;
+}
+.contact-joinus-wrapper .join-email-title {
+  color: var(--green-new) !important;
+}
+.contact-joinus-wrapper .join-email-subtitle {
+  color: white !important;
+}
+.contact-joinus-wrapper .join-email-container {
+  background: rgba(255, 255, 255, 0.1);
+} */

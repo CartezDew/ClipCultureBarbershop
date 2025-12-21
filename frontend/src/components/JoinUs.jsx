@@ -2,43 +2,82 @@ import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/joinus.css';
 import '../styles/form-modal.css';
+import { submitFormWithAttachments } from '../services/formSubmissionService';
+import { validateEmail } from '../utils/emailValidation';
 
 const JoinUs = () => {
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [isFading, setIsFading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const timeoutRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validate email
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const validation = validateEmail(email);
+    if (!validation.isValid) {
+      setEmailError(validation.error);
       return;
     }
     
-    // Submit email (you can add API call here)
-    console.log('Email submitted:', email);
+    // Clear any previous errors
+    setEmailError('');
+    setIsSubmitting(true);
     
-    // Show success modal
-    setShowSuccessModal(true);
-    setIsFading(false);
-    
-    // Clear email input
-    setEmail('');
-    
-    // Auto-close after 5 seconds with fade
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    
-    timeoutRef.current = setTimeout(() => {
-      setIsFading(true);
+    // Submit form - formName matches the form title "Join the Culture"
+    try {
+      await submitFormWithAttachments('Join the Culture', { email });
+      
+      // Show success modal only on actual success
+      setShowSuccessModal(true);
+      setIsFading(false);
+      
+      // Clear email input
+      setEmail('');
+      
+      // Auto-close after 5 seconds with fade
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      
+      timeoutRef.current = setTimeout(() => {
+        setIsFading(true);
+        setTimeout(() => {
+          setShowSuccessModal(false);
+          setIsFading(false);
+        }, 300);
+      }, 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setShowErrorModal(true);
+      
+      // Auto-close error after 5 seconds
       setTimeout(() => {
-        setShowSuccessModal(false);
-        setIsFading(false);
-      }, 300); // Fade duration
-    }, 5000);
+        setShowErrorModal(false);
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    // Clear error when user starts typing
+    if (emailError) {
+      setEmailError('');
+    }
+    // Set custom validity for email input
+    if (newEmail) {
+      const emailValidation = validateEmail(newEmail);
+      e.target.setCustomValidity(emailValidation.isValid ? '' : emailValidation.error);
+    } else {
+      e.target.setCustomValidity('');
+    }
   };
 
   const handleClose = () => {
@@ -69,21 +108,63 @@ const JoinUs = () => {
             Be first to know about drops, events, and insider updates—delivered straight to your inbox.
           </p>
           
-          <form className="join-email-form" onSubmit={handleSubmit}>
-            <input 
-              type="email" 
-              placeholder="Email Address" 
-              className="join-email-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit" className="join-email-button">
-              Sign Up
+          <form className="join-email-form" onSubmit={handleSubmit} noValidate>
+            <div className="join-email-input-wrapper">
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                className={`join-email-input ${emailError ? 'error' : ''}`}
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={(e) => {
+                  if (e.target.value) {
+                    const validation = validateEmail(e.target.value);
+                    if (!validation.isValid) {
+                      setEmailError(validation.error);
+                    }
+                  }
+                }}
+                required
+              />
+              {emailError && (
+                <div className="join-email-error">{emailError}</div>
+              )}
+            </div>
+            <button type="submit" className="join-email-button" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing Up...' : 'Sign Up'}
             </button>
           </form>
         </div>
       </div>
+
+      {showErrorModal && ReactDOM.createPortal(
+        <div className="form0modal-overlay" onClick={() => setShowErrorModal(false)}>
+          <div className="form0modal-container join-success-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="form0modal-close"
+              onClick={() => setShowErrorModal(false)}
+              aria-label="Close modal"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <div className="form0success-message">
+              <div className="form0success-icon" style={{ background: '#fee2e2', color: '#dc2626' }}>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="15" y1="9" x2="9" y2="15"/>
+                  <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+              </div>
+              <h3 className="form0success-title">Oops! Something went wrong.</h3>
+              <p className="form0success-text">Please try again or contact us directly.</p>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
       {showSuccessModal && ReactDOM.createPortal(
         <div className={`form0modal-overlay ${isFading ? 'fade-out' : ''}`} onClick={handleClose}>

@@ -16,6 +16,8 @@
   padding: 0.75rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 3rem;
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
 }
 
 .join-email-title {
@@ -61,6 +63,33 @@
 
 .join-email-input::placeholder {
   color: #a0aec0;
+}
+
+.join-email-input.error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.join-email-input-wrapper {
+  flex: 1;
+  max-width: 300px;
+  position: relative;
+}
+
+.join-email-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #e53e3e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  white-space: nowrap;
 }
 
 .join-email-button {
