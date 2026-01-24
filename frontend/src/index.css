@@ -33,10 +33,9 @@
 html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   scroll-behavior: smooth;
   height: 100%;
-  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -50,9 +49,8 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #fafafa;
-  overflow-x: hidden;
   min-height: 100%;
-  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Ensure main elements don't add extra spacing */
