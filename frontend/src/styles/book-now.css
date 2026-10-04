@@ -1571,3 +1571,6 @@ body.book-now-page-active .App {
     font-size: 0.4rem;
   }
 }
+
+/* The shop has one location, so its booking card fills the row. */
+.book-now-options-row { grid-template-columns: 1fr; }

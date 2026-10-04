@@ -10,10 +10,8 @@ const SuccessModal = ({
 }) => {
   if (!isOpen) return null;
 
-  const locationName = formData.location === 'sandy-springs' ? 'Sandy Springs' : 'Summerhill';
-  const locationAddress = formData.location === 'sandy-springs' 
-    ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328'
-    : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312';
+  const locationName = 'Sandy Springs';
+  const locationAddress = '6309 Roswell Road NE #2D, Sandy Springs, GA 30328';
 
   return ReactDOM.createPortal(
     <div className="success-message-overlay" onClick={onClose}>

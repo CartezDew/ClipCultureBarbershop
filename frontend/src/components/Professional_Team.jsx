@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/professional-team.css';
 import Image1 from '../assets/Barbers/Image_1.webp';
 import Image2 from '../assets/Barbers/Image_2.webp';    
@@ -7,30 +6,9 @@ import Image3 from '../assets/Barbers/Image_3.webp';
 import Image4 from '../assets/Barbers/Image_4.webp';
 import Image5 from '../assets/Barbers/Image_5.webp';
 import Image6 from '../assets/Barbers/Image_6.webp';
-import Image7 from '../assets/Barbers/Image_7.webp';
-import Image8 from '../assets/Barbers/Image_8.webp';
-import Image9 from '../assets/Barbers/Image_9.webp';
-import Image10 from '../assets/Barbers/Image_10.webp';
-import Image11 from '../assets/Barbers/Image_11.webp';
-import Image12 from '../assets/Barbers/Image_12.webp';
-import Image13 from '../assets/Barbers/Image_13.webp'
-
-
 const Professional_Team = () => {
-  const [selectedLocation, setSelectedLocation] = useState('all'); // 'all', 'sandy-springs', 'summerhill'
-  const location = useLocation();
   const navigate = useNavigate();
 
-  // Update selected location based on URL parameter
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const locationParam = params.get('location');
-    
-    if (locationParam === 'sandy-springs' || locationParam === 'summerhill' || locationParam === 'all') {
-      setSelectedLocation(locationParam);
-    }
-  }, [location.search]);
-  
   const sandySpringsBarbers = [
     {
       id: 1,
@@ -82,78 +60,7 @@ const Professional_Team = () => {
     }
   ];
 
-  const summerhillBarbers = [
-    {
-      id: 7,
-      bookingId: 'aaron-w',
-      name: "Aaron W.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image7
-    },
-    {
-      id: 8,
-      bookingId: 'tj-s',
-      name: "TJ S.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image8
-    },
-    {
-      id: 9,
-      bookingId: 'cass-b',
-      name: "Cass B.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image9
-    },
-    {
-      id: 10,
-      bookingId: 'desean-p',
-      name: "DeSean P.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image10
-    },
-    {
-      id: 11,
-      bookingId: 'tray-w',
-      name: "Tray W.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image11
-    },
-    {
-      id: 12,
-      bookingId: 'hugo-d',
-      name: "Hugo D.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image12
-    },
-    {
-      id: 13,
-      bookingId: 'mula-s',
-      name: "Mula S.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image13
-    }
-  ];
-
-  // Filter barbers based on selected location
-  const getFilteredBarbers = () => {
-    if (selectedLocation === 'all') {
-      return [...sandySpringsBarbers, ...summerhillBarbers];
-    } else if (selectedLocation === 'sandy-springs') {
-      return sandySpringsBarbers;
-    } else if (selectedLocation === 'summerhill') {
-      return summerhillBarbers;
-    }
-    return [];
-  };
-
-  const filteredBarbers = getFilteredBarbers();
+  const filteredBarbers = sandySpringsBarbers;
 
   const handleBarberClick = (barber) => {
     if (!barber?.bookingId) {
@@ -170,29 +77,6 @@ const Professional_Team = () => {
           <h2 id="team" className="professional-team__header-title">Meet Our Team</h2>
           <p className="professional-team__subtitle">Masters of the Craft. Shapers of the Culture.</p>
           
-          {/* Location Toggle */}
-          <div className="professional-team__toggle">
-            <button 
-              className={`professional-team__toggle-btn ${selectedLocation === 'all' ? 'active' : ''}`}
-              onClick={() => setSelectedLocation('all')}
-            >
-              All Locations
-            </button>
-            <div className="professional-team__divider"></div>
-            <button 
-              className={`professional-team__toggle-btn ${selectedLocation === 'sandy-springs' ? 'active' : ''}`}
-              onClick={() => setSelectedLocation('sandy-springs')}
-            >
-              Sandy Springs
-            </button>
-            <div className="professional-team__divider"></div>
-            <button 
-              className={`professional-team__toggle-btn ${selectedLocation === 'summerhill' ? 'active' : ''}`}
-              onClick={() => setSelectedLocation('summerhill')}
-            >
-              Summerhill
-            </button>
-          </div>
         </div>
 
         {/* Barbers Grid */}

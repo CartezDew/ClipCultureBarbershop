@@ -1121,12 +1121,12 @@
     transform-origin: bottom center;
   }
   
-  /* Store locations on row 4, spans both columns */
+  /* Sandy Springs on row 4, spans both columns */
   .store_locations {
     display: grid;
     grid-column: 1 / -1;
     grid-row: 4;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
     border: 1rem solid rgba(16, 15, 15, 0.6);
   }
@@ -1189,9 +1189,6 @@
     flex-shrink: 0;
   }
   
-  .store-location-item:nth-child(2) .store-location-icon {
-    color: var(--primary-green);
-  }
   
   /* Social proof on last row (row 5), spans both columns */
   .hero__social-proof {
@@ -1222,9 +1219,6 @@
     padding-left: .5rem;
   }
 
-  .hero__social-proof .social-proof__item:nth-child(4) {
-    display: none;
-  }
 
   .social-proof__number {
     font-size: 1.2rem;

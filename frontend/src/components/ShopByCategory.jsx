@@ -15,7 +15,6 @@ import mentorshipImage from '../assets/Mentorship/Mentorship-1.webp';
 
 // Franchise shop images
 import Shop1 from '../assets/Contact/Shop_1.webp';
-import Shop2 from '../assets/Contact/Shop_2.webp';
 import Shop3 from '../assets/gallery/image-62.webp';
 
 // Apparel image

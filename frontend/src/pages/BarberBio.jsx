@@ -7,13 +7,6 @@ import Image3 from '../assets/Barbers/Image_3.webp';
 import Image4 from '../assets/Barbers/Image_4.webp';
 import Image5 from '../assets/Barbers/Image_5.webp';
 import Image6 from '../assets/Barbers/Image_6.webp';
-import Image7 from '../assets/Barbers/Image_7.webp';
-import Image8 from '../assets/Barbers/Image_8.webp';
-import Image9 from '../assets/Barbers/Image_9.webp';
-import Image10 from '../assets/Barbers/Image_10.webp';
-import Image11 from '../assets/Barbers/Image_11.webp';
-import Image12 from '../assets/Barbers/Image_12.webp';
-import Image13 from '../assets/Barbers/Image_13.webp';
 import GalleryImage1 from '../assets/gallery/image-1.webp';
 import GalleryImage2 from '../assets/gallery/image-2.webp';
 import GalleryImage3 from '../assets/gallery/image-3.webp';
@@ -79,62 +72,6 @@ const BarberBio = () => {
       image: Image6,
       bio: "Veteran barber with 12 years of experience in both traditional and modern techniques. Doug's laid-back personality and expert skills create a comfortable atmosphere. Specializes in tapers and executive cuts."
     },
-    {
-      id: 'aaron-w',
-      name: "Aaron W.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image7,
-      bio: "Dynamic barber with 9 years of experience known for creative fades and bold designs. Aaron brings energy and artistry to every cut. Excellent at consulting with clients to achieve their perfect look."
-    },
-    {
-      id: 'tj-s',
-      name: "TJ S.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image8,
-      bio: "Precision stylist with 5 years of experience specializing in clean cuts and sharp lines. TJ's friendly approach and consistent results have built a loyal following. Expert in modern gentleman's cuts."
-    },
-    {
-      id: 'cass-b',
-      name: "Cass B.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image9,
-      bio: "Talented barber with 6 years of experience excelling in textured styles and natural hair care. Cass's versatility and creativity shine in every appointment. Known for personalized consultations and style advice."
-    },
-    {
-      id: 'desean-p',
-      name: "DeSean P.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image10,
-      bio: "Skilled craftsman with 8 years of experience specializing in bald fades and edge-ups. DeSean's technical precision and perfectionist approach deliver consistently excellent results. Great with intricate designs."
-    },
-    {
-      id: 'tray-w',
-      name: "Tray W.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image11,
-      bio: "Professional barber with 7 years of experience mastering both classic and contemporary styles. Tray's attention to detail and personable nature create an exceptional experience. Specializes in tapers and line work."
-    },
-    {
-      id: 'hugo-d',
-      name: "Hugo D.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image12,
-      bio: "Experienced barber with 10 years in the industry focusing on precision cuts and beard grooming. Hugo's steady hand and eye for detail ensure impeccable results. Known for his professionalism and expertise."
-    },
-    {
-      id: 'mula-s',
-      name: "Mula S.",
-      title: "Barber",
-      location: "Summerhill",
-      image: Image13,
-      bio: "Creative stylist with 6 years of experience bringing fresh perspectives to classic cuts. Mula's innovative techniques and engaging personality make every visit memorable. Excellent at modern fades and styling."
-    }
   ];
 
   const barber = allBarbers.find(b => b.id === barberId);
@@ -153,9 +90,7 @@ const BarberBio = () => {
   }
 
   const handleBookNow = () => {
-    const locationParam = barber.location === 'Sandy Springs'
-      ? 'sandy-springs'
-      : 'summerhill';
+    const locationParam = 'sandy-springs';
 
     navigate('/booking', {
       state: {

@@ -1,7 +1,6 @@
 import { CheckCircle2, Quote } from "lucide-react";
 import Ticker from './Ticker.jsx';
 import '../styles/testimonials.css';
-import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
 import MenHaircut from '../assets/Testimonials/Men_haircut_avatar.webp';
 
@@ -55,15 +54,6 @@ const DEFAULT_TESTIMONIALS = [
     rating: 5,
     verified: true,
     photoUrl: KidsHaircut,
-  },
-  {
-    name: "Toddie Fox",
-    location: "Summerhill",
-    quote:
-      "I was hesitant to try a new barber, but Dave put me at ease the moment I walked in. Professional, welcoming, and precise—this was one of the best cuts I've ever had. Clip Culture truly defines the standard, and I've found my go-to barber.",
-    rating: 5,
-    verified: true,
-    photoUrl: AdultHaircut,
   },
   {
     name: "Q Smith",

@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
-import Shop2Image from '../assets/Contact/Shop_2.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 
 const Contact = () => {
@@ -12,17 +11,14 @@ const Contact = () => {
     <section id="contact" className="contact">
       <div className="contact__container">
         <div className="contact__header">
-          <h2 className="contact__title">Visit Our Locations</h2>
-          <p className="contact__subtitle">Two Culture Hubs. One Standard of Excellence.</p>
+          <h2 className="contact__title">Visit Our Shop</h2>
+          <p className="contact__subtitle">Sandy Springs. One Standard of Excellence.</p>
           <p className="contact__walk-ins">Walk-ins are welcomed</p>
         </div>
 
         <div className="contact__images">
           <div className="contact__image-container">
             <img src={Shop1Image} alt="Sandy Springs Location" className="contact__image" />
-          </div>
-          <div className="contact__image-container">
-            <img src={Shop2Image} alt="Summerhill Location" className="contact__image" />
           </div>
           <div className="contact__image-container">
             <img src={OwnerImage} alt="Owner" className="contact__image" />
@@ -44,26 +40,6 @@ const Contact = () => {
               onClick={(e) => {
                 e.preventDefault();
                 navigate('/booking', { state: { location: 'sandy-springs' } });
-              }}
-            >
-              Book Now
-            </button>
-          </div>
-
-          {/* Summerhill Location */}
-          <div className="contact__column contact__column--summerhill">
-            <div className="contact__location-header">
-              <h3 className="contact__location-title">Summerhill</h3>
-            </div>
-            <div className="contact__location-info">
-              <p className="contact__address">572 Hank Aaron Dr Suite 1120</p>
-              <p className="contact__city">Atlanta, GA 30312</p>
-            </div>
-            <button 
-              className="book__btn book__btn--summerhill"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/booking', { state: { location: 'summerhill' } });
               }}
             >
               Book Now

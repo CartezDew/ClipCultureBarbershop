@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import '../styles/book-now.css';
 import Logo from '../assets/images/New_Logo.webp';
 import ShopImage1 from '../assets/Contact/Shop_1.webp';
-import ShopImage2 from '../assets/Contact/Shop_2.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 // Product images
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
@@ -144,21 +143,12 @@ const BookNow = () => {
   const bookingOptions = [
     { 
       id: 'sandy-springs', 
-      type: 'location',
-      name: 'Sandy Springs', 
-      subtitle: 'Location',
+      type: 'team',
+      name: 'Book with the team',
+      subtitle: 'Sandy Springs',
       address: '6309 Roswell Road NE #2D, Sandy Springs, GA 30328',
       image: ShopImage1,
-      bookingUrl: 'https://getsquire.com/booking/book/clip-culture-sandy-springs-sandy-springs',
-    },
-      { 
-      id: 'summerhill', 
-      type: 'location',
-      name: 'Summerhill', 
-      subtitle: 'Location',
-      address: '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312',
-      image: ShopImage2,
-      bookingUrl: 'https://getsquire.com/booking/book/clip-culture-barbershop-atlanta'
+      bookingUrl: 'https://getsquire.com/booking/book/clip-culture-sandy-springs-sandy-springs?shopId=3af08ed5-5c33-400a-a1dc-43fc85582525',
     },
     { 
       id: 'david', 
@@ -166,7 +156,7 @@ const BookNow = () => {
       name: 'David Brown', 
       subtitle: 'Owner / Master Barber',
       description: 'Over 15 years of experience. Specializes in precision cuts and classic styles with a modern twist.',
-      locationNote: 'Sandy Springs Location Only',
+      locationNote: 'Sandy Springs',
       image: OwnerImage,
       bookingUrl: 'https://clipculturebarbershop.as.me/schedule/c75249a7'
     }
@@ -211,7 +201,7 @@ const BookNow = () => {
   const handleContinue = () => {
     if (currentStep === 1) {
       if (!selectedOption) {
-        setErrorMessage('Please select a location or barber to continue.');
+        setErrorMessage('Please choose the team or David to continue.');
         setShowError(true);
         return;
       }
@@ -239,7 +229,7 @@ const BookNow = () => {
   };
 
   const steps = [
-    { number: 1, label: 'Choose', description: 'Select location or barber' },
+    { number: 1, label: 'Choose', description: 'Select team or David' },
     { number: 2, label: 'Agree', description: 'Review booking policy' },
     { number: 3, label: 'Book', description: 'Complete your booking' }
   ];
@@ -317,21 +307,21 @@ const BookNow = () => {
 
         {/* Step Content */}
         <div className="book-now-content">
-          {/* STEP 1: Choose Location or David */}
+          {/* STEP 1: Choose Team or David */}
           {currentStep === 1 && (
             <div className="book-now-step-content">
-              <h2 className="book-now-section-title">Where would you like to visit?</h2>
-              <p className="book-now-section-subtitle">Select a location or book directly with our owner</p>
+              <h2 className="book-now-section-title">Who would you like to book with?</h2>
+              <p className="book-now-section-subtitle">Book with our Sandy Springs team or directly with our owner</p>
               
               <div className="book-now-options-grid">
-                {/* Locations */}
+                {/* Sandy Springs team */}
                 <div className="book-now-options-row">
-                  {bookingOptions.filter(opt => opt.type === 'location').map((option) => (
+                  {bookingOptions.filter(opt => opt.type === 'team').map((option) => (
                     <div 
                       key={option.id} 
                       role="button"
                       tabIndex={0}
-                      aria-label={`Select ${option.name} location`}
+                      aria-label={option.name}
                       aria-pressed={selectedOption?.id === option.id}
                       className={`book-now-option-card ${selectedOption?.id === option.id ? 'selected' : ''}`}
                       onClick={() => handleOptionSelect(option)}

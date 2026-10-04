@@ -12,13 +12,6 @@ import Image3 from '../assets/Barbers/Image_3.webp';
 import Image4 from '../assets/Barbers/Image_4.webp';
 import Image5 from '../assets/Barbers/Image_5.webp';
 import Image6 from '../assets/Barbers/Image_6.webp';
-import Image7 from '../assets/Barbers/Image_7.webp';
-import Image8 from '../assets/Barbers/Image_8.webp';
-import Image9 from '../assets/Barbers/Image_9.webp';
-import Image10 from '../assets/Barbers/Image_10.webp';
-import Image11 from '../assets/Barbers/Image_11.webp';
-import Image12 from '../assets/Barbers/Image_12.webp';
-import Image13 from '../assets/Barbers/Image_13.webp';
 // Gallery images for portfolio
 import GalleryImage1 from '../assets/gallery/image-1.webp';
 import GalleryImage2 from '../assets/gallery/image-2.webp';
@@ -43,7 +36,7 @@ const Booking = () => {
     barber: '',
     services: [],
     addOns: [],
-    location: '',
+    location: 'sandy-springs',
     date: '',
     time: ''
   });
@@ -52,7 +45,6 @@ const Booking = () => {
   const [monthDropdownOpen, setMonthDropdownOpen] = useState(false);
   const [viewingMonth, setViewingMonth] = useState(new Date().getMonth());
   const [viewingYear, setViewingYear] = useState(new Date().getFullYear());
-  const [locationFilter, setLocationFilter] = useState(null);
   const [policyAgreed, setPolicyAgreed] = useState(false);
   const [showPolicy, setShowPolicy] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -227,77 +219,10 @@ const Booking = () => {
     }
   ];
 
-  const summerhillBarbers = [
-    { 
-      id: 'aaron-w', 
-      name: "Aaron W.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image7, 
-      availability: getRandomAvailability(),
-      bio: "Dynamic barber with 9 years of experience known for creative fades and bold designs. Aaron brings energy and artistry to every cut. Excellent at consulting with clients to achieve their perfect look."
-    },
-    { 
-      id: 'tj-s', 
-      name: "TJ S.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image8, 
-      availability: getRandomAvailability(),
-      bio: "Precision stylist with 5 years of experience specializing in clean cuts and sharp lines. TJ's friendly approach and consistent results have built a loyal following. Expert in modern gentleman's cuts."
-    },
-    { 
-      id: 'cass-b', 
-      name: "Cass B.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image9, 
-      availability: getRandomAvailability(),
-      bio: "Talented barber with 6 years of experience excelling in textured styles and natural hair care. Cass's versatility and creativity shine in every appointment. Known for personalized consultations and style advice."
-    },
-    { 
-      id: 'desean-p', 
-      name: "DeSean P.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image10, 
-      availability: getRandomAvailability(),
-      bio: "Skilled craftsman with 8 years of experience specializing in bald fades and edge-ups. DeSean's technical precision and perfectionist approach deliver consistently excellent results. Great with intricate designs."
-    },
-    { 
-      id: 'tray-w', 
-      name: "Tray W.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image11, 
-      availability: getRandomAvailability(),
-      bio: "Professional barber with 7 years of experience mastering both classic and contemporary styles. Tray's attention to detail and personable nature create an exceptional experience. Specializes in tapers and line work."
-    },
-    { 
-      id: 'hugo-d', 
-      name: "Hugo D.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image12, 
-      availability: getRandomAvailability(),
-      bio: "Experienced barber with 10 years in the industry focusing on precision cuts and beard grooming. Hugo's steady hand and eye for detail ensure impeccable results. Known for his professionalism and expertise."
-    },
-    { 
-      id: 'mula-s', 
-      name: "Mula S.", 
-      title: "Barber", 
-      location: "Summerhill", 
-      image: Image13, 
-      availability: getRandomAvailability(),
-      bio: "Creative stylist with 6 years of experience bringing fresh perspectives to classic cuts. Mula's innovative techniques and engaging personality make every visit memorable. Excellent at modern fades and styling."
-    }
-  ];
-
-  const allBarbers = [...sandySpringsBarbers, ...summerhillBarbers];
+  const allBarbers = sandySpringsBarbers;
 
   const locations = [
     { id: 'sandy-springs', name: 'Sandy Springs Location', address: '6309 Roswell Road NE #2D' },
-    { id: 'summerhill', name: 'Summerhill Location', address: '572 Hank Aaron Dr Suite 1120' }
   ];
 
   const timeSlots = [
@@ -342,14 +267,13 @@ const Booking = () => {
           setFormData(prev => ({
             ...prev,
             barber: barberId,
-            location: matchedBarber.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill'
+            location: 'sandy-springs'
           }));
         }
       }
       
       if (loc) {
-        setLocationFilter(loc);
-        setFormData(prev => ({ ...prev, location: loc }));
+        setFormData(prev => ({ ...prev, location: 'sandy-springs' }));
       }
 
       if (serviceId) {
@@ -664,7 +588,7 @@ const Booking = () => {
   const handleBarberSelect = (barberId) => {
     if (barberId !== 'earliest') {
       const selectedBarber = allBarbers.find(b => b.id === barberId);
-      const locationId = selectedBarber?.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill';
+      const locationId = 'sandy-springs';
       setFormData(prev => ({
         ...prev,
         barber: barberId,
@@ -716,7 +640,7 @@ const Booking = () => {
             ...prev,
             time: time,
             barber: autoAssignedBarber.id,
-            location: autoAssignedBarber.location === 'Sandy Springs' ? 'sandy-springs' : 'summerhill'
+            location: 'sandy-springs'
           }
         : {
             ...prev,
@@ -1085,13 +1009,7 @@ const Booking = () => {
 
       case 2:
         const selectedBarber = allBarbers.find(b => b.id === formData.barber);
-        const filteredBarbers = locationFilter 
-          ? allBarbers.filter(b => {
-              if (locationFilter === 'sandy-springs') return b.location === 'Sandy Springs';
-              if (locationFilter === 'summerhill') return b.location === 'Summerhill';
-              return true;
-            })
-          : allBarbers;
+        const filteredBarbers = allBarbers;
         
         return (
           <div className="booking-step">
@@ -1689,7 +1607,7 @@ const Booking = () => {
                 <span className="value">
                   {selectedLocation?.name || confirmedBarber?.location}
                   <br />
-                  {selectedLocation?.address || (confirmedBarber?.location === 'Sandy Springs' ? '6309 Roswell Road NE #2D, Sandy Springs, GA 30328' : '572 Hank Aaron Dr Suite 1120, Atlanta, GA 30312')}
+                  {selectedLocation?.address || '6309 Roswell Road NE #2D, Sandy Springs, GA 30328'}
                 </span>
               </div>
               <div className="detail-row">

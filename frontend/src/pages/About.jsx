@@ -95,7 +95,7 @@ const About = () => {
                   Rooted in craftsmanship and powered by modern luxuries, our barbershop experience sets the <strong>gold standard</strong> for what grooming should feel like: personal, premium, and community-driven.
                 </p>
                 <p>
-                  From publishing books to developing grooming products, from launching two thriving locations to <strong>mentoring the next generation of barbers</strong>, Clip Culture is more than a brand—it's a movement. We're here to <strong>shape the culture</strong> of grooming locally, nationally, and globally.
+                  From publishing books to developing grooming products, from building our Sandy Springs barbershop to <strong>mentoring the next generation of barbers</strong>, Clip Culture is more than a brand—it's a movement. We're here to <strong>shape the culture</strong> of grooming locally, nationally, and globally.
                 </p>
               </div>
             </div>
@@ -221,7 +221,7 @@ const About = () => {
                   Clip Culture is more than a barbershop—it's a movement built on <strong>mentorship, education, and empowerment</strong>. Founder David Brown has written books, launched grooming products, and trained barbers to turn passion into purpose.
                 </p>
                 <p>
-                  In Fall 2024, Clip Culture opened its second location in <strong>Summerhill</strong>, expanding its reach across Atlanta. With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
+                  With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
                 </p>
               </div>
             </div>

@@ -34,7 +34,7 @@ const Home_Welcome = () => {
               </h2>
               
               <p>
-                Founded by David Brown in 2017, Clip Culture Barbershop began in Sandy Springs with one mission—to elevate barbering through craftsmanship, community, and culture. Since then, it has grown into a movement, expanding to Summerhill and launching books, products, and apparel that inspire education and style worldwide.
+                Founded by David Brown in 2017, Clip Culture Barbershop began in Sandy Springs with one mission—to elevate barbering through craftsmanship, community, and culture. Since then, it has grown into a movement, launching books, products, and apparel that inspire education and style worldwide.
               </p>
               
               <p>

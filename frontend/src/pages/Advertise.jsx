@@ -43,8 +43,7 @@ const advertiseFaqs = [
     a: (
       <>
         <p>
-          Our current company markets are <strong>Sandy Springs</strong> and <strong>Summerhill
-          (Atlanta, GA)</strong>. We're actively evaluating additional territories. Ask us about
+          Our company barbershop is in <strong>Sandy Springs, GA</strong>. We're actively evaluating additional territories. Ask us about
           availability in your city and we'll confirm whether it's open or reserved.
         </p>
       </>

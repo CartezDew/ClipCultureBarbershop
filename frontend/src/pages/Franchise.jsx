@@ -3,7 +3,7 @@ import '../styles/franchise.css';
 import '../styles/facts.css';
 import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
-import Shop2Image from '../assets/Contact/Shop_2.webp';
+import OwnerImage from '../assets/Contact/Owner.webp';
 import Gallery from '../components/Gallery.jsx';
 import FranchiseRequestInfoModal from '../components/FranchiseRequestInfoModal.jsx';
 import FranchiseApplyModal from '../components/FranchiseApplyModal.jsx';
@@ -43,8 +43,7 @@ const franchiseFaqs = [
     a: (
       <>
         <p>
-          Our current company markets are <strong>Sandy Springs</strong> and <strong>Summerhill
-          (Atlanta, GA)</strong>. We're actively evaluating additional territories. Ask us about
+          Our company barbershop is in <strong>Sandy Springs, GA</strong>. We're actively evaluating additional territories. Ask us about
           availability in your city and we'll confirm whether it's open or reserved.
         </p>
       </>
@@ -122,7 +121,7 @@ const Franchise = () => {
                 className="franchise-image"
               />
               <img 
-                src={Shop2Image} 
+                src={OwnerImage}
                 alt="Franchise Opportunity" 
                 className="franchise-image"
               />
@@ -132,7 +131,7 @@ const Franchise = () => {
             <div className="franchise-intro">
               <p className="franchise-intro-text">
                From humble beginnings to becoming one of <strong>Atlanta’s top-rated barbershops</strong>, Clip Culture has built a reputation for excellence, innovation, and community. 
-               Founded by <strong>David Brown</strong>, the brand grew from a single chair to a thriving multi-location business—proving that with the right blueprint and mindset, success is within reach.
+               Founded by <strong>David Brown</strong>, the brand grew from a single chair to a thriving Sandy Springs barbershop—proving that with the right blueprint and mindset, success is within reach.
               </p>
               <p className="franchise-intro-text-2">
               Clip Culture was created to redefine the modern barbershop experience—blending <strong>exceptional craftsmanship, premium service, and a true sense of culture</strong>. 

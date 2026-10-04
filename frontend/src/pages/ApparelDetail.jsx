@@ -262,7 +262,7 @@ const ApparelDetail = () => {
                   <span>In-Store Purchase Only</span>
                 </div>
                 <p className="product-detail__in-store-text">
-                  Visit one of our locations to purchase this item.
+                  Visit our Sandy Springs shop to purchase this item.
                 </p>
               </div>
             </div>
@@ -367,7 +367,7 @@ const ApparelDetail = () => {
                   <span>In-Store Purchase Only</span>
                 </div>
                 <p className="product-detail__in-store-text">
-                  Visit one of our locations to purchase this item.
+                  Visit our Sandy Springs shop to purchase this item.
                 </p>
               </div>
             </div>

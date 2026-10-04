@@ -15,7 +15,6 @@ import MobilePromoSection from '../components/MobilePromoSection.jsx';
 import Footer from '../components/Footer.jsx';
 import { Handshake, MapPin, Building2 } from 'lucide-react';
 import { FaRegThumbsUp } from "react-icons/fa6";
-import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 import HomeGallery from '../components/Home_Gallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import ShopByCategory from '../components/ShopByCategory.jsx';
@@ -46,7 +45,6 @@ import heroImageWebP from '../assets/images/ClipCultureHero.webp';
 import heroImagePNG from '../assets/images/ClipCultureHero.webp';
 import heroImageSplit from '../assets/images/clipculturehero2.webp';
 import shopImage1 from '../assets/Contact/Shop_1.webp';
-import shopImage2 from '../assets/Contact/Shop_2.webp';
 import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
 
 const Home = () => {
@@ -164,12 +162,6 @@ const Home = () => {
       icon: <BicepIcon size={24} />,
       number: '8+',
       label: 'Years Strong',
-    },
-    {
-      key: 'culture-hubs',
-      icon: <PiMapPinSimpleAreaBold size={24} />,
-      number: '2',
-      label: 'Culture Hubs',
     },
   ];
 
@@ -417,7 +409,7 @@ const Home = () => {
             )}
           </div>
           
-          {/* Store Locations - visible only at 600px */}
+          {/* Sandy Springs - visible only at 650px */}
           <div className="store_locations">
             <div 
               className="store-location-item"
@@ -444,33 +436,6 @@ const Home = () => {
               <h3 className="store-location-name">
                 <MapPin size={18} className="store-location-icon" />
                 Sandy Springs
-              </h3>
-            </div>
-            <div 
-              className="store-location-item"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  const elementPosition = contactSection.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - 80;
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                  });
-                } else {
-                  navigate('/#contact');
-                }
-              }}
-              style={{ cursor: 'pointer' }}
-            >
-              <img 
-                src={shopImage2} 
-                alt="Summerhill Barbershop" 
-                className="store-location-image"
-              />
-              <h3 className="store-location-name">
-                <MapPin size={18} className="store-location-icon" />
-                Summerhill
               </h3>
             </div>
           </div>
