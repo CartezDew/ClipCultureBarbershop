@@ -17,6 +17,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +78,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     
     const newErrors = validateForm();
     
@@ -85,21 +87,18 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
       return;
     }
     
-    // Submit form with email service - formName matches form title prop
+    setSubmitting(true);
+    setErrors(prev => ({ ...prev, submit: '' }));
     try {
       await submitFormWithAttachments(title || 'Booking Inquiry', formData);
-      console.log('Booking Inquiry Form submitted:', formData);
+      setSubmitted(true);
+      setTimeout(handleClose, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Still show success to user even if email fails
+      setErrors(prev => ({ ...prev, submit: 'We could not send your request. Please try again.' }));
+    } finally {
+      setSubmitting(false);
     }
-    
-    setSubmitted(true);
-    
-    // Reset form after 3 seconds and close modal
-    setTimeout(() => {
-      handleClose();
-    }, 3000);
   };
 
   const handleClose = () => {
@@ -261,7 +260,8 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
                 />
               </div>
 
-              <button type="submit" className="form0submit-btn">
+              {errors.submit && <p role="alert" className="form0field-error">{errors.submit}</p>}
+              <button type="submit" className="form0submit-btn" disabled={submitting}>
                 Submit Inquiry
               </button>
             </form>

@@ -78,14 +78,16 @@ const Home_Welcome = () => {
               src={DaveHomeImage} 
               alt="David Brown, Founder of Clip Culture Barbershop" 
               className="home-welcome__image"
+              loading="lazy"
+              decoding="async"
             />
             
             {/* Mobile Image Grid - Visible only at 900px */}
             <div className="home-welcome__mobile-images">
-              <img src={Image3} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
-              <img src={Image4} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
+              <img src={Image3} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
+              <img src={Image4} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
               {/* <img src={Image2} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" /> */}
-              <img src={Image1} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" />
+              <img src={Image1} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>

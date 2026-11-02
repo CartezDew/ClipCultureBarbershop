@@ -146,6 +146,14 @@
   transition: opacity 0.3s ease;
 }
 
+.shop-by-category__description {
+  max-width: 260px;
+  margin: 1rem 0 0 1rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 .flame-emoji {
   display: inline-block;
   animation: flame-flicker 2.5s ease-in-out infinite;
@@ -373,6 +381,11 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+.category-card:focus-visible {
+  outline: 3px solid var(--primary-green);
+  outline-offset: 3px;
+}
+
 .category-card__image-wrapper {
   position: relative;
   width: 100%;
@@ -423,54 +436,29 @@
   pointer-events: none;
 }
 
-/* Underline element (animates in for active state) */
-.category-card__name::after {
-    content: "";
-    position: absolute;
-    left: -0.15em;
-    right: -0.15em;
-    bottom: 0.1em;
-    height: 0.5em;
-    z-index: -1;
-    border-radius: 2em;
-    width: 0;
-    transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1);
-  
-    /* Harmonized with Clip Culture greens */
-    background:
-    radial-gradient(circle at 20% 70%, rgba(255, 255, 255, 0.12) 0%, transparent 60%),
-    linear-gradient(90deg, var(--green-dark) 5%, var(--primary-green) 45%, var(--green-light) 90%);
-  filter: blur(0.3px) contrast(1.2) brightness(1.1);
-  mix-blend-mode: screen;
-  
-    transform: skewX(-8deg) rotate(-1deg);
-    filter: blur(0.4px) contrast(1.15) brightness(1.05);
-    mix-blend-mode: multiply;
-    opacity: 0.95;
-  }
+.category-card__highlight {
+  padding: 0 0.08em;
+  background-image: linear-gradient(178deg, transparent 24%, #087e70 25%, #13ad99 90%, transparent 94%);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 460ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
 
 /* Active card label styling */
 .category-card.is-active .category-card__name {
   font-weight: 900;
   opacity: 1;
   color: #ffffff;
-  text-shadow: 
-    0 0 10px rgba(10, 151, 134, 0.6),
-    0 0 20px rgba(10, 151, 134, 0.4),
-    0 3px 10px rgba(0, 0, 0, 0.7),
-    0 0 30px rgba(10, 151, 134, 0.3);
-  animation: 
-    category-name-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
-    category-name-pulse 2s ease-in-out infinite 500ms;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+  animation: category-name-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   transform-origin: center bottom;
 }
 
-.category-card.is-active .category-card__name::after {
-  width: calc(100% + 0.3em);
-  box-shadow: 
-    0 0 15px rgba(10, 151, 134, 0.5),
-    0 0 30px rgba(10, 151, 134, 0.3);
-  animation: underline-glow 2s ease-in-out infinite 500ms;
+.category-card.is-active .category-card__highlight {
+  background-size: 100% 100%;
 }
 
 @keyframes category-name-pop {
@@ -491,39 +479,6 @@
   }
 }
 
-@keyframes category-name-pulse {
-  0%, 100% {
-    transform: scale(1);
-    text-shadow: 
-      0 0 10px rgba(10, 151, 134, 0.6),
-      0 0 20px rgba(10, 151, 134, 0.4),
-      0 3px 10px rgba(0, 0, 0, 0.7),
-      0 0 30px rgba(10, 151, 134, 0.3);
-  }
-  50% {
-    transform: scale(1.05);
-    text-shadow: 
-      0 0 15px rgba(10, 151, 134, 0.8),
-      0 0 25px rgba(10, 151, 134, 0.6),
-      0 4px 12px rgba(0, 0, 0, 0.8),
-      0 0 40px rgba(10, 151, 134, 0.5);
-  }
-}
-
-@keyframes underline-glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 15px rgba(10, 151, 134, 0.5),
-      0 0 30px rgba(10, 151, 134, 0.3);
-    opacity: 0.95;
-  }
-  50% {
-    box-shadow: 
-      0 0 20px rgba(10, 151, 134, 0.7),
-      0 0 40px rgba(10, 151, 134, 0.5);
-    opacity: 1;
-  }
-}
 /* Navigation Button */
 .carousel-nav-button {
   position: absolute;
@@ -657,6 +612,10 @@
     max-width: 100%;
     order: 1;
     white-space: normal;
+  }
+
+  .shop-by-category__description {
+    margin-left: 1.5rem;
   }
 
   /* Testimonials - order 2, top right - positioned absolutely relative to container */

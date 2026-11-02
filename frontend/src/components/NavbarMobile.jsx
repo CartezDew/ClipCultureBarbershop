@@ -268,7 +268,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                         // Opening: if already open (shouldn't happen), keep open; else open
                         return !v
                     })
-                }} aria-label="Toggle mobile menu">
+                }} aria-label="Toggle mobile menu" aria-expanded={isOpen} aria-controls="mobile-nav-menu">
                     <span className="mobile-nav-line"></span>
                     <span className="mobile-nav-line"></span>
                 </button>
@@ -335,6 +335,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                         {/* Menu */}
                         <motion.div
                             key="mobileMenu"
+                            id="mobile-nav-menu"
                             className="mobile-nav-menu"
                             ref={menuRef}
                             initial={{ y: '-100%', opacity: 0 }}
@@ -426,6 +427,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                 <button 
                                                     className="mobile-nav-section-header"
                                                     onClick={() => toggleSection(section)}
+                                                    aria-expanded={Boolean(isExpanded)}
                                                 >
                                                     <span>{section}</span>
                                                     <ChevronDown 
@@ -437,6 +439,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                     {isExpanded && (
                                                         <motion.div
                                                             className="mobile-nav-section-items"
+                                                            id={`mobile-nav-${section.toLowerCase()}`}
                                                             initial={{ height: 0, opacity: 0 }}
                                                             animate={{ height: 'auto', opacity: 1 }}
                                                             exit={{ height: 0, opacity: 0 }}

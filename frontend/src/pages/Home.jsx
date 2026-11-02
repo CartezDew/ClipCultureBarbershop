@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Testimonials from '../components/Testimonials.jsx';
+import ProductStories from '../components/ProductStories.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
 import Professional_Team from '../components/Professional_Team.jsx';
 import Contact from '../components/Contact.jsx';
@@ -456,6 +457,8 @@ const Home = () => {
       </div>
       {/* Barbershop Gallery */}
       {/* <BarbershopGallery /> */}
+
+      <ProductStories />
 
       {/* Testimonials */}
       <Testimonials />

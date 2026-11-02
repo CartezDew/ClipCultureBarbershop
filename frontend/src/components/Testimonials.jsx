@@ -140,6 +140,8 @@ function TestimonialCard({ name, location, quote, rating = 5, photoUrl, verified
                 src={photoUrl} 
                 alt={`${name} headshot`} 
                 className="h-full w-full-testimonials object-cover rounded-full relative z-10" 
+                loading="lazy"
+                decoding="async"
                 style={{ display: 'block' }}
                 onError={(e) => {
                   e.target.style.display = 'none';

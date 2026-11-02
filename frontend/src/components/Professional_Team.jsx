@@ -102,6 +102,8 @@ const Professional_Team = () => {
                     src={barber.image} 
                     alt={`${barber.name} - ${barber.title}`}
                     className="professional-team__image"
+                    loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div className="professional-team__placeholder">

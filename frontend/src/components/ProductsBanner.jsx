@@ -40,9 +40,8 @@ const ProductsBanner = () => {
             src={ProductsClientsImage} 
             alt="Clip Culture Products and Clients" 
             className="products-banner__bg-image"
-            loading="eager"
+            loading="lazy"
             decoding="async"
-            fetchpriority="high"
           />
           <div className="products-banner__overlay" />
         </div>

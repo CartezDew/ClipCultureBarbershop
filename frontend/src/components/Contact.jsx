@@ -18,10 +18,10 @@ const Contact = () => {
 
         <div className="contact__images">
           <div className="contact__image-container">
-            <img src={Shop1Image} alt="Sandy Springs Location" className="contact__image" />
+            <img src={Shop1Image} alt="Sandy Springs Location" className="contact__image" loading="lazy" decoding="async" />
           </div>
           <div className="contact__image-container">
-            <img src={OwnerImage} alt="Owner" className="contact__image" />
+            <img src={OwnerImage} alt="Owner" className="contact__image" loading="lazy" decoding="async" />
           </div>
         </div>
 

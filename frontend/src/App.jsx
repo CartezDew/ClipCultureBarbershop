@@ -1,24 +1,24 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { lazy, Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingActionButtons from './components/FloatingActionButtons.jsx';
 import Home from './pages/Home.jsx';
-import Services from './pages/Services.jsx';
-import Team from './pages/Team.jsx';
-import About from './pages/About.jsx';
-import Shop from './pages/Shop.jsx';
-import Mentorship from './pages/Mentorship.jsx';
-import ProductDetail from './pages/ProductDetail.jsx';
-import ApparelDetail from './pages/ApparelDetail.jsx';
-import Franchise from './pages/Franchise.jsx';
-import Advertise from './pages/Advertise.jsx';
-import VendingMachines from './pages/VendingMachines.jsx';
-import Apply from './pages/Apply.jsx';
-import BarberBio from './pages/BarberBio.jsx';
-import Booking from './pages/Booking.jsx';
-import BookNow from './pages/BookNow.jsx';
-import SpeakingEngagements from './pages/SpeakingEngagements.jsx';
+const Services = lazy(() => import('./pages/Services.jsx'));
+const Team = lazy(() => import('./pages/Team.jsx'));
+const About = lazy(() => import('./pages/About.jsx'));
+const Shop = lazy(() => import('./pages/Shop.jsx'));
+const Mentorship = lazy(() => import('./pages/Mentorship.jsx'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail.jsx'));
+const ApparelDetail = lazy(() => import('./pages/ApparelDetail.jsx'));
+const Franchise = lazy(() => import('./pages/Franchise.jsx'));
+const Advertise = lazy(() => import('./pages/Advertise.jsx'));
+const VendingMachines = lazy(() => import('./pages/VendingMachines.jsx'));
+const Apply = lazy(() => import('./pages/Apply.jsx'));
+const BarberBio = lazy(() => import('./pages/BarberBio.jsx'));
+const Booking = lazy(() => import('./pages/Booking.jsx'));
+const BookNow = lazy(() => import('./pages/BookNow.jsx'));
+const SpeakingEngagements = lazy(() => import('./pages/SpeakingEngagements.jsx'));
 
 function AppContent() {
   const location = useLocation();
@@ -111,6 +111,7 @@ function AppContent() {
 
   return (
     <div className="App">
+      <Suspense fallback={<div className="route-loading" role="status" aria-live="polite">Loading Clip Culture…</div>}>
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={
@@ -228,6 +229,7 @@ function AppContent() {
             </>
           } />
         </Routes>
+      </Suspense>
         
         {/* Floating Action Buttons - Show on all pages except booking, product details, apparel details, and speaking engagements */}
         {location.pathname !== '/booking' && location.pathname !== '/book-now' && location.pathname !== '/vending-machines' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (

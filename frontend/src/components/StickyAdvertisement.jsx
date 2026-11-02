@@ -54,9 +54,8 @@ const StickyAdvertisement = () => {
             src={beardProductsImage}
             alt="Clip Culture Premium Grooming Products"
             className="promo-ad__image"
-            loading="eager"
+            loading="lazy"
             decoding="async"
-            fetchpriority="high"
           />
           {/* Overlay for readability */}
           <div className="promo-ad__overlay" />

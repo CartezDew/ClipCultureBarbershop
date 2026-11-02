@@ -14,8 +14,8 @@ import amazonImage from '../assets/Books/Amazon.webp';
 import mentorshipImage from '../assets/Mentorship/Mentorship-1.webp';
 
 // Franchise shop images
-import Shop1 from '../assets/Contact/Shop_1.webp';
 import Shop3 from '../assets/gallery/image-62.webp';
+import vendingMachinesImage from '../assets/Stagging/vending-machines-category.webp';
 
 // Apparel image
 import apparelImage from '../assets/gallery/image-66.webp';
@@ -93,7 +93,8 @@ const categories = [
   { name: 'Mentorship', image: mentorshipImage, route: '/mentorship' },
   { name: 'Advertise', image: advertisementCategoryImage, route: '/advertise' },
   { name: 'Franchise', image: Shop3, route: '/franchise' }, // Default image, will be overridden by active testimonial
-  { name: 'Speaking Engagements', image: speakingImage, route: '/speaking-engagements' }
+  { name: 'Speaking Engagements', image: speakingImage, route: '/speaking-engagements' },
+  { name: 'Vending Machines', image: vendingMachinesImage, route: '/vending-machines' }
   
 ];
 
@@ -284,6 +285,11 @@ const ShopByCategory = () => {
 
   // Helper function to get and set a random testimonial for a category
   const setRandomTestimonialForCategory = useCallback((categoryName) => {
+    if (categoryName === 'Vending Machines') {
+      setActiveTestimonial(null);
+      return;
+    }
+
     // Map category names to testimonial keys (handles special cases like "New Arrivals" -> "newArrivals")
     const categoryToKeyMap = {
       'New Arrivals': 'newArrivals',
@@ -493,6 +499,12 @@ const ShopByCategory = () => {
           Speaking<br />Engagements
         </>
       );
+    } else if (currentName === 'Vending Machines') {
+      return (
+        <>
+          Vending<br />Machines
+        </>
+      );
     } else {
       return 'Shop\nby categories';
     }
@@ -505,6 +517,9 @@ const ShopByCategory = () => {
           <h2 className="shop-by-category__heading">
             {renderTitle()}
           </h2>
+          {currentName === 'Vending Machines' && (
+            <p className="shop-by-category__description">Bring your products into the Clip Culture shop.</p>
+          )}
           {activeTestimonial && (
             <div className="category-testimonials">
               <div className="category-testimonial">
@@ -531,7 +546,8 @@ const ShopByCategory = () => {
               currentName === 'Franchise' ||
               currentName === 'Advertise' ||
               currentName === 'Mentorship' ||
-              currentName === 'Speaking Engagements';
+              currentName === 'Speaking Engagements' ||
+              currentName === 'Vending Machines';
             return hideBag ? null : (
               <div className="bag-demo">
                 <div className="bag" ref={bagRef}>
@@ -555,7 +571,12 @@ const ShopByCategory = () => {
               <motion.div
                 key={`${category.name}-${index}`}
                 className={`category-card ${index === activeGlobalIndex ? 'is-active' : ''}`}
+                role="link"
+                tabIndex={0}
                 onClick={() => handleCardClick(category)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') handleCardClick(category);
+                }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
@@ -565,18 +586,22 @@ const ShopByCategory = () => {
                     src={getCategoryImage(category)}
                     alt={category.name}
                     className="category-card__image"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="category-card__overlay"></div>
                 </div>
                 <div className="category-card__name">
-                  {category.name === 'New Arrivals' ? (
-                    <>
-                      New Arrivals{' '}
-                      <span className="flame-emoji">🔥</span>
-                    </>
-                  ) : (
-                    category.name
-                  )}
+                  <span className="category-card__highlight">
+                    {category.name === 'New Arrivals' ? (
+                      <>
+                        New Arrivals{' '}
+                        <span className="flame-emoji">🔥</span>
+                      </>
+                    ) : (
+                      category.name
+                    )}
+                  </span>
                 </div>
               </motion.div>
               ))}
