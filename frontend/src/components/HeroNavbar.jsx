@@ -78,7 +78,8 @@ const HeroNavbar = ({ showTaglineAnim = false, isMobile600 = false }) => {
       { name: 'Apparel', link: '/shop#apparel', icon: <Shirt size={16} /> },
       { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
       { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
-      { name: 'Advertise', link: '/shop?category=advertise', icon: <Megaphone size={16} /> }
+      { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
+      { name: 'Vending Machines', link: '/vending-machines', icon: <Store size={16} /> }
     ],
     about: [
       { name: 'Our Story', link: '/about', icon: <FileText size={16} /> },

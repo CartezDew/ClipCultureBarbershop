@@ -139,9 +139,9 @@ const SpeakingEngagements = () => {
 
             <h4 className="speaking-backed-title">Backed by:</h4>
             <ul className="speaking-stats-list">
-              <li className="speaking-stat-item">✔ 135,000+ clients served</li>
+              <li className="speaking-stat-item">✔ 155,000+ clients served</li>
               <li className="speaking-stat-item">✔ 94% client satisfaction</li>
-              <li className="speaking-stat-item">✔ 8+ years of business success</li>
+              <li className="speaking-stat-item">✔ 9+ years of business success</li>
               <li className="speaking-stat-item">✔ 3 authored books, grooming products & mentorship programs</li>
             </ul>
 

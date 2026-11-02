@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, ShoppingCart, UserPlus, Building2, Mic2, Shirt } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, ShoppingCart, UserPlus, Building2, Mic2, Shirt, PackageOpen } from 'lucide-react'
 import Comb from './icons/Comb'
 import { AnimatePresence, motion } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
@@ -33,7 +33,8 @@ const NavbarDesktop = () => {
             { name: 'Apparel', link: '/shop#apparel', icon: <Shirt size={16} /> },
             { name: 'Books', link: '/shop#books', icon: <BookOpen size={16} /> },
             { name: 'Mentorship', link: '/mentorship', icon: <GraduationCap size={16} /> },
-            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> }
+            { name: 'Advertise', link: '/advertise', icon: <Megaphone size={16} /> },
+            { name: 'Vending Machines', link: '/vending-machines', icon: <PackageOpen size={16} /> }
         ],
         about: [
             ...(location.pathname !== '/' ? [{ name: 'Home', link: '/', icon: <Home size={16} /> }] : []),
@@ -192,7 +193,7 @@ const NavbarDesktop = () => {
                                         <ChevronDown className={`dropdown-arrow ${activeDropdown === item.dropdownKey ? 'active' : ''}`} size={14} />
                                     </button>
                                     {activeDropdown === item.dropdownKey && (
-                                        <div className="dropdown-menu">
+                                        <div className={`dropdown-menu ${item.dropdownKey === 'shop' ? 'dropdown-menu--shop' : ''}`}>
                                             {dropdownMenus[item.dropdownKey].map((dropdownItem, index) => (
                                                 <Link
                                                     key={index}

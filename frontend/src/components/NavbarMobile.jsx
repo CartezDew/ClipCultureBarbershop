@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, Scissors, Users, Phone, HelpCircle, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt } from 'lucide-react'
+import { Home, Scissors, Users, Phone, HelpCircle, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt, PackageOpen } from 'lucide-react'
 import Comb from './icons/Comb'
 
 import logoMobile from '../assets/images/CC-Logo-Black-HQ.webp'
@@ -33,6 +33,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
         { id: 'shop-books', name: 'Books', path: '/shop#books', icon: 'BookOpen', section: 'Shop' },
         { id: 'shop-mentorship', name: 'Mentorship', path: '/mentorship', icon: 'GraduationCap', section: 'Shop' },
         { id: 'shop-advertise', name: 'Advertise', path: '/advertise', icon: 'Megaphone', section: 'Shop' },
+        { id: 'shop-vending', name: 'Vending Machines', path: '/vending-machines', icon: 'PackageOpen', section: 'Shop' },
         
         // About section (reordered: Our Story, Speaking Engagements, Franchise, FAQ, Join Team, Contact Us)
         { id: 'about-story', name: 'Our Story', path: '/about', icon: 'FileText', section: 'About' },
@@ -232,6 +233,8 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 return <Megaphone {...iconProps} />
             case 'Store':
                 return <Store {...iconProps} />
+            case 'PackageOpen':
+                return <PackageOpen {...iconProps} />
             case 'FileText':
                 return <FileText {...iconProps} />
             case 'HelpCircle':

@@ -54,7 +54,7 @@ const About = () => {
       <section className="about-stats">
         <div className="about-stats__container">
           <div className="about-stats__item">
-            <span className="about-stats__number">135K+</span>
+            <span className="about-stats__number">155K+</span>
             <span className="about-stats__label">Clients Served</span>
           </div>
           <div className="about-stats__divider"></div>
@@ -64,7 +64,7 @@ const About = () => {
           </div>
           <div className="about-stats__divider"></div>
           <div className="about-stats__item">
-            <span className="about-stats__number">8+</span>
+            <span className="about-stats__number">9+</span>
             <span className="about-stats__label">Years Strong</span>
           </div>
         </div>

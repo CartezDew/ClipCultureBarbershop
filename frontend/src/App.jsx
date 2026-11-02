@@ -13,6 +13,7 @@ import ProductDetail from './pages/ProductDetail.jsx';
 import ApparelDetail from './pages/ApparelDetail.jsx';
 import Franchise from './pages/Franchise.jsx';
 import Advertise from './pages/Advertise.jsx';
+import VendingMachines from './pages/VendingMachines.jsx';
 import Apply from './pages/Apply.jsx';
 import BarberBio from './pages/BarberBio.jsx';
 import Booking from './pages/Booking.jsx';
@@ -33,6 +34,7 @@ function AppContent() {
       '/shop': 'Shop',
       '/mentorship': 'Mentorship',
       '/advertise': 'Advertise',
+      '/vending-machines': 'Vending Machines',
       '/franchise': 'Franchise',
       '/apply': 'Apply',
       '/booking': 'Book Appointment',
@@ -147,6 +149,15 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="/vending-machines" element={
+            <div className="vending-route">
+              <Navbar />
+              <main>
+                <VendingMachines />
+              </main>
+              <div className="vending-footer"><Footer /></div>
+            </div>
+          } />
            <Route path="/advertise" element={
             <>
               <Navbar />
@@ -219,7 +230,7 @@ function AppContent() {
         </Routes>
         
         {/* Floating Action Buttons - Show on all pages except booking, product details, apparel details, and speaking engagements */}
-        {location.pathname !== '/booking' && location.pathname !== '/book-now' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (
+        {location.pathname !== '/booking' && location.pathname !== '/book-now' && location.pathname !== '/vending-machines' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (
           <FloatingActionButtons showOnHome={showFloatingButtons} />
         )}
       </div>

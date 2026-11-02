@@ -805,6 +805,10 @@
   margin-top: 0.5rem;
 }
 
+.dropdown-menu--shop {
+  min-width: 220px;
+}
+
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
