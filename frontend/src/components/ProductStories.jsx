@@ -43,13 +43,24 @@ export default function ProductStories() {
   const soundIndexRef = useRef(null);
   const manualIndexRef = useRef(null);
   const dragRef = useRef(null);
+  const soundControlTimerRef = useRef(null);
   const [soundIndex, setSoundIndex] = useState(null);
+  const [visibleSoundIndex, setVisibleSoundIndex] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
   const [started, setStarted] = useState(() => stories.map(() => false));
   const [ended, setEnded] = useState(() => stories.map(() => false));
   const [elapsed, setElapsed] = useState(() => stories.map(() => 0));
   const [durations, setDurations] = useState(() => stories.map((story) => story.duration));
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => () => window.clearTimeout(soundControlTimerRef.current), []);
+
+  const revealSoundControl = (index) => {
+    if (soundIndexRef.current !== index) return;
+    window.clearTimeout(soundControlTimerRef.current);
+    setVisibleSoundIndex(index);
+    soundControlTimerRef.current = window.setTimeout(() => setVisibleSoundIndex(null), 2500);
+  };
 
   useEffect(() => {
     const videos = [...videoRefs.current];
@@ -100,6 +111,8 @@ export default function ProductStories() {
 
   const toggleSound = (index) => {
     const video = videoRefs.current[index];
+    window.clearTimeout(soundControlTimerRef.current);
+    setVisibleSoundIndex(null);
     if (soundIndexRef.current === index) {
       video.muted = true;
       soundIndexRef.current = null;
@@ -117,6 +130,8 @@ export default function ProductStories() {
 
   const togglePlayback = (index) => {
     const video = videoRefs.current[index];
+    window.clearTimeout(soundControlTimerRef.current);
+    setVisibleSoundIndex(null);
     if (video.paused) {
       if (window.innerWidth <= 640 && (index !== 0 || video.closest('.product-stories__videos')?.scrollLeft > 8)) {
         video.closest('.product-story')?.scrollIntoView({
@@ -150,7 +165,11 @@ export default function ProductStories() {
 
   const startDrag = (event) => {
     if (event.pointerType !== 'mouse' || window.innerWidth > 640 || event.target.closest('button')) return;
-    dragRef.current = { x: event.clientX, left: event.currentTarget.scrollLeft };
+    dragRef.current = {
+      x: event.clientX,
+      left: event.currentTarget.scrollLeft,
+      videoIndex: event.target.tagName === 'VIDEO' ? videoRefs.current.indexOf(event.target) : -1,
+    };
     event.currentTarget.classList.add('is-dragging');
     event.currentTarget.setPointerCapture(event.pointerId);
     event.preventDefault();
@@ -163,9 +182,11 @@ export default function ProductStories() {
 
   const endDrag = (event) => {
     if (!dragRef.current) return;
+    const { x, videoIndex } = dragRef.current;
     dragRef.current = null;
     event.currentTarget.classList.remove('is-dragging');
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (videoIndex >= 0 && Math.abs(event.clientX - x) < 6) revealSoundControl(videoIndex);
   };
 
   return (
@@ -202,7 +223,16 @@ export default function ProductStories() {
                   preload="none"
                   playsInline
                   muted
-                  aria-label={`${story.name}. ${story.description}`}
+                  aria-label={soundIndex === index && playingIndex === index ? `Show sound control for ${story.name}` : `${story.name}. ${story.description}`}
+                  role={soundIndex === index && playingIndex === index ? 'button' : undefined}
+                  tabIndex={soundIndex === index && playingIndex === index ? 0 : -1}
+                  onClick={() => revealSoundControl(index)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      revealSoundControl(index);
+                    }
+                  }}
                   onLoadedMetadata={(event) => {
                     const duration = event.currentTarget.duration;
                     if (Number.isFinite(duration)) {
@@ -229,13 +259,14 @@ export default function ProductStories() {
                     setElapsed((current) => current.map((value, item) => item === index ? 0 : value));
                     soundIndexRef.current = null;
                     setSoundIndex(null);
+                    setVisibleSoundIndex(null);
                     setStarted((current) => current.map((value, item) => item === index ? false : value));
                     setEnded((current) => current.map((value, item) => item === index ? true : value));
                   }}
                 />
-                <span className="product-story__number" aria-hidden="true">{String(index + 1).padStart(2, '0')} / {String(stories.length).padStart(2, '0')}</span>
+                {playingIndex !== index && <span className="product-story__number" aria-hidden="true">{String(index + 1).padStart(2, '0')} / {String(stories.length).padStart(2, '0')}</span>}
                 <button
-                  className="product-story__sound"
+                  className={`product-story__sound${soundIndex === index && playingIndex === index && visibleSoundIndex !== index ? ' is-concealed' : ''}`}
                   type="button"
                   onClick={() => toggleSound(index)}
                   aria-label={soundIndex === index ? `Turn sound off for ${story.name}` : `Turn sound on for ${story.name}`}

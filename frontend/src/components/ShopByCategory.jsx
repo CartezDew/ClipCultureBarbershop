@@ -136,7 +136,7 @@ const RIGHT_ACTIVATION_INSET_PX = 120;
 const ShopByCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isAutoScrolling, setIsAutoScrolling] = useState(false); // Start as false, will be enabled after delay
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [activeGlobalIndex, setActiveGlobalIndex] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(null);
   const [categoryImages, setCategoryImages] = useState({});
@@ -229,17 +229,6 @@ const ShopByCategory = () => {
       window.clearTimeout(timeoutId);
     };
   }, [displayCategories.length]);
-
-  // Delay auto-scroll start on initial page load (3 seconds)
-  useEffect(() => {
-    const initialDelay = setTimeout(() => {
-      setIsAutoScrolling(true);
-    }, 3000); // 3 second delay
-
-    return () => {
-      clearTimeout(initialDelay);
-    };
-  }, []); // Run only on mount
 
   const syncActiveIndex = useCallback(() => {
     const cardWidth = cardWidthRef.current;
