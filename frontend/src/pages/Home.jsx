@@ -33,6 +33,7 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
   const reduceMotion = useReducedMotion();
+  const [heroIntroComplete, setHeroIntroComplete] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [showServiceModal, setShowServiceModal] = useState(false);
   const location = useLocation();
@@ -134,7 +135,7 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar showHomeLogo={Boolean(reduceMotion || heroIntroComplete)} />
       {/* Hero Background Container */}
       <div className="hero-background-container">
         {/* Hero Section */}
@@ -348,13 +349,15 @@ const Home = () => {
             {isMobile600 && (
               <motion.div
                 className="hero-logo-splash"
-                initial={reduceMotion ? false : { opacity: 1, scale: 0.96 }}
-                animate={{ opacity: 0, scale: 1.04 }}
-                transition={{ duration: reduceMotion ? 0 : 0.85, ease: 'easeOut', delay: reduceMotion ? 0 : 0.18 }}
+                aria-hidden="true"
+                initial={reduceMotion ? false : { opacity: 1, scale: 0.97 }}
+                animate={reduceMotion ? { opacity: 0 } : { opacity: [1, 1, 0], scale: [0.97, 1, 1.02] }}
+                transition={{ duration: reduceMotion ? 0 : 1.1, times: [0, 0.32, 1], ease: 'easeInOut' }}
+                onAnimationComplete={() => setHeroIntroComplete(true)}
               >
                 <img
                   src={clipCultureLogo}
-                  alt="Clip Culture Logo"
+                  alt=""
                   className="hero-logo-splash-image"
                 />
               </motion.div>
@@ -362,9 +365,9 @@ const Home = () => {
             
             {isMobile600 ? (
               <motion.h1
-                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.65, ease: 'easeOut', delay: reduceMotion ? 0 : 0.38 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: heroIntroComplete || reduceMotion ? 1 : 0, y: heroIntroComplete || reduceMotion ? 0 : 10 }}
+                transition={{ duration: reduceMotion ? 0 : 0.55, ease: 'easeOut' }}
               >
                 Defining the Standard. <br/> 
                 Shaping the Culture<span className="hero__exclamation">!</span>

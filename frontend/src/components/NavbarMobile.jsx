@@ -285,7 +285,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                     className="logo-image-nav"
                                     initial={{ opacity: 0 }}
                                     animate={showTaglineAnim ? { opacity: 1 } : { opacity: 0 }}
-                                    transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
+                                    transition={{ duration: 0.45, ease: 'easeOut' }}
                                 />
                             ) : (
                                 <img 

@@ -4,7 +4,7 @@ import NavbarMobile from './NavbarMobile.jsx'
 import { ChevronUp } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ showHomeLogo = true }) => {
     const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false)
     const [showBackToTop, setShowBackToTop] = useState(false)
     const autoScrollingRef = useRef(false)
@@ -122,7 +122,7 @@ const Navbar = () => {
         <>
             {isMobile ? (
                 <div className="navbar-visible-mobile" aria-hidden="false">
-                    <NavbarMobile />
+                    <NavbarMobile showTaglineAnim={showHomeLogo} isMobile600={isMobile} />
                 </div>
             ) : (
                 <div className="navbar-visible-desktop" aria-hidden="false">
