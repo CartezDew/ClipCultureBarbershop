@@ -163,6 +163,7 @@ const Home = () => {
               src={heroImagePNG} 
               alt="ClipCulture Barbershop Interior" 
               className="hero__background-image"
+              fetchPriority="high"
             />
           </picture>
           <div className="hero__overlay"></div>
@@ -175,14 +176,14 @@ const Home = () => {
             {/* Eyebrow/Pill text */}
             <div className="hero__eyebrow">
               <span className="hero__eyebrow-dot"></span>
-              Walk-ins are welcome!
+              Sandy Springs Barbershop · Walk-ins welcome
             </div>
             
             {/* Tagline */}
-            <h2 className="hero__headline">
+            <h1 className="hero__headline">
               <span className="hero__headline-line">Defining the Standard.</span>
               <span className="hero__headline-line">Shaping the <em>Culture.</em></span>
-            </h2>
+            </h1>
             
             {/* Subtitle */}
             <p className="hero__subtitle">
@@ -378,14 +379,14 @@ const Home = () => {
             )}
             
             {isMobile600 ? (
-              <motion.h2
+              <motion.h1
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={showTaglineAnim ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
               >
                 Defining the Standard. <br/> 
                 Shaping the Culture<span className="hero__exclamation">!</span>
-              </motion.h2>
+              </motion.h1>
             ) : (
               <h2>Defining the Standard. <br/> 
               Shaping the Culture.</h2>

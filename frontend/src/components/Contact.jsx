@@ -1,7 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
+import Shop1ImageSmall from '../assets/Contact/Shop_1-720.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 
 const Contact = () => {
@@ -18,7 +19,7 @@ const Contact = () => {
 
         <div className="contact__images">
           <div className="contact__image-container">
-            <img src={Shop1Image} alt="Sandy Springs Location" className="contact__image" loading="lazy" decoding="async" />
+            <img src={Shop1Image} srcSet={`${Shop1ImageSmall} 720w, ${Shop1Image} 1500w`} sizes="(max-width: 800px) 100vw, 50vw" alt="Sandy Springs Location" className="contact__image" loading="lazy" decoding="async" />
           </div>
           <div className="contact__image-container">
             <img src={OwnerImage} alt="Owner" className="contact__image" loading="lazy" decoding="async" />

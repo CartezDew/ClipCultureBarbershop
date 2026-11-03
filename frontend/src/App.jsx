@@ -1,10 +1,13 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingActionButtons from './components/FloatingActionButtons.jsx';
 import Home from './pages/Home.jsx';
+import { pageMeta, DEFAULT_SITE_URL } from './lib/seo.js';
 const Services = lazy(() => import('./pages/Services.jsx'));
+const SandySprings = lazy(() => import('./pages/SandySprings.jsx'));
+const FAQs = lazy(() => import('./pages/FAQs.jsx'));
 const Team = lazy(() => import('./pages/Team.jsx'));
 const About = lazy(() => import('./pages/About.jsx'));
 const Shop = lazy(() => import('./pages/Shop.jsx'));
@@ -25,41 +28,28 @@ function AppContent() {
   const [showFloatingButtons, setShowFloatingButtons] = useState(false);
   const isHomePage = location.pathname === '/';
 
-  // Map routes to page names for dynamic titles
-  const getPageName = (pathname) => {
-    const routeMap = {
-      '/': 'Home',
-      '/services': 'Services',
-      '/about': 'About',
-      '/shop': 'Shop',
-      '/mentorship': 'Mentorship',
-      '/advertise': 'Advertise',
-      '/vending-machines': 'Vending Machines',
-      '/franchise': 'Franchise',
-      '/apply': 'Apply',
-      '/booking': 'Book Appointment',
-      '/book-now': 'Book Now',
-      '/speaking-engagements': 'Speaking Engagements',
-    };
-    
-    // Handle dynamic routes
-    if (pathname.startsWith('/products/')) {
-      return 'Product';
-    }
-    if (pathname.startsWith('/apparel/')) {
-      return 'Apparel';
-    }
-    if (pathname.startsWith('/barber/')) {
-      return 'Barber';
-    }
-    
-    return routeMap[pathname] || 'Home';
-  };
-
-  // Update document title dynamically based on route
+  // Keep metadata in sync when navigating without a page request.
   useEffect(() => {
-    const pageName = getPageName(location.pathname);
-    document.title = `Clip Culture | ${pageName}`;
+    const { title, description, url } = pageMeta(location.pathname, import.meta.env.VITE_PUBLIC_SITE_URL || DEFAULT_SITE_URL);
+    document.title = title;
+    const values = [
+      ['meta', 'name', 'description', 'content', description],
+      ['meta', 'property', 'og:title', 'content', title],
+      ['meta', 'property', 'og:description', 'content', description],
+      ['meta', 'property', 'og:url', 'content', url],
+      ['meta', 'name', 'twitter:title', 'content', title],
+      ['meta', 'name', 'twitter:description', 'content', description],
+      ['link', 'rel', 'canonical', 'href', url],
+    ];
+    values.forEach(([tag, key, name, attribute, value]) => {
+      let element = document.head.querySelector(`${tag}[${key}="${name}"]`);
+      if (!element) {
+        element = document.createElement(tag);
+        element.setAttribute(key, name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute(attribute, value);
+    });
   }, [location.pathname]);
 
   // Reset scroll position on route change without animating
@@ -114,6 +104,8 @@ function AppContent() {
       <Suspense fallback={<div className="route-loading" role="status" aria-live="polite">Loading Clip Culture…</div>}>
       <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/sandysprings" element={<><Navbar /><main><SandySprings /></main><Footer /></>} />
+          <Route path="/faqs" element={<><Navbar /><main><FAQs /></main><Footer /></>} />
           <Route path="/services" element={
             <>
               <Navbar />
@@ -228,6 +220,7 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="*" element={<><Navbar /><main className="not-found"><h1>Page not found</h1><p>That page is unavailable.</p><Link to="/">Return to Clip Culture</Link></main><Footer /></>} />
         </Routes>
       </Suspense>
         

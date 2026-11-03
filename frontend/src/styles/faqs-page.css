@@ -1,0 +1,12 @@
+.faqs-page { background: #111816; color: #fff; min-height: 100vh; }
+.faqs-page__header { text-align: center; padding: clamp(5rem, 9vw, 8rem) 1.25rem 2rem; }
+.faqs-page__header span { font: 700 .8rem/1.4 'Rubik', sans-serif; letter-spacing: .18em; color: #91c49b; }
+.faqs-page__header h1 { margin: 1rem 0; font: 700 clamp(2.5rem, 5vw, 4.8rem)/1.05 'Rubik', sans-serif; }
+.faqs-page__header p { margin: auto; max-width: 42rem; color: #cbd5ce; font-size: 1.1rem; }
+.faqs-page .w-full { padding-top: 2.5rem; }
+.faqs-page #facts-heading { color: #f7f7f2; }
+.faqs-page .facts-accordion { margin-top: 2.5rem; }
+.faqs-page .facts-accordion, .faqs-page .fact { opacity: 1; transform: none; transition: none; }
+.faqs-page__cta { text-align: center; padding: 1rem 1.25rem 5rem; }
+.faqs-page__cta p { color: #cbd5ce; }
+.faqs-page__cta a { display: inline-block; padding: .85rem 1.4rem; border-radius: .35rem; background: #0a9786; color: #fff; text-decoration: none; font-weight: 700; }

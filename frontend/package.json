@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --manifest && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
+    "test:seo": "node scripts/verify-search.mjs",
     "test:ui": "vitest --ui"
   },
   "dependencies": {
