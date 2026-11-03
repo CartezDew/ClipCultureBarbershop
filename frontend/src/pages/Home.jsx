@@ -458,7 +458,9 @@ const Home = () => {
       {/* Barbershop Gallery */}
       {/* <BarbershopGallery /> */}
 
-      <ProductStories />
+      <div className="home-product-stories-wrapper">
+        <ProductStories />
+      </div>
 
       {/* Testimonials */}
       <Testimonials />

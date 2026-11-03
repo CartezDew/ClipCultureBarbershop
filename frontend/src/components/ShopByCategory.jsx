@@ -82,6 +82,9 @@ const categoryTestimonials = {
     { name: 'Marcus L.', quote: 'The audience walked away inspired and ready to lead with purpose. We\'ll definitely be booking him again.', photoUrl: MenHaircut },
     { name: 'Carla J.', quote: 'Every story he shared connected deeply. The crowd left more empowered to become future leaders.', photoUrl: KidsHaircut },
   ],
+  vendingMachines: [
+    { name: 'David Brown, Owner', quote: 'Our shop brings people together. I want vending partners to have space to serve this community.', photoUrl: DaveHeadshot },
+  ],
 };
 
 const categories = [
@@ -98,7 +101,6 @@ const categories = [
   
 ];
 
-const REPEAT_COUNT = 2;
 const AUTO_SCROLL_SPEED = 0.022; // px per ms (~22px per second) - further slowed for readability
 // Distance inside the viewport from the right edge where activation should occur.
 // Increase this value to trigger LATER (card travels further into view).
@@ -114,6 +116,7 @@ const ShopByCategory = () => {
   const carouselRef = useRef(null); // viewport
   const trackRef = useRef(null); // inner track that moves
   const animationFrameRef = useRef(null);
+  const stepTimeoutRef = useRef(null);
   const resumeTimeoutRef = useRef(null);
   const cardWidthRef = useRef(0);
   const originalWidthRef = useRef(0);
@@ -127,6 +130,7 @@ const ShopByCategory = () => {
     : categories;
 
   const repeatedCategories = [...displayCategories, ...displayCategories];
+  const baseIndex = activeGlobalIndex % displayCategories.length;
   const titleRef = useRef(null);
   const bagRef = useRef(null);
   const prevActiveIndexRef = useRef(null);
@@ -162,12 +166,12 @@ const ShopByCategory = () => {
     const updateMetrics = () => {
       if (!trackRef.current) return;
 
-      const totalWidth = trackRef.current.scrollWidth;
-      if (totalWidth) {
-        originalWidthRef.current = totalWidth / REPEAT_COUNT;
+      const firstCard = trackRef.current.querySelector('.category-card');
+      const firstDuplicate = trackRef.current.children[displayCategories.length];
+      if (firstCard && firstDuplicate) {
+        originalWidthRef.current = firstDuplicate.offsetLeft - firstCard.offsetLeft;
       }
 
-      const firstCard = trackRef.current.querySelector('.category-card');
       if (firstCard) {
         const cardRect = firstCard.getBoundingClientRect();
         const computedStyle = window.getComputedStyle(trackRef.current);
@@ -194,7 +198,7 @@ const ShopByCategory = () => {
       window.removeEventListener('resize', handleResize);
       window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [displayCategories.length]);
 
   // Delay auto-scroll start on initial page load (3 seconds)
   useEffect(() => {
@@ -206,6 +210,21 @@ const ShopByCategory = () => {
       clearTimeout(initialDelay);
     };
   }, []); // Run only on mount
+
+  const syncActiveIndex = useCallback(() => {
+    const cardWidth = cardWidthRef.current;
+    const viewportEl = carouselRef.current;
+    if (cardWidth <= 0 || !viewportEl) return;
+
+    const visibleOffset = -trackXRef.current;
+    const activationX = Math.max(0, viewportEl.clientWidth - RIGHT_ACTIVATION_INSET_PX);
+    const indexNearLine = Math.round((visibleOffset + activationX - cardWidth / 2) / cardWidth);
+    const globalIndex = ((indexNearLine % repeatedCategories.length) + repeatedCategories.length) % repeatedCategories.length;
+    if (activeIndexRef.current !== globalIndex) {
+      activeIndexRef.current = globalIndex;
+      setActiveGlobalIndex(globalIndex);
+    }
+  }, [repeatedCategories.length]);
 
   // Auto-scroll animation loop
   useEffect(() => {
@@ -225,11 +244,11 @@ const ShopByCategory = () => {
 
     const step = (timestamp) => {
       if (!trackRef.current) return;
-      const delta = timestamp - lastTimestamp;
+      const delta = Math.min(timestamp - lastTimestamp, 64);
       lastTimestamp = timestamp;
 
       const distance = delta * AUTO_SCROLL_SPEED;
-      const resetWidth = originalWidthRef.current || (trackRef.current.scrollWidth / REPEAT_COUNT) || 1;
+      const resetWidth = originalWidthRef.current || 1;
 
       // Move track left (negative X)
       trackXRef.current -= distance;
@@ -238,25 +257,7 @@ const ShopByCategory = () => {
       }
       trackEl.style.transform = `translateX(${trackXRef.current}px)`;
 
-      // Determine first visible card index to highlight
-      const cardWidth = cardWidthRef.current;
-      const viewportEl = carouselRef.current;
-      if (cardWidth > 0 && viewportEl) {
-        const visibleOffset = -trackXRef.current;
-        const viewportWidth = viewportEl.clientWidth || 0;
-        // Activation line measured from the left edge of the viewport.
-        const activationX = Math.max(0, viewportWidth - RIGHT_ACTIVATION_INSET_PX);
-        // Pick the card whose center is closest to the activation line (stable and precise).
-        const indexNearLine = Math.round(
-          (visibleOffset + activationX - (cardWidth / 2)) / cardWidth
-        );
-        const repeatedLength = repeatedCategories.length;
-        const globalIndex = ((indexNearLine % repeatedLength) + repeatedLength) % repeatedLength;
-        if (activeIndexRef.current !== globalIndex) {
-          activeIndexRef.current = globalIndex;
-          setActiveGlobalIndex(globalIndex);
-        }
-      }
+      syncActiveIndex();
       animationFrameRef.current = requestAnimationFrame(step);
     };
 
@@ -271,7 +272,7 @@ const ShopByCategory = () => {
         animationFrameRef.current = null;
       }
     };
-  }, [isAutoScrolling]);
+  }, [isAutoScrolling, syncActiveIndex]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -279,17 +280,15 @@ const ShopByCategory = () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
+      if (stepTimeoutRef.current) {
+        clearTimeout(stepTimeoutRef.current);
+      }
       clearScheduledResume();
     };
   }, [clearScheduledResume]);
 
   // Helper function to get and set a random testimonial for a category
   const setRandomTestimonialForCategory = useCallback((categoryName) => {
-    if (categoryName === 'Vending Machines') {
-      setActiveTestimonial(null);
-      return;
-    }
-
     // Map category names to testimonial keys (handles special cases like "New Arrivals" -> "newArrivals")
     const categoryToKeyMap = {
       'New Arrivals': 'newArrivals',
@@ -302,6 +301,7 @@ const ShopByCategory = () => {
       'Advertise': 'advertise',
       'Franchise': 'franchise',
       'Speaking Engagements': 'speakingEngagements',
+      'Vending Machines': 'vendingMachines',
     };
     
     const key = categoryToKeyMap[categoryName] || 'newArrivals';
@@ -351,20 +351,18 @@ const ShopByCategory = () => {
   // Sync a random testimonial with the active category whenever it changes
   // Skip initial mount (when activeGlobalIndex is 0) since we already set it above
   useEffect(() => {
-    // Skip if this is the initial render and index is 0
     if (prevActiveIndexRef.current === null) {
-      prevActiveIndexRef.current = activeGlobalIndex;
+      prevActiveIndexRef.current = baseIndex;
       return;
     }
     
-    // Only update if the index actually changed
-    if (prevActiveIndexRef.current !== activeGlobalIndex) {
-      const baseIndex = activeGlobalIndex % displayCategories.length;
+    // The duplicate cards represent the same category after a seamless reset.
+    if (prevActiveIndexRef.current !== baseIndex) {
       const categoryName = displayCategories[baseIndex]?.name || 'New Arrivals';
       setRandomTestimonialForCategory(categoryName);
-      prevActiveIndexRef.current = activeGlobalIndex;
+      prevActiveIndexRef.current = baseIndex;
     }
-  }, [activeGlobalIndex, setRandomTestimonialForCategory, displayCategories]);
+  }, [baseIndex, setRandomTestimonialForCategory, displayCategories]);
 
   // Trigger bag wiggle animation when active category changes
   useEffect(() => {
@@ -382,7 +380,7 @@ const ShopByCategory = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [activeGlobalIndex]);
+  }, [baseIndex]);
 
 
   const handleCardClick = (category) => {
@@ -401,50 +399,35 @@ const ShopByCategory = () => {
 
   const handleNextClick = () => {
     const trackEl = trackRef.current;
-    if (!trackEl) return;
+    if (!trackEl || stepTimeoutRef.current) return;
 
     pauseAutoScroll();
 
     const cardWidth = cardWidthRef.current || 220;
-    const resetWidth = originalWidthRef.current || (trackEl.scrollWidth / REPEAT_COUNT) || cardWidth;
+    const resetWidth = originalWidthRef.current || cardWidth;
 
-    // Compute target transform position (move one card to the left)
-    let targetX = trackXRef.current - cardWidth;
-    if (targetX <= -resetWidth) {
-      targetX += resetWidth;
-    }
+    // Slide into the duplicate cards before resetting to the matching position.
+    const targetX = trackXRef.current - cardWidth;
     // Smooth transition for manual step
     trackEl.style.transition = 'transform 320ms cubic-bezier(0.4, 0, 0.2, 1)';
     trackEl.style.transform = `translateX(${targetX}px)`;
     trackXRef.current = targetX;
     // Clean up transition after it completes
-    window.setTimeout(() => {
-      if (trackEl) {
-        trackEl.style.transition = 'none';
+    stepTimeoutRef.current = window.setTimeout(() => {
+      trackEl.style.transition = 'none';
+      if (trackXRef.current <= -resetWidth) {
+        trackXRef.current += resetWidth;
+        trackEl.style.transform = `translateX(${trackXRef.current}px)`;
       }
+      syncActiveIndex();
+      stepTimeoutRef.current = null;
     }, 340);
-
-    // Update active index after manual step
-    if (cardWidth > 0) {
-      const viewportEl = carouselRef.current;
-      const viewportWidth = viewportEl ? viewportEl.clientWidth : 0;
-      const visibleOffset = -trackXRef.current;
-      const activationX = Math.max(0, viewportWidth - RIGHT_ACTIVATION_INSET_PX);
-      const indexNearLine = Math.round(
-        (visibleOffset + activationX - (cardWidth / 2)) / cardWidth
-      );
-      const repeatedLength = repeatedCategories.length;
-      const globalIndex = ((indexNearLine % repeatedLength) + repeatedLength) % repeatedLength;
-      activeIndexRef.current = globalIndex;
-      setActiveGlobalIndex(globalIndex);
-    }
 
     resumeTimeoutRef.current = window.setTimeout(() => {
       resumeAutoScroll();
     }, 1000);
   };
 
-  const baseIndex = activeGlobalIndex % displayCategories.length;
   const currentName = displayCategories[baseIndex]?.name || 'New Arrivals';
   
   // Get the product/book/shop image for Products/Books/Franchise categories
@@ -517,9 +500,6 @@ const ShopByCategory = () => {
           <h2 className="shop-by-category__heading">
             {renderTitle()}
           </h2>
-          {currentName === 'Vending Machines' && (
-            <p className="shop-by-category__description">Bring your products into the Clip Culture shop.</p>
-          )}
           {activeTestimonial && (
             <div className="category-testimonials">
               <div className="category-testimonial">
@@ -540,7 +520,6 @@ const ShopByCategory = () => {
             </div>
           )}
           {(() => {
-            const baseIndex = activeGlobalIndex % displayCategories.length;
             const currentName = displayCategories[baseIndex]?.name || 'New Arrivals';
             const hideBag =
               currentName === 'Franchise' ||
