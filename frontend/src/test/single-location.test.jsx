@@ -47,7 +47,11 @@ describe('single-location booking', () => {
   it('presents one shop address alongside its hours', () => {
     render(<MemoryRouter><Contact /></MemoryRouter>);
     expect(document.querySelectorAll('.contact__address')).toHaveLength(1);
-    expect(screen.getByText('6309 Roswell Road NE #2D')).toBeInTheDocument();
+    const address = screen.getByRole('button', { name: /6309 Roswell Road NE #2D/ });
+    expect(address).toBeInTheDocument();
+    fireEvent.doubleClick(address);
+    expect(window.open).toHaveBeenCalledWith(expect.stringContaining('google.com/maps/search/'), '_blank', 'noopener,noreferrer');
+    expect(screen.getAllByRole('link', { name: '(404)-458-2993' })).toHaveLength(2);
     expect(screen.getByRole('heading', { name: 'Shop Hours' })).toBeInTheDocument();
   });
 });

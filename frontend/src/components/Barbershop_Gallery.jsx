@@ -328,10 +328,6 @@ const BarbershopGallery = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let isTouchHorizontal = false;
-
     const handleScroll = () => {
       // Only hide counts during manual user scrolling, not auto-scroll
       if (isUserInteractingRef.current) {
@@ -354,31 +350,6 @@ const BarbershopGallery = () => {
       pauseAutoScroll();
     };
 
-    // Track touch start position to determine scroll direction
-    const handleTouchStart = (e) => {
-      const touch = e.touches[0];
-      if (touch) {
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        isTouchHorizontal = false;
-      }
-    };
-
-    // Only pause auto-scroll if user is scrolling horizontally
-    const handleTouchMove = (e) => {
-      const touch = e.touches[0];
-      if (!touch) return;
-
-      const deltaX = Math.abs(touch.clientX - touchStartX);
-      const deltaY = Math.abs(touch.clientY - touchStartY);
-
-      // If horizontal movement is greater than vertical, user is scrolling the gallery
-      if (deltaX > deltaY && deltaX > 10) {
-        isTouchHorizontal = true;
-        pauseAutoScroll();
-      }
-    };
-
     const handleWheel = () => {
       pauseAutoScroll();
     };
@@ -386,16 +357,14 @@ const BarbershopGallery = () => {
     updateUI();
     slider.addEventListener("scroll", handleScroll);
     slider.addEventListener("mousedown", handleMouseDown);
-    slider.addEventListener("touchstart", handleTouchStart, { passive: true });
-    slider.addEventListener("touchmove", handleTouchMove, { passive: true });
+    slider.addEventListener("touchstart", pauseAutoScroll, { passive: true });
     slider.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("resize", updateUI);
 
     return () => {
       slider.removeEventListener("scroll", handleScroll);
       slider.removeEventListener("mousedown", handleMouseDown);
-      slider.removeEventListener("touchstart", handleTouchStart);
-      slider.removeEventListener("touchmove", handleTouchMove);
+      slider.removeEventListener("touchstart", pauseAutoScroll);
       slider.removeEventListener("wheel", handleWheel);
       window.removeEventListener("resize", updateUI);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
@@ -528,7 +497,7 @@ const BarbershopGallery = () => {
 
     // Track click handler for desktop
     const onTrackClick = (e) => {
-      if (e.target === track || track.contains(e.target)) {
+      if (e.target === track) {
         e.preventDefault();
         startDrag(e.clientX, true);
         // On desktop, end immediately after click
@@ -553,13 +522,7 @@ const BarbershopGallery = () => {
         e.preventDefault();
         e.stopPropagation();
         
-        if (isOnTrack) {
-          // If touching track, jump thumb to that position and start dragging
-          startDrag(touch.clientX, true);
-        } else {
-          // If touching thumb, start dragging from current position
-          startDrag(touch.clientX, false);
-        }
+        startDrag(touch.clientX, !isOnThumb);
       }
     };
 

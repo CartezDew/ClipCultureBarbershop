@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Clock3, Phone, ArrowUpRight } from 'lucide-react';
+import AddressAction from '../components/AddressAction.jsx';
 import shopImage from '../assets/Contact/Shop_1.webp';
 import shopImageSmall from '../assets/Contact/Shop_1-720.webp';
 import '../styles/sandy-springs.css';
@@ -25,7 +26,7 @@ export default function SandySprings() {
         <div className="sandy-details__item">
           <MapPin size={26} aria-hidden="true" />
           <h2>Find us</h2>
-          <p>6309 Roswell Road NE #2D<br />Sandy Springs, GA 30328</p>
+          <AddressAction />
           <a href="https://www.google.com/maps/search/?api=1&query=6309+Roswell+Road+NE+%232D+Sandy+Springs+GA+30328" target="_blank" rel="noopener noreferrer">Get directions <ArrowUpRight size={16} aria-hidden="true" /></a>
         </div>
         <div className="sandy-details__item">

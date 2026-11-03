@@ -30,19 +30,10 @@ const Navbar = () => {
     }, [])
 
     useEffect(() => {
-        // Special case: on Services and Get Started routes under 580px, always show
-        const alwaysShow = isMobile && (location.pathname === '/services' || location.pathname === '/get-started')
-        if (alwaysShow) {
-            setShowBackToTop(true)
-            return
-        }
-        
-        // Hide back-to-top button on sign-in page
         if (location.pathname === '/sign-in') {
             setShowBackToTop(false)
             return
         }
-        // Mobile rule (default): show everywhere except while hero is visible (on home) or footer is visible
         let observers = []
         let retryTimer = null
         let heroInView = false
@@ -50,16 +41,18 @@ const Navbar = () => {
 
         const recalc = () => {
             if (autoScrollingRef.current) return
-            const shouldShow = (!heroInView) && (!footerInView)
+            const shouldShow = window.scrollY > 120 && !heroInView && !footerInView
             setShowBackToTop(shouldShow)
         }
 
         const attach = () => {
-            const heroEl = document.getElementById('hero')
+            const heroEl = location.pathname === '/' ? document.querySelector('.hero') : document.getElementById('hero')
             const footerEl = document.querySelector('footer.footer')
             let attachedAny = false
 
             if (heroEl && 'IntersectionObserver' in window) {
+                const rect = heroEl.getBoundingClientRect()
+                heroInView = rect.bottom > 0 && rect.top < window.innerHeight
                 const obsH = new IntersectionObserver((entries) => {
                     const entry = entries[0]
                     heroInView = !!(entry && entry.isIntersecting)
@@ -68,9 +61,6 @@ const Navbar = () => {
                 obsH.observe(heroEl)
                 observers.push(obsH)
                 attachedAny = true
-            } else {
-                // If not on home page (no hero), treat as not in view
-                heroInView = false
             }
 
             if (footerEl && 'IntersectionObserver' in window) {
@@ -97,8 +87,10 @@ const Navbar = () => {
                 }
             }, 250)
         }
+        window.addEventListener('scroll', recalc, { passive: true })
 
         return () => {
+            window.removeEventListener('scroll', recalc)
             observers.forEach(o => o.disconnect())
             observers = []
             if (retryTimer) clearInterval(retryTimer)
@@ -123,10 +115,6 @@ const Navbar = () => {
         // Reset after scroll completes
         setTimeout(() => {
             autoScrollingRef.current = false
-            // Restore visibility on routes where it should always show on mobile
-            if (isMobile && (location.pathname === '/services' || location.pathname === '/get-started')) {
-                setShowBackToTop(true)
-            }
         }, 1000)
     }
 

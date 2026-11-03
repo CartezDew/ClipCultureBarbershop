@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Phone } from 'lucide-react';
+import AddressAction from './AddressAction.jsx';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
 import Shop1ImageSmall from '../assets/Contact/Shop_1-720.webp';
@@ -33,8 +34,7 @@ const Contact = () => {
               <h3 className="contact__location-title">Sandy Springs</h3>
             </div>
             <div className="contact__location-info">
-              <p className="contact__address">6309 Roswell Road NE #2D</p>
-              <p className="contact__city">Sandy Springs, GA 30328</p>
+              <AddressAction className="contact__address" />
             </div>
             <button 
               className="book__btn book__btn--sandy-springs"
@@ -66,10 +66,10 @@ const Contact = () => {
               </div>
             </div>
             <div className="contact__phone-section">
-              <p className="contact__phone">
+              <a className="contact__phone" href="tel:+14044582993">
                 <Phone size={16} className="contact__phone-icon" />
                 (404)-458-2993
-              </p>
+              </a>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@ const Contact = () => {
         {/* Mobile Phone Section - Visible only at 600px */}
         <div className="contact__mobile-phone">
           <Phone size={20} className="contact__mobile-phone-icon" />
-          <p className="contact__mobile-phone-number">(404)-458-2993</p>
+          <a className="contact__mobile-phone-number" href="tel:+14044582993">(404)-458-2993</a>
         </div>
       </div>
     </section>

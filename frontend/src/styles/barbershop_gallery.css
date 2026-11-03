@@ -54,13 +54,12 @@
   overscroll-behavior-x: contain;
   margin-bottom: 1rem;
   width: 100%;               /* 👈 match the 1400px container */
-  /* Allow programmatic scrolling on mobile */
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
 }
 
 /* Enable scroll-snap only when user is interacting */
 .gallery-slider-wrapper.snap-enabled {
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
 }
   
   .gallery-slider-wrapper::-webkit-scrollbar {
@@ -139,8 +138,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 6px;
-    padding: 4px 0;
+    height: 24px;
+    padding: 0;
     margin-top: 0.5rem;
   }
   
@@ -148,17 +147,28 @@
   .gallery-slider-scrollbar-track {
     position: relative;
     width: 100%;
-    height: 4px;
-    background: rgba(240, 243, 243, 0.15);
+    height: 24px;
+    background: transparent;
     border-radius: 999px;
     cursor: grab;
     touch-action: none;
     -webkit-tap-highlight-color: transparent;
   }
+
+  .gallery-slider-scrollbar-track::before {
+    content: '';
+    position: absolute;
+    inset: 9px 0;
+    background: rgba(240, 243, 243, 0.25);
+    border-radius: 999px;
+  }
   
 
   .gallery-slider-scrollbar-track:hover {
-    height: 6px;
+    background: transparent;
+  }
+
+  .gallery-slider-scrollbar-track:hover::before {
     background: rgba(240, 243, 243, 0.5);
   }
   
@@ -166,9 +176,9 @@
   .scrollbar-thumb {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 9px;
     width: 15%;            /* adjust here to make it longer */
-    height: 100%;
+    height: 6px;
     background: var(--primary-green);
     border-radius: 999px;
     cursor: grab;
@@ -183,9 +193,9 @@
   .franchise-gallery-wrapper .scrollbar-thumb {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 9px;
     width: 15%;            /* adjust here to make it longer */
-    height: 100%;
+    height: 6px;
     background: var(--green-new);
     border-radius: 999px;
     cursor: grab;
@@ -201,7 +211,7 @@
   .scrollbar-thumb:active {
     cursor: grabbing;
     height: 8px;
-    top: -2px;
+    top: 8px;
     background: var(--primary-green);
     box-shadow: 0 0 8px rgba(10, 151, 134, 0.5);
   }
@@ -278,7 +288,7 @@
     .scrollbar-thumb.active,
     .scrollbar-thumb:active {
       height: 10px;
-      top: -2px;
+      top: 7px;
     }
   }
 
