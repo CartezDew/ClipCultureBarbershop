@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import AddressAction from './AddressAction.jsx';
 import '../styles/contact.css';
@@ -7,8 +6,6 @@ import Shop1ImageSmall from '../assets/Contact/Shop_1-720.webp';
 import OwnerImage from '../assets/Contact/Owner.webp';
 
 const Contact = () => {
-  const navigate = useNavigate();
-  
   return (
     <section id="contact" className="contact">
       <div className="contact__container">
@@ -36,15 +33,6 @@ const Contact = () => {
             <div className="contact__location-info">
               <AddressAction className="contact__address" />
             </div>
-            <button 
-              className="book__btn book__btn--sandy-springs"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/booking', { state: { location: 'sandy-springs' } });
-              }}
-            >
-              Book Now
-            </button>
           </div>
 
           {/* Shop Hours */}

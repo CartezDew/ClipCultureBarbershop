@@ -232,7 +232,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
+  min-height: 2rem;
   margin-bottom: 0.5rem;
+  white-space: nowrap;
 }
 
 .star {
@@ -260,7 +262,7 @@
   font-size: 0.9rem;
   font-weight: 500;
   color: #666;
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -588,6 +590,10 @@
   .product-card__name {
     font-size: 0.9rem;
   }
+
+  .product-card__rating { gap: 0.15rem; }
+  .product-card__rating .star { font-size: 1.05rem; }
+  .product-card__rating-text { font-size: 0.8rem; margin-left: 0.15rem; }
 
   .product-card__sold-out {
     top: .5rem;

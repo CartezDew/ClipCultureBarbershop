@@ -1,20 +1,15 @@
-import { useState } from 'react';
+import { Copy, Navigation } from 'lucide-react';
 import '../styles/address-action.css';
 
 export const SHOP_ADDRESS = '6309 Roswell Road NE #2D, Sandy Springs, GA 30328';
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SHOP_ADDRESS)}`;
 
 export default function AddressAction({ className = '' }) {
-  const [copied, setCopied] = useState(false);
-
   const copyAddress = async (event) => {
-    if (event.detail > 1) return;
+    if (event?.detail > 1) return;
     try {
       await navigator.clipboard.writeText(SHOP_ADDRESS);
-      setCopied(true);
-    } catch {
-      setCopied(false);
-    }
+    } catch { /* Clipboard access can be unavailable outside secure contexts. */ }
   };
 
   return (
@@ -24,13 +19,18 @@ export default function AddressAction({ className = '' }) {
         className="address-action__button"
         onClick={copyAddress}
         onDoubleClick={() => window.open(directionsUrl, '_blank', 'noopener,noreferrer')}
-        title="Click to copy address; double click for directions"
-        aria-label={`${SHOP_ADDRESS}. Click to copy; double click for directions.`}
+        aria-label={`Copy address: ${SHOP_ADDRESS}`}
       >
         6309 Roswell Road NE #2D<br />Sandy Springs, GA 30328
       </button>
-      <span className="address-action__hint" aria-live="polite">{copied ? 'Copied to clipboard' : 'Tap to copy · Double click for directions'}</span>
-      <a className="address-action__directions" href={directionsUrl} target="_blank" rel="noopener noreferrer">Open directions</a>
+      <span className="address-action__actions">
+        <button type="button" className="address-action__copy" onClick={copyAddress} aria-label="Copy Sandy Springs address" title="Copy address">
+          <Copy size={18} aria-hidden="true" />
+        </button>
+        <a className="address-action__directions" href={directionsUrl} target="_blank" rel="noopener noreferrer" aria-label="Open directions to Sandy Springs" title="Open directions">
+          <Navigation size={18} aria-hidden="true" />
+        </a>
+      </span>
     </span>
   );
 }

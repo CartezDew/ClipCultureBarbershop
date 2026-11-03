@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
 import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
@@ -32,7 +32,7 @@ import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
 const Home = () => {
   const [services, setServices] = useState([]);
   const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
-  const [showTaglineAnim, setShowTaglineAnim] = useState(false);
+  const reduceMotion = useReducedMotion();
   const [selectedService, setSelectedService] = useState(null);
   const [showServiceModal, setShowServiceModal] = useState(false);
   const location = useLocation();
@@ -348,10 +348,9 @@ const Home = () => {
             {isMobile600 && (
               <motion.div
                 className="hero-logo-splash"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                transition={{ duration: 3.7, ease: 'easeOut', delay: 0.5 }}
-                onAnimationComplete={() => setShowTaglineAnim(true)}
+                initial={reduceMotion ? false : { opacity: 1, scale: 0.96 }}
+                animate={{ opacity: 0, scale: 1.04 }}
+                transition={{ duration: reduceMotion ? 0 : 0.85, ease: 'easeOut', delay: reduceMotion ? 0 : 0.18 }}
               >
                 <img
                   src={clipCultureLogo}
@@ -363,9 +362,9 @@ const Home = () => {
             
             {isMobile600 ? (
               <motion.h1
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={showTaglineAnim ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.05 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.65, ease: 'easeOut', delay: reduceMotion ? 0 : 0.38 }}
               >
                 Defining the Standard. <br/> 
                 Shaping the Culture<span className="hero__exclamation">!</span>

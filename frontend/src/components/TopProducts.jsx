@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import '../styles/top-products.css';
@@ -23,63 +23,6 @@ const TopProducts = ({ limit }) => {
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Refs to card containers, name elements, and rating elements
-  const cardRefs = useRef([]);
-  const nameRefs = useRef([]);
-  const ratingRefs = useRef([]);
-
-  // Dynamic first-row syncing
-  const [firstRowNameHeight, setFirstRowNameHeight] = useState(null); // px number
-  const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null); // px number
-  const [firstRowIndices, setFirstRowIndices] = useState(new Set());
-
-  useEffect(() => {
-    const computeSync = () => {
-      const firstCard = cardRefs.current[0];
-      if (!firstCard) {
-        return;
-      }
-
-      const rowTop = firstCard.offsetTop;
-      const indices = new Set();
-      cardRefs.current.forEach((el, idx) => {
-        if (el && el.offsetTop === rowTop) indices.add(idx);
-      });
-
-      // Find the maximum heights among all first-row cards
-      let maxNameHeight = 0;
-      let maxRatingHeight = 0;
-      
-      indices.forEach(idx => {
-        const nameEl = nameRefs.current[idx];
-        const ratingEl = ratingRefs.current[idx];
-        if (nameEl) {
-          maxNameHeight = Math.max(maxNameHeight, nameEl.offsetHeight);
-        }
-        if (ratingEl) {
-          maxRatingHeight = Math.max(maxRatingHeight, ratingEl.offsetHeight);
-        }
-      });
-
-      setFirstRowIndices(indices);
-      setFirstRowNameHeight(maxNameHeight); // Apply the maximum name height
-      setFirstRowRatingHeight(maxRatingHeight); // Apply the maximum rating height
-    };
-
-    // Initial computation after a delay for layout to settle
-    const id = window.setTimeout(computeSync, 100);
-    
-    // Also recompute after a bit more time for images to load
-    const id2 = window.setTimeout(computeSync, 500);
-    
-    window.addEventListener('resize', computeSync);
-    
-    return () => {
-      window.clearTimeout(id);
-      window.clearTimeout(id2);
-      window.removeEventListener('resize', computeSync);
-    };
-  }, []); // Empty dependency - runs once on mount and cleanup on unmount
   const products = [
     {
       id: 2,
@@ -202,11 +145,10 @@ const TopProducts = ({ limit }) => {
           </div>
           
           <div className="top-products__grid">
-            {(limit ? products.slice(0, limit) : products).map((product, index) => (
+            {(limit ? products.slice(0, limit) : products).map((product) => (
               <div 
                 key={product.id} 
                 className="product-card"
-                ref={(el) => (cardRefs.current[index] = el)}
                 onPointerEnter={(event) => { if (event.pointerType === 'mouse') setHoveredProduct(product.id); }}
                 onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHoveredProduct(null); }}
               >
@@ -247,8 +189,8 @@ const TopProducts = ({ limit }) => {
                   </div>
                   <div 
                     className="product-card__rating"
-                    ref={(el) => (ratingRefs.current[index] = el)}
-                    style={firstRowRatingHeight && firstRowIndices.has(index) ? { minHeight: `${firstRowRatingHeight}px` } : undefined}
+                    role={!product.isNewDrop && product.rating != null ? 'img' : undefined}
+                    aria-label={!product.isNewDrop && product.rating != null ? `${product.rating} out of 5 stars` : undefined}
                   >
                     {product.isNewDrop ? (
                       <span className="product-card__new-drop">

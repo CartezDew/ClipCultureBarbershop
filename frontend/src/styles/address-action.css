@@ -1,5 +1,6 @@
-.address-action { display: inline-flex; flex-direction: column; align-items: flex-start; gap: .25rem; }
+.address-action { display: inline-flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
 .address-action__button { padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; text-align: left; cursor: copy; }
 .address-action__button:hover, .address-action__button:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
-.address-action__hint { font-size: .75rem; line-height: 1.4; opacity: .75; }
-.address-action__directions { font-size: .8rem; font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+.address-action__actions { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; }
+.address-action__copy, .address-action__directions { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; padding: 0; border: 1px solid currentColor; border-radius: 4px; background: transparent; color: inherit; text-decoration: none; cursor: pointer; }
+.address-action__copy:hover, .address-action__directions:hover, .address-action__copy:focus-visible, .address-action__directions:focus-visible { background: rgba(255,255,255,.18); }
