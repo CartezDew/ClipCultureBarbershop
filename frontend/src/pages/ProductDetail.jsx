@@ -465,7 +465,7 @@ const ProductDetail = () => {
                       <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
                     </div>
                     <div className="product-detail__related-info">
-                      <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                      <h4 className="product-detail__related-name" title={relProduct.name}>{relProduct.name}</h4>
                       <p className="product-detail__related-price">
                         ${relProduct.price}.00 USD · In-Store Only
                       </p>
@@ -503,7 +503,7 @@ const ProductDetail = () => {
                   <img src={relProduct.image} alt={relProduct.name} loading="lazy" />
                 </div>
                 <div className="product-detail__related-info">
-                  <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                  <h4 className="product-detail__related-name" title={relProduct.name}>{relProduct.name}</h4>
                   <p className="product-detail__related-price">
                     ${relProduct.price}.00 USD · In-Store Only
                   </p>

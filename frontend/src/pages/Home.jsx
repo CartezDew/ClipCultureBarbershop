@@ -159,7 +159,7 @@ const Home = () => {
             {/* Eyebrow/Pill text */}
             <div className="hero__eyebrow">
               <span className="hero__eyebrow-dot"></span>
-              Sandy Springs Barbershop · Walk-ins welcome
+              Walk-ins welcome
             </div>
             
             {/* Tagline */}
@@ -428,6 +428,10 @@ const Home = () => {
       {/* Shop by Category */}
       <ShopByCategory />
 
+      <div className="home-product-stories-wrapper">
+        <ProductStories />
+      </div>
+
       {/* Top Products */}
       <TopProducts limit={6} />
 
@@ -438,10 +442,6 @@ const Home = () => {
       </div>
       {/* Barbershop Gallery */}
       {/* <BarbershopGallery /> */}
-
-      <div className="home-product-stories-wrapper">
-        <ProductStories />
-      </div>
 
       {/* Testimonials */}
       <Testimonials />

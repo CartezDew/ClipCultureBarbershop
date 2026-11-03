@@ -26,15 +26,18 @@
 }
 
 .books__title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: clamp(2.7rem, 4vw, 3.4rem);
+  font-weight: 400;
   color: #1a1a1a;
   margin-bottom: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+  letter-spacing: 0.035em;
+  line-height: 1;
 }
 
 .books__title em {
-  font-weight: 900;
+  font-style: normal;
+  font-weight: inherit;
 }
 
 .books__subtitle {
@@ -43,8 +46,9 @@
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
 }
 
 .books__grid {
@@ -99,12 +103,13 @@
 }
 
 .book-card__name {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 0.5rem;
   line-height: 1.4;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: -0.025em;
   min-height: var(--book-title-height);
   /* Let content wrap naturally; height equalized via CSS var set at runtime */
 }
@@ -114,7 +119,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .book-card__price-prefix {
@@ -126,8 +131,11 @@
 
 .book-card__price-amount {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #0a9786;
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
 }
 
 .book-card__rating {
@@ -164,7 +172,7 @@
   font-weight: 500;
   color: #0d233d;
   margin-left: 0.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .book-card__actions {
@@ -189,7 +197,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: -0.01em;
   border: none;
 }
 

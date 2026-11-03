@@ -409,7 +409,7 @@ const ApparelDetail = () => {
                       )}
                     </div>
                     <div className="product-detail__related-info">
-                      <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                      <h4 className="product-detail__related-name" title={relProduct.name}>{relProduct.name}</h4>
                       <p className="product-detail__related-price">
                         {relProduct.isOnSale ? (
                           <>
@@ -454,7 +454,7 @@ const ApparelDetail = () => {
                   )}
                 </div>
                 <div className="product-detail__related-info">
-                  <h4 className="product-detail__related-name">{relProduct.name}</h4>
+                  <h4 className="product-detail__related-name" title={relProduct.name}>{relProduct.name}</h4>
                   <p className="product-detail__related-price">
                     {relProduct.isOnSale ? (
                       <>

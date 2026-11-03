@@ -729,6 +729,83 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+/* Shared shop typography for grooming and apparel detail pages. */
+.product-detail {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.product-detail__name,
+.product-detail__related-title {
+  font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  line-height: 1.05;
+}
+
+.product-detail__name {
+  font-size: clamp(2.5rem, 3.6vw, 3.4rem);
+  overflow-wrap: anywhere;
+}
+
+.product-detail__related-title {
+  font-size: 2.2rem;
+}
+
+.product-detail__price,
+.product-detail__related-price {
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+}
+
+.product-detail__price {
+  font-weight: 800;
+}
+
+.product-detail__size,
+.product-detail__original-price,
+.product-detail__description,
+.product-detail__features li,
+.product-detail__ingredients p,
+.product-detail__how-to-use li,
+.product-detail__rating-text,
+.product-detail__in-store-text {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.product-detail__description,
+.product-detail__ingredients p {
+  overflow-wrap: break-word;
+}
+
+.product-detail__features h3,
+.product-detail__ingredients h3,
+.product-detail__how-to-use h3,
+.product-detail__related-name {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.product-detail__related-name {
+  min-height: 2.8em;
+  text-overflow: ellipsis;
+}
+
+.product-detail__new-drop {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.product-detail__view-all,
+.product-detail__variant-btn,
+.product-detail__color-btn,
+.product-detail__back {
+  font-family: 'Manrope', sans-serif;
+}
+
 /* Responsive Design */
 @media (max-width: 780px) {
   .product-detail__related-badge {
@@ -857,7 +934,7 @@
     max-height: 170px;
   }
   .product-detail__name {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .product-detail__price {
     font-size: 1.2rem;

@@ -37,6 +37,29 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+.shop-header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  margin-top: 1.75rem;
+  padding: .7rem 1.25rem;
+  border-radius: 4px;
+  background: #20ad9d;
+  color: #082322;
+  font: 700 .95rem 'Rubik', Arial, sans-serif;
+  text-decoration: none;
+}
+
+.shop-header__cta:hover,
+.shop-header__cta:focus-visible {
+  background: #70d0c2;
+}
+
+.shop-product-stories-wrapper {
+  margin-bottom: 3rem;
+}
+
 .shop-products-wrapper {
   border-radius: 4px;
   overflow: hidden;

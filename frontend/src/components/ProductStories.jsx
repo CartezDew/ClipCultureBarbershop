@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { ArrowUpRight, Pause, Play, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 import clipCultureOil from '../assets/videos/clip-culture-oil.mp4';
 import clipCultureOilPoster from '../assets/videos/clip-culture-oil-poster.webp';
 import beardOilRoutine from '../assets/videos/beard-oil-routine.mp4';
 import beardOilRoutinePoster from '../assets/videos/beard-oil-routine-poster.webp';
+import jasonBeardOilRoutine from '../assets/videos/jason-beard-oil-routine.mp4';
+import jasonBeardOilRoutinePoster from '../assets/videos/jason-beard-oil-routine-poster.webp';
 import '../styles/product-stories.css';
 
 const stories = [
@@ -12,35 +14,46 @@ const stories = [
     video: clipCultureOil,
     poster: clipCultureOilPoster,
     name: "Eric's Routine",
-    title: 'In his own routine.',
-    description: 'Eric works Premium Beard Oil through his beard as part of his morning routine.',
-    duration: '0:47',
+    title: 'A look she loves.',
+    description: 'Eric uses Premium Beard Oil in his morning routine. He likes the natural ingredients, and his girl loves the look.',
+    duration: 48,
   },
   {
     video: beardOilRoutine,
     poster: beardOilRoutinePoster,
     name: "Vick's Routine",
-    title: 'The everyday finish.',
-    description: 'Vick reaches for Premium Beard Oil while getting his look ready for the day.',
-    duration: '0:35',
+    title: 'Moisture for his routine.',
+    description: 'Vick uses Premium Beard Oil on his hair, skin, and beard to keep them well moisturized.',
+    duration: 35,
+  },
+  {
+    video: jasonBeardOilRoutine,
+    poster: jasonBeardOilRoutinePoster,
+    name: "Jason's Routine",
+    title: 'A little goes a long way.',
+    description: 'Jason likes the rosemary scent, the shine, and how soft his beard feels to the touch.',
+    duration: 47,
   },
 ];
+
+const formatTime = (seconds) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
 
 export default function ProductStories() {
   const videoRefs = useRef([]);
   const soundIndexRef = useRef(null);
   const manualIndexRef = useRef(null);
-  const manualPausedRef = useRef(new Set());
   const dragRef = useRef(null);
   const [soundIndex, setSoundIndex] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
-  const [started, setStarted] = useState([false, false]);
+  const [started, setStarted] = useState(() => stories.map(() => false));
+  const [ended, setEnded] = useState(() => stories.map(() => false));
+  const [elapsed, setElapsed] = useState(() => stories.map(() => 0));
+  const [durations, setDurations] = useState(() => stories.map((story) => story.duration));
 
   useEffect(() => {
     const videos = [...videoRefs.current];
     if (!('IntersectionObserver' in window)) return;
     const ratios = videos.map(() => 0);
-    const allowAutoplay = !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData;
 
     const syncPlayback = () => {
       if (document.hidden) {
@@ -48,19 +61,13 @@ export default function ProductStories() {
         return;
       }
 
-      let selected = soundIndexRef.current ?? manualIndexRef.current;
+      let selected = manualIndexRef.current;
       if (selected !== null && ratios[selected] < 0.5) {
         videos[selected].muted = true;
         soundIndexRef.current = null;
         manualIndexRef.current = null;
         setSoundIndex(null);
         selected = null;
-      }
-
-      if (selected === null && allowAutoplay) {
-        selected = ratios[0] >= 0.6 && !manualPausedRef.current.has(0)
-          ? 0
-          : ratios[1] >= 0.6 && !manualPausedRef.current.has(1) ? 1 : null;
       }
 
       videos.forEach((video, index) => {
@@ -99,23 +106,24 @@ export default function ProductStories() {
       return;
     }
 
-    videoRefs.current.forEach((other) => {
-      other.pause();
-      other.muted = true;
+    videoRefs.current.forEach((other, otherIndex) => {
+      if (otherIndex !== index) other.muted = true;
     });
-    manualPausedRef.current.delete(index);
-    manualIndexRef.current = index;
     soundIndexRef.current = index;
     setSoundIndex(index);
     video.muted = false;
-    video.currentTime = 0;
-    video.play().catch(() => {});
   };
 
   const togglePlayback = (index) => {
     const video = videoRefs.current[index];
     if (video.paused) {
-      manualPausedRef.current.delete(index);
+      if (window.innerWidth <= 640) {
+        video.closest('.product-story')?.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+      }
       manualIndexRef.current = index;
       videoRefs.current.forEach((other, otherIndex) => {
         if (otherIndex !== index) {
@@ -131,7 +139,6 @@ export default function ProductStories() {
       if (video.ended) video.currentTime = 0;
       video.play().catch(() => {});
     } else {
-      manualPausedRef.current.add(index);
       manualIndexRef.current = null;
       soundIndexRef.current = null;
       setSoundIndex(null);
@@ -194,44 +201,67 @@ export default function ProductStories() {
                   playsInline
                   muted
                   aria-label={`${story.name}. ${story.description}`}
+                  onLoadedMetadata={(event) => {
+                    const duration = event.currentTarget.duration;
+                    if (Number.isFinite(duration)) {
+                      setDurations((current) => current.map((value, item) => item === index ? duration : value));
+                    }
+                  }}
                   onTimeUpdate={(event) => {
-                    if (event.currentTarget.currentTime > 0.1 && !started[index]) {
+                    const currentTime = event.currentTarget.currentTime;
+                    setElapsed((current) => current.map((value, item) => item === index ? currentTime : value));
+                    if (currentTime > 0.1 && !started[index]) {
                       setStarted((current) => current.map((value, item) => item === index ? true : value));
                     }
                   }}
-                  onPlay={() => setPlayingIndex(index)}
+                  onPlay={() => {
+                    setPlayingIndex(index);
+                    setEnded((current) => current.map((value, item) => item === index ? false : value));
+                  }}
                   onPause={() => setPlayingIndex((current) => current === index ? null : current)}
                   onEnded={(event) => {
                     setPlayingIndex((current) => current === index ? null : current);
                     manualIndexRef.current = null;
-                    if (soundIndexRef.current === index) {
-                      event.currentTarget.muted = true;
-                      soundIndexRef.current = null;
-                      setSoundIndex(null);
-                    }
+                    event.currentTarget.muted = true;
+                    event.currentTarget.currentTime = 0;
+                    setElapsed((current) => current.map((value, item) => item === index ? 0 : value));
+                    soundIndexRef.current = null;
+                    setSoundIndex(null);
+                    setStarted((current) => current.map((value, item) => item === index ? false : value));
+                    setEnded((current) => current.map((value, item) => item === index ? true : value));
                   }}
                 />
-                <span className="product-story__number" aria-hidden="true">0{index + 1} / 02</span>
+                <span className="product-story__number" aria-hidden="true">{String(index + 1).padStart(2, '0')} / {String(stories.length).padStart(2, '0')}</span>
                 <button
                   className="product-story__sound"
                   type="button"
                   onClick={() => toggleSound(index)}
-                  aria-label={soundIndex === index ? `Mute ${story.name}` : `Watch ${story.name} with sound`}
+                  aria-label={soundIndex === index ? `Turn sound off for ${story.name}` : `Turn sound on for ${story.name}`}
+                  aria-pressed={soundIndex === index}
+                  title={soundIndex === index ? 'Sound on' : 'Sound off'}
                 >
-                  {soundIndex === index ? <VolumeX size={17} aria-hidden="true" /> : <Volume2 size={17} aria-hidden="true" />}
-                  <span>{soundIndex === index ? 'Mute' : 'Watch with sound'}</span>
+                  {soundIndex === index ? <Volume2 size={19} aria-hidden="true" /> : <VolumeX size={19} aria-hidden="true" />}
                 </button>
                 <button
                   className="product-story__play"
                   type="button"
                   onClick={() => togglePlayback(index)}
-                  aria-label={playingIndex === index ? `Pause ${story.name}` : `Play ${story.name}`}
+                  aria-label={playingIndex === index ? `Pause ${story.name}` : ended[index] ? `Replay ${story.name}` : `Play ${story.name}`}
                 >
-                  {playingIndex === index ? <Pause size={18} fill="currentColor" aria-hidden="true" /> : <Play size={18} fill="currentColor" aria-hidden="true" />}
+                  {playingIndex === index ? <Pause size={18} fill="currentColor" aria-hidden="true" /> : ended[index] ? <><RotateCcw size={18} aria-hidden="true" /><span>Replay</span></> : <Play size={18} fill="currentColor" aria-hidden="true" />}
                 </button>
               </div>
+              <div className="product-story__timeline">
+                <progress
+                  className="product-story__progress"
+                  value={elapsed[index]}
+                  max={durations[index]}
+                  aria-label={`${story.name} playback progress`}
+                />
+                <span className="product-story__remaining">{formatTime(Math.max(0, Math.ceil(durations[index] - elapsed[index])))} left</span>
+              </div>
               <div className="product-story__caption">
-                <span>{story.name} <span aria-hidden="true">·</span> {story.duration}</span>
+                <span>{story.name}</span>
                 <h3>{story.title}</h3>
                 <p>{story.description}</p>
               </div>

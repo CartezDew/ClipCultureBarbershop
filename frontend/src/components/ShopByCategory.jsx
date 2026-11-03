@@ -41,6 +41,33 @@ import LotionFront from '../assets/products/rich-shea-butter-front.webp';
 import GelFront from '../assets/products/bath-shower-gel-front.webp';
 
 const newArrivalImages = [BalmFront, OilFront, ShampooFront, LotionFront, GelFront];
+const categoryProductImages = {
+  'New Arrivals': newArrivalImages,
+  'Hair Care': [Product1, BalmFront, OilFront, ShampooFront],
+  'Body & Skin': [LotionFront, GelFront],
+};
+const categoryImageStorageKey = 'clipculture-category-product-images';
+
+const chooseCategoryImage = (categoryName, currentImages, currentImage, previousVisitImage) => {
+  const usedByOtherCategories = new Set(
+    Object.entries(currentImages)
+      .filter(([name]) => name !== categoryName)
+      .map(([, image]) => image)
+  );
+  const available = categoryProductImages[categoryName].filter(image => !usedByOtherCategories.has(image));
+  const newVisitChoices = available.filter(image => image !== previousVisitImage);
+  const fresh = newVisitChoices.filter(image => image !== currentImage);
+  const choices = fresh.length ? fresh : newVisitChoices.length ? newVisitChoices : available;
+  return choices[Math.floor(Math.random() * choices.length)];
+};
+
+const saveCategoryImages = (images) => {
+  try {
+    window.localStorage.setItem(categoryImageStorageKey, JSON.stringify(images));
+  } catch {
+    // The carousel still works when browser storage is unavailable.
+  }
+};
 
 const categoryTestimonials = {
   newArrivals: [
@@ -112,6 +139,7 @@ const ShopByCategory = () => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(false); // Start as false, will be enabled after delay
   const [activeGlobalIndex, setActiveGlobalIndex] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(null);
+  const [categoryImages, setCategoryImages] = useState({});
 
   const carouselRef = useRef(null); // viewport
   const trackRef = useRef(null); // inner track that moves
@@ -135,6 +163,8 @@ const ShopByCategory = () => {
   const bagRef = useRef(null);
   const prevActiveIndexRef = useRef(null);
   const categoryImageCacheRef = useRef({}); // Track last image used for each category
+  const previousVisitImagesRef = useRef({});
+  const initialImagesSetRef = useRef(false);
 
   const clearScheduledResume = useCallback(() => {
     if (resumeTimeoutRef.current) {
@@ -308,7 +338,19 @@ const ShopByCategory = () => {
     const rawList = categoryTestimonials[key] || categoryTestimonials.newArrivals;
     
     // Filter out any empty or invalid testimonials
-    const list = Array.isArray(rawList) ? rawList.filter(t => t && t.name && t.quote) : [];
+    let list = Array.isArray(rawList) ? rawList.filter(t => t && t.name && t.quote) : [];
+
+    if (categoryName === 'Hair Care' || categoryName === 'Body & Skin') {
+      const otherImages = new Set(
+        Object.entries(categoryImageCacheRef.current)
+          .filter(([name]) => name !== categoryName)
+          .map(([, image]) => image)
+      );
+      const available = list.filter(item => !otherImages.has(item.productImage));
+      const newVisitChoices = available.filter(item => item.productImage !== previousVisitImagesRef.current[categoryName]);
+      const fresh = newVisitChoices.filter(item => item.productImage !== categoryImageCacheRef.current[categoryName]);
+      list = fresh.length ? fresh : newVisitChoices.length ? newVisitChoices : available.length ? available : list;
+    }
     
     if (list && list.length > 0) {
       // Randomly select from all available testimonials in the category
@@ -321,7 +363,7 @@ const ShopByCategory = () => {
       
       // Cache the image for this category when testimonial is selected
       if (categoryName === 'New Arrivals') {
-        categoryImageCacheRef.current['New Arrivals'] = newArrivalImages[Math.floor(Math.random() * newArrivalImages.length)];
+        categoryImageCacheRef.current['New Arrivals'] = chooseCategoryImage('New Arrivals', categoryImageCacheRef.current, categoryImageCacheRef.current['New Arrivals'], previousVisitImagesRef.current['New Arrivals']);
       } else if ((categoryName === 'Hair Care' || categoryName === 'Products') && selectedTestimonial.productImage) {
         categoryImageCacheRef.current['Hair Care'] = selectedTestimonial.productImage;
       } else if (categoryName === 'Body & Skin' && selectedTestimonial.productImage) {
@@ -333,6 +375,8 @@ const ShopByCategory = () => {
       } else if (categoryName === 'Franchise' && selectedTestimonial.shopImage) {
         categoryImageCacheRef.current['Franchise'] = selectedTestimonial.shopImage;
       }
+      setCategoryImages({ ...categoryImageCacheRef.current });
+      saveCategoryImages(categoryImageCacheRef.current);
     } else {
       // Fallback to newArrivals if current category has no testimonials
       const fallbackList = categoryTestimonials.newArrivals || [];
@@ -345,10 +389,26 @@ const ShopByCategory = () => {
     }
   }, []);
 
-  // Set initial testimonial for "New Arrivals" on mount
+  // Pick a distinct set on every visit, avoiding the previous visit's images.
   useEffect(() => {
-    setRandomTestimonialForCategory('New Arrivals');
-  }, [setRandomTestimonialForCategory]); // Run only on mount
+    if (initialImagesSetRef.current) return;
+    initialImagesSetRef.current = true;
+    let previous = {};
+    try {
+      previous = JSON.parse(window.localStorage.getItem(categoryImageStorageKey) || '{}') || {};
+    } catch {
+      previous = {};
+    }
+    previousVisitImagesRef.current = previous;
+    const images = {};
+    for (const name of ['Hair Care', 'Body & Skin', 'New Arrivals']) {
+      images[name] = chooseCategoryImage(name, images, null, previous[name]);
+    }
+    categoryImageCacheRef.current = images;
+    setCategoryImages(images);
+    saveCategoryImages(images);
+    setActiveTestimonial(categoryTestimonials.newArrivals[0]);
+  }, []);
 
   // Sync a random testimonial with the active category whenever it changes
   // Skip initial mount (when activeGlobalIndex is 0) since we already set it above
@@ -432,35 +492,7 @@ const ShopByCategory = () => {
 
   const currentName = displayCategories[baseIndex]?.name || 'New Arrivals';
   
-  // Get the product/book/shop image for Products/Books/Franchise categories
-  // Uses cached image that persists until the category becomes active again with a new testimonial
-  const getCategoryImage = (category) => {
-    // Check if we have a cached image for this category
-    if (category.name === 'New Arrivals' && categoryImageCacheRef.current['New Arrivals']) {
-      return categoryImageCacheRef.current['New Arrivals'];
-    }
-    if (category.name === 'Hair Care' && categoryImageCacheRef.current['Hair Care']) {
-      return categoryImageCacheRef.current['Hair Care'];
-    }
-    if (category.name === 'Body & Skin' && categoryImageCacheRef.current['Body & Skin']) {
-      return categoryImageCacheRef.current['Body & Skin'];
-    }
-    if (category.name === 'Products' && categoryImageCacheRef.current['Products']) {
-      return categoryImageCacheRef.current['Products'];
-    }
-    if (category.name === 'Books' && categoryImageCacheRef.current['Books']) {
-      return categoryImageCacheRef.current['Books'];
-    }
-    if (category.name === 'Advertise' && categoryImageCacheRef.current['Advertise']) {
-      return categoryImageCacheRef.current['Advertise'];
-    }
-    if (category.name === 'Franchise' && categoryImageCacheRef.current['Franchise']) {
-      return categoryImageCacheRef.current['Franchise'];
-    }
-    
-    // Return default image if no cached image exists
-    return category.image;
-  };
+  const getCategoryImage = (category) => categoryImages[category.name] || category.image;
   
   const renderTitle = () => {
     if (currentName === 'Franchise') {

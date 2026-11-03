@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import ShopByCategory from '../components/ShopByCategory.jsx';
 import ProductsBanner from '../components/ProductsBanner.jsx';
 import TopProducts from '../components/TopProducts.jsx';
+import ProductStories from '../components/ProductStories.jsx';
 import Apparel from '../components/Apparel.jsx';
 import '../styles/shop.css';
 import '../styles/about.css';
@@ -57,17 +58,21 @@ const Shop = () => {
         <div className="shop-header">
           <h1 className="shop-title">The Culture Collection</h1>
           <p className="shop-subtitle">Curated products and experiences that elevate how you look, lead, and live.</p>
+          <a className="shop-header__cta" href="#premium-grooming-products">Shop Grooming Products</a>
         </div>
         
         <div className="shop-category-wrapper">
           <ShopByCategory />
         </div>
-        
-        <ProductsBanner />
+
+        <div className="shop-product-stories-wrapper">
+          <ProductStories />
+        </div>
         
         <div className="shop-products-wrapper">
           <TopProducts />
         </div>
+        <ProductsBanner />
         <div className="shop-apparel-wrapper">
           <Apparel />
         </div>
