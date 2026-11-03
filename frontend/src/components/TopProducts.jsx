@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { loadProductDetail } from '../lib/productDetailRoute.js';
 import '../styles/top-products.css';
 import Product1 from '../assets/products/Product-1.webp';
 import CurlTwistBack from '../assets/products/curl-twist-ingredients-back.webp';
@@ -18,10 +19,26 @@ import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
 const TopProducts = ({ limit }) => {
+  const sectionRef = useRef(null);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const preload = () => { loadProductDetail().catch(() => {}); };
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        preload();
+        observer.disconnect();
+      }
+    }, { rootMargin: '800px 0px' });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const products = [
     {
@@ -137,7 +154,7 @@ const TopProducts = ({ limit }) => {
 
   return (
     <>
-      <section className="top-products" id="premium-grooming-products">
+      <section className="top-products" id="premium-grooming-products" ref={sectionRef}>
         <div className="top-products__container">
           <div className="top-products__header">
             <h2 className="top-products__title">Premium Grooming Products</h2>
@@ -216,6 +233,8 @@ const TopProducts = ({ limit }) => {
                       to={`/products/${product.slug}`} 
                       state={{ from: isHomePage ? 'home' : 'shop' }}
                       className="productbtn--learn-more productbtn--full-width"
+                      onPointerEnter={() => loadProductDetail().catch(() => {})}
+                      onFocus={() => loadProductDetail().catch(() => {})}
                     >
                       Learn More
                       <ArrowRight size={16} />

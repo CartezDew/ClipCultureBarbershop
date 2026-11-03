@@ -452,23 +452,11 @@ const Home = () => {
           <p className="services-subtitle">Walk-ins are welcome!</p>
           <div className="services-divider"></div>
           <h2 className="services__section-title-main">* Service times are approximate and may vary by complexity *.</h2>
-          <motion.div 
-            className="services-grid"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {services.slice(0, 6).map((service, index) => (
-              <motion.div 
+          <div className="services-grid">
+            {services.slice(0, 6).map((service) => (
+              <div
                 key={service.id} 
                 className="service-item"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 0.5 + (index * 0.1),
-                  ease: "easeOut"
-                }}
                 onClick={() => handleServiceClick(service)}
                 style={{ cursor: 'pointer' }}
               >
@@ -478,9 +466,9 @@ const Home = () => {
                   <div className="service-divider">|</div>
                   <div className="service-duration-pill">{service.durationMins} min <strong>*</strong></div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
           <div className="text-center mt-4">
             <Link to="/services" className="btn btn--secondary">
               View All Services

@@ -34,3 +34,11 @@
   .franchise-joinus-wrapper .join-email-form,
   .speaking-joinus-wrapper .join-email-form { transition-delay: .16s; }
 }
+
+@media (max-width: 600px) {
+  .product-story.page-scroll-reveal {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
+  }
+}

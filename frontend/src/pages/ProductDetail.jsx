@@ -321,7 +321,8 @@ const ProductDetail = () => {
               <img 
                 src={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? product.hoverImage : product.image}
                 alt={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? `${product.name} back label` : product.name}
-                loading="lazy" 
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
 
