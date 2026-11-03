@@ -1,4 +1,4 @@
-/* Mentorship Page Styles */
+/* Franchise Page Styles */
 .franchise-page {
   background: #1a1a1a;
   color: white;
@@ -21,22 +21,21 @@
 }
 
 .franchise-header-image {
-  float: left;
-  width: min(42%, 500px);
-  margin: 0 3rem 1rem 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .franchise-header-content {
-  display: block;
-  overflow: visible;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
 }
 
 .franchise-header-content .franchise-intro {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   background: none;
   backdrop-filter: none;
   border-radius: 0;
@@ -46,22 +45,41 @@
 .franchise-features {
   clear: both;
   width: 100%;
-  border-top: 3px solid rgba(33, 199, 133, 0.4);
-  border-bottom: 3px solid rgba(33, 199, 133, 0.4);
-  border-radius: 15px;
-  padding: 1rem 2rem;
+  border: 1px solid rgba(33, 199, 133, 0.28);
+  border-left: 3px solid var(--green-new);
+  border-radius: 4px;
+  padding: 1.4rem 2rem;
+  background: #202622;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 3rem;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  margin-top: 2rem;
 }
 
+.franchise-features-title, .franchise-eyebrow, .franchise-card-kicker {
+  color: var(--green-new);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.franchise-features-title { margin: 0 0 1rem; }
+
 .franchise-image {
-  max-width: 550px;
-  height: auto;
-  max-height: auto;
+  display: block;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   border-radius: 2px;
+}
+
+.franchise-header-image .franchise-image:last-child {
+  width: 74%;
+  margin: -2rem 0 0 auto;
+  border: 4px solid #1a1a1a;
 }
 
 .franchise-features-list {
@@ -71,7 +89,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 1.5rem; /* widen spacing between columns only */
-  row-gap: 0.4rem; /* tight spacing between rows */
+  row-gap: .8rem;
 }
 
 .franchise-feature-item {
@@ -82,14 +100,6 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   justify-content: flex-start;
 }
-  .franchise-features {
-    padding: 1rem 1.5rem;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    text-wrap: wrap;
-  }
-
 .franchise-checkmark {
   color: var(--green-new);
   font-weight: bold;
@@ -106,16 +116,19 @@
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.2;
   text-align: left;
+  max-width: 12ch;
 }
 
 .franchise-subtitle {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--green-new);
-  font-weight: 600;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  color: #cbd7ce;
+  font-weight: 500;
   /* font-style: italic; */
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   text-align: left;
+  max-width: 48ch;
+  line-height: 1.5;
 }
 
 .franchise-subtitle em strong {
@@ -131,6 +144,12 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+.franchise-intro p { max-width: 62ch; margin: 0 0 1rem; }
+
+.franchise-program { max-width: 680px; margin-top: 4rem; }
+.franchise-program-title { margin: .5rem 0; font-family: 'Rubik', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; }
+.franchise-program > p { margin: 0; color: #cbd7ce; line-height: 1.5; }
+
 .franchise-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -140,10 +159,33 @@
 /* Programs Section */
 .franchise-programs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 4rem;
-  align-items: stretch; /* Make cards equal height */
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+.franchise-program-card:first-child .franchise-program-content,
+.franchise-program-card:nth-child(2) .franchise-program-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.franchise-program-card:nth-child(2) .franchise-requirements-section:last-child {
+  grid-column: 1 / -1;
+}
+
+.franchise-program-card:nth-child(2) .franchise-requirements-section:nth-child(2) {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.franchise-program-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .franchise-program-card {
@@ -152,7 +194,7 @@
   backdrop-filter: blur(10px);
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
   text-align: center;
   display: flex;
   flex-direction: column; /* Stack content vertically */
@@ -160,7 +202,11 @@
 
 .franchise-program-header {
   margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #c9d3cb;
 }
+
+.franchise-card-kicker { display: block; margin-bottom: .6rem; }
 
 .franchise-program-subtitle {
   font-size: clamp(1.3rem, 2.5vw, 1.6rem);
@@ -202,24 +248,16 @@
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.6;
   color: #1a1a1a;
-  margin: 0 0 2rem 0;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.franchise-program-content .franchise-program-description:last-of-type {
-  text-align: center;
-}
-
-.franchise-program-content .franchise-program-description:last-of-type strong {
-  font-weight: 900;
-  color: var(--green-new);
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
 }
 
 /* Franchise Requirements Styling */
 .franchise-requirements-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.4rem;
 }
+
+.franchise-requirements-section + .franchise-requirements-section { padding-top: 1.25rem; border-top: 1px solid #c9d3cb; }
 
 .franchise-requirements-title {
   font-size: clamp(1rem, 1.8vw, 1.2rem);
@@ -333,7 +371,7 @@
   color: white;
   border: 2px solid #bababa;
   width: 100%;
-  margin-top: auto; /* Push button to bottom */
+  margin-top: 0;
 }
 
 .btn--franchise:hover {
@@ -371,18 +409,6 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 1250px) {
-  .franchise-image {
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .franchise-header-image {
-    margin: 0 2rem 1rem 0;
-  }
-}
-
 @media (max-width: 825px) {
   .franchise-feature-item {
     font-size: 0.92rem;
@@ -410,12 +436,6 @@
     margin: 0 auto;
     padding: 0 2rem;
   }
-  /* .franchise-header-image {
-    float: none;
-    width: min(70%, 320px);
-    margin: 0 auto 1.5rem auto;
-  } */
-  
   .franchise-header-content {
     text-align: center;
   }
@@ -448,11 +468,49 @@
 }
 
 @media (max-width: 720px) {
+  .franchise-program-card:first-child .franchise-program-content,
+  .franchise-program-card:nth-child(2) .franchise-program-content {
+    grid-template-columns: 1fr;
+  }
+
+  .franchise-program-card:nth-child(2) .franchise-requirements-section:last-child {
+    grid-column: auto;
+  }
+
+  .franchise-program-card:nth-child(2) .franchise-requirements-section:nth-child(2) {
+    padding-top: 1.25rem;
+    border-top: 1px solid #c9d3cb;
+  }
+
+  .franchise-header-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .franchise-header-copy { order: 1; }
+
+  .franchise-header-image {
+    order: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+    align-items: center;
+  }
+
+  .franchise-header-image .franchise-image:last-child {
+    width: 100%;
+    margin: 0;
+    border: 0;
+  }
+
   .franchise-title {
     font-size: clamp(2rem, 4vw, 2.5rem);
+    text-align: center;
+    margin-inline: auto;
   }
   .franchise-subtitle {
     font-size: clamp(1.5rem, 3vw, 2rem);
+    text-align: center;
   }
   .franchise-intro-text {
     font-size: clamp(1rem, 1.8vw, 1.2rem);
@@ -466,9 +524,6 @@
   .franchise-intro-text-4 {
     font-size: clamp(1rem, 1.8vw, 1.2rem);
   }
-  .franchise-header-image {
-    margin: 0 1.5rem 1rem 0;
-}
 }
 
 @media (max-width: 685px) {
@@ -478,6 +533,12 @@
     margin-top: 2rem;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .franchise-program-actions {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    padding-inline: 2.5rem;
   }
 }
 
@@ -504,54 +565,8 @@
 }
 
 @media (max-width: 556px) {
-  .franchise-header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .franchise-header-content > .franchise-title {
-    order: 1;
-    text-align: center;
-  }
-
-  .franchise-header-content > .franchise-header-image {
-    order: 2;
-  }
-
-  .franchise-header-content > .franchise-subtitle {
-    order: 3;
-    margin-top: 1rem;
-    text-align: center;
-  }
-
-  .franchise-header-content > .franchise-intro {
-    order: 4;
-    text-align: left;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 1.25rem;
-  }
-
-  .franchise-header-image {
-    float: none;
-    width: 100%;
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
   .franchise-features {
     margin-top: 0rem;
-  }
-
-  .franchise-header-image .franchise-image {
-    width: 48%;
-    max-width: 220px;
-    height: auto;
   }
   .franchise-title {
     font-size: clamp(1.8rem, 4vw, 2.3rem);
@@ -563,6 +578,7 @@
     padding-left: 0rem;
     padding-right: 0rem;
   }
+  .franchise-program-actions { padding-inline: 0; }
   .btn--franchise {
     font-size: .9rem;
   }

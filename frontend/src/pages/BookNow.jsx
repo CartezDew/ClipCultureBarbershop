@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 import Footer from '../components/Footer';
 import '../styles/book-now.css';
 import Logo from '../assets/images/New_Logo.webp';
@@ -328,10 +329,7 @@ const BookNow = () => {
                         <img src={option.image} alt={option.name} loading="lazy" />
                         <div className="book-now-option-overlay">
                           <div className="book-now-option-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                              <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                            <MapPin size={22} strokeWidth={2.2} aria-hidden="true" />
                           </div>
                         </div>
                       </div>
@@ -339,6 +337,9 @@ const BookNow = () => {
                         <span className="book-now-option-badge">{option.subtitle}</span>
                         <h3>{option.name}</h3>
                         <p className="book-now-option-address">{option.address}</p>
+                        <span className="book-now-option-action" aria-hidden="true">
+                          Book <ArrowUpRight size={17} strokeWidth={2.4} />
+                        </span>
                       </div>
                       <div className="book-now-option-check">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -387,6 +388,9 @@ const BookNow = () => {
                         </svg>
                         {option.locationNote}
                       </p>
+                      <span className="book-now-option-action" aria-hidden="true">
+                        Book <ArrowUpRight size={17} strokeWidth={2.4} />
+                      </span>
                     </div>
                     <div className="book-now-option-check">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">

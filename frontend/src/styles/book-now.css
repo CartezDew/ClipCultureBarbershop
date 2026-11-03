@@ -376,6 +376,28 @@ body.book-now-page-active .App {
   box-shadow: 0 0 0 6px rgba(10, 151, 134, 0.15), var(--book-now-shadow-hover);
 }
 
+.book-now-option-action {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .8rem;
+  padding: .55rem .75rem;
+  border-radius: 999px;
+  background: var(--primary-black);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .14);
+  pointer-events: none;
+}
+
+.book-now-option-card:hover .book-now-option-action,
+.book-now-option-card:focus-visible .book-now-option-action {
+  background: #333;
+}
+
 .book-now-option-image {
   width: 100%;
   height: 180px;
@@ -406,22 +428,27 @@ body.book-now-page-active .App {
 }
 
 .book-now-option-icon {
-  width: 40px;
-  height: 40px;
-  background: white;
+  width: 44px;
+  height: 44px;
+  background: rgba(26, 26, 26, .9);
+  border: 1px solid rgba(255, 255, 255, .55);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--book-now-accent);
+  color: #5de0d0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .28);
 }
 
 .book-now-option-icon--featured {
   background: linear-gradient(135deg, var(--book-now-accent), var(--book-now-accent-dark));
   color: white;
+  border: 0;
 }
 
 .book-now-option-info {
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
 }
 
@@ -476,7 +503,7 @@ body.book-now-page-active .App {
 .book-now-option-check {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   width: 32px;
   height: 32px;
   background: var(--book-now-accent);

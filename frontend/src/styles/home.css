@@ -1,8 +1,8 @@
 /* Home Page Styles */
 
 /* Services Section Background */
-.section--light {
-  background: linear-gradient(to bottom, #0d233d, #6a9298);
+.home-services-preview {
+  background: linear-gradient(to bottom, #0d233d 0%, #4c6d78 65%, #6a9298 88%, #6a9298 100%);
   /* color: rgb(193, 12, 12); */
 }
 
@@ -175,6 +175,17 @@
 .section--light h2 {
   font-size: clamp(2.5rem, 3.5vw, 2.8rem);
   margin-bottom: 1rem;
+}
+
+/* Match the Services page note without depending on that route's stylesheet. */
+.section--light .services__section-title-main {
+  font-size: clamp(.9rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  color: var(--primary-green);
+  line-height: 1.2;
+  text-align: center;
+  padding: 1rem 0;
+  opacity: .7;
 }
 
 .services-subtitle {
@@ -1212,12 +1223,14 @@
 
   .social-proof__content {
     padding-left: .5rem;
+    align-items: flex-start;
+    text-align: left;
   }
 
 
   .social-proof__number {
     font-size: 1.2rem;
-    text-align: center;
+    text-align: left;
   }
   .social-proof__icon {
     width: 20px;

@@ -36,7 +36,7 @@ const VendingMachines = () => {
   return (
     <div className="vending-page">
       <section className="vending-hero" id="hero" aria-labelledby="vending-title">
-        <div className="vending-hero-copy">
+        <div className="vending-hero-copy" data-scroll-reveal="vending-copy">
           <span className="vending-eyebrow">Vending partnerships <span aria-hidden="true">/</span> Sandy Springs</span>
           <h1 id="vending-title">Put your brand<br /><em>in the room.</em></h1>
           <div className="vending-hero-stat" aria-label="Over 1,600 clients visit each month">
@@ -49,7 +49,7 @@ const VendingMachines = () => {
             <span className="vending-location"><MapPin size={16} aria-hidden="true" /> Sandy Springs, Georgia</span>
           </div>
         </div>
-        <div className="vending-hero-media">
+        <div className="vending-hero-media" data-scroll-reveal="vending-photo">
           <img src={ShopImage} alt="Inside Clip Culture Barbershop, with a vending machine beside the barber stations" />
           <span className="vending-image-caption">THE SPACE · CLIP CULTURE BARBERSHOP</span>
         </div>
@@ -58,31 +58,31 @@ const VendingMachines = () => {
       {/* Monthly visits are cited on Advertise; the other figures match Home and About. */}
       <section className="vending-proof" aria-label="Clip Culture customer figures">
         <div className="vending-proof-inner">
-          <div className="vending-proof-intro"><span className="vending-eyebrow">The audience</span><p>A local shop with a history of bringing people through its doors.</p></div>
-          <div className="vending-proof-item"><span className="vending-proof-icon"><Handshake size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>155K+</strong><span>clients served</span></span></div>
-          <div className="vending-proof-item"><span className="vending-proof-icon"><FaRegThumbsUp size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>94%</strong><span>client satisfaction</span></span></div>
-          <div className="vending-proof-item"><span className="vending-proof-icon"><BicepIcon size={30} /></span><span className="vending-proof-content"><strong>9+</strong><span>years strong</span></span></div>
+          <div className="vending-proof-intro" data-scroll-reveal="vending-copy"><span className="vending-eyebrow">The audience</span><p>A local shop with a history of bringing people through its doors.</p></div>
+          <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><Handshake size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>155K+</strong><span>clients served</span></span></div>
+          <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><FaRegThumbsUp size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>94%</strong><span>client satisfaction</span></span></div>
+          <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><BicepIcon size={30} /></span><span className="vending-proof-content"><strong>9+</strong><span>years strong</span></span></div>
         </div>
       </section>
 
       <section className="vending-opportunity" aria-labelledby="vending-opportunity-title">
-        <div className="vending-section-heading">
+        <div className="vending-section-heading" data-scroll-reveal="vending-copy">
           <span className="vending-eyebrow">Why this space</span>
           <h2 id="vending-opportunity-title">A familiar place.<br /><em>A new way to shop.</em></h2>
           <p>Clients already come to Clip Culture for their grooming. A well-placed machine could make your products easy to discover during a visit. Placement and product fit are discussed with each owner.</p>
         </div>
         <div className="vending-benefits">
-          <article>
+          <article data-scroll-reveal="vending-card">
             <span>01 / THE VISIT</span>
             <h3>Be where customers spend time.</h3>
             <p>Give clients and guests a chance to see your products while they are in the shop.</p>
           </article>
-          <article>
+          <article data-scroll-reveal="vending-card">
             <span>02 / THE FIT</span>
             <h3>Bring your own point of view.</h3>
             <p>Tell us what your machine sells and how it fits a space built around style, self-care, and community.</p>
           </article>
-          <article>
+          <article data-scroll-reveal="vending-card">
             <span>03 / THE DETAILS</span>
             <h3>Find the right place together.</h3>
             <p>Share your machine's footprint and power needs so we can talk through placement.</p>
@@ -91,13 +91,13 @@ const VendingMachines = () => {
       </section>
 
       <section className="vending-inquiry" id="vending-inquiry" aria-labelledby="vending-inquiry-title">
-        <div className="vending-inquiry-copy">
+        <div className="vending-inquiry-copy" data-scroll-reveal="vending-copy">
           <span className="vending-eyebrow">Your next step</span>
           <h2 id="vending-inquiry-title">Let's make room<br />for your brand.</h2>
           <p>Tell us what you sell and what your machine needs. We will follow up to discuss the space and whether it is a good fit.</p>
           <ArrowDownRight className="vending-inquiry-arrow" size={70} strokeWidth={1} aria-hidden="true" />
         </div>
-        <div className="vending-form-panel">
+        <div className="vending-form-panel" data-scroll-reveal="vending-photo">
           {submitted ? (
             <div className="vending-form-success" role="status">
               <span>Inquiry received</span>

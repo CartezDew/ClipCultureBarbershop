@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { RotateCcw } from 'lucide-react';
 import '../styles/apply.css';
 import image8 from '../assets/gallery/image-25.webp';
+import founderMessage from '../assets/videos/founder-message.mp4';
+import founderMessagePoster from '../assets/videos/founder-message-poster.webp';
 import JoinUs from '../components/JoinUs.jsx';
 import ApplicantFormModal from '../components/ApplicantFormModal.jsx';
 
 const Apply = () => {
   const [showModal, setShowModal] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const videoRef = useRef(null);
+
+  const replayVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = 0;
+    setVideoEnded(false);
+    video.play().catch(() => {});
+  };
 
   return (
     <div className="apply-page">
@@ -57,16 +70,34 @@ const Apply = () => {
       <div className="apply-video-section">
         <div className="apply-video-container">
           <div className="apply-video-wrapper">
-            <iframe 
-              width="560" 
-              height="315" 
-              src="https://www.youtube.com/embed/ChdMhO7E5EA?si=zPJNayAsQ-t63BUH" 
-              title="YouTube video player" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen
-            ></iframe>
+            <video
+              ref={videoRef}
+              controls={!videoEnded}
+              playsInline
+              preload="metadata"
+              poster={founderMessagePoster}
+              aria-label="A message from Clip Culture founder David Brown"
+              onPlay={() => setVideoEnded(false)}
+              onEnded={(event) => {
+                event.currentTarget.currentTime = 0;
+                setVideoEnded(true);
+              }}
+            >
+              <source
+                src={founderMessage}
+                type="video/mp4"
+              />
+              Your browser does not support video playback.
+            </video>
+            {videoEnded && (
+              <>
+                <img className="apply-video-end-poster" src={founderMessagePoster} alt="" aria-hidden="true" />
+                <button className="apply-video-replay" type="button" onClick={replayVideo} aria-label="Replay founder video">
+                  <RotateCcw size={18} aria-hidden="true" />
+                  <span>Replay</span>
+                </button>
+              </>
+            )}
           </div>
           
           <div className="apply-video-content">

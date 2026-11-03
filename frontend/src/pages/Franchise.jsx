@@ -126,95 +126,81 @@ const Franchise = () => {
                 className="franchise-image"
               />
             </div>
-            <h1 className="franchise-title">Why Clip Culture Barbershop?</h1>
-            <h2 className="franchise-subtitle">Franchise <em><strong>OPPORTUNITY</strong></em> Awaits</h2>
-            <div className="franchise-intro">
-              <p className="franchise-intro-text">
-               From humble beginnings to becoming one of <strong>Atlanta’s top-rated barbershops</strong>, Clip Culture has built a reputation for excellence, innovation, and community. 
-               Founded by <strong>David Brown</strong>, the brand grew from a single chair to a thriving Sandy Springs barbershop—proving that with the right blueprint and mindset, success is within reach.
-              </p>
-              <p className="franchise-intro-text-2">
-              Clip Culture was created to redefine the modern barbershop experience—blending <strong>exceptional craftsmanship, premium service, and a true sense of culture</strong>. 
-              That same foundation now powers a proven <strong>franchise model</strong> built for passionate entrepreneurs ready to take ownership of their future.
-              </p>
-              <p className="franchise-intro-text-3">
-              With a brand that’s expanded into <strong>grooming products, apparel, books, and mentorship</strong>, Clip Culture isn’t just a barbershop—it’s a movement. 
-              </p>
-              <p className="franchise-intro-text-4">
-              Join a legacy that continues to <strong>define the standard and shape the culture</strong> .
-              </p>
+            <div className="franchise-header-copy">
+              <span className="franchise-eyebrow">Franchise opportunity</span>
+              <h1 className="franchise-title">Own a Clip Culture barbershop.</h1>
+              <p className="franchise-subtitle">Build a neighborhood destination with a brand rooted in craft, service, and community.</p>
+              <div className="franchise-intro">
+                <p className="franchise-intro-text">
+                  Founded by <strong>David Brown</strong> in Sandy Springs, Clip Culture brings a distinct approach to barbering: skilled cuts, thoughtful service, and a welcoming place for clients.
+                </p>
+                <p className="franchise-intro-text-2">
+                  The franchise opportunity pairs that brand experience with training, operational guidance, and support as you build your own shop.
+                </p>
+              </div>
             </div>
           </div>
           <div className="franchise-features">
+            <p className="franchise-features-title">Support at a glance</p>
             <ul className="franchise-features-list">
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Complete Setup & Support
+                Launch support
               </li>
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Hands-On Training
+                Hands-on training
               </li>
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Marketing Made Easy
+                Marketing guidance
               </li>
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Operational Guidance
+                Operations support
               </li>
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Mentorship from Experts
+                Ongoing mentorship
               </li>
               <li className="franchise-feature-item">
                 <span className="franchise-checkmark">✓</span>
-                Scalable Growth Potential
+                Growth planning
               </li>
             </ul>
           </div>
         </div>
         <div className="franchise-content">
           <div className="franchise-program">
-            </div>{/* <h2 className="franchise-program-title">
-              <strong>Ready to invest</strong> in your future? Learn more about our franchise opportunities:
-            </h2> */}
+            <span className="franchise-eyebrow">Explore the opportunity</span>
+            <h2 className="franchise-program-title">What ownership looks like</h2>
+            <p>Start with the support available, then review the qualifications and next steps.</p>
+          </div>
           
           <div className="franchise-programs">
             <div className="franchise-program-card">
               <div className="franchise-program-header">
-                <h3 className="franchise-program-subtitle">Own Your Own Clip Culture</h3>
-                <h4 className="franchise-program-subtitle"><strong>Barbershop Franchise</strong></h4>
+                <span className="franchise-card-kicker">01 / The support</span>
+                <h3 className="franchise-program-subtitle">Build with Clip Culture</h3>
               </div>
               <div className="franchise-program-content">
                 <p className="franchise-program-description">
-                The Clip Culture Barbershop Franchise Opportunity is reshaping the hair industry with a modern, proven approach to business ownership. 
-                Our streamlined model keeps entry costs manageable while providing a <strong>strategic blueprint for long-term success</strong>.
+                  Open a barbershop with guidance on setup, training, marketing, and daily operations.
                 </p>
                 <p className="franchise-program-description">
-                We’re passionate about empowering ambitious entrepreneurs to take control of their future with the backing of a trusted brand and a network of experienced professionals. 
-                With <strong>over 20 years of combined industry expertise</strong>, the Clip Culture team is committed to your growth every step of the way.
+                  Talk with the team about your market, the space you envision, and what it takes to launch. You own the business; Clip Culture helps you prepare to run it.
                 </p>
-                <p className="franchise-program-description">
-                You’re in business <strong>for yourself, not by yourself</strong>.
-                </p>
-                <p className="franchise-program-description">
-                CALL TODAY TO GET MORE INFO!<br/>
-                <strong>1 (404) 458-2993</strong>
-                </p>
-                <button className="btn btn--franchise" onClick={() => setShowRequestInfoModal(true)}>
-                  Request Information
-                </button>
               </div>
             </div>
             
             <div className="franchise-program-card">
               <div className="franchise-program-header">
-                <h3 className="franchise-program-subtitle">Franchise <strong>Requirements</strong>:</h3>
+                <span className="franchise-card-kicker">02 / The qualifications</span>
+                <h3 className="franchise-program-subtitle">See if it fits</h3>
               </div>
               <div className="franchise-program-content">
                 <div className="franchise-requirements-section">
-                  <h4 className="franchise-requirements-title">Ideal Candidate Profile:</h4>
+                  <h4 className="franchise-requirements-title">Who we're looking for</h4>
                   <ul className="franchise-requirements-list">
                     <li>Resides in or near the market they plan to develop</li>
                     <li>Demonstrates strong leadership and team-building skills</li>
@@ -224,7 +210,7 @@ const Franchise = () => {
                 </div>
                 
                 <div className="franchise-requirements-section">
-                  <h4 className="franchise-requirements-title">Financial Overview:</h4>
+                  <h4 className="franchise-requirements-title">Financial overview</h4>
                   <ul className="franchise-requirements-list">
                     <li>Net worth: <strong>$200,000+</strong> (excluding primary residence)</li>
                     <li>Liquid capital: <strong>$50,000+</strong> (cash or securities)</li>
@@ -233,46 +219,19 @@ const Franchise = () => {
                 </div>
                 
                 <div className="franchise-requirements-section">
-                  <h4 className="franchise-requirements-title">Additional Details:</h4>
+                  <h4 className="franchise-requirements-title">Good to know</h4>
                   <ul className="franchise-requirements-list">
                     <li>Must be financially able to support personal expenses during ramp-up</li>
                     <li><strong>No barbering experience required</strong> — training and support provided</li>
                   </ul>
                 </div>
                 
-                <button className="btn btn--franchise" onClick={() => setShowApplyModal(true)}>
-                  Apply Now
-                </button>
               </div>
             </div>
           </div>
-          <div className="franchise-features">
-            <ul className="franchise-features-list">
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Recession-Resistant Market
-              </li>
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Consistent Demand — Hair Always Grows
-              </li>
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Billion-Dollar Cash Flow Opportunity
-              </li>
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Zero Waste — Nothing Spoils
-              </li>
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Underserved, Ever-Growing Market
-              </li>
-              <li className="franchise-feature-item">
-                <span className="franchise-checkmark">✓</span>
-                Engaging and Rewarding Work
-              </li>
-            </ul>
+          <div className="franchise-program-actions">
+            <button className="btn btn--franchise" onClick={() => setShowRequestInfoModal(true)}>Request Information</button>
+            <button className="btn btn--franchise" onClick={() => setShowApplyModal(true)}>Apply Now</button>
           </div>
         </div>
         

@@ -448,6 +448,63 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Give the longer speaking brief a clear reading order below the hero. */
+.speaking-bento-grid { gap: 1rem; }
+.speaking-bento-card { padding: clamp(1.35rem, 2.5vw, 2rem); }
+.speaking-card-title { margin-bottom: .75rem; font-size: clamp(1.2rem, 1.8vw, 1.45rem); }
+.speaking-card-text { font-size: 1rem; line-height: 1.65; opacity: 1; }
+.speaking-narrative-container { max-width: 960px; }
+.speaking-narrative-main-title {
+  max-width: 22ch;
+  margin: 0 auto .75rem;
+  padding: 0;
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  line-height: 1.15;
+}
+.speaking-narrative-subtitle { max-width: 36ch; margin: 0 auto 2.5rem; }
+.speaking-narrative-content { padding-inline: 0; }
+.speaking-narrative-paragraph { max-width: 68ch; line-height: 1.7; }
+.speaking-narrative-quote { max-width: 74ch; margin: 2rem auto 3rem; }
+.speaking-topics-block, .speaking-proof-block { margin-top: 2.5rem; }
+.speaking-topics-title, .speaking-backed-title, .speaking-cta-title {
+  margin: 0 0 1rem;
+  padding: 0;
+  line-height: 1.25;
+}
+.speaking-topics-list, .speaking-stats-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+}
+.speaking-topic-item, .speaking-stat-item {
+  min-width: 0;
+  padding: .85rem 1rem .85rem 2rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .04);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.speaking-topic-item::before { left: .8rem; font-size: 1.2rem; }
+.speaking-stat-item { color: #f1f7f5; }
+.speaking-proof-block + .speaking-narrative-paragraph { margin-top: 1.75rem; }
+.speaking-booking-block {
+  margin-top: 3rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(94, 234, 212, .3);
+  border-radius: 8px;
+  background: rgba(10, 151, 134, .09);
+}
+.speaking-booking-block .speaking-narrative-paragraph { margin-bottom: .8rem; }
+.speaking-final-cta { margin: 0; line-height: 1.6; }
+.speaking-cta-button { margin: 1.5rem 0 0; }
+
+@media (max-width: 680px) {
+  .speaking-topics-list, .speaking-stats-list { grid-template-columns: 1fr; }
+  .speaking-narrative-quote { margin-block: 1.75rem 2.25rem; }
+}
+
 /* Responsive Styles */
 @media (max-width: 940px) {
   .speaking-bento-grid {

@@ -1,0 +1,36 @@
+@media (prefers-reduced-motion: no-preference) {
+  .page-scroll-reveal {
+    opacity: 0;
+    translate: 0 18px;
+    transition: opacity .7s ease, translate .7s cubic-bezier(.2, .7, .2, 1);
+  }
+
+  .page-scroll-reveal[data-scroll-motion="fade"] { translate: 0 0; }
+  .page-scroll-reveal[data-scroll-motion="slide-left"] { translate: -24px 0; }
+  .page-scroll-reveal[data-scroll-motion="slide-right"] { translate: 24px 0; }
+  .page-scroll-reveal[data-scroll-motion="vending-photo"] { translate: 28px 0; }
+  .page-scroll-reveal[data-scroll-motion="vending-count"] { translate: 0 12px; }
+  .page-scroll-reveal[data-scroll-motion="vending-card"] { translate: 0 28px; }
+
+  .page-scroll-reveal.is-visible { opacity: 1; translate: 0 0; }
+  .vending-benefits article:nth-child(2) { transition-delay: .09s; }
+  .vending-benefits article:nth-child(3) { transition-delay: .18s; }
+  .vending-proof-item:nth-child(3) { transition-delay: .09s; }
+  .vending-proof-item:nth-child(4) { transition-delay: .18s; }
+  .apply-bento-card:nth-child(2) { transition-delay: .08s; }
+  .apply-bento-card:nth-child(3) { transition-delay: .16s; }
+  .apply-video-content { transition-delay: .1s; }
+  .apply-joinus-wrapper .join-email-subtitle { transition-delay: .08s; }
+  .apply-joinus-wrapper .join-email-form { transition-delay: .16s; }
+  .product-story:nth-child(2) { transition-delay: .18s; }
+  .product-story:nth-child(3) { transition-delay: .36s; }
+  .franchise-header-copy { transition-delay: .12s; }
+  .franchise-program-card:nth-child(2) { transition-delay: .1s; }
+  .speaking-bento-card:nth-child(2) { transition-delay: .08s; }
+  .speaking-bento-card:nth-child(3) { transition-delay: .16s; }
+  .speaking-video-content { transition-delay: .1s; }
+  .franchise-joinus-wrapper .join-email-subtitle,
+  .speaking-joinus-wrapper .join-email-subtitle { transition-delay: .08s; }
+  .franchise-joinus-wrapper .join-email-form,
+  .speaking-joinus-wrapper .join-email-form { transition-delay: .16s; }
+}

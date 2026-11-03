@@ -5,6 +5,8 @@ import Footer from './components/Footer.jsx';
 import FloatingActionButtons from './components/FloatingActionButtons.jsx';
 import Home from './pages/Home.jsx';
 import { pageMeta, DEFAULT_SITE_URL } from './lib/seo.js';
+import { setupScrollReveals } from './lib/scrollReveal.js';
+import './styles/scroll-reveal.css';
 const Services = lazy(() => import('./pages/Services.jsx'));
 const SandySprings = lazy(() => import('./pages/SandySprings.jsx'));
 const FAQs = lazy(() => import('./pages/FAQs.jsx'));
@@ -27,6 +29,8 @@ function AppContent() {
   const location = useLocation();
   const [showFloatingButtons, setShowFloatingButtons] = useState(false);
   const isHomePage = location.pathname === '/';
+
+  useEffect(() => setupScrollReveals(location.pathname), [location.pathname]);
 
   // Keep metadata in sync when navigating without a page request.
   useEffect(() => {

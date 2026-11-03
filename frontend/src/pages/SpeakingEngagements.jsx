@@ -127,43 +127,49 @@ const SpeakingEngagements = () => {
               </p>
             </div>
 
-            <h4 className="speaking-topics-title">David Speaks On:</h4>
-            <ul className="speaking-topics-list">
+            <div className="speaking-topics-block">
+              <h4 className="speaking-topics-title">David Speaks On:</h4>
+              <ul className="speaking-topics-list">
               <li className="speaking-topic-item">Entrepreneurship & Brand Building</li>
               <li className="speaking-topic-item">Leadership, Culture & Community Impact</li>
               <li className="speaking-topic-item">Turning Passion into Purpose</li>
               <li className="speaking-topic-item">The Business of Barbering & Modern Grooming</li>
               <li className="speaking-topic-item">Mentorship, Mindset, and Personal Growth</li>
               <li className="speaking-topic-item">Building a Cultural Brand That Lasts</li>
-            </ul>
+              </ul>
+            </div>
 
-            <h4 className="speaking-backed-title">Backed by:</h4>
-            <ul className="speaking-stats-list">
+            <div className="speaking-proof-block">
+              <h4 className="speaking-backed-title">Backed by:</h4>
+              <ul className="speaking-stats-list">
               <li className="speaking-stat-item">✔ 155,000+ clients served</li>
               <li className="speaking-stat-item">✔ 94% client satisfaction</li>
               <li className="speaking-stat-item">✔ 9+ years of business success</li>
               <li className="speaking-stat-item">✔ 3 authored books, grooming products & mentorship programs</li>
-            </ul>
+              </ul>
+            </div>
 
             <p className="speaking-narrative-paragraph">
               David's presence is authentic, powerful, and relatable—energizing rooms and sparking meaningful 
               conversations that stick long after the event ends.
             </p>
 
-            <h4 className="speaking-cta-title">Bring a Culture-Shaping Voice to Your Platform</h4>
-            <p className="speaking-narrative-paragraph">
-              If you're looking to inspire your audience with real-world experience, proven principles, and a message 
-              rooted in community, excellence, and purpose—David Brown is the speaker your event needs.
-            </p>
+            <div className="speaking-booking-block">
+              <h4 className="speaking-cta-title">Bring a Culture-Shaping Voice to Your Platform</h4>
+              <p className="speaking-narrative-paragraph">
+                If you're looking to inspire your audience with real-world experience, proven principles, and a message
+                rooted in community, excellence, and purpose—David Brown is the speaker your event needs.
+              </p>
 
-            <p className="speaking-final-cta">
-              Fill out the inquiry form below, and a member of our team will connect with you to bring David to 
-              your event or podcast.
-            </p>
+              <p className="speaking-final-cta">
+                Fill out the inquiry form below, and a member of our team will connect with you to bring David to
+                your event or podcast.
+              </p>
 
-            <button className="speaking-cta-button" onClick={() => setShowModal(true)}>
-              Book David Brown
-            </button>
+              <button className="speaking-cta-button" onClick={() => setShowModal(true)}>
+                Book David Brown
+              </button>
+            </div>
           </div>
         </div>
       </div>

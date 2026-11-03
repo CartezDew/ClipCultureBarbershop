@@ -447,7 +447,7 @@ const Home = () => {
       <Testimonials />
 
       {/* Services Preview */}
-      <section className="section section--light">
+      <section className="section section--light home-services-preview">
         <div className="container">
           <h2 className="text-center mb-4">Our Services</h2>
           <p className="services-subtitle">Walk-ins are welcome!</p>

@@ -1,113 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import '../styles/advertise.css';
-import '../styles/facts.css';
 import JoinUs from '../components/JoinUs.jsx';
 import Shop1Image from '../assets/gallery/image-14.webp';
 import Shop2Image from '../assets/gallery/image-4.webp';
 import HatsImage from '../assets/About_Home/Products-hats.webp';
-import Gallery from '../components/Gallery.jsx';
 import AdvertisePurchaseModal from '../components/AdvertisePurchaseModal.jsx';
 import AdvertiseRequestInfoModal from '../components/AdvertiseRequestInfoModal.jsx';
-// FAQ data moved inline to avoid import issues
-const advertiseFaqs = [
-  {
-    id: 1,
-    q: "What does it cost to open a Clip Culture Barbershop?",
-    a: (
-      <>
-        <p>
-          We provide a detailed investment breakdown in our <strong>Franchise Disclosure
-          Document (FDD)</strong> once you qualify. Total costs vary by market, footprint,
-          build-out, and equipment. Your recruiter will walk you through every line item.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 2,
-    q: "How much does a Clip Culture Barbershop make in sales?",
-    a: (
-      <>
-        <p>
-          Performance depends on many factors—location, operating discipline, team quality,
-          marketing, and your leadership. We don't make earnings claims outside the FDD, but
-          we do provide <strong>training, playbooks, and ongoing support</strong> to help you
-          execute the Clip Culture system with excellence.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 3,
-    q: "What franchise markets are available?",
-    a: (
-      <>
-        <p>
-          Our company barbershop is in <strong>Sandy Springs, GA</strong>. We're actively evaluating additional territories. Ask us about
-          availability in your city and we'll confirm whether it's open or reserved.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 4,
-    q: "Do you offer single-shop franchises?",
-    a: (
-      <>
-        <p>
-          Yes. We award <strong>single-unit franchises</strong> and develop qualified operators
-          toward <strong>multi-unit ownership</strong> over time (often within ~3 years) based on
-          performance and territory availability.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: 5,
-    q: "Do I have to be a barber to operate a Clip Culture Barbershop?",
-    a: (
-      <>
-        <p>
-          <strong>No barber experience required.</strong> We partner with owners who lead people,
-          build culture, and run operations. You'll hire licensed professionals while we provide
-          <strong> training, systems, and ongoing mentorship</strong> to help you succeed.
-        </p>
-      </>
-    ),
-  },
-];
 
 const Advertise = () => {
-  const [openFact, setOpenFact] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const accordionRef = useRef(null);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [showRequestInfoModal, setShowRequestInfoModal] = useState(false);
-
-  const toggleFact = (id) => {
-    setOpenFact(openFact === id ? null : id);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (accordionRef.current) {
-      observer.observe(accordionRef.current);
-    }
-
-    return () => {
-      if (accordionRef.current) {
-        observer.unobserve(accordionRef.current);
-      }
-    };
-  }, []);
 
   return (
     <div className="advertise-page">
@@ -122,43 +24,14 @@ const Advertise = () => {
             <h1 className="advertise-title">Advertise with <br/><strong>Clip Culture Barbershop</strong></h1>
             <div className="advertise-intro">
               <p className="advertise-intro-text">
-              At Clip Culture Barbershop, your brand gets more than visibility — it gets credibility.
-              With <strong>155,000+ clients served</strong>, a <strong>94% customer satisfaction rate</strong>, and <strong>9+ years of trusted service</strong>, our audience represents a thriving, loyal, and diverse community across Atlanta.
+                Put your message in front of clients during their visit to our Sandy Springs barbershop. Your brand appears on in-shop screens, with email and social placements available in select packages.
               </p>
               <p className="advertise-intro-text-2">
-              Advertising with Clip Culture means positioning your business in front of an engaged audience that values quality, authenticity, and culture. It’s more than exposure — it’s connection.
+                Clip Culture has served <strong>155,000+ clients</strong>. Explore the packages below to see the placement, duration, and channels included.
               </p>
             </div>
           </div>
           
-        </div>
-        <div className="advertise-features">
-          <ul className="advertise-features-list">
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              High-Traffic Exposure
-            </li>
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              Established Reputation
-            </li>
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              Prime In-Shop Placement
-            </li>
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              Targeted Reach
-            </li>
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              Cost-Effective Impact
-            </li>
-            <li className="advertise-feature-item">
-              <span className="advertise-checkmark">✓</span>
-              Turn Wait Time Into Ad Time
-            </li>
-          </ul>
         </div>
         <div className="advertise-content">
           <div className="advertise-bento-grid">
@@ -173,15 +46,11 @@ const Advertise = () => {
               <div className="advertise-bento-join">
                 <div className="advertise-program-card">
                   <div className="advertise-program-header">
-                    <h3 className="advertise-program-subtitle"><strong>Join the Culture</strong> 
-                    <br/>— Grow Your Brand.</h3>
+                    <h2 className="advertise-program-subtitle">A place for your brand to be seen</h2>
                   </div>
                   <div className="advertise-program-content">
                     <p className="advertise-program-description">
-                    Don't miss the chance to put your brand in front of Atlanta's most loyal and influential community.
-                    </p>
-                    <p className="advertise-program-description">
-                    Partner with <strong>Clip Culture Barbershop</strong> and connect with thousands of clients who value quality, style, and authenticity.
+                      In-shop advertising reaches clients while they spend time with us. Add email and social placements with a package that fits your campaign.
                     </p>
                      <div className="advertise-bento-image-hats">
                   <img 
@@ -198,17 +67,16 @@ const Advertise = () => {
             <div className="advertise-bento-right">
               <div className="advertise-program-card">
                 <div className="advertise-program-header">
-                  <h3 className="advertise-program-subtitle">Why Advertise<br/>
-                  <strong>With Us</strong>:</h3>
+                  <h2 className="advertise-program-subtitle">How your message reaches clients</h2>
                 </div>
                 <div className="advertise-program-content">
                   <div className="advertise-benefits-list">
                     <div className="advertise-benefit-item">
                       <span className="advertise-checkmark">✓</span>
                       <div className="advertise-benefit-content">
-                        <h4 className="advertise-benefit-title">High-Traffic Exposure</h4>
+                        <h3 className="advertise-benefit-title">In-shop screens</h3>
                         <p className="advertise-benefit-description">
-                          Over <strong>1,600 clients</strong> visit our shops each month, giving your brand consistent visibility in an energetic, community-driven space.
+                          Your logo appears on barbershop monitors for the duration of your package.
                         </p>
                       </div>
                     </div>
@@ -216,9 +84,9 @@ const Advertise = () => {
                     <div className="advertise-benefit-item">
                       <span className="advertise-checkmark">✓</span>
                       <div className="advertise-benefit-content">
-                        <h4 className="advertise-benefit-title">Established Reputation</h4>
+                        <h3 className="advertise-benefit-title">Email and social</h3>
                         <p className="advertise-benefit-description">
-                          Partner with one of Atlanta's most recognized barbershop brands — synonymous with excellence and authenticity.
+                          Every package includes email and social placements. See the counts in each package below.
                         </p>
                       </div>
                     </div>
@@ -226,32 +94,13 @@ const Advertise = () => {
                     <div className="advertise-benefit-item">
                       <span className="advertise-checkmark">✓</span>
                       <div className="advertise-benefit-content">
-                        <h4 className="advertise-benefit-title">Prime In-Shop Placement</h4>
+                        <h3 className="advertise-benefit-title">A local audience</h3>
                         <p className="advertise-benefit-description">
-                          Your message plays on strategically positioned displays, capturing attention during peak engagement.
+                          Connect with people who visit Clip Culture in Sandy Springs and follow our community online.
                         </p>
                       </div>
                     </div>
                     
-                    <div className="advertise-benefit-item">
-                      <span className="advertise-checkmark">✓</span>
-                      <div className="advertise-benefit-content">
-                        <h4 className="advertise-benefit-title">Targeted Reach</h4>
-                        <p className="advertise-benefit-description">
-                          Our clientele spans professionals, families, and trendsetters, offering you access to a wide range of demographics and interests.
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="advertise-benefit-item">
-                      <span className="advertise-checkmark">✓</span>
-                      <div className="advertise-benefit-content">
-                        <h4 className="advertise-benefit-title">Cost-Effective Impact</h4>
-                        <p className="advertise-benefit-description">
-                          Competitive advertising packages designed to maximize your marketing investment and deliver measurable results.
-                        </p>
-                      </div>
-                    </div>
                   </div>
                   <img
                     src={HatsImage}
@@ -263,39 +112,11 @@ const Advertise = () => {
               
               <div className="advertise-bento-cta">
                 <p className="advertise-cta-text">
-                  Spots fill quickly — <strong>reserve your ad space today</strong> and see your business take center stage.
+                  Compare the packages below, then choose a plan or ask us about placement.
                 </p>
               </div>
             </div>
 
-          </div>
-          <div className="advertise-features">
-            <ul className="advertise-features-list">
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Recession-Resistant Market
-              </li>
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Consistent Demand — Hair Always Grows
-              </li>
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Billion-Dollar Cash Flow Opportunity
-              </li>
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Zero Waste — Nothing Spoils
-              </li>
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Underserved, Ever-Growing Market
-              </li>
-              <li className="advertise-feature-item">
-                <span className="advertise-checkmark">✓</span>
-                Engaging and Rewarding Work
-              </li>
-            </ul>
           </div>
         </div>
         
@@ -358,47 +179,6 @@ const Advertise = () => {
           </div>
         </div>
         
-        {/* FAQ Section */}
-        {/* <div className="advertise-faq-section">
-          <div className="w-full">
-            <h2 id="facts-heading" className="facts-animated">Frequently Asked Questions</h2>
-            <p className="facts-subtitle">
-              Get answers to the most common questions about our franchise opportunity.
-            </p>
-            
-            <ul 
-              className={`facts-accordion ${isVisible ? 'facts-accordion-animated' : ''}`}
-              ref={accordionRef}
-            >
-              {advertiseFaqs.map((faq, index) => (
-                <li 
-                  key={faq.id} 
-                  className={`fact ${isVisible ? 'fact-visible' : ''} ${openFact === faq.id ? 'open' : ''}`}
-                >
-                  <button 
-                    className="fact-trigger" 
-                    onClick={() => toggleFact(faq.id)}
-                    aria-expanded={openFact === faq.id}
-                    aria-controls={`faq-${faq.id}`}
-                  >
-                    <span>{faq.q}</span>
-                    <span className="chev" aria-hidden="true"></span>
-                  </button>
-                  <div 
-                    className="fact-panel" 
-                    id={`faq-${faq.id}`}
-                    style={{ 
-                      maxHeight: openFact === faq.id ? '500px' : '0px',
-                      opacity: openFact === faq.id ? 1 : 0
-                    }}
-                  >
-                    <div>{faq.a}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
         </div>
 
         <AdvertisePurchaseModal 
@@ -411,7 +191,6 @@ const Advertise = () => {
           onClose={() => setShowRequestInfoModal(false)}
         />
 
-        {/* <Gallery /> */}
       <div className="advertise-joinus-wrapper">
         <JoinUs />
       </div>
