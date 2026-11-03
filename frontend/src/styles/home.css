@@ -424,18 +424,12 @@
   }
 } 
 
-/* Hero navbar is now above hero section, ensure proper spacing */
-.hero-navbar {
-  position: relative;
-  width: 100%;
-}
-
 /* Hero Background Container - Full width with black background */
 .hero-background-container {
   width: 100%;
   background-color: var(--primary-black);
   margin: 0;
-  padding: 0;
+  padding: 4rem 0 0;
   display: flex;
   justify-content: center;
 }
@@ -1036,6 +1030,7 @@
   .hero-background-container {
     background: none;
     border-bottom: none;
+    padding-top: 50px;
   }
   .hero {
     position: relative;

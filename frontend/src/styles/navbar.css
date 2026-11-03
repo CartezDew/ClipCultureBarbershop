@@ -82,6 +82,11 @@
     width: 100%;
     position: relative; /* enable absolute centering for toggle */
   }
+
+  .navbar-desktop .navbar-container {
+    height: 4rem;
+    padding: .4rem 2.5rem;
+  }
   
   /* Override services page navbar transparency */
   .services-navbar-container .navbar,
@@ -122,6 +127,11 @@
     object-fit: contain;
     transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease;
     margin-top: 0.5rem;
+  }
+
+  .navbar-desktop .logo-image-nav {
+    height: 3rem;
+    margin-top: 0;
   }
   
   /* Menu Section */
@@ -185,6 +195,10 @@
     overflow: hidden;
     border-radius: 9px;
     text-decoration: none;
+  }
+
+  .navbar-desktop .book-now-btn {
+    padding: .5rem .8rem;
   }
   
   .book-now-btn:hover {

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
-import HeroNavbar from '../components/HeroNavbar.jsx';
 import Navbar from '../components/Navbar.jsx';
 import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
@@ -32,7 +31,6 @@ import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
 
 const Home = () => {
   const [services, setServices] = useState([]);
-  const [showHeroNavbar, setShowHeroNavbar] = useState(true);
   const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
   const [showTaglineAnim, setShowTaglineAnim] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -101,20 +99,6 @@ const Home = () => {
   }, [location.hash]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.querySelector('.hero');
-      if (heroSection) {
-        const rect = heroSection.getBoundingClientRect();
-        // Hide hero navbar when hero section is completely out of view
-        setShowHeroNavbar(rect.bottom > 0);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
     if (typeof window === 'undefined') return;
     const mql = window.matchMedia('(max-width: 650px)');
     const handleChange = (e) => setIsMobile600(e.matches);
@@ -150,8 +134,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Navbar - Mounted above hero section */}
-      {showHeroNavbar && <HeroNavbar showTaglineAnim={showTaglineAnim} isMobile600={isMobile600} />}
+      <Navbar />
       {/* Hero Background Container */}
       <div className="hero-background-container">
         {/* Hero Section */}
@@ -441,9 +424,6 @@ const Home = () => {
         </div>
       </section>
       </div>
-
-      {/* Main Navbar - Shows when hero section is out of view */}
-      {!showHeroNavbar && <Navbar />}
 
       {/* Shop by Category */}
       <ShopByCategory />

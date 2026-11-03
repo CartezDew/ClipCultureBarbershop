@@ -1,24 +1,25 @@
 .vending-page {
   background: #171a18;
   color: #f5f5ef;
-  font-family: 'Rubik', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .vending-page * { box-sizing: border-box; }
 .vending-page h1, .vending-page h2, .vending-page h3, .vending-page p { margin-top: 0; }
-.vending-eyebrow { color: #92c898; font-size: .76rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.vending-eyebrow { color: #92c898; font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .vending-eyebrow span { padding: 0 .4rem; color: #617b65; }
 
 .vending-hero, .vending-proof-inner, .vending-opportunity, .vending-inquiry { max-width: 1440px; margin: 0 auto; }
 .vending-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); min-height: 720px; }
 .vending-hero-copy { padding: clamp(4rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem); padding-top: clamp(6.5rem, 9vw, 8rem); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
-.vending-hero h1 { margin: 1.5rem 0 1.9rem; font-size: clamp(3.25rem, 7vw, 5rem); line-height: 1.05; letter-spacing: -.05em; font-weight: 800; }
-.vending-hero h1 em { color: #92c898; font-style: italic; }
+.vending-hero h1 { margin: 1.5rem 0 1.9rem; font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.2; font-weight: 700; }
+.vending-hero h1 br { display: none; }
+.vending-hero h1 em { display: block; margin-top: .5rem; color: var(--green-new); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-style: normal; font-weight: 600; letter-spacing: normal; }
 .vending-hero-stat { display: flex; align-items: flex-end; gap: 1.1rem; width: 100%; padding: .5rem 0 1.2rem; border-top: 1px solid #405549; border-bottom: 1px solid #405549; }
-.vending-hero-stat strong { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 400; line-height: .9; letter-spacing: -.035em; color: #92c898; }
-.vending-hero-stat strong span { font-family: 'Rubik', Arial, sans-serif; font-size: .35em; vertical-align: top; }
+.vending-hero-stat strong { font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: clamp(2.2rem, 3vw, 3.1rem); font-weight: 700; line-height: 1; color: #92c898; }
+.vending-hero-stat strong span { font-family: 'Rubik', Arial, sans-serif; font-size: .55em; vertical-align: top; }
 .vending-hero-stat > span { padding-bottom: .45rem; color: #f5f5ef; font-size: clamp(.95rem, 1.3vw, 1.15rem); line-height: 1.35; font-weight: 700; }
-.vending-hero-copy > p { max-width: 540px; margin: 1.7rem 0 0; color: #c5cdc6; font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.6; }
+.vending-hero-copy > p { max-width: 540px; margin: 1.7rem 0 0; color: #c5cdc6; font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.6; }
 .vending-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.7rem; }
 .vending-primary-link { display: inline-flex; gap: 1.25rem; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; min-height: 52px; background: #82ba86; color: #102016; text-decoration: none; font-weight: 800; border-radius: 3px; transition: background .2s, transform .2s; }
 .vending-primary-link:hover, .vending-primary-link:focus-visible { background: #a2d7a4; transform: translateY(-2px); }
@@ -36,23 +37,23 @@
 .vending-proof-icon { display: flex; flex: none; align-items: center; justify-content: center; width: 32px; height: 32px; color: #f5f5ef; }
 .vending-proof-content { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
 .vending-proof-content strong { color: #92c898; font-size: clamp(2rem, 2.5vw, 2.65rem); line-height: 1; font-weight: 700; letter-spacing: -.025em; }
-.vending-proof-content > span { color: #f5f5ef; font-size: clamp(.82rem, 1.15vw, 1rem); line-height: 1.25; letter-spacing: .02em; }
+.vending-proof-content > span { color: #f5f5ef; font-size: clamp(.68rem, 1.15vw, 1rem); line-height: 1.25; letter-spacing: .02em; }
 
 .vending-opportunity { padding: clamp(4.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem); }
 .vending-section-heading { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4rem; align-items: end; }
 .vending-section-heading .vending-eyebrow { grid-column: 1 / -1; margin-bottom: 1.25rem; }
-.vending-section-heading h2, .vending-inquiry h2 { max-width: 660px; font-size: clamp(2.4rem, 4.3vw, 4.7rem); line-height: 1.05; letter-spacing: -.04em; }
+.vending-section-heading h2, .vending-inquiry h2 { max-width: 660px; font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.2; font-weight: 700; }
 .vending-section-heading h2 em { color: #92c898; font-style: normal; }
-.vending-section-heading > p { max-width: 550px; color: #bfcac1; line-height: 1.75; font-size: 1.05rem; }
+.vending-section-heading > p { max-width: 550px; color: #bfcac1; line-height: 1.6; font-size: clamp(1rem, 1.8vw, 1.2rem); }
 .vending-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 4rem; border-top: 1px solid #657268; border-bottom: 1px solid #657268; }
 .vending-benefits article { padding: 1.5rem 2rem 1.8rem 0; }
 .vending-benefits article + article { border-left: 1px solid #455149; padding-left: 2rem; }
 .vending-benefits article > span { color: #92c898; font-size: .75rem; font-weight: 700; letter-spacing: .13em; }
-.vending-benefits h3 { margin: 1.6rem 0 .8rem; font-size: clamp(1.45rem, 2vw, 2rem); line-height: 1.15; letter-spacing: -.03em; }
-.vending-benefits p { max-width: 350px; color: #bfcac1; line-height: 1.7; }
+.vending-benefits h3 { margin: 1.6rem 0 .8rem; font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: clamp(1.3rem, 2.5vw, 1.6rem); line-height: 1.2; }
+.vending-benefits p { max-width: 350px; color: #bfcac1; font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.6; }
 
 .vending-inquiry { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 6vw, 7rem); padding: clamp(4.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem); background: #e9eee7; color: #1c2920; scroll-margin-top: 4rem; }
-.vending-inquiry-copy > p { max-width: 430px; line-height: 1.7; color: #4d5c50; font-size: 1.05rem; }
+.vending-inquiry-copy > p { max-width: 430px; line-height: 1.6; color: #4d5c50; font-size: clamp(1rem, 1.8vw, 1.2rem); }
 .vending-inquiry .vending-eyebrow { color: #347949; }
 .vending-inquiry h2 { margin: 1.4rem 0 1.3rem; }
 .vending-inquiry-arrow { margin-top: 2rem; color: #347949; }
@@ -83,10 +84,6 @@
 .vending-page .join-email-input:focus { border-color: rgba(146, 200, 152, .85); box-shadow: 0 0 0 3px rgba(146, 200, 152, .15); }
 .vending-footer .footer { background: rgba(38, 62, 45, .78); }
 .vending-footer .footer__bottom { background: rgba(17, 32, 21, .58); }
-.vending-route .navbar-desktop .navbar-container { height: 4rem; padding: .4rem 2.5rem; }
-.vending-route .navbar-desktop .logo-image-nav { height: 3rem; margin-top: 0; }
-.vending-route .navbar-desktop .book-now-btn { padding: .5rem .8rem; }
-
 @media (max-width: 900px) {
   .vending-hero { grid-template-columns: 1fr; }
   .vending-hero-copy { padding-top: 6.5rem; padding-bottom: 4rem; }
@@ -97,6 +94,11 @@
   .vending-section-heading { grid-template-columns: 1fr; }
   .vending-inquiry { grid-template-columns: 1fr; }
   .vending-inquiry-arrow { display: none; }
+}
+
+@media (max-width: 720px) {
+  .vending-hero h1, .vending-section-heading h2, .vending-inquiry h2 { font-size: clamp(2.2rem, 4vw, 2.8rem); }
+  .vending-hero h1 em { font-size: clamp(1.8rem, 3vw, 2rem); }
 }
 
 @media (max-width: 650px) {
@@ -117,10 +119,16 @@
   .vending-form-wide { grid-column: auto; }
 }
 
+@media (max-width: 556px) {
+  .vending-hero h1, .vending-section-heading h2, .vending-inquiry h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
+  .vending-hero h1 em { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .vending-hero-stat strong { font-size: 1.75rem; }
+}
+
 @media (max-width: 449px) {
   .vending-proof-inner { grid-template-columns: 1fr; gap: 0; }
   .vending-proof-intro { padding-bottom: 1.25rem; }
   .vending-proof-item { min-height: 82px; padding: .9rem 0; border-left: 0; border-top: 1px solid #69866e; flex-direction: row; align-items: center; gap: .75rem; }
-  .vending-proof-content strong { font-size: 2rem; }
-  .vending-proof-content > span { font-size: .88rem; }
+  .vending-proof-content strong { font-size: 1.5rem; }
+  .vending-proof-content > span { font-size: .9rem; }
 }
