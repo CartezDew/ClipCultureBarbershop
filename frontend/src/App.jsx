@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
@@ -160,6 +160,9 @@ function AppContent() {
               <Footer />
             </>
           } />
+          <Route path="/products/beard-wash" element={<Navigate to="/products/therapeutic-shampoo" replace />} />
+          <Route path="/products/body-lotion" element={<Navigate to="/products/rich-shea-butter" replace />} />
+          <Route path="/products/body-wash" element={<Navigate to="/products/bath-shower-gel" replace />} />
           <Route path="/products/:slug" element={
             <>
               <Navbar />

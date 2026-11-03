@@ -26,9 +26,6 @@ import speakingImage from '../assets/gallery/image-61.webp';
 import advertisementCategoryImage from '../assets/Stagging/advertisement_category.webp';
 import bookCategoryImage from '../assets/Stagging/book_category.webp';
 
-// New Arrivals image
-import beardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
-
 // Category testimonials data (single-source within this component)
 import AdultHaircut from '../assets/Testimonials/Adult_haircut_avatar.webp';
 import KidsHaircut from '../assets/Testimonials/Kids_haircut_avatar.webp';
@@ -37,10 +34,13 @@ import DaveHeadshot from '../assets/Testimonials/Dave_headshot.webp';
 
 // Product images for testimonials
 import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
-import Product5 from '../assets/products/Product-5 .webp';
-import Product6 from '../assets/products/Product-6.webp';
+import BalmFront from '../assets/products/magic-beard-balm-front.webp';
+import OilFront from '../assets/products/premium-beard-oil-front.webp';
+import ShampooFront from '../assets/products/therapeutic-shampoo-front.webp';
+import LotionFront from '../assets/products/rich-shea-butter-front.webp';
+import GelFront from '../assets/products/bath-shower-gel-front.webp';
+
+const newArrivalImages = [BalmFront, OilFront, ShampooFront, LotionFront, GelFront];
 
 const categoryTestimonials = {
   newArrivals: [
@@ -48,12 +48,12 @@ const categoryTestimonials = {
   ],
   products: [
     { name: 'James R.', quote: 'My beard finally looks groomed, not just grown.', photoUrl: MenHaircut, productImage: Product1 },
-    { name: 'Derrick S.', quote: 'The wash + balm combo had me looking shop-fresh all week.', photoUrl: AdultHaircut, productImage: Product2 },
-    { name: 'Antoine W.', quote: 'Clean scent, no buildup, and my wife actually noticed.', photoUrl: KidsHaircut, productImage: Product3 },
+    { name: 'Derrick S.', quote: 'The wash + balm combo had me looking shop-fresh all week.', photoUrl: AdultHaircut, productImage: BalmFront },
+    { name: 'Antoine W.', quote: 'Clean scent, no buildup, and my wife actually noticed.', photoUrl: KidsHaircut, productImage: OilFront },
   ],
   bodySkin: [
-    { name: 'Michael T.', quote: 'Soft skin all day. This lotion is the real deal.', photoUrl: MenHaircut, productImage: Product5 },
-    { name: 'Kevin D.', quote: 'Body wash that actually moisturizes. Game changer.', photoUrl: AdultHaircut, productImage: Product6 },
+    { name: 'Michael T.', quote: 'Soft skin all day. This lotion is the real deal.', photoUrl: MenHaircut, productImage: LotionFront },
+    { name: 'Kevin D.', quote: 'Body wash that actually moisturizes. Game changer.', photoUrl: AdultHaircut, productImage: GelFront },
   ],
   apparel: [
     { name: 'Brandon C.', quote: 'Comfortable, fitted, and actually represents the culture.', photoUrl: MenHaircut },
@@ -88,9 +88,9 @@ const categoryTestimonials = {
 };
 
 const categories = [
-  { name: 'New Arrivals', image: beardLineUp1, route: '/shop#premium-grooming-products' },
+  { name: 'New Arrivals', image: BalmFront, route: '/shop#premium-grooming-products' },
   { name: 'Hair Care', image: Product1, route: '/shop#premium-grooming-products' }, // Default image, will be overridden by active testimonial
-  { name: 'Body & Skin', image: Product5, route: '/shop#premium-grooming-products' }, // Default image, will be overridden by active testimonial
+  { name: 'Body & Skin', image: LotionFront, route: '/shop#premium-grooming-products' }, // Default image, will be overridden by active testimonial
   { name: 'Apparel', image: apparelImage, route: '/shop#apparel'},
   { name: 'Books', image: bookImage3, route: '/shop#books' },
   { name: 'Mentorship', image: mentorshipImage, route: '/mentorship' },
@@ -320,7 +320,9 @@ const ShopByCategory = () => {
       setActiveTestimonial(selectedTestimonial);
       
       // Cache the image for this category when testimonial is selected
-      if ((categoryName === 'Hair Care' || categoryName === 'Products') && selectedTestimonial.productImage) {
+      if (categoryName === 'New Arrivals') {
+        categoryImageCacheRef.current['New Arrivals'] = newArrivalImages[Math.floor(Math.random() * newArrivalImages.length)];
+      } else if ((categoryName === 'Hair Care' || categoryName === 'Products') && selectedTestimonial.productImage) {
         categoryImageCacheRef.current['Hair Care'] = selectedTestimonial.productImage;
       } else if (categoryName === 'Body & Skin' && selectedTestimonial.productImage) {
         categoryImageCacheRef.current['Body & Skin'] = selectedTestimonial.productImage;
@@ -434,6 +436,9 @@ const ShopByCategory = () => {
   // Uses cached image that persists until the category becomes active again with a new testimonial
   const getCategoryImage = (category) => {
     // Check if we have a cached image for this category
+    if (category.name === 'New Arrivals' && categoryImageCacheRef.current['New Arrivals']) {
+      return categoryImageCacheRef.current['New Arrivals'];
+    }
     if (category.name === 'Hair Care' && categoryImageCacheRef.current['Hair Care']) {
       return categoryImageCacheRef.current['Hair Care'];
     }

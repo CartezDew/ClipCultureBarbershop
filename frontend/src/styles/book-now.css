@@ -1189,6 +1189,13 @@ body.book-now-page-active .App {
   color: var(--book-now-accent);
 }
 
+.book-now-product-availability {
+  margin: 0.5rem 0 0;
+  color: var(--book-now-text-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .book-now-view-all-btn {
   display: flex;
   align-items: center;

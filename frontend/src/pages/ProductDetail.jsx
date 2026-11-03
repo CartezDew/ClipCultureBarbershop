@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Star, ChevronLeft, ChevronRight, Store } from 'lucide-react';
 import '../styles/product-detail.css';
 import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
-import Product4 from '../assets/products/Product-4.webp';
-import Product5 from '../assets/products/Product-5 .webp';
-import Product6 from '../assets/products/Product-6.webp';
+import CurlTwistBack from '../assets/products/curl-twist-ingredients-back.webp';
+import BalmFront from '../assets/products/magic-beard-balm-front.webp';
+import BalmBack from '../assets/products/magic-beard-balm-ingredients-back.webp';
+import OilFront from '../assets/products/premium-beard-oil-front.webp';
+import OilBack from '../assets/products/premium-beard-oil-ingredients-back.webp';
+import ShampooFront from '../assets/products/therapeutic-shampoo-front.webp';
+import ShampooBack from '../assets/products/therapeutic-shampoo-ingredients-back.webp';
+import LotionFront from '../assets/products/rich-shea-butter-front.webp';
+import LotionBack from '../assets/products/rich-shea-butter-ingredients-back.webp';
+import GelFront from '../assets/products/bath-shower-gel-front.webp';
+import GelBack from '../assets/products/bath-shower-gel-ingredients-back.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const location = useLocation();
-  const [isHovering, setIsHovering] = useState(false);
+  const [hoveredImageSlug, setHoveredImageSlug] = useState(null);
+  const [selectedImageSlug, setSelectedImageSlug] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -34,12 +41,10 @@ const ProductDetail = () => {
       reviewCount: 12,
       image: BeardLineUp1,
       hoverImage: BeardLineUp2,
-      isNewDrop: true,
-      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225",
       description: "Developed by master barber David Brown, owner of Clip Culture Barbershop. <strong>Revive</strong> is a premium beard and hair line-up enhancement designed for precision, performance, and staying power. This semi-permanent airbrush dye delivers a clean, natural-looking definition that holds through sweat, humidity, and long days behind the chair.",
       variants: [
         { sku: "BLINE-2OZ", size: "2 oz", price: 25 },
-        { sku: "BLINE-4OZ", size: "4 oz", price: 40 }
+        { sku: "BLINE-4OZ", size: "4 oz", price: 25 }
       ],
       features: [
         "Enhances beard and hairline definition for a sharp, clean finish",
@@ -59,11 +64,11 @@ const ProductDetail = () => {
     'curl-twist': {
       id: 1,
       name: "Curl Twist",
-      price: 20,
+      price: 25,
       size: null,
       rating: 5,
       image: Product1,
-      buyLink: "https://shopclipculture.com/products/curl-twist",
+      hoverImage: CurlTwistBack,
       description: "Premium curl defining cream that enhances natural texture and provides long-lasting hold without stiffness.",
       features: [
         "Defines and enhances natural curls",
@@ -76,11 +81,12 @@ const ProductDetail = () => {
     'magic-beard-balm': {
       id: 2,
       name: "Magic Beard Balm",
-      price: 20,
-      size: null,
+      price: 25,
+      size: "6.8 oz / 200 mL",
       rating: 5,
-      image: Product2,
-      buyLink: "https://shopclipculture.com/products/magic-beard-balm",
+      image: BalmFront,
+      hoverImage: BalmBack,
+      isNewDrop: true,
       description: "Nourishing beard balm that conditions, styles, and tames unruly facial hair while promoting healthy growth.",
       features: [
         "Conditions and softens beard hair",
@@ -88,16 +94,17 @@ const ProductDetail = () => {
         "Promotes healthy beard growth",
         "All-day moisture"
       ],
-      ingredients: "Vitis Vinifera Seed Oil, Prunus Amygdalus Dulcis Oil, Cera Alba (Beeswax), Butyrospermum Parkii Butter, Theobroma Cacao Seed Butter, Cocos Nucifera Oil, Tocopherol, Fragrance (Parfum)."
+      ingredients: "Vitis Vinifera (Grape) Seed Oil, Prunus Dulcis (Almond) Oil, Beeswax, Butyrospermum Parkii (Shea Butter), Theobroma Cacao (Cocoa) Seed Butter, Cocos Nucifera (Coconut) Oil, Tocopherol (Vitamin E) Oil, Scented with Essential Oils."
     },
     'premium-beard-oil': {
       id: 3,
       name: "Premium Beard Oil",
-      price: 20,
-      size: null,
+      price: 25,
+      size: "3.38 oz",
       rating: 5,
-      image: Product3,
-      buyLink: "https://shopclipculture.com/products/premium-beard-oil",
+      image: OilFront,
+      hoverImage: OilBack,
+      isNewDrop: true,
       description: "Lightweight beard oil that moisturizes the skin underneath while adding shine and softness to your beard.",
       features: [
         "Moisturizes skin and hair",
@@ -105,33 +112,35 @@ const ProductDetail = () => {
         "Adds natural shine",
         "Lightweight and non-greasy"
       ],
-      ingredients: "Simmondsia Chinensis Seed Oil, Cocos Nucifera Oil, Corylus Avellana Seed Oil, Vitis Vinifera Seed Oil, Aloe Barbadensis Leaf Extract, Ricinus Communis Seed Oil, Argania Spinosa Kernel Oil, Rosa Canina Seed Oil, Lavandula Angustifolia Oil, Eucalyptus Globulus Leaf Oil, Mentha Piperita Oil, Tocopheryl Acetate, Algae Extract, Glycerin, Rosmarinus Officinalis Leaf Extract, Camellia Oleifera Leaf Extract."
+      ingredients: "Prunus Amygdalus Dulcis (Sweet Almond) Oil, Ricinus Communis (Castor) Seed Oil, Vitis Vinifera (Grape) Seed Oil, Olea Europaea (Olive) Fruit Oil, Virgin Organic Argania Spinosa (Argan) Kernel Oil, Oryza Sativa (Rice) Bran Extract, Rosmarinus Officinalis (Rosemary) Leaf Extract, Helianthus Annuus (Sunflower) Extract, Tocopherols."
     },
-    'beard-wash': {
+    'therapeutic-shampoo': {
       id: 4,
-      name: "Beard Wash",
-      price: 20,
-      size: null,
+      name: "Therapeutic Shampoo",
+      price: 25,
+      size: "8.4 oz / 250 mL",
       rating: 5,
-      image: Product4,
-      buyLink: "https://shopclipculture.com/products/beard-wash",
-      description: "Gentle cleansing wash specifically formulated for facial hair and the sensitive skin underneath.",
+      image: ShampooFront,
+      hoverImage: ShampooBack,
+      isNewDrop: true,
+      description: "Clip Culture Hair Care Therapeutic Shampoo.",
       features: [
         "Gentle cleansing formula",
         "Removes dirt and buildup",
         "Maintains natural oils",
         "Suitable for daily use"
       ],
-      ingredients: "Saponified Oils of Cocos Nucifera Oil, Olea Europaea Fruit Oil, Simmondsia Chinensis Seed Oil, Helianthus Annuus Seed Oil, Cyamopsis Tetragonoloba Gum, Glycerin, Aloe Barbadensis Leaf Juice, Rosmarinus Officinalis Leaf Extract, Butyrospermum Parkii Butter, Citric Acid, Fragrance (Parfum)."
+      ingredients: "Saponified Oils of Cocos Nucifera (Coconut) Oil, Olea Europaea (Olive) Oil, Simmondsia Chinensis (Jojoba) Seed Oil and Helianthus Annuus (Sunflower) Seed Oil, Cyamopsis Tetragonoloba (Guar) Gum, Vegetable Glycerin, Aloe Barbadensis Leaf Juice, Rosmarinus Officinalis (Rosemary) Leaf Extract, Butyrospermum Parkii (Shea Butter), Citric Acid, Essential Oils."
     },
-    'body-lotion': {
+    'rich-shea-butter': {
       id: 5,
-      name: "Body Lotion",
-      price: 20,
-      size: null,
+      name: "Rich Shea Butter",
+      price: 25,
+      size: "8 oz",
       rating: 4.6,
-      image: Product5,
-      buyLink: "https://shopclipculture.com/products/intensive-body-lotion",
+      image: LotionFront,
+      hoverImage: LotionBack,
+      isNewDrop: true,
       description: "Intensive body lotion that deeply moisturizes and nourishes skin, leaving it soft and smooth all day.",
       features: [
         "Deep moisturizing formula",
@@ -139,16 +148,17 @@ const ProductDetail = () => {
         "Non-greasy finish",
         "Suitable for all skin types"
       ],
-      ingredients: "Aqua (Water), Caprylic/Capric Triglyceride, Glycerin, Carthamus Tinctorius Seed Oil, Stearic Acid, Caprae Lac (Goat Milk), Glyceryl Stearate, Prunus Amygdalus Dulcis Oil, Cetyl Alcohol, Aloe Barbadensis Leaf Extract, Avena Sativa Bran Extract, Citrus Aurantium Dulcis Peel Extract, Oryza Sativa Bran Extract, Rosmarinus Officinalis Leaf Extract, Helianthus Annuus Extract, Tocopherol, Xanthan Gum, Carbomer, Triethanolamine, Phenoxyethanol, Hexylene Glycol, Caprylyl Glycol, Ethylhexylglycerin."
+      ingredients: "Deionized Water, Carthamus Tinctorius (Safflower) Seed Oil, Isopropyl Myristate, Glycerin, Stearic Acid, Cetyl Alcohol, Glyceryl Stearate, Butyrospermum Parkii (Shea) Butter, Dimethicone, Tocopheryl Acetate (Vitamin E Acetate), Retinyl Palmitate (Vitamin A Palmitate), Tetrahexyldecyl Ascorbate (Vitamin C), Organic Aloe Barbadensis (Aloe Vera) Leaf Extract, Organic Calendula Officinalis (Marigold) Flower Extract, Organic Chamomilla Recutita (Chamomile) Flower Extract, Symphytum Officinale (Comfrey) Root Extract, Cucumis Sativus (Cucumber) Fruit Extract, Carbomer, Xanthan Gum, Triethanolamine, Phenoxyethanol, Hexylene Glycol, Caprylyl Glycol, Ethylhexylglycerin."
     },
-    'body-wash': {
+    'bath-shower-gel': {
       id: 6,
-      name: "Body Wash",
-      price: 20,
-      size: "16 oz",
+      name: "Bath & Shower Gel",
+      price: 25,
+      size: "16.9 oz / 500 mL",
       rating: 4,
-      image: Product6,
-      buyLink: "https://shopclipculture.com/products/body-wash",
+      image: GelFront,
+      hoverImage: GelBack,
+      isNewDrop: true,
       description: "A creamy wash, rich in lather, pearlescent liquid which is soft enough for the face, yet concentrated enough to be used all over the body. It nourishes and cleanses skin down to its deepest layers.",
       features: [
         "Gentle cleansing action",
@@ -156,7 +166,7 @@ const ProductDetail = () => {
         "Refreshing scent",
         "Rich, luxurious lather"
       ],
-      ingredients: "Deionized Water (Aqua), Sodium Methyl Cocoyl Taurate, Cocamidopropyl Betaine, Cocamide DIPA, Glycol Distearate, Laureth-4, Aloe Barbadensis Leaf Extract*, Hamamelis Virginiana (Witch Hazel) Distillate, Chamomilla Recutita (Chamomile) Flower Extract*, Phenoxyethanol, Ethylhexylglycerin, Caprylyl Glycol, Hexylene Glycol, Citric Acid, Sodium Chloride."
+      ingredients: "Deionized Water, Sodium Lauryl Sulfate, Sodium Methyl Cocoyl Taurate, Cocamidopropyl Betaine, Cocamide DIPA, Glycol Distearate, Laureth-4, Whole Milk, Buttermilk, Organic Aloe Barbadensis (Aloe Vera) Leaf Extract, Hamamelis Virginiana (Witch Hazel) Distillate, Organic Chamomilla Recutita (Chamomile) Flower Extract, Phenoxyethanol, Ethylhexylglycerin, Caprylyl Glycol, Hexylene Glycol, Citric Acid, Sodium Chloride."
     }
   };
 
@@ -165,61 +175,58 @@ const ProductDetail = () => {
   // All products for "You may also like" - exclude current product
   const allProducts = [
     {
-      id: 0,
-      name: "Beard & Line Up Enhancement",
-      priceFrom: 25,
-      image: BeardLineUp1,
-      slug: "beard-line-up-enhancement",
-      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225",
-      isNewDrop: true
-    },
-    {
-      id: 1,
-      name: "Curl Twist",
-      price: 20,
-      image: Product1,
-      slug: "curl-twist",
-      buyLink: "https://shopclipculture.com/products/curl-twist"
-    },
-    {
       id: 2,
       name: "Magic Beard Balm",
-      price: 20,
-      image: Product2,
+      price: 25,
+      image: BalmFront,
       slug: "magic-beard-balm",
-      buyLink: "https://shopclipculture.com/products/magic-beard-balm"
+      isNewDrop: true,
     },
     {
       id: 3,
       name: "Premium Beard Oil",
-      price: 20,
-      image: Product3,
+      price: 25,
+      image: OilFront,
       slug: "premium-beard-oil",
-      buyLink: "https://shopclipculture.com/products/premium-beard-oil"
+      isNewDrop: true,
     },
     {
       id: 4,
-      name: "Beard Wash",
-      price: 20,
-      image: Product4,
-      slug: "beard-wash",
-      buyLink: "https://shopclipculture.com/products/beard-wash"
+      name: "Therapeutic Shampoo",
+      price: 25,
+      image: ShampooFront,
+      slug: "therapeutic-shampoo",
+      isNewDrop: true,
     },
     {
       id: 5,
-      name: "Body Lotion",
-      price: 20,
-      image: Product5,
-      slug: "body-lotion",
-      buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
+      name: "Rich Shea Butter",
+      price: 25,
+      image: LotionFront,
+      slug: "rich-shea-butter",
+      isNewDrop: true,
     },
     {
       id: 6,
-      name: "Body Wash",
-      price: 15,
-      image: Product6,
-      slug: "body-wash",
-      buyLink: "https://shopclipculture.com/products/body-wash"
+      name: "Bath & Shower Gel",
+      price: 25,
+      image: GelFront,
+      slug: "bath-shower-gel",
+      isNewDrop: true,
+    },
+    {
+      id: 1,
+      name: "Curl Twist",
+      price: 25,
+      image: Product1,
+      slug: "curl-twist",
+    },
+    {
+      id: 0,
+      name: "Beard & Line Up Enhancement",
+      price: 25,
+      image: BeardLineUp1,
+      slug: "beard-line-up-enhancement",
     }
   ];
 
@@ -297,28 +304,35 @@ const ProductDetail = () => {
           <div className="product-detail__left-column">
             <div 
               className="product-detail__image"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+              onPointerEnter={(event) => { if (event.pointerType === 'mouse') setHoveredImageSlug(slug); }}
+              onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHoveredImageSlug(null); }}
+              onClick={() => { if (product.hoverImage) setSelectedImageSlug(current => current === slug ? null : slug); }}
+              onKeyDown={(event) => {
+                if (product.hoverImage && (event.key === 'Enter' || event.key === ' ')) {
+                  event.preventDefault();
+                  setSelectedImageSlug(current => current === slug ? null : slug);
+                }
+              }}
+              role={product.hoverImage ? 'button' : undefined}
+              tabIndex={product.hoverImage ? 0 : undefined}
+              aria-label={product.hoverImage ? `Show ${selectedImageSlug === slug ? 'front' : 'back'} of ${product.name}` : undefined}
+              aria-pressed={product.hoverImage ? selectedImageSlug === slug : undefined}
             >
               <img 
-                src={isHovering && product.hoverImage ? product.hoverImage : product.image} 
-                alt={product.name} 
+                src={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? product.hoverImage : product.image}
+                alt={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? `${product.name} back label` : product.name}
                 loading="lazy" 
               />
             </div>
 
-            {/* Buy Now for desktop (above 700px) */}
+            {/* In-store notice for desktop (above 700px) */}
             <div className="product-detail__actions-desktop">
-              <div className="product-detail__actions">
-                <a 
-                  href={product.buyLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn--buy-now"
-                >
-                  <ExternalLink size={20} />
-                  Buy Now
-                </a>
+              <div className="product-detail__in-store-notice">
+                <div className="product-detail__in-store-badge">
+                  <Store size={18} />
+                  <span>In-Store Purchase Only</span>
+                </div>
+                <p className="product-detail__in-store-text">Visit our Sandy Springs shop to purchase this item.</p>
               </div>
             </div>
           </div>
@@ -335,8 +349,12 @@ const ProductDetail = () => {
               ) : (
                 <>
                   <span className="product-detail__price">${product.price}</span>
-                  <span className="product-detail__divider">|</span>
-                  <span className="product-detail__size">{product.size}</span>
+                  {product.size && (
+                    <>
+                      <span className="product-detail__divider">|</span>
+                      <span className="product-detail__size">{product.size}</span>
+                    </>
+                  )}
                 </>
               )}
             </div>
@@ -399,18 +417,14 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Buy Now for mobile (below 700px) */}
+            {/* In-store notice for mobile (below 700px) */}
             <div className="product-detail__actions-mobile">
-              <div className="product-detail__actions">
-                <a 
-                  href={product.buyLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn--buy-now"
-                >
-                  <ExternalLink size={20} />
-                  Buy Now
-                </a>
+              <div className="product-detail__in-store-notice">
+                <div className="product-detail__in-store-badge">
+                  <Store size={18} />
+                  <span>In-Store Purchase Only</span>
+                </div>
+                <p className="product-detail__in-store-text">Visit our Sandy Springs shop to purchase this item.</p>
               </div>
             </div>
           </div>
@@ -438,11 +452,10 @@ const ProductDetail = () => {
                 style={{ transform: `translateX(-${scrollOffset}px)` }}
               >
                 {relatedProducts.map((relProduct) => (
-                  <a
+                  <Link
                     key={relProduct.id}
-                    href={relProduct.buyLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={`/products/${relProduct.slug}`}
+                    state={{ from: fromPage || 'home' }}
                     className="product-detail__related-card"
                   >
                     <div className="product-detail__related-image">
@@ -454,10 +467,10 @@ const ProductDetail = () => {
                     <div className="product-detail__related-info">
                       <h4 className="product-detail__related-name">{relProduct.name}</h4>
                       <p className="product-detail__related-price">
-                        {relProduct.priceFrom ? `From $${relProduct.priceFrom}` : `$${relProduct.price}.00 USD`}
+                        ${relProduct.price}.00 USD · In-Store Only
                       </p>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -477,11 +490,10 @@ const ProductDetail = () => {
           {/* Mobile Grid */}
           <div className="product-detail__related-grid-mobile">
             {relatedProducts.slice(0, 4).map((relProduct) => (
-              <a
+              <Link
                 key={relProduct.id}
-                href={relProduct.buyLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={`/products/${relProduct.slug}`}
+                state={{ from: fromPage || 'home' }}
                 className="product-detail__related-card"
               >
                 <div className="product-detail__related-image">
@@ -493,10 +505,10 @@ const ProductDetail = () => {
                 <div className="product-detail__related-info">
                   <h4 className="product-detail__related-name">{relProduct.name}</h4>
                   <p className="product-detail__related-price">
-                    {relProduct.priceFrom ? `From $${relProduct.priceFrom}` : `$${relProduct.price}.00 USD`}
+                    ${relProduct.price}.00 USD · In-Store Only
                   </p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 

@@ -113,6 +113,23 @@
   position: relative;
 }
 
+.product-card__image-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.product-card__image-toggle:focus-visible {
+  outline: 2px solid #0a9786;
+  outline-offset: 2px;
+}
+
 .product-card__sold-out {
   position: absolute;
   top: 0rem;

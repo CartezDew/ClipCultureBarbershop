@@ -8,9 +8,9 @@ import OwnerImage from '../assets/Contact/Owner.webp';
 // Product images
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
-import Product5 from '../assets/products/Product-5 .webp';
+import BalmFront from '../assets/products/magic-beard-balm-front.webp';
+import OilFront from '../assets/products/premium-beard-oil-front.webp';
+import LotionFront from '../assets/products/rich-shea-butter-front.webp';
 
 const BookNow = () => {
   const navigate = useNavigate();
@@ -58,48 +58,45 @@ const BookNow = () => {
     beardLineUp: {
       id: 0,
       name: "Beard & Line Up Enhancement",
-      priceFrom: 25,
+      price: 25,
       image: BeardLineUp1,
       slug: "beard-line-up-enhancement",
-      size: "2 oz / 4 oz",
-      isNewDrop: true,
-      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
+      size: "2 oz / 4 oz"
     },
     curlTwist: {
       id: 1,
       name: "Curl Twist",
-      price: 20,
+      price: 25,
       image: Product1,
       slug: "curl-twist",
-      size: "8 oz",
-      buyLink: "https://shopclipculture.com/products/curl-twist"
+      size: "8 oz"
     },
     beardBalm: {
       id: 2,
       name: "Magic Beard Balm",
-      price: 20,
-      image: Product2,
+      price: 25,
+      image: BalmFront,
       slug: "magic-beard-balm",
-      size: "8 oz",
-      buyLink: "https://shopclipculture.com/products/magic-beard-balm"
+      size: "6.8 oz",
+      isNewDrop: true
     },
     beardOil: {
       id: 3,
       name: "Premium Beard Oil",
-      price: 20,
-      image: Product3,
+      price: 25,
+      image: OilFront,
       slug: "premium-beard-oil",
-      size: "4 oz",
-      buyLink: "https://shopclipculture.com/products/premium-beard-oil"
+      size: "3.38 oz",
+      isNewDrop: true
     },
     bodyLotion: {
       id: 4,
-      name: "Body Lotion",
-      price: 20,
-      image: Product5,
-      slug: "body-lotion",
-      size: "16 oz",
-      buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
+      name: "Rich Shea Butter",
+      price: 25,
+      image: LotionFront,
+      slug: "rich-shea-butter",
+      size: "8 oz",
+      isNewDrop: true
     }
   };
 
@@ -648,11 +645,9 @@ const BookNow = () => {
                 style={{ transform: `translateX(-${scrollOffset}px)` }}
               >
                 {featuredProducts.map((product) => (
-                  <a 
+                  <Link
                     key={product.id} 
-                    href={product.buyLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={`/products/${product.slug}`}
                     className="book-now-product-card"
                   >
                     {product.isNewDrop && (
@@ -665,10 +660,11 @@ const BookNow = () => {
                       <h5 className="book-now-product-name">{product.name}</h5>
                       {product.size && <p className="book-now-product-size">{product.size}</p>}
                       <p className="book-now-product-price">
-                        {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                        ${product.price}
                       </p>
+                      <p className="book-now-product-availability">In-Store Only</p>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -703,11 +699,9 @@ const BookNow = () => {
           {/* Mobile Grid - shows 4 products */}
           <div className="book-now-products-grid-mobile">
             {featuredProducts.slice(0, 4).map((product) => (
-              <a 
+              <Link
                 key={product.id} 
-                href={product.buyLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={`/products/${product.slug}`}
                 className="book-now-product-card"
               >
                 {product.isNewDrop && (
@@ -720,10 +714,11 @@ const BookNow = () => {
                   <h5 className="book-now-product-name">{product.name}</h5>
                   {product.size && <p className="book-now-product-size">{product.size}</p>}
                   <p className="book-now-product-price">
-                    {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                    ${product.price}
                   </p>
+                  <p className="book-now-product-availability">In-Store Only</p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
           

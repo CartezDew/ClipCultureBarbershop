@@ -21,8 +21,8 @@ import GalleryImage5 from '../assets/gallery/image-5.webp';
 import GalleryImage6 from '../assets/gallery/image-6.webp';
 // Product images
 import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
+import BalmFront from '../assets/products/magic-beard-balm-front.webp';
+import OilFront from '../assets/products/premium-beard-oil-front.webp';
 
 const BookingForm = ({ showMainForm = true }) => {
   const navigate = useNavigate();
@@ -102,26 +102,26 @@ const BookingForm = ({ showMainForm = true }) => {
     {
       id: 1,
       name: "Curl Twist",
-      price: 15,
+      price: 25,
       image: Product1,
       slug: "curl-twist",
       size: "8 oz"
     },
     {
       id: 2,
-      name: "Beard Balm",
-      price: 20,
-      image: Product2,
-      slug: "beard-balm",
-      size: "8 oz"
+      name: "Magic Beard Balm",
+      price: 25,
+      image: BalmFront,
+      slug: "magic-beard-balm",
+      size: "6.8 oz"
     },
     {
       id: 3,
-      name: "Beard Oil",
-      price: 20,
-      image: Product3,
-      slug: "beard-oil",
-      size: "4 oz"
+      name: "Premium Beard Oil",
+      price: 25,
+      image: OilFront,
+      slug: "premium-beard-oil",
+      size: "3.38 oz"
     }
   ];
 
@@ -2297,7 +2297,7 @@ const BookingForm = ({ showMainForm = true }) => {
                             <div className="booking-product-info">
                               <h5 className="booking-product-name">{product.name}</h5>
                               <p className="booking-product-size">{product.size}</p>
-                              <p className="booking-product-price">${product.price}</p>
+                              <p className="booking-product-price">${product.price} · In-Store Only</p>
                             </div>
                           </Link>
                         ))}

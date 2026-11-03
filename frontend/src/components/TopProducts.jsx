@@ -1,21 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import '../styles/top-products.css';
 import Product1 from '../assets/products/Product-1.webp';
-import Product2 from '../assets/products/Product-2.webp';
-import Product3 from '../assets/products/Product-3.webp';
-import Product4 from '../assets/products/Product-4.webp';
-import Product5 from '../assets/products/Product-5 .webp';
-import Product6 from '../assets/products/Product-6.webp';
+import CurlTwistBack from '../assets/products/curl-twist-ingredients-back.webp';
+import BalmFront from '../assets/products/magic-beard-balm-front.webp';
+import BalmBack from '../assets/products/magic-beard-balm-ingredients-back.webp';
+import OilFront from '../assets/products/premium-beard-oil-front.webp';
+import OilBack from '../assets/products/premium-beard-oil-ingredients-back.webp';
+import ShampooFront from '../assets/products/therapeutic-shampoo-front.webp';
+import ShampooBack from '../assets/products/therapeutic-shampoo-ingredients-back.webp';
+import LotionFront from '../assets/products/rich-shea-butter-front.webp';
+import LotionBack from '../assets/products/rich-shea-butter-ingredients-back.webp';
+import GelFront from '../assets/products/bath-shower-gel-front.webp';
+import GelBack from '../assets/products/bath-shower-gel-ingredients-back.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
 
 const TopProducts = ({ limit }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const [quantities, setQuantities] = useState({});
   const [hoveredProduct, setHoveredProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Refs to card containers, name elements, and rating elements
   const cardRefs = useRef([]);
@@ -26,26 +32,6 @@ const TopProducts = ({ limit }) => {
   const [firstRowNameHeight, setFirstRowNameHeight] = useState(null); // px number
   const [firstRowRatingHeight, setFirstRowRatingHeight] = useState(null); // px number
   const [firstRowIndices, setFirstRowIndices] = useState(new Set());
-
-  const getQuantity = (productId) => quantities[productId] || 1;
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity >= 1) {
-      setQuantities({ ...quantities, [productId]: newQuantity });
-    }
-  };
-
-  const decreaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    if (current > 1) {
-      updateQuantity(productId, current - 1);
-    }
-  };
-
-  const increaseQuantity = (productId) => {
-    const current = getQuantity(productId);
-    updateQuantity(productId, current + 1);
-  };
 
   useEffect(() => {
     const computeSync = () => {
@@ -96,76 +82,79 @@ const TopProducts = ({ limit }) => {
   }, []); // Empty dependency - runs once on mount and cleanup on unmount
   const products = [
     {
-      id: 0,
-      name: "Beard & Line Up Enhancement",
-      priceFrom: 25,
-      rating: null,
-      image: BeardLineUp1,
-      hoverImage: BeardLineUp2,
-      slug: "beard-line-up-enhancement",
-      sizes: ["2 oz", "4 oz"],
-      isNewDrop: true,
-      buyLink: "https://shopclipculture.com/products/revive-premium-beard-line-up-enhancement?variant=47472947200225"
-    },
-    {
-      id: 1,
-      name: "Curl Twist",
-      price: 20,
-      rating: 5,
-      image: Product1,
-      slug: "curl-twist",
-      size: null,
-      buyLink: "https://shopclipculture.com/products/curl-twist"
-    },
-    {
       id: 2,
       name: "Magic Beard Balm",
-      price: 20,
+      price: 25,
       rating: 5,
-      image: Product2,
+      image: BalmFront,
+      hoverImage: BalmBack,
       slug: "magic-beard-balm",
-      size: null,
-      buyLink: "https://shopclipculture.com/products/magic-beard-balm"
+      size: "6.8 oz",
+      isNewDrop: true
     },
     {
       id: 3,
       name: "Premium Beard Oil",
-      price: 20,
+      price: 25,
       rating: 5,
-      image: Product3,
+      image: OilFront,
+      hoverImage: OilBack,
       slug: "premium-beard-oil",
-      size: null,
-      buyLink: "https://shopclipculture.com/products/premium-beard-oil"
+      size: "3.38 oz",
+      isNewDrop: true
     },
     {
       id: 4,
-      name: "Beard Wash",
-      price: 20,
+      name: "Therapeutic Shampoo",
+      price: 25,
       rating: 5,
-      image: Product4,
-      slug: "beard-wash",
+      image: ShampooFront,
+      hoverImage: ShampooBack,
+      slug: "therapeutic-shampoo",
       size: null,
-      buyLink: "https://shopclipculture.com/products/beard-wash"
+      isNewDrop: true
     },
     {
       id: 5,
-      name: "Body Lotion",
-      price: 20,
+      name: "Rich Shea Butter",
+      price: 25,
       rating: 4.6,
-      image: Product5,
-      slug: "body-lotion",
+      image: LotionFront,
+      hoverImage: LotionBack,
+      slug: "rich-shea-butter",
       size: null,
-      buyLink: "https://shopclipculture.com/products/intensive-body-lotion"
+      isNewDrop: true
     },
     {
       id: 6,
-      name: "Body Wash",
-      price: 20,
+      name: "Bath & Shower Gel",
+      price: 25,
       rating: 4,
-      image: Product6,
-      slug: "body-wash",
-      size: "16 oz",
-      buyLink: "https://shopclipculture.com/products/body-wash"
+      image: GelFront,
+      hoverImage: GelBack,
+      slug: "bath-shower-gel",
+      size: "16.9 oz",
+      isNewDrop: true
+    },
+    {
+      id: 1,
+      name: "Curl Twist",
+      price: 25,
+      rating: 5,
+      image: Product1,
+      hoverImage: CurlTwistBack,
+      slug: "curl-twist",
+      size: null
+    },
+    {
+      id: 0,
+      name: "Beard & Line Up Enhancement",
+      price: 25,
+      rating: null,
+      image: BeardLineUp1,
+      hoverImage: BeardLineUp2,
+      slug: "beard-line-up-enhancement",
+      sizes: ["2 oz", "4 oz"]
     }
   ];
 
@@ -218,16 +207,28 @@ const TopProducts = ({ limit }) => {
                 key={product.id} 
                 className="product-card"
                 ref={(el) => (cardRefs.current[index] = el)}
-                onMouseEnter={() => setHoveredProduct(product.id)}
-                onMouseLeave={() => setHoveredProduct(null)}
+                onPointerEnter={(event) => { if (event.pointerType === 'mouse') setHoveredProduct(product.id); }}
+                onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHoveredProduct(null); }}
               >
                 <div className="product-card__image-container">
-                  <img 
-                    src={hoveredProduct === product.id && product.hoverImage ? product.hoverImage : product.image} 
-                    alt={product.name}
-                    className="product-card__image"
-                    loading="lazy"
-                  />
+                  {product.hoverImage ? (
+                    <button
+                      type="button"
+                      className="product-card__image-toggle"
+                      aria-label={`Show ${selectedProduct === product.id ? 'front' : 'back'} of ${product.name}`}
+                      aria-pressed={selectedProduct === product.id}
+                      onClick={() => setSelectedProduct(current => current === product.id ? null : product.id)}
+                    >
+                      <img
+                        src={hoveredProduct === product.id || selectedProduct === product.id ? product.hoverImage : product.image}
+                        alt={hoveredProduct === product.id || selectedProduct === product.id ? `${product.name} back label` : product.name}
+                        className="product-card__image"
+                        loading="lazy"
+                      />
+                    </button>
+                  ) : (
+                    <img src={product.image} alt={product.name} className="product-card__image" loading="lazy" />
+                  )}
                   {product.sizes && (
                     <span className="product-card__sizes-badge">
                       {product.sizes.join(' / ')}
@@ -242,7 +243,7 @@ const TopProducts = ({ limit }) => {
                     {product.name}
                   </h3>
                   <div className="product-card__price">
-                    {product.priceFrom ? `From $${product.priceFrom}` : `$${product.price}`}
+                    ${product.price}
                   </div>
                   <div 
                     className="product-card__rating"
@@ -265,49 +266,14 @@ const TopProducts = ({ limit }) => {
                       </>
                     )}
                   </div>
-                  <div className="product-card__quantity">
-                    <label className="product-card__quantity-label">Quantity</label>
-                    <div className="product-card__quantity-selector">
-                      <button 
-                        className="quantity-btn quantity-btn--minus"
-                        onClick={() => decreaseQuantity(product.id)}
-                        aria-label="Decrease quantity"
-                      >
-                        −
-                      </button>
-                      <input 
-                        type="number" 
-                        className="quantity-input" 
-                        value={getQuantity(product.id)}
-                        onChange={(e) => {
-                          const value = parseInt(e.target.value) || 1;
-                          updateQuantity(product.id, value);
-                        }}
-                        min="1"
-                      />
-                      <button 
-                        className="quantity-btn quantity-btn--plus"
-                        onClick={() => increaseQuantity(product.id)}
-                        aria-label="Increase quantity"
-                      >
-                        +
-                      </button>
-                    </div>
+                  <div className="product-card__in-store-notice">
+                    <span className="product-card__in-store-badge">In-Store Only</span>
                   </div>
-                  <div className="product-card__actions">
-                    <a 
-                      href={product.buyLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="productbtn--buy-now"
-                    >
-                      <ExternalLink size={16} />
-                      Buy Now
-                    </a>
+                  <div className="product-card__actions product-card__actions--single">
                     <Link 
                       to={`/products/${product.slug}`} 
                       state={{ from: isHomePage ? 'home' : 'shop' }}
-                      className="productbtn--learn-more"
+                      className="productbtn--learn-more productbtn--full-width"
                     >
                       Learn More
                       <ArrowRight size={16} />
