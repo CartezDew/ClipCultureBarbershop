@@ -35,11 +35,11 @@
 
 .product-stories__intro h2 {
   max-width: 440px;
-  margin: 1.4rem 0 1.5rem;
-  font-size: clamp(3rem, 4.5vw, 5rem);
+  margin: 1.2rem 0 1rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -.055em;
+  line-height: 1.1;
+  letter-spacing: -.045em;
 }
 
 .product-stories__intro h2 em {
@@ -51,8 +51,8 @@
 .product-stories__intro p {
   max-width: 380px;
   color: #c2ceca;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: clamp(.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
 }
 
 .product-stories__link {
@@ -259,8 +259,11 @@
   }
 
   .product-stories__intro h2 {
-    font-size: clamp(2.65rem, 10vw, 3.5rem);
+    margin: 1rem 0 .85rem;
+    font-size: clamp(1.8rem, 5vw, 2rem);
   }
+
+  .product-stories__intro p { font-size: .95rem; }
 
   .product-stories__intro h2 em {
     display: block;
@@ -270,10 +273,13 @@
     --story-card-width: clamp(170px, 42vw, 190px);
     display: flex;
     gap: 1rem;
+    margin-inline: 1rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    padding: 2.5rem calc((100% - var(--story-card-width)) / 2) 0;
+    padding: 2.5rem calc((100% - var(--story-card-width)) / 2) 0 0;
+    -webkit-mask-image: linear-gradient(to right, #000, #000 calc(100% - 1.5rem), transparent);
+    mask-image: linear-gradient(to right, #000, #000 calc(100% - 1.5rem), transparent);
     -webkit-overflow-scrolling: touch;
     cursor: grab;
   }
@@ -281,6 +287,11 @@
   .product-stories__videos.is-dragging {
     scroll-snap-type: none;
     cursor: grabbing;
+  }
+
+  .product-stories__videos.has-scrolled {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
   }
 
   .product-stories__videos::-webkit-scrollbar {
@@ -297,6 +308,8 @@
     min-width: 0;
     scroll-snap-align: center;
   }
+
+  .product-story:first-child { scroll-snap-align: start; }
 
   .product-story__sound {
     min-height: 42px;

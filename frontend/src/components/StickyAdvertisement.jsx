@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import beardProductsImage from '../assets/About_Home/Beard_Products.webp';
+import beardProductsImage from '../assets/About_Home/Beard_Products-new-backdrop.webp';
+import shampooImage from '../assets/About_Home/stand-products/therapeutic-shampoo.webp';
+import beardOilImage from '../assets/About_Home/stand-products/premium-beard-oil.webp';
+import beardBalmImage from '../assets/About_Home/stand-products/magic-beard-balm.webp';
 import '../styles/sticky-advertisement.css';
 
 const StickyAdvertisement = () => {
@@ -46,17 +49,20 @@ const StickyAdvertisement = () => {
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && handleClick()}
         style={{ cursor: 'pointer' }}
-        aria-label="Shop our grooming products"
+        aria-label="Shop Therapeutic Shampoo, Premium Beard Oil, and Magic Beard Balm"
       >
         {/* Background Image - Optimized like ProductsBanner */}
         <div className="promo-ad__image-wrapper">
           <img
             src={beardProductsImage}
-            alt="Clip Culture Premium Grooming Products"
+            alt=""
             className="promo-ad__image"
             loading="lazy"
             decoding="async"
           />
+          <img src={shampooImage} alt="" className="promo-ad__product promo-ad__product--shampoo" loading="lazy" decoding="async" />
+          <img src={beardOilImage} alt="" className="promo-ad__product promo-ad__product--oil" loading="lazy" decoding="async" />
+          <img src={beardBalmImage} alt="" className="promo-ad__product promo-ad__product--balm" loading="lazy" decoding="async" />
           {/* Overlay for readability */}
           <div className="promo-ad__overlay" />
         </div>

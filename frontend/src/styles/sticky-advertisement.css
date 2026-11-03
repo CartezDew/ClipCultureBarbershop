@@ -24,21 +24,43 @@
   overflow: hidden;
 }
 
+.promo-ad__image-wrapper::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: 4%;
+  bottom: 3%;
+  width: 34%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(227, 178, 88, .32), rgba(24, 18, 10, .65) 70%, transparent);
+  filter: blur(5px);
+  pointer-events: none;
+}
+
 .promo-ad__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.6s ease;
 }
 
-.promo-ad:hover .promo-ad__image {
-  transform: scale(1.03);
+.promo-ad__product {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  height: auto;
+  filter: drop-shadow(8px 10px 8px rgba(0, 0, 0, .6));
 }
+
+.promo-ad__product--shampoo { left: 7%; bottom: 6%; width: 9%; }
+.promo-ad__product--oil { left: 14%; bottom: 7%; width: 7.5%; }
+.promo-ad__product--balm { left: 20.5%; bottom: 5%; width: 15%; }
 
 /* Overlay for text readability */
 .promo-ad__overlay {
   position: absolute;
+  z-index: 2;
   inset: 0;
   background: radial-gradient(
     ellipse 100% 100% at center,
@@ -323,6 +345,9 @@
   .promo-ad__container {
     height: 270px;
   }
+
+  .promo-ad__content { left: 62%; }
+  .promo-ad__headline { font-size: clamp(1.5rem, 4vw, 2rem); }
 }
 
 @media (max-width: 640px) {
@@ -389,8 +414,11 @@
   }
 
   .promo-ad__content {
-    gap: 0.5rem;
-    padding: 0 1rem;
+    top: 42%;
+    left: 65%;
+    width: 44%;
+    gap: 0.25rem;
+    padding: 0;
   }
 
   .promo-ad__eyebrow {
@@ -398,12 +426,13 @@
   }
 
   .promo-ad__headline {
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
+    font-size: 1.5rem;
+    white-space: nowrap;
   }
 
   .promo-ad__tagline {
     font-size: 0.7rem;
-    margin-top: 0.5rem;
+    margin: 0;
   }
 }
 @media (max-width: 440px) {

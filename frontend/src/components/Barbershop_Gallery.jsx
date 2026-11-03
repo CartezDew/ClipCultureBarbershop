@@ -8,7 +8,7 @@ const rawImages = import.meta.glob(
 );
 
 // Services gallery image order - same as ServicesGallery component
-const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 22, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
+const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
 
 // Speaking engagements gallery image order
 const speakingImageOrder = [61, 68, 71, 63, 14, 40, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
@@ -33,6 +33,7 @@ const BarbershopGallery = () => {
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [showCounts, setShowCounts] = useState(true);
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [snapEnabled, setSnapEnabled] = useState(false);
   const isGalleryVisibleRef = useRef(true);
@@ -663,9 +664,22 @@ const BarbershopGallery = () => {
             const isActive = displayIndex === (currentVisibleIndex % totalImages);
             return (
               <div
-                className="gallery-image-wrapper"
+                className={`gallery-image-wrapper${selectedImageIndex === index ? ' is-selected' : ''}`}
                 key={`${img.path}-${index}`}
-                onClick={pauseAutoScroll}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select image ${displayIndex + 1} of ${totalImages}`}
+                onClick={() => {
+                  pauseAutoScroll();
+                  setSelectedImageIndex(index);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    pauseAutoScroll();
+                    setSelectedImageIndex(index);
+                  }
+                }}
               >
                 <img
                   src={img.src}

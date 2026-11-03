@@ -121,6 +121,17 @@
     transform: translateY(-4px);
     transition: opacity 1s ease-in-out, transform 0.6s ease-out;
   }
+
+  .barbershop-gallery-section .gallery-image-wrapper:is(:hover, :focus-visible, .is-selected) .gallery-image-count {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  }
+
+  .gallery-image-wrapper:focus-visible {
+    outline: 2px solid #65c9bb;
+    outline-offset: -2px;
+  }
   
   /* scrollbar container */
   .gallery-slider-scrollbar {

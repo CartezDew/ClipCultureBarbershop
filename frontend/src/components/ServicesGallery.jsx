@@ -18,7 +18,7 @@ const ServicesGallery = () => {
 
   // Services-specific gallery images - dynamically import with Vite
   const galleryModules = import.meta.glob('../assets/gallery/*.webp', { eager: true });
-  const desiredOrder = [7, 2, 20, 10, 13, 22, 37, 15, 16, 18, 23, 25, 26, 29, 31, 47];
+  const desiredOrder = [7, 2, 20, 10, 13, 37, 15, 16, 18, 23, 25, 26, 29, 31, 47];
 
   const allImages = Object.entries(galleryModules).map(([path, mod]) => {
     const match = path.match(/image-(\d+)\.webp$/);

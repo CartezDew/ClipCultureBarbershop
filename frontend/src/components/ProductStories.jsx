@@ -49,6 +49,7 @@ export default function ProductStories() {
   const [ended, setEnded] = useState(() => stories.map(() => false));
   const [elapsed, setElapsed] = useState(() => stories.map(() => 0));
   const [durations, setDurations] = useState(() => stories.map((story) => story.duration));
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const videos = [...videoRefs.current];
@@ -117,7 +118,7 @@ export default function ProductStories() {
   const togglePlayback = (index) => {
     const video = videoRefs.current[index];
     if (video.paused) {
-      if (window.innerWidth <= 640) {
+      if (window.innerWidth <= 640 && (index !== 0 || video.closest('.product-stories__videos')?.scrollLeft > 8)) {
         video.closest('.product-story')?.scrollIntoView({
           behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
           block: 'nearest',
@@ -180,9 +181,10 @@ export default function ProductStories() {
         </div>
 
         <div
-          className="product-stories__videos"
+          className={`product-stories__videos${hasScrolled ? ' has-scrolled' : ''}`}
           aria-label="Customers using Clip Culture beard oil"
           tabIndex={0}
+          onScroll={(event) => setHasScrolled(event.currentTarget.scrollLeft > 8)}
           onPointerDown={startDrag}
           onPointerMove={moveDrag}
           onPointerUp={endDrag}

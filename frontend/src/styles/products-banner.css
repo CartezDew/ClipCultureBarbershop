@@ -1,92 +1,93 @@
-/* Products Banner Component */
 .products-banner {
   width: 100%;
-  background-color: #0a0a0a;
-  padding: 0;
-  overflow: hidden;
   margin-bottom: 4rem;
-  border-radius: 4px;
+  overflow: hidden;
+  background: #030303;
+  color: #fff;
 }
 
 .products-banner__container {
   position: relative;
-  max-width: 1400px;
+  max-width: 1641px;
   margin: 0 auto;
-  height: 600px;
-  overflow: hidden;
-  border-radius: 4px;
 }
 
-/* Background Image */
-.products-banner__background {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+.products-banner__scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1641 / 958;
 }
 
-.products-banner__bg-image {
+.products-banner__backdrop {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  /* GPU acceleration hints for smoother rendering */
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
-.products-banner__overlay {
+.products-banner__stand-front {
   position: absolute;
+  z-index: 7;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.1) 40%,
-    rgba(0, 0, 0, 0.2) 60%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(50.5% 72%, 52% 72.7%, 55% 73.7%, 72% 73.7%, 75% 72.7%, 77% 72%, 77% 79%, 50.5% 79%);
+  pointer-events: none;
 }
 
-/* Logo - Top Left */
 .products-banner__logo-wrapper {
   position: absolute;
+  z-index: 6;
   top: 1.5rem;
   left: 1.5rem;
-  z-index: 10;
 }
 
 .products-banner__logo {
+  display: block;
   width: 80px;
   height: auto;
-  filter: invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-  opacity: 0.45;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  filter: invert(1);
+  opacity: .55;
 }
 
-.products-banner__logo:hover {
-  transform: scale(1.05);
-  opacity: 1;
+.products-banner__products {
+  position: absolute;
+  inset: 0;
 }
 
-/* Slogan - Bottom */
+.products-banner__product {
+  position: absolute;
+  display: block;
+  filter: drop-shadow(5px 7px 5px rgba(0, 0, 0, .7));
+  transition: none;
+}
+
+.products-banner__product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.products-banner__product--bath-shower-gel { z-index: 1; left: 50%; bottom: 29%; width: 7.5%; }
+.products-banner__product--therapeutic-shampoo { z-index: 2; left: 67%; bottom: 29%; width: 6%; }
+.products-banner__product--beard-line-up-enhancement { z-index: 3; left: 57%; bottom: 27.5%; width: 4.8%; }
+.products-banner__product--premium-beard-oil { z-index: 4; left: 61%; bottom: 27.5%; width: 4.6%; }
+.products-banner__product--magic-beard-balm { z-index: 5; left: 53.5%; bottom: 26%; width: 8.5%; }
+.products-banner__product--rich-shea-butter { z-index: 6; left: 65%; bottom: 26%; width: 10%; }
+
+.products-banner__product:focus-visible {
+  outline: 2px solid #7ed4c7;
+  outline-offset: 3px;
+}
+
 .products-banner__slogan-wrapper {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    transparent 100%
-  );
-}
-
-.products-banner__slogan-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  z-index: 6;
+  right: 1rem;
+  bottom: clamp(1rem, 3vw, 2.5rem);
+  left: 1rem;
 }
 
 .products-banner__slogan {
@@ -94,220 +95,61 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+  gap: .5rem 1rem;
   margin: 0;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.25rem, 3vw, 2rem);
-  font-weight: 500;
   font-style: italic;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  letter-spacing: .02em;
   text-align: center;
-  padding-top:  2rem;
 }
 
-.products-banner__slogan-line {
-  color: #ffffff;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-  /* Initial state for animation */
+.products-banner__slogan-line,
+.products-banner__slogan-separator {
   opacity: 0;
-  transform: translateY(20px);
 }
 
 .products-banner__slogan-separator {
-  color: var(--primary-green, #0a9786);
-  font-weight: 300;
-  font-style: normal;
+  color: #28aa9a;
   font-size: 1.5em;
-  text-shadow: 0 0 20px rgba(10, 151, 134, 0.5);
-  /* Initial state for animation */
-  opacity: 0;
-  transform: scale(0.5);
+  font-style: normal;
 }
 
-/* Animation keyframes */
-@keyframes sloganFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes separatorPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  60% {
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-}
-
-/* Animate when in view */
 .products-banner__slogan.animate-in .products-banner__slogan-line {
-  animation: sloganFadeUp 0.7s ease-out forwards;
+  animation: sloganFadeUp .7s ease-out forwards;
 }
 
 .products-banner__slogan.animate-in .products-banner__slogan-separator {
-  animation: separatorPop 0.5s ease-out forwards;
+  animation: sloganFadeUp .5s ease-out forwards;
 }
 
-.products-banner__slogan-line::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(10, 151, 134, 0.6) 20%,
-    rgba(10, 151, 134, 0.8) 50%,
-    rgba(10, 151, 134, 0.6) 80%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
+@keyframes sloganFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.products-banner:hover .products-banner__slogan-line::after {
-  opacity: 1;
-}
-
-/* Responsive */
-
-@media (max-width: 1100px) {
-  .products-banner__bg-image {
-      object-position: 150% center; /* Shift image to the right */
-    }
-  }
-
-@media (max-width: 960px) {
-  .products-banner__bg-image {
-      object-position: 100% center; /* Shift image to the right */
-    }
-  }  
 
 @media (max-width: 900px) {
-  .products-banner__container {
-    height: 500px;
-  }
-  
-  .products-banner__logo {
-    width: 65px;
-  }
-  
-  .products-banner__slogan-wrapper {
-    padding: 1.5rem 1rem;
+  .products-banner__scene {
+    width: 900px;
+    margin-left: calc(50% - 580px);
   }
 }
-
-@media (max-width: 700px) {
-  .products-banner__bg-image {
-      object-position: 60% center; /* Shift image to the right */
-    }
-  }  
 
 @media (max-width: 600px) {
-  .products-banner__container {
-    height: 400px;
-  }
-  
-  .products-banner__logo-wrapper {
-    top: 1rem;
-    left: 1rem;
-  }
-  
-  .products-banner__logo {
-    width: 55px;
+  .products-banner__scene {
+    width: 760px;
+    margin-left: calc(50% - 490px);
   }
 
-  .products-banner__slogan {
-    font-size: clamp(1rem, 3vw, 1.3rem);
-  }
-  
-  /* .products-banner__slogan {
-    flex-direction: column;
-    gap: 0.25rem;
-  } */
-  
-  /* .products-banner__slogan-separator {
-    display: none;
-  } */
-  
-  .products-banner__slogan-wrapper {
-    padding: 1.25rem 1rem;
-  }
+  .products-banner__logo-wrapper { top: 1rem; left: 1rem; }
+  .products-banner__logo { width: 50px; }
+  .products-banner__slogan { font-size: clamp(1rem, 3.5vw, 1.35rem); gap: .1rem .5rem; }
 }
 
-@media (max-width: 530px) {
-    .products-banner__container {
-        border-radius: 10px;
-    }
-    .products-banner__background {
-        border-radius: 10px;
-    }
-    .products-banner__overlay {
-        border-radius: 10px;
-    }
-    .products-banner {
-        border-radius: 10px;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .products-banner__slogan-line,
+  .products-banner__slogan-separator { opacity: 1; }
+  .products-banner__slogan.animate-in .products-banner__slogan-line,
+  .products-banner__slogan.animate-in .products-banner__slogan-separator { animation: none; }
 }
-
-@media (max-width: 450px) {
-  .products-banner__container {
-    height: 380px;
-  }
-  .products-banner__logo {
-    width: 50px;
-  }
-  .products-banner__slogan {
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    margin-left: -.5rem;
-    margin-right: -.5rem;
-  }
-}
-@media (max-width: 400px) {
-  .products-banner__container {
-    height: 310px;
-  }
-
-  .products-banner__slogan {
-    font-size: clamp(.95rem, 3vw, 1rem);
-    gap: 0rem 0.1rem;
-
-  }
-  
-  .products-banner__logo {
-    width: 40px;
-  }
-}
-
-@media (max-width: 380px) {
-  .products-banner__slogan {
-    font-size: clamp(.9rem, 3vw, 1rem);
-    gap: 0rem 0.1rem;
-  }
-}
-
-@media (max-width: 350px) {
-  .products-banner__slogan-separator {
-    display: none;
-  }
-  .products-banner__slogan {
-    gap: 1rem .5rem;
-  }
-}
-
