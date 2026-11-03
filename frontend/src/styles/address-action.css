@@ -2,3 +2,4 @@
 .address-action__button { padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; text-align: left; cursor: copy; }
 .address-action__button:hover, .address-action__button:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
 .address-action__hint { font-size: .75rem; line-height: 1.4; opacity: .75; }
+.address-action__directions { font-size: .8rem; font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }

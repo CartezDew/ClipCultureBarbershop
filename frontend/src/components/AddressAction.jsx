@@ -30,6 +30,7 @@ export default function AddressAction({ className = '' }) {
         6309 Roswell Road NE #2D<br />Sandy Springs, GA 30328
       </button>
       <span className="address-action__hint" aria-live="polite">{copied ? 'Copied to clipboard' : 'Tap to copy · Double click for directions'}</span>
+      <a className="address-action__directions" href={directionsUrl} target="_blank" rel="noopener noreferrer">Open directions</a>
     </span>
   );
 }

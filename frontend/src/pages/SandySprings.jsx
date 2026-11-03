@@ -27,7 +27,6 @@ export default function SandySprings() {
           <MapPin size={26} aria-hidden="true" />
           <h2>Find us</h2>
           <AddressAction />
-          <a href="https://www.google.com/maps/search/?api=1&query=6309+Roswell+Road+NE+%232D+Sandy+Springs+GA+30328" target="_blank" rel="noopener noreferrer">Get directions <ArrowUpRight size={16} aria-hidden="true" /></a>
         </div>
         <div className="sandy-details__item">
           <Clock3 size={26} aria-hidden="true" />
