@@ -182,7 +182,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
       submission_label: 'Submitted',
       submitted_at: timestamp,
       page_url: pageUrl,
-      logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,
       form_fields_text: form_fields_text,
       ...fieldParams
     };
@@ -248,7 +247,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
       response_title: responseCopy.title,
       acknowledgement: responseCopy.acknowledgement,
       next_step: responseCopy.nextStep,
-      logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,
       site_url: siteUrl,
       
       // EmailJS renders either the newsletter welcome or inquiry response.

@@ -4,7 +4,7 @@ import '../styles/address-action.css';
 export const SHOP_ADDRESS = '6309 Roswell Road NE #2D, Sandy Springs, GA 30328';
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SHOP_ADDRESS)}`;
 
-export default function AddressAction({ className = '' }) {
+export default function AddressAction({ className = '', children }) {
   const copyAddress = async (event) => {
     if (event?.detail > 1) return;
     try {
@@ -21,7 +21,7 @@ export default function AddressAction({ className = '' }) {
         onDoubleClick={() => window.open(directionsUrl, '_blank', 'noopener,noreferrer')}
         aria-label={`Copy address: ${SHOP_ADDRESS}`}
       >
-        6309 Roswell Road NE #2D<br />Sandy Springs, GA 30328
+        {children ?? <>6309 Roswell Road NE #2D<br />Sandy Springs, GA 30328</>}
       </button>
       <span className="address-action__actions">
         <button type="button" className="address-action__copy" onClick={copyAddress} aria-label="Copy Sandy Springs address" title="Copy address">

@@ -47,12 +47,10 @@ describe('form email routing', () => {
     const internal = emailjs.send.mock.calls[0][2];
     const acknowledgement = emailjs.send.mock.calls[1][2];
     expect(internal.to_email).not.toBe(acknowledgement.to_email);
-    expect(internal.logo_url).toBe('https://clip-culture.netlify.app/clip-culture-email-logo.png');
     expect(acknowledgement.to_email).toBe('jordan@example.com');
     expect(acknowledgement.acknowledgement).toContain('applying for a Clip Culture franchise');
     expect(acknowledgement.next_step).toContain('within 48 hours');
     expect(acknowledgement.join_culture).toBe(false);
-    expect(acknowledgement.logo_url).toBe('https://clip-culture.netlify.app/clip-culture-email-logo.png');
   });
 
   it('marks the newsletter signup for its own welcome copy', async () => {

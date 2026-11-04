@@ -28,16 +28,32 @@ const Contact = () => {
           {/* Sandy Springs Location */}
           <div className="contact__column contact__column--sandy-springs">
             <div className="contact__location-header">
-              <h3 className="contact__location-title">Sandy Springs</h3>
+              <svg className="contact__title-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path className="contact__icon-accent" d="M19 52c-10 2-10 6 1 8 9 2 23 0 27-3 3-3-1-5-7-5" />
+                <path d="M32 5C21 4 13 12 13 24c0 11 13 25 19 32 6-7 19-21 19-32C51 13 44 5 32 5Z" />
+                <path d="M39 23c0 4-3 8-7 8s-8-3-8-7 3-8 7-8 8 3 8 7Z" />
+                <path className="contact__icon-detail" d="M18 23c0-7 4-12 9-13M43 37l-8 11" />
+              </svg>
+              <h3 className="contact__location-title">Drop In</h3>
             </div>
             <div className="contact__location-info">
-              <AddressAction className="contact__address" />
+              <AddressAction className="contact__address">
+                <span>6309 Roswell Road NE</span>
+                <span className="contact__suite">Suite 2D</span>
+                <span>Sandy Springs, GA 30328</span>
+              </AddressAction>
             </div>
           </div>
 
           {/* Shop Hours */}
           <div className="contact__column contact__column--hours">
             <div className="contact__location-header">
+              <svg className="contact__title-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path className="contact__icon-accent" d="M5 58c15-1 34-1 54 0M16 8l31-1" />
+                <path d="m11 14 41-1 6 13H6l5-12ZM7 26v4c0 5 8 5 9 0 1 5 8 5 10 0 1 5 8 5 10 0 1 5 8 5 10 0 1 5 10 5 11 0v-4M11 35l1 20h40l1-20" />
+                <path d="m18 14-2 12m11-12-1 12m10-12v12m9-12 2 12M19 38h12v17M37 38h8v9h-8zM27 46v3" />
+                <path className="contact__icon-detail" d="m40 40 3 3M15 51v-9" />
+              </svg>
               <h3 className="contact__location-title">Shop Hours</h3>
             </div>
             <div className="contact__hours">
