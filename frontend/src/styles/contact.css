@@ -162,15 +162,14 @@
   z-index: 0;
   width: var(--contact-icon-size);
   height: var(--contact-icon-size);
-  transform: translateY(-50%) rotate(-7deg);
+  transform: translateY(-50%);
   color: #123d35;
-  opacity: 0.38;
+  opacity: 0.23;
   pointer-events: none;
 }
 
 .contact__column--hours .contact__title-icon {
-  left: min(calc(50% + 3rem), calc(100% - var(--contact-icon-size)));
-  transform: translateY(-50%) rotate(5deg);
+  left: min(calc(50% + 2rem), calc(100% - var(--contact-icon-size)));
 }
 
 .contact__icon-accent {

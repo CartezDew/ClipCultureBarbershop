@@ -49,10 +49,11 @@ const Contact = () => {
           <div className="contact__column contact__column--hours">
             <div className="contact__location-header">
               <svg className="contact__title-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <path className="contact__icon-accent" d="M5 58c15-1 34-1 54 0M16 8l31-1" />
-                <path d="m11 14 41-1 6 13H6l5-12ZM7 26v4c0 5 8 5 9 0 1 5 8 5 10 0 1 5 8 5 10 0 1 5 8 5 10 0 1 5 10 5 11 0v-4M11 35l1 20h40l1-20" />
-                <path d="m18 14-2 12m11-12-1 12m10-12v12m9-12 2 12M19 38h12v17M37 38h8v9h-8zM27 46v3" />
-                <path className="contact__icon-detail" d="m40 40 3 3M15 51v-9" />
+                <path d="M27 10V8a5 5 0 0 1 10 0v2M27 55v1a5 5 0 0 0 10 0v-1M23 16v33m18-33v33" />
+                <path d="M22 10h20a3 3 0 0 1 0 6H22a3 3 0 0 1 0-6ZM22 49h20a3 3 0 0 1 0 6H22a3 3 0 0 1 0-6Z" />
+                <path className="contact__icon-accent" d="m23 25 18-9m-18 27 18-9" />
+                <path d="m23 32 18-9m-16 26 16-8" />
+                <path className="contact__icon-detail" d="M26 19v3m0 13v4m18-21v29" />
               </svg>
               <h3 className="contact__location-title">Shop Hours</h3>
             </div>
