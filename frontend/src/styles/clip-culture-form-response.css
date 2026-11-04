@@ -1,0 +1,44 @@
+.cc-form-response {
+  width: min(100%, 480px);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid #e2d5b3;
+  border-top: 4px solid #caa63b;
+  border-radius: 14px;
+  background: #faf9f5;
+  color: #182024;
+  text-align: center;
+  box-shadow: 0 16px 38px rgba(12, 19, 21, .08);
+}
+
+.cc-form-response__logo {
+  display: block;
+  width: 142px;
+  max-width: 55%;
+  height: auto;
+  margin: 0 auto 1.25rem;
+}
+
+.cc-form-response__eyebrow {
+  display: block;
+  margin-bottom: .65rem;
+  color: #087f78;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.cc-form-response h3 {
+  margin: 0 0 .75rem;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  line-height: 1.2;
+}
+
+.cc-form-response p {
+  margin: .65rem 0 0;
+  line-height: 1.55;
+}
+
+.cc-form-response__next {
+  font-weight: 700;
+}

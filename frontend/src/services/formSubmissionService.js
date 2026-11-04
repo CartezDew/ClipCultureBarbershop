@@ -6,6 +6,7 @@
  */
 
 import emailjs from '@emailjs/browser';
+import { getFormResponse } from '../lib/formResponseCopy.js';
 
 // Configuration from environment variables
 const EMAILJS_CONFIG = {
@@ -151,9 +152,14 @@ export const submitFormWithAttachments = async (formName, formData) => {
 
   // Determine form type for auto-reply
   const joinCulture = isJoinCultureForm(formName);
-  const customerSubject = joinCulture
-    ? 'Welcome to Clip Culture'
-    : `Clip Culture Barbershop received your ${formName} submission`;
+  const responseCopy = getFormResponse(formName, fromName === 'Valued Customer' ? '' : fromName);
+  const browserOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+  const siteUrl = import.meta.env.VITE_PUBLIC_SITE_URL || (
+    /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/.test(browserOrigin)
+      ? 'https://clip-culture.netlify.app'
+      : browserOrigin || 'https://clip-culture.netlify.app'
+  );
+  const customerSubject = responseCopy.subject;
 
   console.log('📋 Form Submission:', {
     formName,
@@ -230,6 +236,13 @@ export const submitFormWithAttachments = async (formName, formData) => {
       form_name: formName,
       from_name: fromName,
       name: fromName,
+      to_name: fromName,
+      reply_to: internalEmail,
+      greeting: responseCopy.greeting,
+      acknowledgement: responseCopy.acknowledgement,
+      next_step: responseCopy.nextStep,
+      logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,
+      site_url: siteUrl,
       
       // Display flags for template
       join_culture_display: joinCulture ? 'block' : 'none',

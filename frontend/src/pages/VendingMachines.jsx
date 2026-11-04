@@ -4,6 +4,7 @@ import { FaRegThumbsUp } from 'react-icons/fa6';
 import BicepIcon from '../components/icons/BicepIcon.jsx';
 import JoinUs from '../components/JoinUs.jsx';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
+import ClipCultureFormResponse from '../components/ClipCultureFormResponse.jsx';
 import ShopImage from '../assets/Contact/Shop_1.webp';
 import '../styles/vending-machines.css';
 
@@ -99,10 +100,8 @@ const VendingMachines = () => {
         </div>
         <div className="vending-form-panel" data-scroll-reveal="vending-photo">
           {submitted ? (
-            <div className="vending-form-success" role="status">
-              <span>Inquiry received</span>
-              <h3>Thanks for reaching out.</h3>
-              <p>We have your details and will be in touch about the vending space.</p>
+            <div className="vending-form-success">
+              <ClipCultureFormResponse formName="Vending Machine Space Inquiry" />
               <button type="button" onClick={() => setSubmitted(false)}>Send another inquiry</button>
             </div>
           ) : (

@@ -51,7 +51,7 @@ describe('single-location booking', () => {
     expect(address).toBeInTheDocument();
     fireEvent.doubleClick(address);
     expect(window.open).toHaveBeenCalledWith(expect.stringContaining('google.com/maps/search/'), '_blank', 'noopener,noreferrer');
-    expect(screen.getByRole('link', { name: 'Open directions' })).toHaveAttribute('href', expect.stringContaining('google.com/maps/search/'));
+    expect(screen.getByRole('link', { name: 'Open directions to Sandy Springs' })).toHaveAttribute('href', expect.stringContaining('google.com/maps/search/'));
     expect(screen.getAllByRole('link', { name: '(404)-458-2993' })).toHaveLength(2);
     expect(screen.getByRole('heading', { name: 'Shop Hours' })).toBeInTheDocument();
   });

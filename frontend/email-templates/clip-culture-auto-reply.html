@@ -1,0 +1,52 @@
+<!--
+  EmailJS auto-reply template
+  To Email: {{to_email}}
+  Subject: {{subject}}
+  Reply To: {{reply_to}}
+  Paste the markup below into the EmailJS template's HTML content editor.
+  The matching variables are sent by src/services/formSubmissionService.js.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clip Culture received your message</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f2f1ec;font-family:Arial,Helvetica,sans-serif;color:#1a2225;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#f2f1ec;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;border-collapse:collapse;background:#ffffff;border-top:5px solid #caa43a;">
+            <tr>
+              <td align="center" style="padding:34px 28px 23px;border-bottom:1px solid #e9e5db;">
+                <img src="{{logo_url}}" alt="Clip Culture" width="166" style="display:block;width:166px;max-width:100%;height:auto;border:0;">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:36px 38px 38px;">
+                <p style="margin:0 0 14px;color:#008d82;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">MESSAGE RECEIVED</p>
+                <h1 style="margin:0 0 22px;color:#182024;font-size:29px;font-weight:700;line-height:1.2;">Thank you for reaching out.</h1>
+                <p style="margin:0 0 15px;color:#273237;font-size:16px;line-height:1.6;">{{greeting}}</p>
+                <p style="margin:0 0 22px;color:#273237;font-size:16px;line-height:1.6;">{{acknowledgement}}</p>
+                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#f6f4ec;border-left:4px solid #caa43a;">
+                  <tr>
+                    <td style="padding:19px 20px;color:#182024;font-size:16px;font-weight:700;line-height:1.5;">{{next_step}}</td>
+                  </tr>
+                </table>
+                <p style="margin:27px 0 0;color:#5c686b;font-size:13px;line-height:1.5;">Regarding: {{form_name}}<br>Received: {{submitted_at}}</p>
+                <p style="margin:29px 0 0;color:#273237;font-size:15px;line-height:1.5;">Defining the Standard. Shaping the Culture.<br><strong>The Clip Culture Team</strong></p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:22px 28px;background:#182024;color:#f4f2ea;font-size:12px;line-height:1.6;">
+                Clip Culture Barbershop · Sandy Springs, Georgia<br>
+                <a href="{{site_url}}" style="color:#d9b652;text-decoration:underline;">Visit Clip Culture</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

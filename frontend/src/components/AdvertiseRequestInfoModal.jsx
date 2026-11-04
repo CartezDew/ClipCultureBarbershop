@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
+import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 import { validateEmail } from '../utils/emailValidation';
 
 const AdvertiseRequestInfoModal = ({ isOpen, onClose }) => {
@@ -196,17 +197,7 @@ const AdvertiseRequestInfoModal = ({ isOpen, onClose }) => {
             </form>
           </>
         ) : (
-          <div className="form0success-message">
-            <div className="form0success-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <h3 className="form0success-title">Thank You!</h3>
-            <p className="form0success-text">
-              We'll send you detailed advertising information shortly. Expect to hear from us within 24 hours.
-            </p>
-          </div>
+          <ClipCultureFormResponse formName="Advertise Request Info" name={formData.firstName} />
         )}
       </div>
     </div>,

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
+import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 import { validateEmail } from '../utils/emailValidation';
 
 const FranchiseApplyModal = ({ isOpen, onClose }) => {
@@ -329,17 +330,7 @@ const FranchiseApplyModal = ({ isOpen, onClose }) => {
             </form>
           </>
         ) : (
-          <div className="form0success-message">
-            <div className="form0success-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <h3 className="form0success-title">Application Submitted!</h3>
-            <p className="form0success-text">
-              Thank you for your interest in a Clip Culture franchise. Our team will review your application and contact you within 48 hours.
-            </p>
-          </div>
+          <ClipCultureFormResponse formName="Franchise Application" name={formData.firstName} />
         )}
       </div>
     </div>,

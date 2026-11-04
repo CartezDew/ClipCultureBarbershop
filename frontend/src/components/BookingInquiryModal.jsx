@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
 import { validateEmail } from '../utils/emailValidation';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
+import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 
 const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
   const [formData, setFormData] = useState({
@@ -267,17 +268,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
             </form>
           </>
         ) : (
-          <div className="form0success-message">
-            <div className="form0success-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <h3 className="form0success-title">Thank You!</h3>
-            <p className="form0success-text">
-              We've received your booking inquiry and will be in touch soon.
-            </p>
-          </div>
+          <ClipCultureFormResponse formName={title || 'Booking Inquiry'} name={formData.fullName} />
         )}
       </div>
     </div>,

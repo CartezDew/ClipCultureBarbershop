@@ -26,7 +26,7 @@ describe('vending machine inquiry', () => {
     await waitFor(() => expect(submitFormWithAttachments).toHaveBeenCalledWith('Vending Machine Space Inquiry', {
       fullName: 'Alex Owner', email: 'alex@example.com', phone: '555-0100', businessName: 'Alex Vending', products: 'Snacks', machineDetails: '36 inches wide',
     }));
-    expect(await screen.findByText('Thanks for reaching out.')).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Thank you for reaching out.' })).toBeInTheDocument();
   });
 
   it('keeps the form visible when delivery fails', async () => {

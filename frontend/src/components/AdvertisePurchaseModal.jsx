@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/form-modal.css';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
+import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 import { validateEmail } from '../utils/emailValidation';
 
 const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
@@ -225,17 +226,7 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
             </form>
           </>
         ) : (
-          <div className="form0success-message">
-            <div className="form0success-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <h3 className="form0success-title">Thank You!</h3>
-            <p className="form0success-text">
-              We've received your package purchase request. Our team will contact you shortly to complete the process.
-            </p>
-          </div>
+          <ClipCultureFormResponse formName="Advertise Purchase Package" name={formData.firstName} />
         )}
       </div>
     </div>,
