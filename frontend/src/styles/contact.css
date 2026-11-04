@@ -1,44 +1,4 @@
 /* Contact Section */
-.contact__form-card {
-  max-width: 760px;
-  margin: 3rem auto 0;
-  padding: clamp(1.4rem, 4vw, 2.5rem);
-  border-radius: 14px;
-  background: #f7f6f2;
-  color: #182024;
-}
-
-.contact__form-card h3 { margin: 0 0 .5rem; font-size: clamp(1.45rem, 3vw, 1.9rem); }
-.contact__form-card p { margin: 0 0 1.5rem; line-height: 1.5; }
-.contact__form-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.contact__form-fields label { display: grid; gap: .4rem; font-size: .9rem; font-weight: 700; }
-.contact__form-message { grid-column: 1 / -1; }
-.contact__form-fields input, .contact__form-fields textarea {
-  width: 100%;
-  min-height: 44px;
-  padding: .75rem .85rem;
-  border: 1px solid #b8c0be;
-  border-radius: 7px;
-  background: #fff;
-  color: #182024;
-  font: inherit;
-}
-.contact__form-fields :is(input, textarea):focus-visible { outline: 2px solid #008d82; outline-offset: 2px; }
-.contact__form-submit, .contact__form-reset {
-  margin-top: 1.25rem;
-  padding: .8rem 1.3rem;
-  border: 0;
-  border-radius: 7px;
-  background: #182024;
-  color: #fff;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.contact__form-submit:disabled { opacity: .6; cursor: wait; }
-.contact__form-card .contact__form-error { margin: .8rem 0 0; color: #a12626; }
-@media (max-width: 600px) { .contact__form-fields { grid-template-columns: 1fr; } }
-
 .contact {
   /* Ensure anchor scroll stops with space for fixed navbars */
   scroll-margin-top: 120px;

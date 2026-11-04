@@ -1,52 +1,46 @@
-<!--
-  EmailJS auto-reply template
-  To Email: {{to_email}}
-  Subject: {{subject}}
-  Reply To: {{reply_to}}
-  Paste the markup below into the EmailJS template's HTML content editor.
-  The matching variables are sent by src/services/formSubmissionService.js.
--->
+<!-- EmailJS ClipCulture_AutoReply: To {{to_email}}, Subject {{customer_subject}}, Reply To {{reply_to}} -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clip Culture received your message</title>
-  </head>
-  <body style="margin:0;padding:0;background:#f2f1ec;font-family:Arial,Helvetica,sans-serif;color:#1a2225;">
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#f2f1ec;">
-      <tr>
-        <td align="center" style="padding:32px 16px;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;border-collapse:collapse;background:#ffffff;border-top:5px solid #caa43a;">
-            <tr>
-              <td align="center" style="padding:34px 28px 23px;border-bottom:1px solid #e9e5db;">
-                <img src="{{logo_url}}" alt="Clip Culture" width="166" style="display:block;width:166px;max-width:100%;height:auto;border:0;">
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:36px 38px 38px;">
-                <p style="margin:0 0 14px;color:#008d82;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">MESSAGE RECEIVED</p>
-                <h1 style="margin:0 0 22px;color:#182024;font-size:29px;font-weight:700;line-height:1.2;">Thank you for reaching out.</h1>
-                <p style="margin:0 0 15px;color:#273237;font-size:16px;line-height:1.6;">{{greeting}}</p>
-                <p style="margin:0 0 22px;color:#273237;font-size:16px;line-height:1.6;">{{acknowledgement}}</p>
-                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#f6f4ec;border-left:4px solid #caa43a;">
-                  <tr>
-                    <td style="padding:19px 20px;color:#182024;font-size:16px;font-weight:700;line-height:1.5;">{{next_step}}</td>
-                  </tr>
-                </table>
-                <p style="margin:27px 0 0;color:#5c686b;font-size:13px;line-height:1.5;">Regarding: {{form_name}}<br>Received: {{submitted_at}}</p>
-                <p style="margin:29px 0 0;color:#273237;font-size:15px;line-height:1.5;">Defining the Standard. Shaping the Culture.<br><strong>The Clip Culture Team</strong></p>
-              </td>
-            </tr>
-            <tr>
-              <td align="center" style="padding:22px 28px;background:#182024;color:#f4f2ea;font-size:12px;line-height:1.6;">
-                Clip Culture Barbershop · Sandy Springs, Georgia<br>
-                <a href="{{site_url}}" style="color:#d9b652;text-decoration:underline;">Visit Clip Culture</a>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clip Culture</title>
+</head>
+<body style="margin:0;padding:0;background:#eeede8;font-family:Arial,Helvetica,sans-serif;color:#192321;">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#eeede8;font-family:Arial,Helvetica,sans-serif;">
+    <tr><td align="center" style="padding:28px 14px;font-family:Arial,Helvetica,sans-serif;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;border-collapse:collapse;background:#fff;border-top:6px solid #c9a13b;border-left:1px solid #e5e2d8;border-right:1px solid #e5e2d8;font-family:Arial,Helvetica,sans-serif;">
+        <tr><td align="center" style="padding:28px 24px 22px;border-bottom:1px solid #e9e5da;font-family:Arial,Helvetica,sans-serif;">
+          <img src="{{logo_url}}" alt="Clip Culture" width="78" style="display:block;width:78px;max-width:100%;height:auto;border:0;margin:0 auto 14px;">
+          <p style="margin:0;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;line-height:1.4;">CLIP CULTURE BARBERSHOP</p>
+        </td></tr>
+        <tr><td style="padding:38px 38px 36px;font-family:Arial,Helvetica,sans-serif;">
+          <div style="display:{{join_culture_display}};">
+            <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">WELCOME TO THE CULTURE</p>
+            <h1 style="margin:0 0 20px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">You’re in. Welcome to Clip Culture.</h1>
+            <p style="margin:0;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">Thanks for signing up. You’ll be first to hear about product drops, events, and news from the shop.</p>
+          </div>
+          <div style="display:{{default_form_display}};">
+            <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">MESSAGE RECEIVED</p>
+            <h1 style="margin:0 0 24px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">Thank you for reaching out.</h1>
+            <p style="margin:0 0 12px;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">{{greeting}}</p>
+            <p style="margin:0 0 26px;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">{{acknowledgement}}</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#192321;font-family:Arial,Helvetica,sans-serif;">
+              <tr><td style="padding:21px 22px;border-left:4px solid #c9a13b;font-family:Arial,Helvetica,sans-serif;">
+                <p style="margin:0 0 5px;color:#d8b956;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.7px;">WHAT HAPPENS NEXT</p>
+                <p style="margin:0;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;line-height:1.5;">{{next_step}}</p>
+              </td></tr>
+            </table>
+            <p style="margin:24px 0 0;color:#69736f;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;">Regarding {{form_name}}<br>Received {{submitted_at}}</p>
+          </div>
+          <p style="margin:30px 0 0;padding-top:20px;border-top:1px solid #e9e5da;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;">Defining the Standard. Shaping the Culture.<br><strong style="color:#192321;">The Clip Culture Team</strong></p>
+        </td></tr>
+        <tr><td align="center" style="padding:24px 28px;background:#192321;color:#d6ddda;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.7;">
+          Sandy Springs, Georgia<br>
+          <a href="{{site_url}}" style="color:#d8b956;text-decoration:underline;font-family:Arial,Helvetica,sans-serif;font-weight:700;">Visit Clip Culture</a>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
 </html>

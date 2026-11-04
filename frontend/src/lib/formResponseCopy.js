@@ -20,7 +20,9 @@ export const getFormResponse = (formName, name = '') => {
   const topic = formTopics[formName] || 'Clip Culture';
 
   return {
-    subject: `We received your message | Clip Culture`,
+    subject: formName === 'Join the Culture'
+      ? 'Welcome to the Culture | Clip Culture'
+      : 'We received your message | Clip Culture',
     greeting: firstName ? `Hi ${firstName},` : 'Hello,',
     acknowledgement: `Thank you for reaching out about ${topic}. We received your submission.`,
     nextStep: 'Someone from the Clip Culture team will be in contact within 48 hours.',

@@ -34,7 +34,7 @@ describe('newsletter sign-up', () => {
     render(<JoinUs />);
     fireEvent.change(screen.getByPlaceholderText('Email Address'), { target: { value: 'owner@example.com' } });
     fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
-    expect(await screen.findByRole('heading', { name: 'Thank you for reaching out.' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Thank you. Your email is added.' })).toBeInTheDocument();
     expect(submitFormWithAttachments).toHaveBeenCalledWith('Join the Culture', { email: 'owner@example.com' });
   });
 });

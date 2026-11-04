@@ -4,7 +4,6 @@ import '../styles/joinus.css';
 import '../styles/form-modal.css';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
 import { validateEmail } from '../utils/emailValidation';
-import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 
 const JoinUs = () => {
   const [email, setEmail] = useState('');
@@ -192,7 +191,15 @@ const JoinUs = () => {
               ))}
             </div>
 
-            <ClipCultureFormResponse formName="Join the Culture" />
+            <div className="form0success-message">
+              <div className="form0success-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <h3 className="form0success-title">Thank you. Your email is added.</h3>
+              <p className="form0success-text">Welcome to the culture!</p>
+            </div>
           </div>
         </div>,
         document.body
