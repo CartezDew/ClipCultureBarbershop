@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <!-- Lets prerendered content start hidden for its reveal animation; shown anyway if scripts never start. -->
-    <script>document.documentElement.classList.add('js');setTimeout(function(){var d=document.documentElement;if(!d.classList.contains('reveal-ready'))d.classList.remove('js')},4000)</script>
+    <script>if(!/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|inspectiontool|chatgpt|claude|perplexity|bytespider/i.test(navigator.userAgent))document.documentElement.classList.add('js');setTimeout(function(){var d=document.documentElement;if(!d.classList.contains('reveal-ready'))d.classList.remove('js')},4000)</script>
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#123018" />

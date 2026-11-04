@@ -11,7 +11,7 @@ const Contact = () => {
       <div className="contact__container">
         <div className="contact__header">
           <h2 className="contact__title">Visit Our Shop</h2>
-          <p className="contact__subtitle">Sandy Springs. One Standard of Excellence.</p>
+          <p className="contact__subtitle">One Standard of Excellence.</p>
           <p className="contact__walk-ins">Walk-ins are welcomed</p>
         </div>
 

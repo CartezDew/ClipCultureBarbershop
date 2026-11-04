@@ -43,14 +43,32 @@
 
   [data-scroll-state="visible"] { opacity: 1; translate: 0 0; scale: 1; rotate: none; }
 
+  /* Elements whose own stylesheet sets a narrower transition (for hover or an existing fade)
+     need the reveal properties added back, or the reveal snaps instead of animating. */
+  .testimonials__grid > article[data-scroll-state] {
+    transition:
+      transform .35s cubic-bezier(.2, .8, .2, 1),
+      box-shadow .35s ease,
+      opacity .7s ease var(--reveal-delay, 0s),
+      translate .8s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0s),
+      rotate .9s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0s);
+  }
+  .product-detail__related-card[data-scroll-state] {
+    transition:
+      transform .3s ease,
+      opacity .7s ease var(--reveal-delay, 0s),
+      translate .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0s);
+  }
+  /* These keep their own durations and delays; only the property list grows. */
+  .promo-ad__content[data-scroll-state],
+  .promo-ad__headline[data-scroll-state] { transition-property: opacity, transform, translate; }
+
   .vending-benefits article:nth-child(2) { transition-delay: .09s; }
   .vending-benefits article:nth-child(3) { transition-delay: .18s; }
   .vending-proof-item:nth-child(3) { transition-delay: .09s; }
   .vending-proof-item:nth-child(4) { transition-delay: .18s; }
   .apply-bento-card:nth-child(2) { transition-delay: .25s; }
   .apply-bento-card:nth-child(3) { transition-delay: .5s; }
-  .testimonials__grid article:nth-child(2) { transition-delay: .12s; }
-  .testimonials__grid article:nth-child(3) { transition-delay: .24s; }
   .apply-video-content { transition-delay: .1s; }
   .apply-joinus-wrapper .join-email-subtitle { transition-delay: .08s; }
   .apply-joinus-wrapper .join-email-form { transition-delay: .16s; }

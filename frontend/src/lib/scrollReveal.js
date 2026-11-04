@@ -2,9 +2,10 @@ const PAGE_SELECTORS = {
   '/': '.home-product-stories-wrapper .product-stories__intro, .home-product-stories-wrapper .product-story, .top-products__header, .top-products__grid .product-card, .home-barbershop-gallery-wrapper, .testimonials header, .testimonials__grid article, .testimonials__reviews-section, .home-services-preview .container > h2, .home-services-preview .service-item, .home-welcome__left, .home-welcome__right, .contact__header, .contact__image-container, .contact__column',
   '/vending-machines': '.vending-page [data-scroll-reveal]',
   '/shop': '.shop-header, .shop-product-stories-wrapper .product-stories__intro, .shop-product-stories-wrapper .product-story, .shop-page .top-products__header, .shop-page .product-card, .shop-page .books__header, .shop-page .book-card',
-  '/faqs': '.faqs-page__header, .faqs-page__cta, .faqs-page .fact',
+  // FAQ questions animate themselves (components/facts.jsx), so they are not listed here.
+  '/faqs': '.faqs-page__header, .faqs-page__cta',
   '/apply': '.apply-title, .apply-now-button, .apply-bento-card, .apply-video-wrapper, .apply-video-title, .apply-video-subtitle, .apply-founder-callouts > *, .apply-joinus-wrapper .join-email-title, .apply-joinus-wrapper .join-email-subtitle, .apply-joinus-wrapper .join-email-form',
-  '/franchise': '.franchise-header-image, .franchise-header-copy, .franchise-features-list > *, .franchise-program, .franchise-program-card, .franchise-program-actions, .franchise-faq-section h2, .franchise-faq-section .facts-subtitle, .franchise-faq-section .fact, .franchise-gallery-wrapper, .franchise-joinus-wrapper .join-email-title, .franchise-joinus-wrapper .join-email-subtitle, .franchise-joinus-wrapper .join-email-form',
+  '/franchise': '.franchise-header-image, .franchise-header-copy, .franchise-features-list > *, .franchise-program, .franchise-program-card, .franchise-program-actions, .franchise-faq-section h2, .franchise-faq-section .facts-subtitle, .franchise-gallery-wrapper, .franchise-joinus-wrapper .join-email-title, .franchise-joinus-wrapper .join-email-subtitle, .franchise-joinus-wrapper .join-email-form',
   '/speaking-engagements': '.speaking-header-overlay, .speaking-bento-card, .speaking-video-wrapper, .speaking-video-content, .speaking-narrative-main-title, .speaking-narrative-subtitle, .speaking-narrative-content > .speaking-narrative-paragraph, .speaking-narrative-quote, .speaking-topics-block, .speaking-proof-block, .speaking-booking-block, .speaking-gallery-wrapper, .speaking-joinus-wrapper .join-email-title, .speaking-joinus-wrapper .join-email-subtitle, .speaking-joinus-wrapper .join-email-form',
   '/book-now': '.book-now-header, .book-now-progress, .book-now-step-content > :not(.book-now-options-grid), .book-now-option-card, .book-now-products-title, .book-now-product-card',
   '/services': 'main h1, main h2, .services-gallery-wrapper, .promo-ad__image-wrapper, .promo-ad__content, .services__card, .services__cta',
@@ -80,7 +81,9 @@ function markElement(element, pathname, seen) {
   // Siblings in a row arrive one after another rather than all at once.
   const siblings = element.parentElement ? [...element.parentElement.children].filter((child) => seen.has(child)) : [];
   const order = Math.max(0, siblings.indexOf(element));
-  if (order) element.style.setProperty('--reveal-delay', `${Math.min(order, 4) * 80}ms`);
+  // Testimonials arrive with a longer beat between cards.
+  const step = element.dataset.scrollMotion === 'tilt' ? 160 : 80;
+  if (order) element.style.setProperty('--reveal-delay', `${Math.min(order, 4) * step}ms`);
   element.dataset.scrollState = 'pending';
 }
 
@@ -88,6 +91,10 @@ export function markReveals(root, pathname) {
   const seen = new WeakSet();
   root.querySelectorAll(selectorFor(pathname)).forEach((element) => markElement(element, pathname, seen));
 }
+
+// Search and AI crawlers get every element visible straight away: same content, no reveal.
+// Keep in step with the matching pattern in index.html.
+const CRAWLER = /bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|inspectiontool|chatgpt|claude|perplexity|bytespider/i;
 
 const unmark = (element) => {
   delete element.dataset.scrollState;
@@ -98,7 +105,7 @@ const unmark = (element) => {
 export function setupScrollReveals(pathname) {
   const root = document.querySelector('.App');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!root || reduceMotion || !('IntersectionObserver' in window)) {
+  if (!root || reduceMotion || CRAWLER.test(navigator.userAgent) || !('IntersectionObserver' in window)) {
     // Show anything the prerendered page marked as hidden.
     root?.querySelectorAll('[data-scroll-state="pending"]').forEach((element) => { element.dataset.scrollState = 'visible'; });
     document.documentElement.classList.add('reveal-ready');
