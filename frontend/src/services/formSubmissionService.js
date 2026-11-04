@@ -182,6 +182,7 @@ export const submitFormWithAttachments = async (formName, formData) => {
       submission_label: 'Submitted',
       submitted_at: timestamp,
       page_url: pageUrl,
+      logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,
       form_fields_text: form_fields_text,
       ...fieldParams
     };

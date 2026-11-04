@@ -13,9 +13,10 @@
 
 .cc-form-response__logo {
   display: block;
-  width: 142px;
+  width: 68px;
   max-width: 55%;
-  height: auto;
+  height: 90px;
+  object-fit: contain;
   margin: 0 auto 1.25rem;
 }
 
