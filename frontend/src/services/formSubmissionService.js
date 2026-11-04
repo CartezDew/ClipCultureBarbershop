@@ -243,6 +243,8 @@ export const submitFormWithAttachments = async (formName, formData) => {
       to_name: fromName,
       reply_to: internalEmail,
       greeting: responseCopy.greeting,
+      response_eyebrow: responseCopy.eyebrow,
+      response_title: responseCopy.title,
       acknowledgement: responseCopy.acknowledgement,
       next_step: responseCopy.nextStep,
       logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,

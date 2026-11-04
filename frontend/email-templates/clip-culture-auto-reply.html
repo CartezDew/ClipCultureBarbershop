@@ -11,8 +11,13 @@
     <tr><td align="center" style="padding:28px 14px;font-family:Arial,Helvetica,sans-serif;">
       <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;border-collapse:collapse;background:#fff;border-top:6px solid #c9a13b;border-left:1px solid #e5e2d8;border-right:1px solid #e5e2d8;font-family:Arial,Helvetica,sans-serif;">
         <tr><td align="center" style="padding:28px 24px 22px;border-bottom:1px solid #e9e5da;font-family:Arial,Helvetica,sans-serif;">
-          <img src="{{logo_url}}" alt="Clip Culture" width="78" style="display:block;width:78px;max-width:100%;height:auto;border:0;margin:0 auto 14px;">
-          <p style="margin:0;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;line-height:1.4;">CLIP CULTURE BARBERSHOP</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:0 auto;"><tr>
+            <td width="64" height="64" background="{{logo_url}}" style="width:64px;height:64px;background-image:url('{{logo_url}}');background-position:center;background-repeat:no-repeat;background-size:contain;"></td>
+            <td style="padding-left:14px;text-align:left;font-family:Georgia,serif;color:#192321;">
+              <p style="margin:0;font-size:23px;font-style:italic;font-weight:700;line-height:1.05;">Clip Culture</p>
+              <p style="margin:5px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:2.2px;line-height:1.4;">BARBERSHOP</p>
+            </td>
+          </tr></table>
         </td></tr>
         <tr><td style="padding:38px 38px 36px;font-family:Arial,Helvetica,sans-serif;">
           {{#join_culture}}<div>
@@ -21,8 +26,8 @@
             <p style="margin:0;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">Thanks for signing up. You’ll be first to hear about product drops, events, and news from the shop.</p>
           </div>{{/join_culture}}
           {{^join_culture}}<div>
-            <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">MESSAGE RECEIVED</p>
-            <h1 style="margin:0 0 24px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">Thank you for reaching out.</h1>
+            <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">{{response_eyebrow}}</p>
+            <h1 style="margin:0 0 24px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">{{response_title}}</h1>
             <p style="margin:0 0 12px;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">{{greeting}}</p>
             <p style="margin:0 0 26px;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">{{acknowledgement}}</p>
             <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background:#192321;font-family:Arial,Helvetica,sans-serif;">
