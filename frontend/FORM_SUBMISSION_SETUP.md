@@ -8,14 +8,14 @@ The current EmailJS account has one Gmail service and two templates:
 
 | Setting | Current ID |
 | --- | --- |
-| Service | `clipculture_2025` |
+| Service | `clipculture_gmail_test` |
 | Internal notification | `clipculture_form_2025` |
 | Visitor acknowledgement | `clipculture_reply_2025` |
 
 Set these variables in `frontend/.env` for local development and in the hosting provider's build environment for production:
 
 ```text
-VITE_EMAILJS_SERVICE_ID=clipculture_2025
+VITE_EMAILJS_SERVICE_ID=clipculture_gmail_test
 VITE_EMAILJS_PUBLIC_KEY=<EmailJS public key>
 VITE_EMAILJS_INTERNAL_TEMPLATE_ID=clipculture_form_2025
 VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID=clipculture_reply_2025
@@ -23,7 +23,7 @@ VITE_EMAILJS_INTERNAL_TO_EMAIL=<business inbox>
 VITE_PUBLIC_SITE_URL=https://clip-culture.netlify.app
 ```
 
-The public key and template IDs stay the same when the business inbox changes. To hand this over to the client, connect their sending mailbox in **EmailJS → Email Services**, update the service ID if it changes, and change `VITE_EMAILJS_INTERNAL_TO_EMAIL` in both environments. Also check the internal template's **To Email** field is `{{to_email}}` and the acknowledgement template's **Reply To** field is `{{reply_to}}`. The visitor's email is supplied separately as `{{to_email}}`; changing the business inbox does not redirect visitor acknowledgements.
+The public key and template IDs stay the same when the business inbox changes. `clipculture_gmail_test` is the working Gmail service; the older `clipculture_2025` service had an invalid Google grant. To hand this over to the client, connect their sending mailbox in **EmailJS → Email Services**, update the service ID if it changes, and change `VITE_EMAILJS_INTERNAL_TO_EMAIL` in both environments. Also check the internal template's **To Email** field is `{{to_email}}` and the acknowledgement template's **Reply To** field is `{{reply_to}}`. The visitor's email is supplied separately as `{{to_email}}`; changing the business inbox does not redirect visitor acknowledgements.
 
 The reusable acknowledgement markup is in `email-templates/clip-culture-auto-reply.html`. Paste its HTML into **EmailJS → Email Templates → ClipCulture_AutoReply → Edit Content → Code Editor** when changing the design. Keep **To Email** as `{{to_email}}`, **Subject** as `{{customer_subject}}`, **From Name** as `Clip Culture Barbershop`, and **Reply To** as `{{reply_to}}`. The transparent favicon mark at `public/clip-culture-email-logo.png` must be deployed to the public site so email clients can load it. Text and layout CSS for the on-site confirmation are in `src/components/ClipCultureFormResponse.jsx` and `src/styles/clip-culture-form-response.css`.
 
