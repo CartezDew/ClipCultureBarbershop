@@ -164,7 +164,7 @@
   height: var(--contact-icon-size);
   transform: translateY(-50%);
   color: #123d35;
-  opacity: 0.23;
+  opacity: 0.16;
   pointer-events: none;
 }
 
