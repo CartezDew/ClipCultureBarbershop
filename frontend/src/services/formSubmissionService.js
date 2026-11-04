@@ -221,6 +221,10 @@ export const submitFormWithAttachments = async (formName, formData) => {
     console.log('⏭️ Skipping auto-reply: Customer email matches internal inbox');
     results.autoReply.skipped = true;
     results.autoReply.reason = 'Customer email matches internal inbox';
+  } else if (!results.internalEmail.sent) {
+    console.log('⏭️ Skipping auto-reply: Internal notification failed');
+    results.autoReply.skipped = true;
+    results.autoReply.reason = 'Internal notification failed';
   } else if (!EMAILJS_CONFIG.AUTOREPLY_TEMPLATE_ID) {
     console.log('⏭️ Skipping auto-reply: Template not configured');
     results.autoReply.skipped = true;
