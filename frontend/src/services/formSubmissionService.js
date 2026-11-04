@@ -248,9 +248,8 @@ export const submitFormWithAttachments = async (formName, formData) => {
       logo_url: `${siteUrl.replace(/\/$/, '')}/clip-culture-email-logo.png`,
       site_url: siteUrl,
       
-      // Display flags for template
-      join_culture_display: joinCulture ? 'block' : 'none',
-      default_form_display: joinCulture ? 'none' : 'block',
+      // EmailJS renders either the newsletter welcome or inquiry response.
+      join_culture: joinCulture,
       
       submitted_at: timestamp
     };

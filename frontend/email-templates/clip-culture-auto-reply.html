@@ -15,12 +15,12 @@
           <p style="margin:0;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;line-height:1.4;">CLIP CULTURE BARBERSHOP</p>
         </td></tr>
         <tr><td style="padding:38px 38px 36px;font-family:Arial,Helvetica,sans-serif;">
-          <div style="display:{{join_culture_display}};">
+          {{#join_culture}}<div>
             <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">WELCOME TO THE CULTURE</p>
             <h1 style="margin:0 0 20px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">You’re in. Welcome to Clip Culture.</h1>
             <p style="margin:0;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">Thanks for signing up. You’ll be first to hear about product drops, events, and news from the shop.</p>
-          </div>
-          <div style="display:{{default_form_display}};">
+          </div>{{/join_culture}}
+          {{^join_culture}}<div>
             <p style="margin:0 0 10px;color:#168d7f;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;line-height:1.5;">MESSAGE RECEIVED</p>
             <h1 style="margin:0 0 24px;color:#192321;font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;line-height:1.18;">Thank you for reaching out.</h1>
             <p style="margin:0 0 12px;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;">{{greeting}}</p>
@@ -32,7 +32,7 @@
               </td></tr>
             </table>
             <p style="margin:24px 0 0;color:#69736f;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;">Regarding {{form_name}}<br>Received {{submitted_at}}</p>
-          </div>
+          </div>{{/join_culture}}
           <p style="margin:30px 0 0;padding-top:20px;border-top:1px solid #e9e5da;color:#34413e;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;">Defining the Standard. Shaping the Culture.<br><strong style="color:#192321;">The Clip Culture Team</strong></p>
         </td></tr>
         <tr><td align="center" style="padding:24px 28px;background:#192321;color:#d6ddda;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.7;">
