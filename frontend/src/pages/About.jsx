@@ -9,6 +9,47 @@ import movementImage from '../assets/gallery/image-6.webp';
 import JoinUs from '../components/JoinUs.jsx';
 import { yearsInBusiness } from '../lib/business.js';
 
+// The YouTube player is close to 1 MB of scripts; create it only as the video nears the screen.
+function AnniversaryVideo() {
+  const wrapperRef = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper || !('IntersectionObserver' in window)) {
+      setShowVideo(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setShowVideo(true);
+      observer.disconnect();
+    }, { rootMargin: '600px 0px' });
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="about-video__wrapper" ref={wrapperRef}>
+      {showVideo ? (
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ChdMhO7E5EA?si=AnbrpcXuxktnpr1Q"
+          title="Clip Culture 5 year anniversary celebration (YouTube video)"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="about-video__iframe"
+        ></iframe>
+      ) : (
+        <div className="about-video__iframe about-video__placeholder" aria-hidden="true" />
+      )}
+    </div>
+  );
+}
+
 const About = () => {
   const [visibleSections, setVisibleSections] = useState({});
   const sectionRefs = useRef([]);
@@ -253,19 +294,7 @@ const About = () => {
               <p className="about-video__subtitle">Our 5 Year Anniversary Celebration</p>
             </div>
             
-            <div className="about-video__wrapper">
-              <iframe 
-                width="560" 
-                height="315" 
-                src="https://www.youtube.com/embed/ChdMhO7E5EA?si=AnbrpcXuxktnpr1Q" 
-                title="YouTube video player" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
-                allowFullScreen
-                className="about-video__iframe"
-              ></iframe>
-            </div>
+            <AnniversaryVideo />
             
             <p className="about-video__credit">
               — David Brown, Clip Culture Barbershop Owner

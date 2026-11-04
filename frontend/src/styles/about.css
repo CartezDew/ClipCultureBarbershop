@@ -441,6 +441,10 @@
   display: block;
 }
 
+.about-video__placeholder {
+  background: #0d0f0f;
+}
+
 .about-video__credit {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(0.9rem, 1.2vw, 1rem);
