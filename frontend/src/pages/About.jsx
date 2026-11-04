@@ -7,6 +7,7 @@ import leapImage from '../assets/gallery/image-20.webp';
 import birthImage from '../assets/gallery/image-42.webp';
 import movementImage from '../assets/gallery/image-6.webp';
 import JoinUs from '../components/JoinUs.jsx';
+import { yearsInBusiness } from '../lib/business.js';
 
 const About = () => {
   const [visibleSections, setVisibleSections] = useState({});
@@ -64,7 +65,7 @@ const About = () => {
           </div>
           <div className="about-stats__divider"></div>
           <div className="about-stats__item">
-            <span className="about-stats__number">9+</span>
+            <span className="about-stats__number">{yearsInBusiness()}+</span>
             <span className="about-stats__label">Years Strong</span>
           </div>
         </div>
@@ -122,7 +123,7 @@ const About = () => {
               </div>
             </div>
             <div className="about-section__image-wrapper about-section__image-wrapper--right">
-              <img src={communityImage} alt="David Brown - Clip Culture Founder" className="about-section__image" />
+              <img loading="lazy" decoding="async" src={communityImage} alt="David Brown - Clip Culture Founder" className="about-section__image" />
               <div className="about-section__image-accent"></div>
             </div>
           </div>
@@ -136,7 +137,7 @@ const About = () => {
         >
           <div className="about-section__inner">
             <div className="about-section__image-wrapper about-section__image-wrapper--left about-section__image-wrapper--small">
-              <img src={businessImage} alt="Business Education" className="about-section__image" />
+              <img loading="lazy" decoding="async" src={businessImage} alt="Business Education" className="about-section__image" />
               <div className="about-section__image-accent"></div>
             </div>
             <div className="about-section__content">
@@ -174,7 +175,7 @@ const About = () => {
               </div>
             </div>
             <div className="about-section__image-wrapper about-section__image-wrapper--right about-section__image-wrapper--small">
-              <img src={leapImage} alt="The Leap of Faith" className="about-section__image" />
+              <img loading="lazy" decoding="async" src={leapImage} alt="The Leap of Faith" className="about-section__image" />
               <div className="about-section__image-accent"></div>
             </div>
           </div>
@@ -188,7 +189,7 @@ const About = () => {
         >
           <div className="about-section__inner">
             <div className="about-section__image-wrapper about-section__image-wrapper--left">
-              <img src={birthImage} alt="The Birth of Clip Culture" className="about-section__image" />
+              <img loading="lazy" decoding="async" src={birthImage} alt="The Birth of Clip Culture" className="about-section__image" />
               <div className="about-section__image-accent"></div>
             </div>
             <div className="about-section__content">
@@ -226,7 +227,7 @@ const About = () => {
               </div>
             </div>
             <div className="about-section__image-wrapper about-section__image-wrapper--right">
-              <img src={movementImage} alt="More Than a Barbershop" className="about-section__image" />
+              <img loading="lazy" decoding="async" src={movementImage} alt="More Than a Barbershop" className="about-section__image" />
               <div className="about-section__image-accent"></div>
             </div>
           </div>

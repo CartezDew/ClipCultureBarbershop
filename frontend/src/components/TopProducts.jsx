@@ -236,8 +236,8 @@ const TopProducts = ({ limit }) => {
                       onPointerEnter={() => loadProductDetail().catch(() => {})}
                       onFocus={() => loadProductDetail().catch(() => {})}
                     >
-                      Learn More
-                      <ArrowRight size={16} />
+                      Learn More<span className="visually-hidden"> about {product.name}</span>
+                      <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>

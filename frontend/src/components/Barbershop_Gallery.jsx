@@ -647,7 +647,7 @@ const BarbershopGallery = () => {
                 <img
                   src={img.src}
                   alt={img.filename}
-                  loading="lazy"
+                  loading={index < 2 ? "eager" : "lazy"}
                   className="barbershop-gallery-image"
                 />
                 <span

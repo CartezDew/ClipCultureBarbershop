@@ -5,6 +5,7 @@ import CoachingCallImage from '../assets/Mentorship/Coaching Call.webp';
 import InPersonMentorshipImage from '../assets/Mentorship/Mentorship-3.webp';
 import JoinUs from '../components/JoinUs.jsx';
 import ApplicantFormModal from '../components/ApplicantFormModal.jsx';
+import { yearsInBusiness } from '../lib/business.js';
 
 const Mentorship = () => {
   const [showCoachingModal, setShowCoachingModal] = useState(false);
@@ -20,7 +21,7 @@ const Mentorship = () => {
             <div className="mentorship-intro">
               <p className="mentorship-intro-text">
                 Step into your purpose with mentorship from <strong>David Brown</strong>, founder and owner of Clip Culture Barbershop. 
-                With over <strong>12 years of hands-on experience</strong> and <strong>9+ years</strong> of business ownership, David has mastered the art of blending craftsmanship, entrepreneurship, and culture.
+                With over <strong>12 years of hands-on experience</strong> and <strong>{yearsInBusiness()}+ years</strong> of business ownership, David has mastered the art of blending craftsmanship, entrepreneurship, and culture.
               </p>
               <br/>
               <p className="mentorship-intro-text-2">
@@ -78,7 +79,7 @@ const Mentorship = () => {
               <h3 className="mentorship-program-subtitle">Coaching Call:</h3>
             </div>
             <div className="mentorship-program-image">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={CoachingCallImage} 
                 alt="Coaching Call Program" 
                 className="program-image"
@@ -102,7 +103,7 @@ const Mentorship = () => {
               <h3 className="mentorship-program-subtitle">In-Person Mentorship:</h3>
             </div>
             <div className="mentorship-program-image">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={InPersonMentorshipImage} 
                 alt="Mentorship Program" 
                 className="program-image"

@@ -5,9 +5,9 @@ import '../styles/product-detail.css';
 import Product7 from '../assets/products/Product-7.webp';
 import Product10 from '../assets/products/Product-10.webp';
 import Product11 from '../assets/products/Product-11.webp';
-import Product8 from '../assets/products/Product-8.webp';
-import Product9 from '../assets/products/Product-9.webp';
-import Product12 from '../assets/products/Product-12.webp';
+import Product8 from '../assets/products/Product-12.webp';
+import Product9 from '../assets/products/Product-13.webp';
+import Product12 from '../assets/products/Product-8.webp';
 
 const ApparelDetail = () => {
   const { slug } = useParams();

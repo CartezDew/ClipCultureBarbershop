@@ -1,30 +1,69 @@
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useState, useEffect, useLayoutEffect } from 'react';
+import { LazyMotion } from 'framer-motion';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingActionButtons from './components/FloatingActionButtons.jsx';
 import Home from './pages/Home.jsx';
 import { pageMeta, DEFAULT_SITE_URL } from './lib/seo.js';
 import { setupScrollReveals } from './lib/scrollReveal.js';
+import { setupPressFeedback } from './lib/pressFeedback.js';
 import { loadProductDetail } from './lib/productDetailRoute.js';
 import './styles/scroll-reveal.css';
-const Services = lazy(() => import('./pages/Services.jsx'));
-const SandySprings = lazy(() => import('./pages/SandySprings.jsx'));
-const FAQs = lazy(() => import('./pages/FAQs.jsx'));
-const Team = lazy(() => import('./pages/Team.jsx'));
-const About = lazy(() => import('./pages/About.jsx'));
-const Shop = lazy(() => import('./pages/Shop.jsx'));
-const Mentorship = lazy(() => import('./pages/Mentorship.jsx'));
-const ProductDetail = lazy(loadProductDetail);
-const ApparelDetail = lazy(() => import('./pages/ApparelDetail.jsx'));
-const Franchise = lazy(() => import('./pages/Franchise.jsx'));
-const Advertise = lazy(() => import('./pages/Advertise.jsx'));
-const VendingMachines = lazy(() => import('./pages/VendingMachines.jsx'));
-const Apply = lazy(() => import('./pages/Apply.jsx'));
-const BarberBio = lazy(() => import('./pages/BarberBio.jsx'));
-const Booking = lazy(() => import('./pages/Booking.jsx'));
-const BookNow = lazy(() => import('./pages/BookNow.jsx'));
-const SpeakingEngagements = lazy(() => import('./pages/SpeakingEngagements.jsx'));
+
+// A preloaded page renders straight away instead of suspending, so the prerendered
+// HTML is never replaced by the loading fallback.
+function lazyPage(load) {
+  let Loaded = null;
+  const preload = () => load().then((module) => { Loaded = module.default; return module; });
+  const Lazy = lazy(preload);
+  const Page = (props) => {
+    // Pick once per mount so the page is not remounted when loading finishes.
+    const [Component] = useState(() => Loaded || Lazy);
+    return <Component {...props} />;
+  };
+  Page.preload = preload;
+  return Page;
+}
+
+const Services = lazyPage(() => import('./pages/Services.jsx'));
+const SandySprings = lazyPage(() => import('./pages/SandySprings.jsx'));
+const FAQs = lazyPage(() => import('./pages/FAQs.jsx'));
+const About = lazyPage(() => import('./pages/About.jsx'));
+const Shop = lazyPage(() => import('./pages/Shop.jsx'));
+const Mentorship = lazyPage(() => import('./pages/Mentorship.jsx'));
+const ProductDetail = lazyPage(loadProductDetail);
+const ApparelDetail = lazyPage(() => import('./pages/ApparelDetail.jsx'));
+const Franchise = lazyPage(() => import('./pages/Franchise.jsx'));
+const Advertise = lazyPage(() => import('./pages/Advertise.jsx'));
+const VendingMachines = lazyPage(() => import('./pages/VendingMachines.jsx'));
+const Apply = lazyPage(() => import('./pages/Apply.jsx'));
+const BookNow = lazyPage(() => import('./pages/BookNow.jsx'));
+const SpeakingEngagements = lazyPage(() => import('./pages/SpeakingEngagements.jsx'));
+
+const routePages = {
+  '/sandysprings': SandySprings,
+  '/faqs': FAQs,
+  '/services': Services,
+  '/about': About,
+  '/shop': Shop,
+  '/book-now': BookNow,
+  '/mentorship': Mentorship,
+  '/advertise': Advertise,
+  '/vending-machines': VendingMachines,
+  '/franchise': Franchise,
+  '/apply': Apply,
+  '/speaking-engagements': SpeakingEngagements,
+};
+const detailPages = { products: ProductDetail, apparel: ApparelDetail };
+
+// Load the current route's page before the first render.
+export function preloadRoute(pathname) {
+  const page = routePages[pathname] || detailPages[pathname.split('/')[1]];
+  return page ? page.preload() : Promise.resolve();
+}
+
+const loadMotionFeatures = () => import('./lib/motionFeatures.js').then((module) => module.default);
 
 function AppContent() {
   const location = useLocation();
@@ -32,10 +71,11 @@ function AppContent() {
   const isHomePage = location.pathname === '/';
 
   useEffect(() => setupScrollReveals(location.pathname), [location.pathname]);
+  useEffect(() => setupPressFeedback(), []);
 
   // Keep metadata in sync when navigating without a page request.
   useEffect(() => {
-    const { title, description, url } = pageMeta(location.pathname, import.meta.env.VITE_PUBLIC_SITE_URL || DEFAULT_SITE_URL);
+    const { title, description, url } = pageMeta(location.pathname, DEFAULT_SITE_URL);
     document.title = title;
     const values = [
       ['meta', 'name', 'description', 'content', description],
@@ -59,15 +99,7 @@ function AppContent() {
 
   // Reset scroll position on route change without animating
   useLayoutEffect(() => {
-    const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'instant'
-      });
-    }, 100); // 100ms delay before positioning at top
-    
-    return () => clearTimeout(timer);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [location.pathname]);
 
   useEffect(() => {
@@ -105,6 +137,7 @@ function AppContent() {
   }, [isHomePage]);
 
   return (
+    <LazyMotion features={loadMotionFeatures} strict>
     <div className="App">
       <Suspense fallback={<div className="route-loading" role="status" aria-live="polite">Loading Clip Culture…</div>}>
       <Routes>
@@ -204,18 +237,6 @@ function AppContent() {
               <Footer />
             </>
           } />
-          <Route path="/barber/:barberId" element={
-            <>
-              <Navbar />
-              <main>
-                <BarberBio />
-              </main>
-              <Footer />
-            </>
-          } />
-          <Route path="/booking" element={
-            <Booking />
-          } />
           <Route path="/book-now" element={
             <BookNow />
           } />
@@ -233,10 +254,11 @@ function AppContent() {
       </Suspense>
         
         {/* Floating Action Buttons - Show on all pages except booking, product details, apparel details, and speaking engagements */}
-        {location.pathname !== '/booking' && location.pathname !== '/book-now' && location.pathname !== '/vending-machines' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (
+        {location.pathname !== '/book-now' && location.pathname !== '/vending-machines' && !location.pathname.startsWith('/products/') && !location.pathname.startsWith('/apparel/') && location.pathname !== '/speaking-engagements' && (
           <FloatingActionButtons showOnHome={showFloatingButtons} />
         )}
       </div>
+    </LazyMotion>
   );
 }
 
@@ -248,4 +270,5 @@ function App() {
   );
 }
 
+export { AppContent };
 export default App;

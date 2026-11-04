@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import ServicesGallery from '../components/ServicesGallery.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import ServiceDetailModal from '../components/ServiceDetailModal.jsx';
@@ -98,6 +98,7 @@ const Services = () => {
   const specialtyServices = [
     { id: 'child-haircut', name: 'Child Haircut (10 and under)', price: 25, duration: '25 min <strong>*</strong>', category: 'Children', description: "Patient and gentle haircut service for children 10 and under." },
     { id: 'child-haircut-designs', name: 'Child Haircut + Designs', price: 30, duration: '30 min <strong>*</strong>', category: 'Children', description: "Kids haircut with a cool custom design." },
+    { id: 'teen-haircut', name: 'Teen Haircut (11-16)', price: 30, duration: '30 min <strong>*</strong>', category: 'Children', description: "Precision haircut for teens ages 11 to 16." },
     { id: 'womens-haircut-designs', name: "Women's Haircut + Designs", price: 35, duration: '30 min <strong>*</strong>', category: 'Women', description: "Stylish cuts and designs tailored for women." },
     { id: 'womens-undercut', name: "Women's Undercut (only)", price: 25, duration: '25 min <strong>*</strong>', category: 'Women', description: "Maintenance for shaved sides/back/undercut styles." },
     { id: 'senior-citizen-haircut', name: 'Senior Citizen Haircut (62+)', price: 30, duration: '30 min <strong>*</strong>', category: 'Seniors', description: "Discounted haircut service for seniors aged 62 and up." }
@@ -130,17 +131,13 @@ const Services = () => {
           {/* Regular Services */}
           <h2 className="services__section-title-main">* Service times are approximate and may vary by complexity *.</h2>
           <div className="services__section">
-            <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
+            <div className="services__grid">
               {regularServices.map((service, index) => (
                 <div 
                   key={service.id} 
-                  className={`services__card ${isAnimated ? 'card-animate-in' : ''}`}
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    opacity: isAnimated ? 1 : 0,
-                    transform: isAnimated ? 'translateX(0)' : 'translateX(-50px)',
-                    cursor: 'pointer'
-                  }}
+                  className="services__card"
+                  data-scroll-reveal="services-card"
+                  style={{ cursor: 'pointer' }}
                   onClick={() => handleServiceClick(service)}
                 >
                   <h3 className="services__card-title">{service.name}</h3>
@@ -158,17 +155,13 @@ const Services = () => {
           <div className="services__section">
             <h2 id="specialty-services" className="services__section-title">Specialty Services</h2>
             <div className="services-divider"></div>
-            <div className={`services__grid ${isAnimated ? 'animate' : ''}`}>
+            <div className="services__grid">
               {specialtyServices.map((service, index) => (
                 <div 
                   key={service.id} 
-                  className={`services__card services__card--specialty ${isAnimated ? 'card-animate-in' : ''}`}
-                  style={{
-                    animationDelay: `${(index + 19) * 0.1}s`,
-                    opacity: isAnimated ? 1 : 0,
-                    transform: isAnimated ? 'translateX(0)' : 'translateX(-50px)',
-                    cursor: 'pointer'
-                  }}
+                  className="services__card services__card--specialty"
+                  data-scroll-reveal="services-card"
+                  style={{ cursor: 'pointer' }}
                   onClick={() => handleServiceClick(service)}
                 >
                   <h3 className="services__card-title">{service.name}</h3>
@@ -187,17 +180,13 @@ const Services = () => {
           <div className="services__section">
             <h2 className="services__section-title">Add-on Services</h2>
             <div className="services-divider"></div>
-            <div className={`services__grid services__grid--addons ${isAnimated ? 'animate' : ''}`}>
+            <div className="services__grid services__grid--addons">
               {addOnServices.map((service, index) => (
                 <div 
                   key={service.id} 
-                  className={`services__card services__card--addon ${isAnimated ? 'card-animate-in' : ''}`}
-                  style={{
-                    animationDelay: `${(index + 16) * 0.1}s`,
-                    opacity: isAnimated ? 1 : 0,
-                    transform: isAnimated ? 'translateX(0)' : 'translateX(-50px)',
-                    cursor: 'pointer'
-                  }}
+                  className="services__card services__card--addon"
+                  data-scroll-reveal="services-card"
+                  style={{ cursor: 'pointer' }}
                   onClick={() => handleServiceClick(service)}
                 >
                   <h3 className="services__card-title">{service.name}</h3>
@@ -212,7 +201,7 @@ const Services = () => {
           </div>
 
           <div className="services__cta">
-            <motion.button 
+            <m.button 
               className="btn-book-now" 
               onClick={() => navigate('/book-now')}
               animate={{
@@ -229,7 +218,7 @@ const Services = () => {
               }}
             >
               Book Your Service
-            </motion.button>
+            </m.button>
           </div>
         </div>
       </section>

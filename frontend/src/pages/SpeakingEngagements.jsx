@@ -6,6 +6,7 @@ import speakerImage from '../assets/gallery/image-70.webp';
 import JoinUs from '../components/JoinUs.jsx';
 import BookingInquiryModal from '../components/BookingInquiryModal.jsx';
 import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
+import { yearsInBusiness } from '../lib/business.js';
 
 const SpeakingEngagements = () => {
   const [showModal, setShowModal] = useState(false);
@@ -144,7 +145,7 @@ const SpeakingEngagements = () => {
               <ul className="speaking-stats-list">
               <li className="speaking-stat-item">✔ 155,000+ clients served</li>
               <li className="speaking-stat-item">✔ 94% client satisfaction</li>
-              <li className="speaking-stat-item">✔ 9+ years of business success</li>
+              <li className="speaking-stat-item">✔ {yearsInBusiness()}+ years of business success</li>
               <li className="speaking-stat-item">✔ 3 authored books, grooming products & mentorship programs</li>
               </ul>
             </div>

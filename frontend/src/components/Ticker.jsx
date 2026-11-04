@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ticker.css';
 
@@ -94,7 +94,7 @@ const Ticker = () => {
       <div className="ticker-track">
         {TickerItems.map((label, i) => (
           <React.Fragment key={`${label}-${i}`}>
-            <motion.div
+            <m.div
               className="ticker-item"
               onClick={() => handleTickerClick(i)}
               style={{ 
@@ -115,7 +115,7 @@ const Ticker = () => {
             >
               {label}
               {/* Animated underline */}
-              <motion.div
+              <m.div
                 className="ticker-underline"
                 style={{
                   position: 'absolute',
@@ -135,7 +135,7 @@ const Ticker = () => {
                   delay: currentUnderlinedIndex === i ? 0.1 : 0
                 }}
               />
-            </motion.div>
+            </m.div>
             {i < (TickerItems.length - 1) && (
               <span className="ticker-separator">|</span>
             )}

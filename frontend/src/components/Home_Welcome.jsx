@@ -48,7 +48,7 @@ const Home_Welcome = () => {
               </Link>
               <div className="home-welcome__social">
                 <a 
-                  href="https://instagram.com" 
+                  href="https://www.instagram.com/clipculturebarbershop/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="home-welcome__social-button home-welcome__social-button--instagram"
@@ -59,7 +59,7 @@ const Home_Welcome = () => {
                   </svg>
                 </a>
                 <a 
-                  href="https://facebook.com" 
+                  href="https://www.facebook.com/clipculturebarbershop" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="home-welcome__social-button home-welcome__social-button--facebook"
@@ -86,7 +86,7 @@ const Home_Welcome = () => {
             <div className="home-welcome__mobile-images">
               <img src={Image3} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
               <img src={Image4} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
-              {/* <img src={Image2} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" /> */}
+              {/* <img loading="lazy" decoding="async" src={Image2} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" /> */}
               <img src={Image1} alt="Clip Culture Barbershop" className="home-welcome__mobile-image" loading="lazy" decoding="async" />
             </div>
           </div>

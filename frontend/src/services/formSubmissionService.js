@@ -7,6 +7,7 @@
 
 import emailjs from '@emailjs/browser';
 import { getFormResponse } from '../lib/formResponseCopy.js';
+import { DEFAULT_SITE_URL } from '../lib/seo.js';
 
 // Configuration from environment variables
 const EMAILJS_CONFIG = {
@@ -14,20 +15,12 @@ const EMAILJS_CONFIG = {
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
   INTERNAL_TEMPLATE_ID: import.meta.env.VITE_EMAILJS_INTERNAL_TEMPLATE_ID,
   AUTOREPLY_TEMPLATE_ID: import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
-  INTERNAL_TO_EMAIL: import.meta.env.VITE_EMAILJS_INTERNAL_TO_EMAIL || 'cartezmarkese57@gmail.com'
+  INTERNAL_TO_EMAIL: import.meta.env.VITE_EMAILJS_INTERNAL_TO_EMAIL
 };
 
 // Maximum fields the EmailJS template supports
 const MAX_FIELDS = 15;
 
-// Log config presence for debugging
-console.log('EmailJS Config Status:', {
-  SERVICE_ID: EMAILJS_CONFIG.SERVICE_ID ? '✓ Set' : '✗ Missing',
-  PUBLIC_KEY: EMAILJS_CONFIG.PUBLIC_KEY ? '✓ Set' : '✗ Missing',
-  INTERNAL_TEMPLATE_ID: EMAILJS_CONFIG.INTERNAL_TEMPLATE_ID ? '✓ Set' : '✗ Missing',
-  AUTOREPLY_TEMPLATE_ID: EMAILJS_CONFIG.AUTOREPLY_TEMPLATE_ID ? '✓ Set' : '✗ Missing',
-  INTERNAL_TO_EMAIL: EMAILJS_CONFIG.INTERNAL_TO_EMAIL ? '✓ Set' : '✗ Missing'
-});
 
 /**
  * Convert camelCase to readable label
@@ -126,7 +119,7 @@ export const submitFormWithAttachments = async (formName, formData) => {
   };
 
   // Validate config
-  if (!EMAILJS_CONFIG.SERVICE_ID || !EMAILJS_CONFIG.PUBLIC_KEY) {
+  if (!EMAILJS_CONFIG.SERVICE_ID || !EMAILJS_CONFIG.PUBLIC_KEY || !EMAILJS_CONFIG.INTERNAL_TO_EMAIL) {
     console.error('❌ EmailJS configuration missing. Check your .env file.');
     throw new Error('Email service not configured. Please contact support.');
   }
@@ -154,19 +147,11 @@ export const submitFormWithAttachments = async (formName, formData) => {
   const joinCulture = isJoinCultureForm(formName);
   const responseCopy = getFormResponse(formName, fromName === 'Valued Customer' ? '' : fromName);
   const browserOrigin = typeof window !== 'undefined' ? window.location.origin : '';
-  const siteUrl = import.meta.env.VITE_PUBLIC_SITE_URL || (
-    /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/.test(browserOrigin)
-      ? 'https://clip-culture.netlify.app'
-      : browserOrigin || 'https://clip-culture.netlify.app'
-  );
+  // Link back to whichever domain the visitor used, so emails follow the site to its final domain.
+  const isLocal = /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/.test(browserOrigin);
+  const siteUrl = (!isLocal && browserOrigin) || import.meta.env.VITE_PUBLIC_SITE_URL || DEFAULT_SITE_URL;
   const customerSubject = responseCopy.subject;
 
-  console.log('📋 Form Submission:', {
-    formName,
-    customerEmail: customerEmail || '(none)',
-    internalEmail,
-    joinCulture
-  });
 
   // ============================================
   // 1. INTERNAL NOTIFICATION → Your inbox
@@ -186,7 +171,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
       ...fieldParams
     };
 
-    console.log('📧 Sending INTERNAL notification to:', internalEmail);
 
     try {
       const response = await emailjs.send(
@@ -196,7 +180,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
         EMAILJS_CONFIG.PUBLIC_KEY
       );
       
-      console.log('✅ Internal email sent:', response.status);
       results.internalEmail.sent = true;
     } catch (error) {
       console.error('❌ Internal email failed:', error.text);
@@ -214,19 +197,15 @@ export const submitFormWithAttachments = async (formName, formData) => {
   // - Auto-reply template is configured
   
   if (!customerEmail) {
-    console.log('⏭️ Skipping auto-reply: Customer did not provide email');
     results.autoReply.skipped = true;
     results.autoReply.reason = 'No customer email provided';
   } else if (customerEmail.toLowerCase() === internalEmail.toLowerCase()) {
-    console.log('⏭️ Skipping auto-reply: Customer email matches internal inbox');
     results.autoReply.skipped = true;
     results.autoReply.reason = 'Customer email matches internal inbox';
   } else if (!results.internalEmail.sent) {
-    console.log('⏭️ Skipping auto-reply: Internal notification failed');
     results.autoReply.skipped = true;
     results.autoReply.reason = 'Internal notification failed';
   } else if (!EMAILJS_CONFIG.AUTOREPLY_TEMPLATE_ID) {
-    console.log('⏭️ Skipping auto-reply: Template not configured');
     results.autoReply.skipped = true;
     results.autoReply.reason = 'Auto-reply template not configured';
   } else {
@@ -255,9 +234,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
       submitted_at: timestamp
     };
 
-    console.log('📧 Sending AUTO-REPLY to CUSTOMER:', customerEmail);
-    console.log('   Subject:', customerSubject);
-    console.log('   (NOT sending to internal:', internalEmail, ')');
 
     try {
       const response = await emailjs.send(
@@ -267,7 +243,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
         EMAILJS_CONFIG.PUBLIC_KEY
       );
       
-      console.log('✅ Auto-reply sent to customer:', response.status);
       results.autoReply.sent = true;
     } catch (error) {
       console.error('❌ Auto-reply failed:', error.text);
@@ -289,7 +264,6 @@ export const submitFormWithAttachments = async (formName, formData) => {
 export const initEmailJS = () => {
   if (EMAILJS_CONFIG.PUBLIC_KEY) {
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-    console.log('✅ EmailJS initialized');
   }
 };
 

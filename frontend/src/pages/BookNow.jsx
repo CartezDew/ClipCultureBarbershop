@@ -153,7 +153,7 @@ const BookNow = () => {
       type: 'barber',
       name: 'David Brown', 
       subtitle: 'Owner / Master Barber',
-      description: 'Over 15 years of experience. Specializes in precision cuts and classic styles with a modern twist.',
+      description: 'Over 12 years of experience. Specializes in precision cuts and classic styles with a modern twist.',
       locationNote: 'Sandy Springs',
       image: OwnerImage,
       bookingUrl: 'https://clipculturebarbershop.as.me/schedule/c75249a7'
@@ -210,8 +210,9 @@ const BookNow = () => {
         setShowError(true);
         return;
       }
-      // Redirect directly to booking URL for all options
       window.open(selectedOption.bookingUrl, '_blank', 'noopener,noreferrer');
+      // Step 3 keeps a booking link on screen in case the new tab was blocked.
+      setCurrentStep(3);
     }
   };
 
@@ -483,7 +484,7 @@ const BookNow = () => {
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                       </svg>
-                      <span>24-hour notice required for cancellations</span>
+                      <span>4-hour notice required for cancellations</span>
                     </li>
                   </ul>
                 </div>
@@ -506,12 +507,12 @@ const BookNow = () => {
                       which will be applied to your next booking.
                     </p>
                     <p>
-                      <strong>Cancellation Notice:</strong> Please provide at least 24 hours notice if you need to 
+                      <strong>Cancellation Notice:</strong> Please provide at least 4 hours notice if you need to 
                       cancel or reschedule your appointment.
                     </p>
                     <p>
-                      <strong>Late Arrivals:</strong> Arriving more than 15 minutes late may result in your appointment 
-                      being rescheduled to accommodate other clients.
+                      <strong>Late Arrivals:</strong> Arriving 5 or more minutes late may result in a canceled 
+                      appointment and the $15 no-show fee.
                     </p>
                     <p>
                       We understand that emergencies happen. Please contact us as soon as possible if you need to make 

@@ -10,6 +10,18 @@ import '../styles/about.css';
 import Books from '../components/Books.jsx';
 import JoinUs from '../components/JoinUs.jsx';
 
+// Scroll a shop section just below the fixed navbar.
+const scrollToSection = (targetId) => {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  // Use specific offset for books, apparel, and premium-grooming-products sections
+  const offset = targetId === 'books' || targetId === 'apparel' || targetId === 'premium-grooming-products' ? 80 : 100;
+  window.scrollTo({
+    top: el.getBoundingClientRect().top + window.pageYOffset - offset,
+    behavior: 'smooth'
+  });
+};
+
 const Shop = () => {
   const location = useLocation();
 
@@ -18,21 +30,7 @@ const Shop = () => {
     if (!location.hash) return;
     const targetId = location.hash.replace('#', '');
 
-    const scrollWithOffset = () => {
-      const el = document.getElementById(targetId);
-      if (!el) return;
-
-      // Get the element's position
-      const elementPosition = el.getBoundingClientRect().top;
-      // Use specific offset for books, apparel, and premium-grooming-products sections
-      const offset = targetId === 'books' || targetId === 'apparel' || targetId === 'premium-grooming-products' ? 80 : 100;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    };
+    const scrollWithOffset = () => scrollToSection(targetId);
 
     // Wait for images and content to load before scrolling
     const handleLoad = () => {
@@ -58,7 +56,17 @@ const Shop = () => {
         <div className="shop-header">
           <h1 className="shop-title">The Culture Collection</h1>
           <p className="shop-subtitle">Curated products and experiences that elevate how you look, lead, and live.</p>
-          <a className="shop-header__cta" href="#premium-grooming-products">Shop Grooming Products</a>
+          <a
+            className="shop-header__cta"
+            href="#premium-grooming-products"
+            onClick={(event) => {
+              // Same landing spot as the home page's category carousel.
+              event.preventDefault();
+              scrollToSection('premium-grooming-products');
+            }}
+          >
+            Shop Grooming Products
+          </a>
         </div>
         
         <div className="shop-category-wrapper">

@@ -4,6 +4,7 @@ import '../styles/form-modal.css';
 import { validateEmail } from '../utils/emailValidation';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
 import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
+import { useModal } from '../hooks/useModal.js';
 
 const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
   const [formData, setFormData] = useState({
@@ -93,7 +94,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
     try {
       await submitFormWithAttachments(title || 'Booking Inquiry', formData);
       setSubmitted(true);
-      setTimeout(handleClose, 3000);
+      modal.closeLater(handleClose, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
       setErrors(prev => ({ ...prev, submit: 'We could not send your request. Please try again.' }));
@@ -118,11 +119,13 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
     onClose();
   };
 
+  const modal = useModal(isOpen, handleClose);
+
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div className="form0modal-overlay" onClick={handleClose}>
-      <div className="form0modal-container" onClick={(e) => e.stopPropagation()}>
+    <div className="form0modal-overlay" {...modal.overlayProps}>
+      <div className="form0modal-container" {...modal.dialogProps}>
         <button 
           className="form0modal-close"
           onClick={handleClose}
@@ -144,11 +147,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
             <form className="form0modal-form" onSubmit={handleSubmit}>
               
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-fullName">
                   Full Name <span className="form0required">*</span>
                 </label>
                 <input
                   type="text"
+                  id="booking-inquiry-fullName"
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
@@ -159,11 +163,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-organizationName">
                   Name of Organization <span className="form0required">*</span>
                 </label>
                 <input
                   type="text"
+                  id="booking-inquiry-organizationName"
                   name="organizationName"
                   value={formData.organizationName}
                   onChange={handleChange}
@@ -174,11 +179,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-email">
                   Email Address <span className="form0required">*</span>
                 </label>
                 <input
                   type="email"
+                  id="booking-inquiry-email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -189,11 +195,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-phone">
                   Phone Number <span className="form0required">*</span>
                 </label>
                 <input
                   type="tel"
+                  id="booking-inquiry-phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
@@ -204,11 +211,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-eventDetails">
                   Event Details <span className="form0required">*</span>
                 </label>
                 <textarea
-                  name="eventDetails"
+                id="booking-inquiry-eventDetails"
+                name="eventDetails"
                   value={formData.eventDetails}
                   onChange={handleChange}
                   className={`form0field-input ${errors.eventDetails ? 'error' : ''}`}
@@ -219,11 +227,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-budget">
                   Budget
                 </label>
                 <input
                   type="text"
+                  id="booking-inquiry-budget"
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
@@ -233,11 +242,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-lengthOfTime">
                   Length of Time <span className="form0required">*</span>
                 </label>
                 <input
                   type="text"
+                  id="booking-inquiry-lengthOfTime"
                   name="lengthOfTime"
                   value={formData.lengthOfTime}
                   onChange={handleChange}
@@ -248,11 +258,12 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="booking-inquiry-sponsors">
                   Sponsors & Other Affiliated Parties (if any)
                 </label>
                 <textarea
-                  name="sponsors"
+                id="booking-inquiry-sponsors"
+                name="sponsors"
                   value={formData.sponsors}
                   onChange={handleChange}
                   className="form0field-input"
@@ -263,7 +274,7 @@ const BookingInquiryModal = ({ isOpen, onClose, title, subtitle }) => {
 
               {errors.submit && <p role="alert" className="form0field-error">{errors.submit}</p>}
               <button type="submit" className="form0submit-btn" disabled={submitting}>
-                Submit Inquiry
+                {submitting ? 'Sending…' : 'Submit Inquiry'}
               </button>
             </form>
           </>

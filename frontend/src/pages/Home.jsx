@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { getServices } from '../lib/mockApi.js';
 import Navbar from '../components/Navbar.jsx';
-import BookingForm from '../components/BookingForm.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import ProductStories from '../components/ProductStories.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
-import Professional_Team from '../components/Professional_Team.jsx';
 import Contact from '../components/Contact.jsx';
 import Facts from '../components/facts.jsx';
 import MobilePromoSection from '../components/MobilePromoSection.jsx';
@@ -27,13 +25,28 @@ import heroImageWebP from '../assets/images/ClipCultureHero.webp';
 import heroImagePNG from '../assets/images/ClipCultureHero.webp';
 import heroImageSplit from '../assets/images/clipculturehero2.webp';
 import shopImage1 from '../assets/Contact/Shop_1.webp';
+import shopImage1Small from '../assets/Contact/Shop_1-720.webp';
 import clipCultureLogo from '../assets/images/Clip Culture Logo.webp';
+import { yearsInBusiness } from '../lib/business.js';
 
 const Home = () => {
   const [services, setServices] = useState([]);
-  const [isMobile600, setIsMobile600] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false);
+  // Set after mount so the first render matches the prerendered HTML.
+  const [isMobile600, setIsMobile600] = useState(false);
   const reduceMotion = useReducedMotion();
   const [heroIntroComplete, setHeroIntroComplete] = useState(false);
+  const [heroStatsReady, setHeroStatsReady] = useState(false);
+
+  // Stat icons bounce in after the phone splash finishes, or shortly after load on larger screens.
+  useEffect(() => {
+    if (heroIntroComplete || reduceMotion) {
+      setHeroStatsReady(true);
+      return undefined;
+    }
+    if (window.matchMedia('(max-width: 650px)').matches) return undefined;
+    const timer = setTimeout(() => setHeroStatsReady(true), 400);
+    return () => clearTimeout(timer);
+  }, [heroIntroComplete, reduceMotion]);
   const [selectedService, setSelectedService] = useState(null);
   const [showServiceModal, setShowServiceModal] = useState(false);
   const location = useLocation();
@@ -128,7 +141,7 @@ const Home = () => {
     {
       key: 'years-strong',
       icon: <BicepIcon size={24} />,
-      number: '9+',
+      number: `${yearsInBusiness()}+`,
       label: 'Years Strong',
     },
   ];
@@ -145,7 +158,7 @@ const Home = () => {
             <source srcSet={heroImageWebP} type="image/webp" />
             <img 
               src={heroImagePNG} 
-              alt="ClipCulture Barbershop Interior" 
+              alt="Clip Culture Barbershop interior" 
               className="hero__background-image"
               fetchPriority="high"
             />
@@ -205,7 +218,7 @@ const Home = () => {
                 className="social-link"
                 aria-label="Follow us on Instagram"
               >
-                <motion.svg
+                <m.svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -221,7 +234,7 @@ const Home = () => {
                   }}
                 >
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </motion.svg>
+                </m.svg>
                 Instagram
               </a>
               
@@ -232,7 +245,7 @@ const Home = () => {
                 className="social-link"
                 aria-label="Follow us on Facebook"
               >
-                <motion.svg
+                <m.svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -249,7 +262,7 @@ const Home = () => {
                   }}
                 >
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </motion.svg>
+                </m.svg>
                 Facebook
               </a>
             </div>
@@ -289,7 +302,7 @@ const Home = () => {
             className="social-link"
             aria-label="Follow us on Instagram"
           >
-            <motion.svg
+            <m.svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -305,7 +318,7 @@ const Home = () => {
               }}
             >
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </motion.svg>
+            </m.svg>
             Instagram
           </a>
           
@@ -316,7 +329,7 @@ const Home = () => {
             className="social-link"
             aria-label="Follow us on Facebook"
           >
-            <motion.svg
+            <m.svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -333,7 +346,7 @@ const Home = () => {
               }}
             >
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </motion.svg>
+            </m.svg>
             Facebook
           </a>
         </div>
@@ -347,7 +360,7 @@ const Home = () => {
           <div className="hero__tagline">
             {/* Mobile splash overlay (<=600px) */}
             {isMobile600 && (
-              <motion.div
+              <m.div
                 className="hero-logo-splash"
                 aria-hidden="true"
                 initial={reduceMotion ? false : { opacity: 1, scale: 0.97 }}
@@ -360,18 +373,18 @@ const Home = () => {
                   alt=""
                   className="hero-logo-splash-image"
                 />
-              </motion.div>
+              </m.div>
             )}
             
             {isMobile600 ? (
-              <motion.h1
+              <m.h1
                 initial={reduceMotion ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: heroIntroComplete || reduceMotion ? 1 : 0, y: heroIntroComplete || reduceMotion ? 0 : 10 }}
                 transition={{ duration: reduceMotion ? 0 : 0.55, ease: 'easeOut' }}
               >
                 Defining the Standard. <br/> 
                 Shaping the Culture<span className="hero__exclamation">!</span>
-              </motion.h1>
+              </m.h1>
             ) : (
               <h2>Defining the Standard. <br/> 
               Shaping the Culture.</h2>
@@ -399,6 +412,8 @@ const Home = () => {
             >
               <img 
                 src={shopImage1} 
+                srcSet={`${shopImage1Small} 720w, ${shopImage1} 1500w`}
+                sizes="(max-width: 900px) 100vw, 50vw"
                 alt="Sandy Springs Barbershop" 
                 className="store-location-image"
               />
@@ -410,7 +425,7 @@ const Home = () => {
           </div>
           
           {/* Social Proof Section */}
-          <div className="hero__social-proof">
+          <div className={`hero__social-proof${heroStatsReady ? ' hero__social-proof--ready' : ''}`}>
             {socialProofItems.map(({ key, icon, number, label }) => (
               <div className="social-proof__item" key={key}>
                 <div className="social-proof__icon">
@@ -488,9 +503,6 @@ const Home = () => {
 
       {/* Home Welcome */}
       <Home_Welcome />
-
-      {/* Professional Team */}
-      <Professional_Team />
 
       {/* Mobile Showcase - Products, Mentorship & Speaking */}
       {/* Mobile Promo Section - Only visible at 900px and below */}

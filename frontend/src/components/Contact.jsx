@@ -73,7 +73,7 @@ const Contact = () => {
             <div className="contact__phone-section">
               <a className="contact__phone" href="tel:+14044582993">
                 <Phone size={16} className="contact__phone-icon" />
-                (404)-458-2993
+                (404) 458-2993
               </a>
             </div>
           </div>
@@ -82,7 +82,7 @@ const Contact = () => {
         {/* Mobile Phone Section - Visible only at 600px */}
         <div className="contact__mobile-phone">
           <Phone size={20} className="contact__mobile-phone-icon" />
-          <a className="contact__mobile-phone-number" href="tel:+14044582993">(404)-458-2993</a>
+          <a className="contact__mobile-phone-number" href="tel:+14044582993">(404) 458-2993</a>
         </div>
       </div>
     </section>

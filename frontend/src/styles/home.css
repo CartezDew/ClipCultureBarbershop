@@ -1620,3 +1620,43 @@
     }
   }
 }
+
+/* Give the hero stats room to breathe on larger screens */
+@media (min-width: 769px) {
+  .hero__social-proof {
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .hero__social-proof {
+    gap: clamp(1.25rem, 2vw, 2.5rem);
+  }
+
+  .hero__social-proof .social-proof__label {
+    white-space: nowrap;
+  }
+}
+
+/* Hero stat icons bounce into place, one after another, once the hero intro finishes. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero__social-proof .social-proof__icon {
+    opacity: 0;
+  }
+
+  .js .hero__social-proof--ready .social-proof__icon {
+    animation: socialProofIconBounce 0.9s cubic-bezier(.28, .84, .42, 1) both;
+  }
+
+  .js .hero__social-proof--ready .social-proof__item:nth-child(2) .social-proof__icon { animation-delay: 0.15s; }
+  .js .hero__social-proof--ready .social-proof__item:nth-child(3) .social-proof__icon { animation-delay: 0.3s; }
+}
+
+@keyframes socialProofIconBounce {
+  0% { opacity: 0; transform: translateY(-18px) scale(0.6); }
+  45% { opacity: 1; transform: translateY(0) scale(1.15); }
+  65% { transform: translateY(-5px) scale(0.95); }
+  82% { transform: translateY(0) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}

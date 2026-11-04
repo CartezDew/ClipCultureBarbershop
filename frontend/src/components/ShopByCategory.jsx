@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import '../styles/shop-by-category.css';
 
@@ -531,7 +531,7 @@ const ShopByCategory = () => {
               <div className="category-testimonial">
                 <div className="category-testimonial__avatar-wrapper">
                   <div className="category-testimonial__avatar">
-                    <img src={activeTestimonial.photoUrl} alt={activeTestimonial.name} />
+                    <img loading="lazy" decoding="async" src={activeTestimonial.photoUrl} alt={activeTestimonial.name} />
                   </div>
                 </div>
                 <div className="category-testimonial__content">
@@ -573,7 +573,7 @@ const ShopByCategory = () => {
           <div ref={carouselRef} className="shop-by-category__carousel">
             <div ref={trackRef} className="shop-by-category__track">
               {repeatedCategories.map((category, index) => (
-              <motion.div
+              <m.div
                 key={`${category.name}-${index}`}
                 className={`category-card ${index === activeGlobalIndex ? 'is-active' : ''}`}
                 role="link"
@@ -591,7 +591,7 @@ const ShopByCategory = () => {
                     src={getCategoryImage(category)}
                     alt={category.name}
                     className="category-card__image"
-                    loading="lazy"
+                    loading={index < 3 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
                   <div className="category-card__overlay"></div>
@@ -608,7 +608,7 @@ const ShopByCategory = () => {
                     )}
                   </span>
                 </div>
-              </motion.div>
+              </m.div>
               ))}
             </div>
           </div>

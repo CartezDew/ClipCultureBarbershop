@@ -112,6 +112,11 @@
     padding: 0 0rem;
   }
 
+  .shop-subtitle {
+    padding: 1rem;
+  }
+  
+
   .shop-category-wrapper .shop-by-category {
     border-radius: 10px;
   }

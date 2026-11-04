@@ -901,3 +901,8 @@
     right: -7px;
   }
 }
+
+/* Prerendered pages include both navbars; keep the mobile one off wide screens. */
+@media (min-width: 651px) {
+  .navbar-visible-mobile.navbar-prerendered { display: none !important; }
+}

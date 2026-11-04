@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import '../styles/form-modal.css';
+import { useModal } from '../hooks/useModal.js';
 
 const ServiceDetailModal = ({ isOpen, onClose, service }) => {
   const navigate = useNavigate();
+  const modal = useModal(isOpen && Boolean(service), onClose);
 
   if (!isOpen || !service) return null;
 
@@ -37,8 +39,8 @@ const ServiceDetailModal = ({ isOpen, onClose, service }) => {
   };
 
   return ReactDOM.createPortal(
-    <div className="form0modal-overlay" onClick={onClose}>
-      <div className="form0modal-container" onClick={(e) => e.stopPropagation()}>
+    <div className="form0modal-overlay" {...modal.overlayProps}>
+      <div className="form0modal-container" {...modal.dialogProps}>
         <button 
           className="form0modal-close"
           onClick={onClose}

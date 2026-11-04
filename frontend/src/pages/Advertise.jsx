@@ -37,7 +37,7 @@ const Advertise = () => {
           <div className="advertise-bento-grid">
             <div className="advertise-bento-left">
               <div className="advertise-bento-image-box">
-                <img 
+                <img loading="lazy" decoding="async" 
                   src={Shop2Image} 
                   alt="Advertise Opportunity" 
                   className="advertise-bento-image"
@@ -53,7 +53,7 @@ const Advertise = () => {
                       In-shop advertising reaches clients while they spend time with us. Add email and social placements with a package that fits your campaign.
                     </p>
                      <div className="advertise-bento-image-hats">
-                  <img 
+                  <img loading="lazy" decoding="async" 
                   src={HatsImage} 
                   alt="Advertise Opportunity" 
                   className="advertise-bento-image-hats"
@@ -102,7 +102,7 @@ const Advertise = () => {
                     </div>
                     
                   </div>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={HatsImage}
                     alt="Advertise Opportunity"
                     className="advertise-bento-image-hats-2"

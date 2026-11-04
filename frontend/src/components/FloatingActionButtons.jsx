@@ -9,8 +9,7 @@ const FloatingActionButtons = ({ showOnHome }) => {
   
   // Pages where floating buttons should NOT be shown
   const excludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply'];
-  const isBarberBioPage = location.pathname.startsWith('/barber/');
-  const isExcludedPage = excludedPages.includes(location.pathname) || isBarberBioPage;
+  const isExcludedPage = excludedPages.includes(location.pathname);
 
   // Check if floating buttons are reaching the footer
   useEffect(() => {

@@ -115,12 +115,12 @@ const Franchise = () => {
         <div className="franchise-header">
           <div className="franchise-header-content">
             <div className="franchise-header-image">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={Shop1Image} 
                 alt="Franchise Opportunity" 
                 className="franchise-image"
               />
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={OwnerImage}
                 alt="Franchise Opportunity" 
                 className="franchise-image"

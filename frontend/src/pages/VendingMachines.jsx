@@ -7,6 +7,7 @@ import { submitFormWithAttachments } from '../services/formSubmissionService';
 import ClipCultureFormResponse from '../components/ClipCultureFormResponse.jsx';
 import ShopImage from '../assets/Contact/Shop_1.webp';
 import '../styles/vending-machines.css';
+import { yearsInBusiness } from '../lib/business.js';
 
 const VendingMachines = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -62,7 +63,7 @@ const VendingMachines = () => {
           <div className="vending-proof-intro" data-scroll-reveal="vending-copy"><span className="vending-eyebrow">The audience</span><p>A local shop with a history of bringing people through its doors.</p></div>
           <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><Handshake size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>155K+</strong><span>clients served</span></span></div>
           <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><FaRegThumbsUp size={30} aria-hidden="true" /></span><span className="vending-proof-content"><strong>94%</strong><span>client satisfaction</span></span></div>
-          <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><BicepIcon size={30} /></span><span className="vending-proof-content"><strong>9+</strong><span>years strong</span></span></div>
+          <div className="vending-proof-item" data-scroll-reveal="vending-count"><span className="vending-proof-icon"><BicepIcon size={30} /></span><span className="vending-proof-content"><strong>{yearsInBusiness()}+</strong><span>years strong</span></span></div>
         </div>
       </section>
 

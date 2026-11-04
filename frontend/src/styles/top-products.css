@@ -488,7 +488,7 @@
     margin-right: -2rem;
   }
   .top-products__title {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 
   .top-products__grid {
@@ -529,7 +529,7 @@
 
 @media (max-width: 475px) {
   .top-products__title {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
   .top-products__subtitle {
     font-size: 1.1rem;
@@ -571,7 +571,7 @@
   }
   
   .top-products__title {
-    font-size: 1.75rem;
+    font-size: 1.9rem;
   }
   
   .product-card {
@@ -609,7 +609,7 @@
 }
 @media (max-width: 360px) {
   .top-products__title {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
   }
   .top-products__subtitle {
     font-size: 1rem;

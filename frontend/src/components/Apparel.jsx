@@ -229,8 +229,8 @@ const Apparel = ({ limit }) => {
                       state={{ from: 'shop' }}
                       className="productbtn--learn-more productbtn--full-width"
                     >
-                      Learn More
-                      <ArrowRight size={16} />
+                      Learn More<span className="visually-hidden"> about {product.name}</span>
+                      <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>

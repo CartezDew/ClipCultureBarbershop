@@ -1,6 +1,24 @@
-/about-1   /about   301
-/application-form   /apply   301
-/franchise-form   /franchise   301
-/franchise-form-1   /advertise   301
-/*    /index.html   200
+# Retired Squarespace URLs → closest new page
+/home   /   301
+/about-1   /about/   301
+/mentorship-1   /mentorship/   301
+/summerhill-old   /sandysprings/   301
+/application-form   /apply/   301
+/franchise-form   /franchise/   301
+/franchise-form-1   /advertise/   301
+/products   /shop/   301
+/products/p/kt2h51yjt27f8lcn8t6j9p3hyqkvu7-m7khg-zlcbz-96x5s   /products/rich-shea-butter/   301
+/products/p/body-wash-ldjy8-efpw7-9ngf3   /products/bath-shower-gel/   301
+/products/p/beard-wash-sm7j9-3bsnk-pb96w   /products/therapeutic-shampoo/   301
+/products/p/premium-beard-oil-cmjmj-6s7ef-fdaxh   /products/premium-beard-oil/   301
+/products/p/curl-twist-2ykrx-7xwlj-mktr3   /products/curl-twist/   301
+/products/p/style-01-ej5na-sjccn-g7794-9cd9k-flr59   /products/magic-beard-balm/   301
+/products/p/*   /shop/   301
+/products/beard-wash   /products/therapeutic-shampoo/   301
+/products/body-lotion   /products/rich-shea-butter/   301
+/products/body-wash   /products/bath-shower-gel/   301
 
+# Booking happens on Squire and Acuity through /book-now
+/booking   /book-now/   301
+
+/*    /index.html   200

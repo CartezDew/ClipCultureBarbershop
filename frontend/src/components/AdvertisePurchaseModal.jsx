@@ -4,6 +4,7 @@ import '../styles/form-modal.css';
 import { submitFormWithAttachments } from '../services/formSubmissionService';
 import ClipCultureFormResponse from './ClipCultureFormResponse.jsx';
 import { validateEmail } from '../utils/emailValidation';
+import { useModal } from '../hooks/useModal.js';
 
 const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -88,7 +89,7 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
     try {
       await submitFormWithAttachments('Advertise Purchase Package', formData);
       setSubmitted(true);
-      setTimeout(handleClose, 3000);
+      modal.closeLater(handleClose, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
       setErrors(prev => ({ ...prev, submit: 'We could not send your request. Please try again.' }));
@@ -110,11 +111,13 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const modal = useModal(isOpen, handleClose);
+
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div className="form0modal-overlay" onClick={handleClose}>
-      <div className="form0modal-container" onClick={(e) => e.stopPropagation()}>
+    <div className="form0modal-overlay" {...modal.overlayProps}>
+      <div className="form0modal-container" {...modal.dialogProps}>
         <button 
           className="form0modal-close"
           onClick={handleClose}
@@ -159,11 +162,12 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
 
               <div className="form0field-row">
                 <div className="form0field-group">
-                  <label className="form0field-label">
+                  <label className="form0field-label" htmlFor="advertise-purchase-firstName">
                     First Name <span className="form0required">*</span>
                   </label>
                   <input
                     type="text"
+                    id="advertise-purchase-firstName"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
@@ -174,11 +178,12 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="form0field-group">
-                  <label className="form0field-label">
+                  <label className="form0field-label" htmlFor="advertise-purchase-lastName">
                     Last Name <span className="form0required">*</span>
                   </label>
                   <input
                     type="text"
+                    id="advertise-purchase-lastName"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
@@ -190,11 +195,12 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="advertise-purchase-email">
                   Email Address <span className="form0required">*</span>
                 </label>
                 <input
                   type="email"
+                  id="advertise-purchase-email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -205,11 +211,12 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="form0field-group">
-                <label className="form0field-label">
+                <label className="form0field-label" htmlFor="advertise-purchase-phone">
                   Phone Number <span className="form0required">*</span>
                 </label>
                 <input
                   type="tel"
+                  id="advertise-purchase-phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
@@ -221,7 +228,7 @@ const AdvertisePurchaseModal = ({ isOpen, onClose }) => {
 
               {errors.submit && <p role="alert" className="form0field-error">{errors.submit}</p>}
               <button type="submit" className="form0submit-btn" disabled={submitting}>
-                Purchase Package
+                {submitting ? 'Sending…' : 'Purchase Package'}
               </button>
             </form>
           </>

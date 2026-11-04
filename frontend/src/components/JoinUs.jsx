@@ -113,6 +113,8 @@ const JoinUs = () => {
               <input 
                 type="email" 
                 placeholder="Email Address" 
+                aria-label="Email address"
+                autoComplete="email"
                 className={`join-email-input ${emailError ? 'error' : ''}`}
                 value={email}
                 onChange={handleEmailChange}

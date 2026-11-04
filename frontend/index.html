@@ -2,18 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <!-- Lets prerendered content start hidden for its reveal animation; shown anyway if scripts never start. -->
+    <script>document.documentElement.classList.add('js');setTimeout(function(){var d=document.documentElement;if(!d.classList.contains('reveal-ready'))d.classList.remove('js')},4000)</script>
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#123018" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>Clip Culture | Home</title>
-    <meta name="description" content="Book modern cuts and premium grooming at ClipCulture. Walk-ins welcome. Online booking available.">
-    <meta property="og:title" content="ClipCulture Barbershop" />
+    <!-- Fonts load without blocking the first paint; display=swap shows fallback text meanwhile. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Montserrat:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Rubik:wght@300;400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Montserrat:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Rubik:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Montserrat:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Rubik:wght@300;400;500;600;700&amp;display=swap" /></noscript>
+    <title>Clip Culture Barbershop | Haircuts in Sandy Springs, GA</title>
+    <meta name="description" content="Book modern cuts and premium grooming at Clip Culture Barbershop in Sandy Springs, GA. Walk-ins welcome. Online booking available.">
+    <meta property="og:title" content="Clip Culture Barbershop" />
     <meta property="og:description" content="Premium grooming. Walk-ins welcome. Online booking." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.webp" />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:site_name" content="Clip Culture Barbershop" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ClipCulture Barbershop" />
+    <meta name="twitter:title" content="Clip Culture Barbershop" />
     <meta name="twitter:description" content="Premium grooming. Walk-ins welcome. Online booking." />
   </head>
   <body>

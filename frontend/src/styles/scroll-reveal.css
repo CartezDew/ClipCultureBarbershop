@@ -1,24 +1,56 @@
+/* Scroll and in-view reveals. State is set by src/lib/scrollReveal.js through data attributes
+   (and by the prerender, so pages first paint hidden). Hidden states apply only once index.html
+   has marked the page with .js, so content stays visible without JavaScript.
+   Motion stays firm and short: confident, no bounce. */
 @media (prefers-reduced-motion: no-preference) {
-  .page-scroll-reveal {
-    opacity: 0;
-    translate: 0 18px;
-    transition: opacity .7s ease, translate .7s cubic-bezier(.2, .7, .2, 1);
+  [data-scroll-state] {
+    transition:
+      opacity .7s ease,
+      translate .7s cubic-bezier(.2, .7, .2, 1),
+      scale 1s cubic-bezier(.2, .7, .2, 1),
+      rotate .9s cubic-bezier(.2, .7, .2, 1);
+    transition-delay: var(--reveal-delay, 0s);
   }
 
-  .page-scroll-reveal[data-scroll-motion="fade"] { translate: 0 0; }
-  .page-scroll-reveal[data-scroll-motion="slide-left"] { translate: -24px 0; }
-  .page-scroll-reveal[data-scroll-motion="slide-right"] { translate: 24px 0; }
-  .page-scroll-reveal[data-scroll-motion="vending-photo"] { translate: 28px 0; }
-  .page-scroll-reveal[data-scroll-motion="vending-count"] { translate: 0 12px; }
-  .page-scroll-reveal[data-scroll-motion="vending-card"] { translate: 0 28px; }
+  .js [data-scroll-state="pending"] { opacity: 0; translate: 0 18px; }
 
-  .page-scroll-reveal.is-visible { opacity: 1; translate: 0 0; }
+  .js [data-scroll-state="pending"][data-scroll-motion="fade"] { translate: 0 0; }
+  .js [data-scroll-state="pending"][data-scroll-motion="rise"] { translate: 0 32px; }
+  .js [data-scroll-state="pending"][data-scroll-motion="slide-left"] { translate: -24px 0; }
+  .js [data-scroll-state="pending"][data-scroll-motion="slide-right"] { translate: 24px 0; }
+  /* Photos settle into place from slightly enlarged, like a camera finding focus. */
+  .js [data-scroll-state="pending"][data-scroll-motion="settle"] { translate: 0 0; scale: 1.06; }
+  .js [data-scroll-state="pending"][data-scroll-motion="vending-photo"] { translate: 28px 0; }
+  .js [data-scroll-state="pending"][data-scroll-motion="vending-count"] { translate: 0 12px; }
+  .js [data-scroll-state="pending"][data-scroll-motion="vending-card"] { translate: 0 28px; }
+  .js [data-scroll-state="pending"][data-scroll-motion="services-card"] { translate: -50px 0; }
+
+  /* Testimonials tip up from a slight backward lean, one after another. */
+  .testimonials__grid { perspective: 1200px; }
+  [data-scroll-motion="tilt"] { transform-origin: 50% 100%; }
+  .js [data-scroll-state="pending"][data-scroll-motion="tilt"] { translate: 0 28px; rotate: x 14deg; }
+
+  /* Join Team cards unfold from their top edge and drop into place, one after another. */
+  .apply-bento-grid { perspective: 1400px; }
+  [data-scroll-motion="fold"] { transform-origin: 50% 0; }
+  .js [data-scroll-state="pending"][data-scroll-motion="fold"] { translate: 0 0; rotate: x -80deg; }
+  [data-scroll-state][data-scroll-motion="fold"] {
+    transition:
+      all .3s ease,
+      opacity .45s ease,
+      rotate .85s cubic-bezier(.22, .9, .3, 1);
+  }
+
+  [data-scroll-state="visible"] { opacity: 1; translate: 0 0; scale: 1; rotate: none; }
+
   .vending-benefits article:nth-child(2) { transition-delay: .09s; }
   .vending-benefits article:nth-child(3) { transition-delay: .18s; }
   .vending-proof-item:nth-child(3) { transition-delay: .09s; }
   .vending-proof-item:nth-child(4) { transition-delay: .18s; }
-  .apply-bento-card:nth-child(2) { transition-delay: .08s; }
-  .apply-bento-card:nth-child(3) { transition-delay: .16s; }
+  .apply-bento-card:nth-child(2) { transition-delay: .25s; }
+  .apply-bento-card:nth-child(3) { transition-delay: .5s; }
+  .testimonials__grid article:nth-child(2) { transition-delay: .12s; }
+  .testimonials__grid article:nth-child(3) { transition-delay: .24s; }
   .apply-video-content { transition-delay: .1s; }
   .apply-joinus-wrapper .join-email-subtitle { transition-delay: .08s; }
   .apply-joinus-wrapper .join-email-form { transition-delay: .16s; }
@@ -33,12 +65,4 @@
   .speaking-joinus-wrapper .join-email-subtitle { transition-delay: .08s; }
   .franchise-joinus-wrapper .join-email-form,
   .speaking-joinus-wrapper .join-email-form { transition-delay: .16s; }
-}
-
-@media (max-width: 600px) {
-  .product-story.page-scroll-reveal {
-    opacity: 1;
-    translate: 0 0;
-    transition: none;
-  }
 }

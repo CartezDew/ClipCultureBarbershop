@@ -10,7 +10,7 @@ import "../styles/facts.css";
  * Each item: { id: number|string, q: string, a: ReactNode|string }
  */
 
-export default function Facts({ items = sampleFacts }) {
+export default function Facts({ items = faqItems }) {
   const [openId, setOpenId] = useState(null);
   const [animationsTriggered, setAnimationsTriggered] = useState(false);
   const factsRef = useRef(null);
@@ -149,15 +149,14 @@ function FactItem({ id, q, isOpen, onToggle, children }) {
   );
 }
 
-/* --- Sample content you can replace --- */
-const sampleFacts = [
+export const faqItems = [
   {
     id: 1,
     q: "I'm a new client—what should I know before my appointment?",
     a: (
       <>
         <p>
-          Welcome to ClipCulture! Please arrive <strong>10–15 minutes early</strong> to allow time for your initial consultation prior to your service to your appointment.
+          Welcome to Clip Culture! Please arrive <strong>10–15 minutes early</strong> for your appointment to allow time for your initial consultation.
         </p>
       </>
     ),
@@ -175,7 +174,7 @@ const sampleFacts = [
             <strong>No products:</strong> Please avoid grease, heavy oils, foams, or styling products before service.
           </li>
           <li>
-            <strong>No time to prep?</strong> Book a <em>Shampoo + Blow-Dry</em> add-on and arrive <strong>15–20 minutes early</strong>.
+            <strong>No time to prep?</strong> Book the <em>Shampoo Service</em> add-on and arrive <strong>15–20 minutes early</strong>.
           </li>
         </ul>
       </>
@@ -247,7 +246,7 @@ const sampleFacts = [
       <>
         <p>
         Our products are made with <strong>high-quality, barber-approved ingredients</strong> that nourish your hair and scalp without heavy buildup. 
-        Each formula is tested by our team to ensure lasting style, comfort, and results that reflect the ClipCulture standard.
+        Each formula is tested by our team to ensure lasting style, comfort, and results that reflect the Clip Culture standard.
         </p>
       </>
     ),

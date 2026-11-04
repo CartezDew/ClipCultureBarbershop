@@ -5,16 +5,17 @@ import { ChevronUp } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 
 const Navbar = ({ showHomeLogo = true }) => {
-    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 650 : false)
+    // null until mounted, so the first render matches the prerendered HTML (both navbars, CSS picks one)
+    const [isMobile, setIsMobile] = useState(null)
+    const isPrerender = isMobile === null
     const [showBackToTop, setShowBackToTop] = useState(false)
     const autoScrollingRef = useRef(false)
     const location = useLocation()
     
     // Pages where floating action buttons are NOT shown (so back-to-top should be lower)
     const floatingButtonsExcludedPages = ['/login', '/mentorship', '/advertise', '/franchise', '/apply', '/book-now', '/speaking-engagements']
-    const isBarberBioPage = location.pathname.startsWith('/barber/')
     const isProductDetailPage = location.pathname.startsWith('/products/')
-    const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname) || isBarberBioPage || isProductDetailPage
+    const isFloatingButtonsExcluded = floatingButtonsExcludedPages.includes(location.pathname) || isProductDetailPage
 
     useEffect(() => {
         if (typeof window === 'undefined') return
@@ -120,11 +121,14 @@ const Navbar = ({ showHomeLogo = true }) => {
 
     return (
         <>
-            {isMobile ? (
-                <div className="navbar-visible-mobile" aria-hidden="false">
-                    <NavbarMobile showTaglineAnim={showHomeLogo} isMobile600={isMobile} />
+            {/* Prerendered HTML has no screen width, so it carries both navbars and CSS shows the
+                right one; otherwise phones see the desktop bar until the app starts and the page jumps. */}
+            {(isPrerender || isMobile) && (
+                <div className={`navbar-visible-mobile${isPrerender ? ' navbar-prerendered' : ''}`} aria-hidden="false">
+                    <NavbarMobile showTaglineAnim={showHomeLogo} isMobile600={isPrerender || isMobile} />
                 </div>
-            ) : (
+            )}
+            {(isPrerender || !isMobile) && (
                 <div className="navbar-visible-desktop" aria-hidden="false">
                     <NavbarDesktop />
                 </div>

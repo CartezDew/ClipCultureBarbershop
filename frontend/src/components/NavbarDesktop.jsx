@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Home, Scissors, Users, Phone, HelpCircle, Camera, ChevronDown, Info, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, ShoppingCart, UserPlus, Building2, Mic2, Shirt, PackageOpen } from 'lucide-react'
 import Comb from './icons/Comb'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import logoWebP from '../assets/images/CC-Logo-Black-HQ.webp'
 import '../styles/navbar.css'
 
@@ -153,14 +153,14 @@ const NavbarDesktop = () => {
                     <Link to="/" className="logo-link">
                         <img 
                             src={logoWebP} 
-                            alt="ClipCulture Logo" 
+                            alt="Clip Culture Barbershop logo" 
                             className="logo-image-nav"
                         />
                     </Link>
                 </div>
                 {/* Menu items: keep mounted to avoid flicker; animate between hidden/visible */}
                 {(
-                  <motion.div
+                  <m.div
                     className="menu-section"
                     style={{ willChange: 'opacity, transform' }}
                     initial={{ opacity: 1, y: 0 }}
@@ -218,7 +218,7 @@ const NavbarDesktop = () => {
                             )
                         }
                     })}
-                  </motion.div>
+                  </m.div>
                 )}
                 <div className="icon-section">
                     <Link to="/book-now" className="book-now-btn">

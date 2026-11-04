@@ -267,7 +267,7 @@
 
   .product-stories__intro h2 {
     margin: 1rem 0 .85rem;
-    font-size: clamp(1.8rem, 5vw, 2rem);
+    font-size: clamp(1.9rem, 5vw, 2rem);
   }
 
   .product-stories__intro p { font-size: .95rem; }

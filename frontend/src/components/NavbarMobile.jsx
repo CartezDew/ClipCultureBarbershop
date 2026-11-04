@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { Home, Scissors, Users, Phone, HelpCircle, Camera, ShoppingCart, User, Users2, Baby, MapPin, Building, BookOpen, GraduationCap, Megaphone, Store, FileText, Mail, UserPlus, Building2, Info, ChevronDown, Mic2, Shirt, PackageOpen } from 'lucide-react'
 import Comb from './icons/Comb'
 
@@ -278,10 +278,10 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                         <picture>
                             <source srcSet={`${logoMobile} 2x, ${logoMobile} 1x`} type="image/webp" />
                             {isMobile600 && location.pathname === '/' ? (
-                                <motion.img
+                                <m.img
                                     src={logoMobile}
                                     srcSet={`${logoMobile} 1x`}
-                                    alt="ClipCulture Logo"
+                                    alt="Clip Culture Barbershop logo"
                                     className="logo-image-nav"
                                     initial={{ opacity: 0 }}
                                     animate={showTaglineAnim ? { opacity: 1 } : { opacity: 0 }}
@@ -291,7 +291,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                 <img 
                                     src={logoMobile} 
                                     srcSet={`${logoMobile} 1x`}
-                                    alt="ClipCulture Logo" 
+                                    alt="Clip Culture Barbershop logo" 
                                     className="logo-image-nav"
                                 />
                             )}
@@ -320,7 +320,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                 {isOpen && (
                     <>
                         {/* Overlay backdrop */}
-                        <motion.div
+                        <m.div
                             key="mobileOverlay"
                             className="mobile-nav-overlay"
                             initial={{ opacity: 0 }}
@@ -333,7 +333,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                             onClick={() => setIsOpen(false)}
                         />
                         {/* Menu */}
-                        <motion.div
+                        <m.div
                             key="mobileMenu"
                             id="mobile-nav-menu"
                             className="mobile-nav-menu"
@@ -437,7 +437,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                 </button>
                                                 <AnimatePresence initial={false}>
                                                     {isExpanded && (
-                                                        <motion.div
+                                                        <m.div
                                                             className="mobile-nav-section-items"
                                                             id={`mobile-nav-${section.toLowerCase()}`}
                                                             initial={{ height: 0, opacity: 0 }}
@@ -462,7 +462,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                                                     </Link>
                                                                 )
                                                             })}
-                                                        </motion.div>
+                                                        </m.div>
                                                     )}
                                                 </AnimatePresence>
                                             </div>
@@ -473,7 +473,7 @@ const NavbarMobile = ({ showTaglineAnim = false, isMobile600 = false }) => {
                                 return items
                             })()}
                         </div>
-                    </motion.div>
+                    </m.div>
                     </>
                 )}
             </AnimatePresence>

@@ -108,15 +108,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 0;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.3s;
   position: relative;
-}
-
-.services__grid.animate {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .services__grid--addons {
@@ -124,16 +116,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(1, 1fr);
   gap: 0;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.3s;
   position: relative;
   margin-bottom: 0rem;
-}
-
-.services__grid--addons.animate {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Service Cards */
@@ -147,14 +131,15 @@
   text-align: left;
   position: relative;
   cursor: pointer;
-  opacity: 0;
-  transform: translateX(-50px);
   overflow: hidden;
 }
 
-/* Sequential card animation */
-.services__card.card-animate-in {
-  animation: cardEaseInFromLeft 0.6s ease-out forwards;
+/* Cards ease in from the left as each scrolls into view (see src/lib/scrollReveal.js). */
+.services__card[data-scroll-state] {
+  transition:
+    all 0.3s ease,
+    opacity 0.6s ease-out var(--reveal-delay, 0s),
+    translate 0.6s ease-out var(--reveal-delay, 0s);
 }
 
 /* Add-on Services */
@@ -167,16 +152,6 @@
 
 
 
-@keyframes cardEaseInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 /* Card with borders */
 .services__card {
