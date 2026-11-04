@@ -197,7 +197,7 @@ export default function ProductStories() {
           <h2 id="product-stories-title">The Culture <em>at Home.</em></h2>
           <p>See how customers make our beard oil part of their day, in their own way.</p>
           <Link to="/products/premium-beard-oil" className="product-stories__link">
-            Explore the beard oil <ArrowUpRight size={18} aria-hidden="true" />
+            Explore our beard oil <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </div>
 
