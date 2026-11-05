@@ -21,7 +21,7 @@ const HomeGallery = () => {
   const otherModules = import.meta.glob('../assets/gallery/*.{png,jpg,jpeg,gif}', { eager: true });
   const galleryModules = { ...webpModules, ...otherModules };
 
-  const servicesImages = Object.entries(galleryModules)
+  const galleryImages = Object.entries(galleryModules)
     .map(([path, mod]) => {
       const filename = path.split('/').pop() || '';
       const numMatch = filename.match(/(\d+)/);
@@ -29,10 +29,14 @@ const HomeGallery = () => {
       return {
         id: num,
         src: mod.default,
-        alt: filename
+        alt: num >= 72 && num <= 80 ? 'Clip Culture grooming products' : filename
       };
     })
     .sort((a, b) => (a.id - b.id) || a.alt.localeCompare(b.alt));
+  const newImagePositions = [10, 27, 33, 37, 44, 55, 64, 69, 77];
+  const servicesImages = galleryImages.filter((image) => image.id < 72 || image.id > 80);
+  galleryImages.filter((image) => image.id >= 72 && image.id <= 80)
+    .forEach((image, index) => servicesImages.splice(newImagePositions[index], 0, image));
 
   // Create extended array for seamless infinite loop - duplicate the array
   const extendedImages = [...servicesImages, ...servicesImages];

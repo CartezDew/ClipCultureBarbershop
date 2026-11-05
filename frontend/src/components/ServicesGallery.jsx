@@ -18,7 +18,7 @@ const ServicesGallery = () => {
 
   // Services-specific gallery images - dynamically import with Vite
   const galleryModules = import.meta.glob('../assets/gallery/*.webp', { eager: true });
-  const desiredOrder = [7, 2, 20, 10, 13, 37, 15, 16, 18, 23, 25, 26, 29, 31, 47];
+  const desiredOrder = [7, 2, 20, 72, 10, 73, 13, 37, 74, 15, 75, 16, 18, 76, 23, 77, 25, 78, 26, 79, 29, 80, 31];
 
   const allImages = Object.entries(galleryModules).map(([path, mod]) => {
     const match = path.match(/image-(\d+)\.webp$/);
@@ -26,7 +26,7 @@ const ServicesGallery = () => {
     return {
       id: num,
       src: mod.default,
-      alt: `Haircut Service ${num}`
+      alt: num >= 72 && num <= 80 ? 'Clip Culture grooming products' : `Haircut Service ${num}`
     };
   });
 
