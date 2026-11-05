@@ -6,7 +6,7 @@
     align-items: center;
   }
 
-.franchise-gallery-wrapper .barbershop-gallery-outer, .services-gallery-wrapper .barbershop-gallery-outer {
+.franchise-gallery-wrapper .barbershop-gallery-outer, .services-gallery-wrapper .barbershop-gallery-outer, .advertise-gallery-wrapper .barbershop-gallery-outer {
     background: var(--primary-black);
   }
 
@@ -190,7 +190,8 @@
     pointer-events: auto;
   }
 
-  .franchise-gallery-wrapper .scrollbar-thumb {
+  .franchise-gallery-wrapper .scrollbar-thumb,
+  .advertise-gallery-wrapper .scrollbar-thumb {
     position: absolute;
     left: 0;
     top: 9px;
@@ -217,7 +218,9 @@
   }
 
   .franchise-gallery-wrapper .scrollbar-thumb.active,
-  .franchise-gallery-wrapper .scrollbar-thumb:active {
+  .franchise-gallery-wrapper .scrollbar-thumb:active,
+  .advertise-gallery-wrapper .scrollbar-thumb.active,
+  .advertise-gallery-wrapper .scrollbar-thumb:active {
     background: var(--green-new);
     box-shadow: 0 0 8px rgba(10, 151, 134, 0.5);
   }

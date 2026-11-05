@@ -23,6 +23,10 @@ const mainProductPlacements = [
 // Services gallery image order, with the product photos mixed in. image-47 (old packaging) is left out.
 const servicesImageOrder = [7, 2, 76, 3, 10, 62, 72, 13, 15, 79, 16, 27, 28, 74, 29, 37, 80, 18, 23, 73, 25, 26, 78, 31, 75, 37, 65, 77];
 
+// Advertise gallery: new product photos alternating with Clip Culture branded marketing
+// (apparel, the branded case, signs, capes, storefront, logo art).
+const advertiseImageOrder = [72, 21, 63, 76, 29, 51, 74, 41, 69, 79, 54, 36, 73, 27, 62, 78, 48, 38, 75, 66, 65, 80, 49, 60, 77, 39];
+
 // Speaking engagements gallery image order
 const speakingImageOrder = [61, 68, 71, 63, 14, 40, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
 
@@ -55,6 +59,8 @@ const BarbershopGallery = () => {
   const isServicesRoute = location.pathname === "/services";
   // Check if we're on the speaking route
   const isSpeakingRoute = location.pathname === "/speaking-engagements";
+  // Check if we're on the advertise route
+  const isAdvertiseRoute = location.pathname === "/advertise";
 
   // Process all images and filter based on route
   const baseImageEntries = useMemo(() => {
@@ -73,6 +79,11 @@ const BarbershopGallery = () => {
       return servicesImageOrder
         .map((id) => allImageEntries.find((img) => img.id === id))
         .filter(Boolean);
+    } else if (isAdvertiseRoute) {
+      // On advertise route: products and branded marketing only
+      return advertiseImageOrder
+        .map((id) => allImageEntries.find((img) => img.id === id))
+        .filter(Boolean);
     } else if (isSpeakingRoute) {
       // On speaking route: only show images from speakingImageOrder
       return speakingImageOrder
@@ -89,7 +100,7 @@ const BarbershopGallery = () => {
       });
       return entries;
     }
-  }, [isServicesRoute, isSpeakingRoute]);
+  }, [isServicesRoute, isSpeakingRoute, isAdvertiseRoute]);
 
   // Total images count - dynamically updates based on route (original count, not duplicated)
   const totalImages = baseImageEntries.length;
@@ -270,7 +281,7 @@ const BarbershopGallery = () => {
     }
     updateUI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isServicesRoute, isSpeakingRoute]);
+  }, [isServicesRoute, isSpeakingRoute, isAdvertiseRoute]);
 
   // Show count briefly when a new image becomes visible during auto-scroll
   useEffect(() => {
@@ -388,7 +399,7 @@ const BarbershopGallery = () => {
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isServicesRoute, isSpeakingRoute, pauseAutoScroll]);
+  }, [isServicesRoute, isSpeakingRoute, isAdvertiseRoute, pauseAutoScroll]);
 
   // draggable thumb - supports both mouse and touch events
   useEffect(() => {

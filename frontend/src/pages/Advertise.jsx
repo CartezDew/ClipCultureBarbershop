@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/advertise.css';
 import JoinUs from '../components/JoinUs.jsx';
+import BarbershopGallery from '../components/Barbershop_Gallery.jsx';
 import Shop1Image from '../assets/gallery/image-14.webp';
 import Shop2Image from '../assets/gallery/image-4.webp';
 import HatsImage from '../assets/About_Home/Products-hats.webp';
@@ -191,6 +192,9 @@ const Advertise = () => {
           onClose={() => setShowRequestInfoModal(false)}
         />
 
+      <div className="advertise-gallery-wrapper">
+          <BarbershopGallery />
+      </div>
       <div className="advertise-joinus-wrapper">
         <JoinUs />
       </div>
