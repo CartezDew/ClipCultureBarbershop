@@ -39,7 +39,7 @@ const VendingMachines = () => {
     <div className="vending-page">
       <section className="vending-hero" id="hero" aria-labelledby="vending-title">
         <div className="vending-hero-copy" data-scroll-reveal="vending-copy">
-          <span className="vending-eyebrow">Vending partnerships <span aria-hidden="true">/</span> Sandy Springs</span>
+          <span className="vending-eyebrow">Vending partnerships</span>
           <h1 id="vending-title">Put your brand<br /><em>in the room.</em></h1>
           <div className="vending-hero-stat" aria-label="Over 1,600 clients visit each month">
             <strong>1,600<span>+</span></strong>
