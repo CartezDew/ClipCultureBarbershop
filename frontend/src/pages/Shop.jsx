@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { groomingSetImages } from '../lib/groomingSet.js';
 import ShopByCategory from '../components/ShopByCategory.jsx';
 import ProductsBanner from '../components/ProductsBanner.jsx';
 import TopProducts from '../components/TopProducts.jsx';
@@ -54,19 +55,35 @@ const Shop = () => {
     <div className="shop-page">
       <div className="shop-container">
         <div className="shop-header">
-          <h1 className="shop-title">The Culture Collection</h1>
-          <p className="shop-subtitle">Curated products and experiences that elevate how you look, lead, and live.</p>
-          <a
-            className="shop-header__cta"
-            href="#premium-grooming-products"
-            onClick={(event) => {
-              // Same landing spot as the home page's category carousel.
-              event.preventDefault();
-              scrollToSection('premium-grooming-products');
-            }}
-          >
-            Shop Grooming Products
-          </a>
+          <div className="shop-header__copy">
+            <h1 className="shop-title">The Culture Collection</h1>
+            <p className="shop-subtitle">Curated products and experiences that elevate how you look, lead, and live.</p>
+            <div className="shop-header__actions">
+              <a
+                className="shop-header__cta"
+                href="#premium-grooming-products"
+                onClick={(event) => {
+                  // Same landing spot as the home page's category carousel.
+                  event.preventDefault();
+                  scrollToSection('premium-grooming-products');
+                }}
+              >
+                Shop Grooming Products
+              </a>
+            </div>
+          </div>
+          <figure className="shop-header__media">
+            <img
+              src={groomingSetImages.marbleLine}
+              srcSet={`${groomingSetImages.marbleLineSmall} 720w, ${groomingSetImages.marbleLine} 1280w`}
+              sizes="(max-width: 860px) 100vw, 55vw"
+              width="1280"
+              height="853"
+              alt="The Clip Culture Hair Care line: body wash, beard oil, shampoo, shea butter and beard balm on black marble"
+              fetchPriority="high"
+            />
+            <figcaption>Clip Culture Hair Care <span aria-hidden="true">·</span> Since 2021</figcaption>
+          </figure>
         </div>
         
         <div className="shop-category-wrapper">

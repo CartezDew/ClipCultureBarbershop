@@ -28,9 +28,14 @@ export const pages = {
   '/speaking-engagements': { title: 'Speaking Engagements | David Brown, Clip Culture', description: 'Invite Clip Culture founder David Brown to speak about barbering, business, and building community.' },
 };
 
+// Product pages whose title should not be built from the slug.
+const productPages = {
+  '/products/grooming-set': { title: 'Grooming Set: All 5 Products, Save $15 | Clip Culture', description: 'Get Clip Culture body wash, beard oil, shampoo, shea butter and beard balm together for $110 instead of $125, in store in Sandy Springs.' },
+};
+
 export function pageMeta(pathname, siteUrl = DEFAULT_SITE_URL) {
   const path = pathname.replace(/\/$/, '') || '/';
-  let page = pages[path];
+  let page = pages[path] || productPages[path];
   if (!page && /^\/(products|apparel)\/[a-z0-9-]+$/.test(path)) {
     const name = path.split('/').at(-1).split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');
     page = { title: `${name} | Clip Culture`, description: `Learn about ${name} from Clip Culture Barbershop in Sandy Springs, Georgia.` };

@@ -295,6 +295,25 @@
   font-weight: 600;
 }
 
+/* Text link under a section, e.g. the product line chapter */
+.about-section__link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-top: 1.75rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--about-teal);
+  color: #ffffff;
+  font: 700 clamp(.95rem, 1.2vw, 1.05rem) 'Manrope', sans-serif;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.about-section__link:hover,
+.about-section__link:focus-visible {
+  color: var(--about-teal-light);
+}
+
 /* Section Variations */
 .about-section--vision .about-section__title,
 .about-section--business .about-section__title,

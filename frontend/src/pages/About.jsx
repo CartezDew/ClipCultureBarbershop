@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import '../styles/about.css';
 import visionImage from '../assets/gallery/image-11.webp';
 import communityImage from '../assets/gallery/image-4.webp';
@@ -7,6 +9,7 @@ import leapImage from '../assets/gallery/image-20.webp';
 import birthImage from '../assets/gallery/image-42.webp';
 import movementImage from '../assets/gallery/image-6.webp';
 import JoinUs from '../components/JoinUs.jsx';
+import { groomingSetImages } from '../lib/groomingSet.js';
 import { yearsInBusiness } from '../lib/business.js';
 
 // The YouTube player is close to 1 MB of scripts; create it only as the video nears the screen.
@@ -248,13 +251,56 @@ const About = () => {
           </div>
         </section>
 
+        {/* The Product Line (2021) */}
+        <section
+          className={`about-section about-section--products ${visibleSections.products ? 'animate-in' : ''}`}
+          data-section="products"
+          ref={(el) => addToRefs(el, 5)}
+        >
+          <div className="about-section__inner about-section__inner--reverse">
+            <div className="about-section__content">
+              <span className="about-section__label">The Product Line</span>
+              <h2 className="about-section__title">From the Chair to the Shelf</h2>
+              <div className="about-section__text">
+                <p>
+                  In <strong>2021</strong>, David launched <strong>Clip Culture Hair Care</strong>, a grooming line developed by a master barber so clients could keep the barbershop standard going at home.
+                </p>
+                <p>
+                  The line brings together five essentials for hair, beard and skin: Therapeutic Shampoo, Bath &amp; Shower Gel, Premium Beard Oil, Magic Beard Balm and Rich Shea Butter.
+                </p>
+              </div>
+              <Link to="/shop#premium-grooming-products" className="about-section__link">
+                Explore the grooming line <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="about-section__image-wrapper about-section__image-wrapper--right">
+              <img
+                loading="lazy"
+                decoding="async"
+                src={groomingSetImages.marbleLine}
+                srcSet={`${groomingSetImages.marbleLineSmall} 720w, ${groomingSetImages.marbleLine} 1280w`}
+                sizes="(max-width: 800px) 100vw, 50vw"
+                width="1280"
+                height="853"
+                alt="The Clip Culture Hair Care line: body wash, beard oil, shampoo, shea butter and beard balm"
+                className="about-section__image"
+              />
+              <div className="about-section__image-accent"></div>
+            </div>
+          </div>
+        </section>
+
         {/* More Than a Barbershop */}
         <section
           className={`about-section about-section--movement ${visibleSections.movement ? 'animate-in' : ''}`}
           data-section="movement"
-          ref={(el) => addToRefs(el, 5)}
+          ref={(el) => addToRefs(el, 6)}
         >
-          <div className="about-section__inner about-section__inner--reverse">
+          <div className="about-section__inner">
+            <div className="about-section__image-wrapper about-section__image-wrapper--left">
+              <img loading="lazy" decoding="async" src={movementImage} alt="More Than a Barbershop" className="about-section__image" />
+              <div className="about-section__image-accent"></div>
+            </div>
             <div className="about-section__content">
               <span className="about-section__label">The Movement</span>
               <h2 className="about-section__title">More Than a Barbershop</h2>
@@ -266,10 +312,6 @@ const About = () => {
                   With every cut, every product, and every lesson shared, Clip Culture continues to shape the culture—locally and globally.
                 </p>
               </div>
-            </div>
-            <div className="about-section__image-wrapper about-section__image-wrapper--right">
-              <img loading="lazy" decoding="async" src={movementImage} alt="More Than a Barbershop" className="about-section__image" />
-              <div className="about-section__image-accent"></div>
             </div>
           </div>
         </section>

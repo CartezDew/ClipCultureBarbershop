@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar.jsx';
 import TopProducts from '../components/TopProducts.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import ProductStories from '../components/ProductStories.jsx';
+import GroomingSetFeature from '../components/GroomingSetFeature.jsx';
 import Home_Welcome from '../components/Home_Welcome.jsx';
 import Contact from '../components/Contact.jsx';
 import Facts from '../components/facts.jsx';
@@ -448,6 +449,9 @@ const Home = () => {
       <div className="home-product-stories-wrapper">
         <ProductStories />
       </div>
+
+      {/* The full grooming line and the five-product set */}
+      <GroomingSetFeature />
 
       {/* Top Products */}
       <TopProducts limit={6} />

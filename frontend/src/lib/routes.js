@@ -1,7 +1,7 @@
 // Product and apparel pages that exist; shared by the prerender script and the Netlify 404 edge function.
 export const productSlugs = [
   'magic-beard-balm', 'premium-beard-oil', 'therapeutic-shampoo', 'rich-shea-butter',
-  'bath-shower-gel', 'curl-twist', 'beard-line-up-enhancement',
+  'bath-shower-gel', 'curl-twist', 'beard-line-up-enhancement', 'grooming-set',
 ];
 export const legacyProductSlugs = ['beard-wash', 'body-lotion', 'body-wash'];
 export const apparelSlugs = [

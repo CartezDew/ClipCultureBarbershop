@@ -1,5 +1,6 @@
 import { Phone } from 'lucide-react';
 import AddressAction from './AddressAction.jsx';
+import BarberPole from './icons/BarberPole.jsx';
 import '../styles/contact.css';
 import Shop1Image from '../assets/Contact/Shop_1.webp';
 import Shop1ImageSmall from '../assets/Contact/Shop_1-720.webp';
@@ -48,13 +49,7 @@ const Contact = () => {
           {/* Shop Hours */}
           <div className="contact__column contact__column--hours">
             <div className="contact__location-header">
-              <svg className="contact__title-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <path d="M27 10V8a5 5 0 0 1 10 0v2M27 55v1a5 5 0 0 0 10 0v-1M23 16v33m18-33v33" />
-                <path d="M22 10h20a3 3 0 0 1 0 6H22a3 3 0 0 1 0-6ZM22 49h20a3 3 0 0 1 0 6H22a3 3 0 0 1 0-6Z" />
-                <path className="contact__icon-accent" d="m23 25 18-9m-18 27 18-9" />
-                <path d="m23 32 18-9m-16 26 16-8" />
-                <path className="contact__icon-detail" d="M26 19v3m0 13v4m18-21v29" />
-              </svg>
+              <BarberPole className="contact__title-icon" accentClassName="contact__icon-accent" detailClassName="contact__icon-detail" />
               <h3 className="contact__location-title">Shop Hours</h3>
             </div>
             <div className="contact__hours">

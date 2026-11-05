@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, Star, ChevronLeft, ChevronRight, Store } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Star, ChevronLeft, ChevronRight, Store, Gift } from 'lucide-react';
 import '../styles/product-detail.css';
 import Product1 from '../assets/products/Product-1.webp';
 import CurlTwistBack from '../assets/products/curl-twist-ingredients-back.webp';
@@ -16,6 +16,7 @@ import GelFront from '../assets/products/bath-shower-gel-front.webp';
 import GelBack from '../assets/products/bath-shower-gel-ingredients-back.webp';
 import BeardLineUp1 from '../assets/products/Beard-Line-Up-1.webp';
 import BeardLineUp2 from '../assets/products/Beard-Line-Up-2.webp';
+import { groomingSet, groomingSetImages, groomingSetItems, groomingSetSlugs } from '../lib/groomingSet.js';
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -34,6 +35,27 @@ const ProductDetail = () => {
   const backText = fromPage === 'shop' ? 'Back to Shop' : 'Back to Home';
 
   const products = {
+    [groomingSet.slug]: {
+      id: 7,
+      name: groomingSet.name,
+      price: groomingSet.price,
+      originalPrice: groomingSet.originalPrice,
+      size: '5 products',
+      isSet: true,
+      image: groomingSetImages.giftBox,
+      imageAlt: 'Clip Culture Grooming Set: body wash, beard oil, shampoo, shea butter and beard balm in a gold gift box',
+      hoverImage: groomingSetImages.tealCase,
+      hoverAlt: 'The five Clip Culture grooming products in a teal carrying case',
+      viewLabel: 'another photo',
+      description: `The full Clip Culture Hair Care line, introduced in 2021, in one set: everything for hair, beard and skin, from wash day to finish. Buy all five together for <strong>$${groomingSet.price}</strong> instead of $${groomingSet.originalPrice} and save $${groomingSet.savings}. Ready to give, or to restock your own routine.`,
+      bundleIncludes: groomingSetItems,
+      features: [
+        `Save $${groomingSet.savings} compared with buying each product separately`,
+        'Covers hair, beard and skin in one routine',
+        'Developed by master barber David Brown',
+        'A ready-made gift for birthdays and the holidays'
+      ]
+    },
     'beard-line-up-enhancement': {
       id: 0,
       name: "Beard & Line Up Enhancement",
@@ -175,6 +197,14 @@ const ProductDetail = () => {
   // All products for "You may also like" - exclude current product
   const allProducts = [
     {
+      id: 7,
+      name: groomingSet.name,
+      price: groomingSet.price,
+      image: groomingSetImages.giftBoxSmall,
+      slug: groomingSet.slug,
+      isSet: true,
+    },
+    {
       id: 2,
       name: "Magic Beard Balm",
       price: 25,
@@ -303,7 +333,7 @@ const ProductDetail = () => {
         <div className="product-detail__content">
           <div className="product-detail__left-column">
             <div 
-              className="product-detail__image"
+              className={`product-detail__image${product.isSet ? ' product-detail__image--photo' : ''}`}
               onPointerEnter={(event) => { if (event.pointerType === 'mouse') setHoveredImageSlug(slug); }}
               onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHoveredImageSlug(null); }}
               onClick={() => { if (product.hoverImage) setSelectedImageSlug(current => current === slug ? null : slug); }}
@@ -315,12 +345,12 @@ const ProductDetail = () => {
               }}
               role={product.hoverImage ? 'button' : undefined}
               tabIndex={product.hoverImage ? 0 : undefined}
-              aria-label={product.hoverImage ? `Show ${selectedImageSlug === slug ? 'front' : 'back'} of ${product.name}` : undefined}
+              aria-label={product.hoverImage ? (product.viewLabel ? `Show ${product.viewLabel} of ${product.name}` : `Show ${selectedImageSlug === slug ? 'front' : 'back'} of ${product.name}`) : undefined}
               aria-pressed={product.hoverImage ? selectedImageSlug === slug : undefined}
             >
               <img 
                 src={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? product.hoverImage : product.image}
-                alt={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? `${product.name} back label` : product.name}
+                alt={(hoveredImageSlug === slug || selectedImageSlug === slug) && product.hoverImage ? (product.hoverAlt || `${product.name} back label`) : (product.imageAlt || product.name)}
                 loading="eager"
                 fetchPriority="high"
               />
@@ -350,6 +380,11 @@ const ProductDetail = () => {
               ) : (
                 <>
                   <span className="product-detail__price">${product.price}</span>
+                  {product.originalPrice && (
+                    <span className="product-detail__original-price">
+                      <span className="visually-hidden">Regular price </span>${product.originalPrice}
+                    </span>
+                  )}
                   {product.size && (
                     <>
                       <span className="product-detail__divider">|</span>
@@ -377,7 +412,9 @@ const ProductDetail = () => {
               </div>
             )}
             <div className="product-detail__rating">
-              {product.isNewDrop ? (
+              {product.isSet ? (
+                <span className="product-detail__set-savings">Save ${groomingSet.savings} as a set</span>
+              ) : product.isNewDrop ? (
                 <span className="product-detail__new-drop">
                   new drop{' '}
                   <span className="fire-emoji">🔥</span>
@@ -393,6 +430,36 @@ const ProductDetail = () => {
             </div>
             <p className="product-detail__description" dangerouslySetInnerHTML={{ __html: product.description }}></p>
 
+            {product.bundleIncludes && (
+              <div className="product-detail__set-includes">
+                <h3>In the set:</h3>
+                <ul>
+                  {product.bundleIncludes.map((item) => (
+                    <li key={item.slug}>
+                      <Link to={`/products/${item.slug}`} state={{ from: fromPage || 'home' }}>{item.name}</Link>
+                      <span>${item.price}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {groomingSetSlugs.includes(slug) && (
+              <Link
+                to={`/products/${groomingSet.slug}`}
+                state={{ from: fromPage || 'home' }}
+                className="product-detail__set-offer"
+              >
+                <img src={groomingSetImages.giftBoxSmall} alt="" loading="lazy" />
+                <span className="product-detail__set-offer-text">
+                  <span className="product-detail__set-offer-eyebrow"><Gift size={15} aria-hidden="true" /> Get all five</span>
+                  <strong>{product.name} is part of the Grooming Set</strong>
+                  <span>All five products for ${groomingSet.price}, a ${groomingSet.savings} saving.</span>
+                </span>
+                <ArrowRight size={20} aria-hidden="true" className="product-detail__set-offer-arrow" />
+              </Link>
+            )}
+
             <div className="product-detail__features">
               <h3>Key Features:</h3>
               <ul>
@@ -402,10 +469,12 @@ const ProductDetail = () => {
               </ul>
             </div>
 
-            <div className="product-detail__ingredients">
-              <h3>Ingredients:</h3>
-              <p>{product.ingredients}</p>
-            </div>
+            {product.ingredients && (
+              <div className="product-detail__ingredients">
+                <h3>Ingredients:</h3>
+                <p>{product.ingredients}</p>
+              </div>
+            )}
 
             {product.howToUse && (
               <div className="product-detail__how-to-use">
@@ -459,7 +528,10 @@ const ProductDetail = () => {
                     state={{ from: fromPage || 'home' }}
                     className="product-detail__related-card"
                   >
-                    <div className="product-detail__related-image">
+                    <div className={`product-detail__related-image${relProduct.isSet ? ' product-detail__related-image--photo' : ''}`}>
+                      {relProduct.isSet && (
+                        <span className="product-detail__related-badge">Save ${groomingSet.savings}</span>
+                      )}
                       {relProduct.isNewDrop && (
                         <span className="product-detail__related-badge">New</span>
                       )}
@@ -497,7 +569,10 @@ const ProductDetail = () => {
                 state={{ from: fromPage || 'home' }}
                 className="product-detail__related-card"
               >
-                <div className="product-detail__related-image">
+                <div className={`product-detail__related-image${relProduct.isSet ? ' product-detail__related-image--photo' : ''}`}>
+                  {relProduct.isSet && (
+                    <span className="product-detail__related-badge">Save ${groomingSet.savings}</span>
+                  )}
                   {relProduct.isNewDrop && (
                     <span className="product-detail__related-badge">New</span>
                   )}

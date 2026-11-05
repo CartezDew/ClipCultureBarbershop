@@ -1096,3 +1096,151 @@
     font-size: 0.95rem;
   }
 }
+
+/* Grooming Set: lifestyle photos fill their frames instead of floating like packshots. */
+.product-detail__image--photo {
+  padding: 0;
+  overflow: hidden;
+  background: #121817;
+}
+
+.product-detail__image--photo img,
+.product-detail__image--photo:hover img {
+  display: block;
+  width: 100%;
+  max-height: none;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transform: none;
+}
+
+.product-detail__related-image--photo img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+}
+
+.product-detail__set-savings {
+  display: inline-flex;
+  align-items: center;
+  padding: .35rem .65rem;
+  border-radius: 4px;
+  background: #e6f4f1;
+  color: #0d6f63;
+  font: 700 .85rem 'DM Sans', sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.product-detail__set-includes {
+  margin-bottom: 2rem;
+}
+
+.product-detail__set-includes h3 {
+  margin-bottom: .75rem;
+  color: #1a1a1a;
+  font: 700 1.25rem 'Manrope', sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.product-detail__set-includes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.product-detail__set-includes li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .7rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  color: #4a5568;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.product-detail__set-includes a {
+  color: #1a1a1a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.product-detail__set-includes a:hover,
+.product-detail__set-includes a:focus-visible {
+  color: #0a9786;
+  text-decoration: underline;
+}
+
+.product-detail__set-offer {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: .75rem 1rem .75rem .75rem;
+  border: 1px solid #c9a55c;
+  border-radius: 8px;
+  background: #121817;
+  color: #f7f7f2;
+  text-decoration: none;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.product-detail__set-offer:hover,
+.product-detail__set-offer:focus-visible {
+  border-color: #e3c47e;
+  transform: translateY(-2px);
+}
+
+.product-detail__set-offer img {
+  width: 112px;
+  aspect-ratio: 3 / 2;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.product-detail__set-offer-text {
+  display: grid;
+  gap: .2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  line-height: 1.4;
+  color: #c2ceca;
+}
+
+.product-detail__set-offer-text strong {
+  color: #f7f7f2;
+  font-size: 1rem;
+}
+
+.product-detail__set-offer-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  color: #e3c47e;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.product-detail__set-offer-arrow {
+  color: #e3c47e;
+}
+
+@media (max-width: 480px) {
+  .product-detail__set-offer {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .product-detail__set-offer img {
+    width: 88px;
+  }
+
+  .product-detail__set-offer-arrow {
+    display: none;
+  }
+}
