@@ -7,8 +7,21 @@ const rawImages = import.meta.glob(
   { eager: true }
 );
 
-// Services gallery image order - same as ServicesGallery component
-const servicesImageOrder = [7, 2, 3, 10, 62, 13, 15, 16, 27, 28, 29, 37, 18, 23, 25, 26, 31, 37, 47, 65];
+// New-packaging product photos (image-72 to image-80), spread out so no two sit side by side.
+const productImageIds = [72, 73, 74, 75, 76, 77, 78, 79, 80];
+const isProductImage = (id) => productImageIds.includes(id);
+
+// Photos of the old product packaging, kept out of every gallery.
+const retiredImageIds = [47];
+
+// Main gallery: where each product photo lands (0-based) in a fixed, shuffled order. A fixed
+// order keeps the prerendered page and the browser in agreement.
+const mainProductPlacements = [
+  [4, 76], [13, 72], [20, 79], [31, 74], [38, 80], [47, 73], [55, 78], [64, 75], [72, 77],
+];
+
+// Services gallery image order, with the product photos mixed in. image-47 (old packaging) is left out.
+const servicesImageOrder = [7, 2, 76, 3, 10, 62, 72, 13, 15, 79, 16, 27, 28, 74, 29, 37, 80, 18, 23, 73, 25, 26, 78, 31, 75, 37, 65, 77];
 
 // Speaking engagements gallery image order
 const speakingImageOrder = [61, 68, 71, 63, 14, 40, 1, 3, 5, 20, 53, 57, 65, 67, 69, 70, 71];
@@ -66,10 +79,15 @@ const BarbershopGallery = () => {
         .map((id) => allImageEntries.find((img) => img.id === id))
         .filter(Boolean);
     } else {
-      // On other routes: show all images sorted by ID
-      return allImageEntries.sort(
-        (a, b) => a.id - b.id || a.filename.localeCompare(b.filename)
-      );
+      // On other routes: all shop photos sorted by ID, with the product photos placed between them
+      const entries = allImageEntries
+        .filter((img) => !isProductImage(img.id) && !retiredImageIds.includes(img.id))
+        .sort((a, b) => a.id - b.id || a.filename.localeCompare(b.filename));
+      mainProductPlacements.forEach(([position, id]) => {
+        const product = allImageEntries.find((img) => img.id === id);
+        if (product) entries.splice(Math.min(position, entries.length), 0, product);
+      });
+      return entries;
     }
   }, [isServicesRoute, isSpeakingRoute]);
 
@@ -646,7 +664,7 @@ const BarbershopGallery = () => {
               >
                 <img
                   src={img.src}
-                  alt={img.filename}
+                  alt={isProductImage(img.id) ? "Clip Culture Hair Care grooming products" : img.filename}
                   loading={index < 2 ? "eager" : "lazy"}
                   className="barbershop-gallery-image"
                 />
