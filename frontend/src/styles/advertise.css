@@ -1221,3 +1221,96 @@
     max-width: 140px;
   }
 }
+
+/* More room between the package buttons and the photo slider below them. */
+.advertise-gallery-wrapper {
+  margin-top: 2rem;
+}
+
+/* While the cards sit side by side (601px to 900px), keep the desktop arrangement: the
+   "Compare the packages" box stays under "How your message reaches clients" in the right
+   column, and the left card grows to match. The hats fill the bottom of that left card,
+   as on desktop. They are absolutely positioned, so they never change the grid's sizing. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .advertise-bento-join {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+  }
+
+  .advertise-bento-right .advertise-program-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .advertise-bento-cta {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  /* A fixed, shorter photo leaves the left card room below its text for the hats. */
+  .advertise-bento-image-box {
+    aspect-ratio: 16 / 9;
+  }
+
+  .advertise-bento-join .advertise-program-content > .advertise-bento-image-hats {
+    display: block;
+    bottom: -30px;
+    width: min(190px, 60%);
+    max-width: none;
+  }
+
+  .advertise-bento-join .advertise-program-content > .advertise-bento-image-hats > img {
+    display: block;
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    background: none;
+  }
+
+  .advertise-bento-right .advertise-bento-image-hats-2 {
+    display: none;
+  }
+}
+
+/* The left card gains empty space as the screen narrows, so the hats grow to fill it. */
+@media (min-width: 701px) and (max-width: 820px) {
+  .advertise-bento-join .advertise-program-content > .advertise-bento-image-hats {
+    width: min(220px, 70%);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 700px) {
+  .advertise-bento-join .advertise-program-content > .advertise-bento-image-hats {
+    width: min(260px, 88%);
+  }
+}
+
+/* Once the cards stack (381px to 600px) the right card is full width, so the hats sit at the
+   bottom of it instead of over the title. The card gets matching bottom room so they never
+   cover the list. As before, they are hidden at 380px and below. */
+@media (min-width: 381px) and (max-width: 600px) {
+  .advertise-bento-right .advertise-program-card {
+    /* Room for the hats: their height is about 56% of their width (150px to 220px wide). */
+    padding-bottom: calc(2rem + clamp(85px, 26vw, 124px));
+  }
+
+  .advertise-bento-right .advertise-bento-image-hats-2 {
+    display: block;
+    position: absolute;
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: 0.6rem;
+    transform: translateX(-50%);
+    width: clamp(150px, 46vw, 220px);
+    max-width: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .advertise-bento-image-hats,
+  .advertise-bento-image-hats-2 {
+    display: none;
+  }
+}
