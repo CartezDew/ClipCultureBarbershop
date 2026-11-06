@@ -260,8 +260,10 @@ const ProductDetail = () => {
     }
   ];
 
-  // Filter out current product from related products
-  const relatedProducts = allProducts.filter(p => p.slug !== slug);
+  // Suggest other grooming items only: never the product being viewed, and on the Grooming Set
+  // page never the five products already inside the set (that leaves Curl Twist and Beard & Line Up).
+  const excludedSlugs = new Set([slug, ...(slug === groomingSet.slug ? groomingSetSlugs : [])]);
+  const relatedProducts = allProducts.filter(p => !excludedSlugs.has(p.slug));
   
   // Carousel configuration
   const visibleCount = isMobile ? 2 : 4;

@@ -167,8 +167,8 @@ const ApparelDetail = () => {
     { id: 5, name: "Beanie – Black & White", price: 9.99, image: Product12, slug: "clip-culture-barbershop-beanie", isSoldOut: true }
   ];
 
-  // Filter out current product from related products
-  const relatedProducts = allApparelProducts.filter(p => p.slug !== slug);
+  // Suggest apparel that is in stock, never the item being viewed
+  const relatedProducts = allApparelProducts.filter(p => p.slug !== slug && !p.isSoldOut);
   
   // Carousel configuration
   const visibleCount = isMobile ? 2 : 4;
