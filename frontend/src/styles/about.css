@@ -443,6 +443,9 @@
 
 .about-video__wrapper {
   position: relative;
+  background-color: #0d0f0f;
+  background-position: center;
+  background-size: cover;
   width: 100%;
   max-width: 700px;
   margin: 0 auto 2rem auto;
@@ -461,7 +464,27 @@
 }
 
 .about-video__placeholder {
-  background: #0d0f0f;
+  background: transparent;
+}
+
+/* Play badge on the thumbnail while YouTube loads; the player covers it once it appears. */
+.about-video__wrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  background: rgba(15, 15, 15, 0.8) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 26px no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-video__wrapper .about-video__iframe {
+  position: relative;
+  z-index: 1;
 }
 
 .about-video__credit {

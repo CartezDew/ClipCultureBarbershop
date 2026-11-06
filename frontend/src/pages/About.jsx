@@ -12,7 +12,10 @@ import JoinUs from '../components/JoinUs.jsx';
 import { groomingSetImages } from '../lib/groomingSet.js';
 import { yearsInBusiness } from '../lib/business.js';
 
+const ANNIVERSARY_VIDEO_ID = 'ChdMhO7E5EA';
+
 // The YouTube player is close to 1 MB of scripts; create it only as the video nears the screen.
+// The video's thumbnail fills the frame meanwhile, so it never looks empty while the player loads.
 function AnniversaryVideo() {
   const wrapperRef = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
@@ -33,12 +36,16 @@ function AnniversaryVideo() {
   }, []);
 
   return (
-    <div className="about-video__wrapper" ref={wrapperRef}>
+    <div
+      className="about-video__wrapper"
+      ref={wrapperRef}
+      style={{ backgroundImage: `url(https://i.ytimg.com/vi_webp/${ANNIVERSARY_VIDEO_ID}/hqdefault.webp)` }}
+    >
       {showVideo ? (
         <iframe
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/ChdMhO7E5EA?si=AnbrpcXuxktnpr1Q"
+          src={`https://www.youtube.com/embed/${ANNIVERSARY_VIDEO_ID}?si=AnbrpcXuxktnpr1Q`}
           title="Clip Culture 5 year anniversary celebration (YouTube video)"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
